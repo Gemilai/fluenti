@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fluentify - Modern AI Translator</title>
+
+    <meta name="theme-color" content="#1e293b">
+    <meta name="description" content="Translate text, images, and PDF documents with a modern, fast, and user-friendly interface powered by Google AI.">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { darkMode: 'class' }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono&display=swap" rel="stylesheet">
+
+    <style type="text/css">
+        body, .bg-card, .bg-input { transition: background-color 0.3s ease, color 0.3s ease; }
+        textarea::-webkit-scrollbar, .scroll-container::-webkit-scrollbar { width: 8px; }
+        textarea::-webkit-scrollbar-track, .scroll-container::-webkit-scrollbar-track { background: transparent; }
+        textarea::-webkit-scrollbar-thumb, .scroll-container::-webkit-scrollbar-thumb { background-color: rgba(100, 116, 139, 0.5); border-radius: 20px; }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .spinner { animation: spin 1s linear infinite; }
+        
+        .pdf-page-item { transition: border-color 0.2s ease, box-shadow 0.2s ease; }
+        .pdf-page-item.selected {
+            border-color: #0ea5e9;
+            box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.5);
+        }
+        .pdf-page-item.selected::after {
+            content: '✔';
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background-color: #0ea5e9;
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+
+        #enhancements-toolbar { transition: opacity 0.3s ease, transform 0.3s ease; }
+        .progress-bar { height: 8px; background-color: #e5e7eb; border-radius: 9999px; overflow: hidden; }
+        .dark .progress-bar { background-color: #374151; }
+        .progress-bar-inner { height: 100%; background-color: #0ea5e9; border-radius: 9999px; transition: width 0.3s ease; }
+        #log-viewer { transition: max-height 0.5s ease-in-out; }
+        #log-output { white-space: pre-wrap; word-break: break-all; }
+        .log-entry { display: flex; gap: 0.75rem; }
+        .log-timestamp { flex-shrink: 0; color: #64748b; }
+        .dark .log-timestamp { color: #94a3b8; }
+        .log-message.error { color: #ef4444; }
+        .dark .log-message.error { color: #f87171; }
+        .log-message.success { color: #22c55e; }
+        .dark .log-message.success { color: #4ade80; }
+
+        #subtitle-editor-section table { width: 100%; border-collapse: collapse; }
+        #subtitle-editor-section th, #subtitle-editor-section td { padding: 8px 12px; border: 1px solid #d1d5db; text-align: left; vertical-align: middle;}
+        html[dir="rtl"] #subtitle-editor-section th, html[dir="rtl"] #subtitle-editor-section td { text-align: right; }
+        .dark #subtitle-editor-section th, .dark #subtitle-editor-section td { border-color: #4b5563; }
+        #subtitle-editor-section th { background-color: #f3f4f6; }
+        .dark #subtitle-editor-section th { background-color: #374151; }
+        #subtitle-editor-section td[contenteditable="true"]:focus { background-color: #f0f9ff; outline: 2px solid #0ea5e9; }
+        .dark #subtitle-editor-section td[contenteditable="true"]:focus { background-color: #0c4a6e; }
+        #subtitle-editor-section .failed-translation { color: #ef4444; font-style: italic; }
+        .dark #subtitle-editor-section .failed-translation { color: #f87171; }
+
+
+        /* New Layout & Navigation Styles */
+        body { padding-bottom: 70px; }
+        @media (min-width: 768px) { body { padding-bottom: 0; } }
+
+        #mobile-nav {
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-top: 1px solid #e2e8f0;
+        }
+        .dark #mobile-nav {
+            background-color: rgba(30, 41, 59, 0.85);
+            border-top-color: #334155;
+        }
+        .mobile-nav-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+            padding: 8px 4px;
+            gap: 2px;
+            font-size: 0.65rem;
+            line-height: 1rem;
+            color: #475569;
+            transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+        }
+        .dark .mobile-nav-btn { color: #94a3b8; }
+        .mobile-nav-btn:hover { background-color: rgba(0,0,0,0.05); }
+        .dark .mobile-nav-btn:hover { background-color: rgba(255,255,255,0.05); }
+        .mobile-nav-btn.active { color: #0ea5e9; }
+        .dark .mobile-nav-btn.active { color: #38bdf8; }
+        .mobile-nav-btn i { font-size: 1.25rem; margin-bottom: 2px; }
+
+        .desktop-tab-btn {
+            flex: 1;
+            text-align: center;
+            padding: 0.75rem 0.5rem;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            transition: color 0.2s ease, background-color 0.2s ease;
+            color: #475569;
+            font-weight: 500;
+        }
+        .dark .desktop-tab-btn {
+             color: #94a3b8;
+        }
+        .desktop-tab-btn.active {
+            background-color: #0ea5e9;
+            color: white;
+        }
+        #settings-btn.active {
+            background-color: #0ea5e9;
+        }
+        #settings-btn.active i {
+            color: white;
+        }
+        
+        /* Video Generator Styles */
+        #video-gen-container { position: relative; width: 100%; height: 0; padding-bottom: 56.25%; /* 16:9 aspect ratio */ background-color: #000; }
+        #video-gen-yt-player-container, #video-gen-local-video-player, #video-gen-subtitle-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        #video-gen-subtitle-overlay { z-index: 10; display: flex; flex-direction: column; justify-content: flex-end; padding: 1% 2% 2%; box-sizing: border-box; color: white; text-align: center; pointer-events: none; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8); font-size: 1.5vw; }
+        #video-gen-subtitle-overlay .subtitle-line { background-color: rgba(0, 0, 0, 0.5); padding: 0.2em 0.4em; display: inline; line-height: 1.4; }
+        @media (max-width: 768px) { #video-gen-subtitle-overlay { font-size: 2.5vw; } }
+        @media (min-width: 1200px) { #video-gen-subtitle-overlay { font-size: 18px; } }
+        .video-gen-tab-button { transition: all 0.2s ease-in-out; border-bottom: 2px solid transparent; }
+        .video-gen-tab-button.active { border-bottom-color: #3b82f6; /* blue-500 */ color: #d1d5db; /* gray-300 */ }
+        .video-gen-tab-content { display: none; }
+        .video-gen-tab-content.active { display: block; }
+        #video-gen-file-upload-label { cursor: pointer; }
+        #video-gen-subtitle-output { font-family: 'Noto Sans Mono', monospace; }
+
+    </style>
+</head>
+
+<body class="bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-300 font-sans antialiased">
+
+    <div id="promo-banner" dir="rtl" class="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white p-3 shadow-md relative flex items-center justify-between text-right text-sm sm:text-base">
+        <div class="flex-grow flex items-center gap-2">
+            <span class="font-bold">🚫 با VPNهای بی‌کیفیت خداحافظی کن!</span>
+            <span class="hidden sm:inline"> اینترنت آزاد و امن با </span>
+            <a href="https://t.me/BESTVPN_V2BOT?start=1035839739" target="_blank" rel="noopener noreferrer" class="font-bold underline hover:text-cyan-200 transition-colors">BESTVPN</a>
+        </div>
+        <a href="https://t.me/BESTVPN_V2BOT?start=1035839739" target="_blank" rel="noopener noreferrer" class="mx-4 px-4 py-1.5 bg-white text-blue-600 font-bold rounded-full shadow hover:bg-gray-200 transition-transform transform hover:scale-105 whitespace-nowrap text-xs sm:text-sm">
+            دریافت تست رایگان
+        </a>
+        <button id="close-banner-btn" class="text-white/70 hover:text-white transition-colors" aria-label="Close banner">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+    </div>
+
+    <main class="w-full max-w-4xl mx-auto p-4">
+        <div id="app-container" class="bg-white dark:bg-slate-800 bg-card rounded-2xl shadow-lg dark:shadow-2xl dark:shadow-black/30 p-6 md:p-8 relative overflow-hidden flex flex-col">
+            
+            <header class="flex justify-between items-center mb-6">
+                <h1 class="text-3xl font-bold text-slate-900 dark:text-white" data-i18n-key="appTitle">Fluentify</h1>
+                <div class="flex items-center gap-2">
+                    <select id="language-switcher" class="bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-300 rounded-md p-2 text-sm focus:ring-2 focus:ring-sky-500 focus:outline-none appearance-none cursor-pointer">
+                        <option value="en">English</option>
+                        <option value="fa">فارسی</option>
+                        <option value="ru">Русский</option>
+                    </select>
+                    <button id="how-to-use-btn" class="p-2 rounded-full bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors" data-i18n-title-key="howToUseBtnLabel" aria-label="How to use">
+                        <svg class="w-5 h-5 text-slate-600 dark:text-slate-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" /></svg>
+                    </button>
+                    <button id="theme-toggle" class="p-2 rounded-full bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors" aria-label="Toggle theme">
+                        <svg id="theme-icon-light" class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                        <svg id="theme-icon-dark" class="w-5 h-5 text-slate-400 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                    </button>
+                    <button id="settings-btn" data-view="settings" class="hidden md:flex items-center justify-center p-2 rounded-full bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors" data-i18n-title-key="advSettingsBtn" aria-label="Settings">
+                         <i class="fas fa-cog text-slate-600 dark:text-slate-300"></i>
+                    </button>
+                </div>
+            </header>
+
+            <div id="desktop-tabs" class="hidden md:flex items-center space-x-2 rtl:space-x-reverse mb-4 bg-slate-200 dark:bg-slate-700 p-1 rounded-lg">
+                <button type="button" data-mode="text" class="desktop-tab-btn active"><span data-i18n-key="tabText">Text</span></button>
+                <button type="button" data-mode="image" class="desktop-tab-btn"><span data-i18n-key="tabImage">Image</span></button>
+                <button type="button" data-mode="pdf" class="desktop-tab-btn"><span data-i18n-key="tabPDF">PDF</span></button>
+                <button type="button" data-mode="subtitle" class="desktop-tab-btn"><span data-i18n-key="tabSubtitle">Subtitle</span></button>
+                <button type="button" data-mode="video" class="desktop-tab-btn"><span data-i18n-key="tabVideo">Video</span></button>
+            </div>
+
+            <div id="view-container" class="flex-grow">
+                <div id="translation-view">
+                    <form id="translate-form" onsubmit="return false;">
+                        <div class="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-4 items-center mb-4">
+                            <select id="source_lang" name="source_lang" class="w-full bg-slate-100 dark:bg-slate-700 bg-input border-slate-300 dark:border-transparent focus:ring-2 focus:ring-sky-500 rounded-lg p-3"></select>
+                            <button type="button" id="swap-btn" class="p-3 rounded-full bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed md:mx-0 mx-auto" data-i18n-title-key="swapBtnLabel" aria-label="Swap languages">
+                                <svg class="w-5 h-5 text-slate-600 dark:text-slate-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" /></svg>
+                            </button>
+                            <select id="target_lang" name="target_lang" class="w-full bg-slate-100 dark:bg-slate-700 bg-input border-slate-300 dark:border-transparent focus:ring-2 focus:ring-sky-500 rounded-lg p-3"></select>
+                        </div>
+        
+                        <div class="relative mb-4">
+                            <div id="text-input-section">
+                                <textarea id="text-input" name="text" maxlength="5000" data-i18n-placeholder-key="textInputPlaceholder" placeholder="Enter text to translate..." class="w-full h-40 p-4 bg-slate-100 dark:bg-slate-700 bg-input rounded-lg border-slate-300 dark:border-transparent focus:ring-2 focus:ring-sky-500 resize-none"></textarea>
+                                <span id="char-counter" class="absolute bottom-2 right-3 rtl:right-auto rtl:left-3 text-xs text-slate-500 dark:text-slate-400">0 / 5000</span>
+                            </div>
+        
+                            <div id="youtube-input-section" class="hidden mb-4 p-4 bg-slate-200/50 dark:bg-slate-900/50 rounded-lg space-y-3">
+                                <label class="block text-sm font-medium text-slate-700 dark:text-slate-300" data-i18n-key="youtubeSectionTitle">Load from YouTube URL</label>
+                                <div class="flex flex-col sm:flex-row gap-2">
+                                    <input type="text" id="youtube-url-input" data-i18n-placeholder-key="youtubeUrlPlaceholder" placeholder="Enter YouTube Video URL..." class="w-full flex-grow bg-slate-100 dark:bg-slate-700 bg-input rounded-lg p-3 border-slate-300 dark:border-transparent focus:ring-2 focus:ring-sky-500 transition duration-200">
+                                    <input type="text" id="youtube-lang-input" value="en" data-i18n-placeholder-key="youtubeLangPlaceholder" placeholder="lang" class="sm:w-20 bg-slate-100 dark:bg-slate-700 bg-input text-center rounded-lg p-3 border-slate-300 dark:border-transparent focus:ring-2 focus:ring-sky-500 transition duration-200">
+                                    <button type="button" id="fetch-youtube-subs-btn" class="w-full sm:w-auto px-4 py-2 rounded-lg bg-sky-500 hover:bg-sky-600 text-white font-bold transition-colors flex items-center justify-center">
+                                       <span id="fetch-youtube-btn-text" data-i18n-key="youtubeFetchBtn">Fetch</span>
+                                       <svg id="fetch-youtube-btn-spinner" class="spinner w-5 h-5 ml-2 rtl:ml-0 rtl:mr-2 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                                    </button>
+                                </div>
+                                <p class="text-xs text-slate-600 dark:text-slate-400 text-center pt-3 border-t border-slate-300 dark:border-slate-700" data-i18n-key="youtubeNotice" data-i18n-html></p>
+                           </div>
+                            
+                            <div id="file-input-section" class="hidden">
+                                <div id="dropzone-container" class="relative flex flex-col items-center justify-center w-full h-40 border-2 border-slate-300 dark:border-slate-600 border-dashed rounded-lg cursor-pointer bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors p-2">
+                                    <div id="dropzone-prompt" class="flex flex-col items-center justify-center text-center p-4">
+                                        <svg class="w-8 h-8 mb-4 text-slate-500 dark:text-slate-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/></svg>
+                                        <p class="mb-2 text-sm text-slate-500 dark:text-slate-400"><span class="font-semibold" data-i18n-key="fileDragDrop"></span> <span data-i18n-key="fileOr"></span></p>
+                                        <button type="button" id="choose-file-btn" class="px-4 py-2 bg-white dark:bg-slate-600 border border-gray-300 dark:border-gray-500 rounded-lg text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-700" data-i18n-key="fileChooseBtn"></button>
+                                        <p id="file-upload-hint" class="text-xs text-slate-500 mt-2"></p>
+                                    </div>
+                                    <div id="file-preview-container" class="hidden relative w-full h-full flex items-center justify-center">
+                                        <img id="image-preview" class="max-w-full max-h-full object-contain rounded-md" alt="Image preview">
+                                        <div id="subtitle-preview" class="hidden text-center p-4 w-full"><svg class="w-12 h-12 mx-auto text-slate-500 dark:text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg><p id="subtitle-filename" class="mt-2 font-semibold text-slate-700 dark:text-slate-300 truncate w-full"></p></div>
+                                        <button type="button" id="remove-file-btn" class="absolute top-1 right-1 rtl:right-auto rtl:left-1 p-1.5 rounded-full bg-black/50 hover:bg-red-600 text-white transition-colors" data-i18n-title-key="removeFileBtnLabel" aria-label="Remove file"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+                                    </div>
+                                </div>
+                                <input id="file-upload" name="file" type="file" class="hidden" />
+                            </div>
+                        </div>
+        
+                        <div id="pdf-viewer-section" class="hidden mb-4 bg-slate-200/50 dark:bg-slate-900/50 rounded-lg p-4 space-y-4">
+                            <div class="flex flex-wrap gap-4 justify-between items-center pb-3 border-b border-slate-300 dark:border-slate-700">
+                                <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-200" data-i18n-key="pdfSelectPagesTitle"></h3>
+                                <div class="flex items-center gap-2">
+                                     <button type="button" id="select-all-pages-btn" class="px-3 py-1 text-sm font-medium rounded-md bg-white dark:bg-slate-600 border border-gray-300 dark:border-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700" data-i18n-key="pdfSelectAll"></button>
+                                     <button type="button" id="deselect-all-pages-btn" class="px-3 py-1 text-sm font-medium rounded-md bg-white dark:bg-slate-600 border border-gray-300 dark:border-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700" data-i18n-key="pdfDeselectAll"></button>
+                                </div>
+                            </div>
+                            <div id="pdf-page-viewer" class="scroll-container max-h-[30rem] overflow-y-auto grid grid-cols-1 md:grid-cols-2 gap-4 p-2 bg-slate-100 dark:bg-slate-800 rounded-md"></div>
+                             <div class="pt-3 border-t border-slate-300 dark:border-slate-700 flex flex-wrap gap-x-4 gap-y-2 justify-between items-center">
+                                <span id="page-selection-counter" class="text-sm font-medium text-slate-600 dark:text-slate-400"></span>
+                                <div class="flex items-center">
+                                    <input id="combine-pages-checkbox" name="combine_pages" type="checkbox" class="h-4 w-4 rounded border-slate-400 dark:border-slate-600 bg-slate-200 dark:bg-slate-700 text-sky-600 focus:ring-sky-500">
+                                    <label for="combine-pages-checkbox" class="ms-2 rtl:ms-0 rtl:me-2 text-sm font-medium text-slate-700 dark:text-slate-300" data-i18n-key="pdfCombinePages"></label>
+                                </div>
+                            </div>
+                             <p id="batch-warning" class="text-center text-xs text-amber-600 dark:text-amber-400 mt-2"></p>
+                        </div>
+                        
+                        <div id="subtitle-editor-section" class="hidden mb-4 bg-slate-200/50 dark:bg-slate-900/50 rounded-lg p-4 space-y-4">
+                            <div class="flex flex-wrap gap-4 justify-between items-center pb-3 border-b border-slate-300 dark:border-slate-700">
+                                <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-200" data-i18n-key="subtitleEditorTitle"></h3>
+                                <div class="flex items-center gap-2">
+                                     <button type="button" id="export-btn" disabled class="px-3 py-1 text-sm font-medium rounded-md bg-white dark:bg-slate-600 border border-gray-300 dark:border-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed" data-i18n-key="subtitleExportBtnLabel"></button>
+                                </div>
+                            </div>
+
+                            <div id="saved-progress-notification" class="hidden p-3 bg-sky-100 dark:bg-sky-900/50 border border-sky-300 dark:border-sky-700 rounded-lg text-sm text-sky-800 dark:text-sky-200 flex flex-wrap items-center justify-between gap-2">
+                                <span data-i18n-key="subtitleSavedProgress"></span>
+                                <div class="flex items-center gap-2">
+                                    <button type="button" id="load-progress-btn" class="px-3 py-1 bg-sky-500 text-white rounded-md hover:bg-sky-600" data-i18n-key="subtitleLoadProgress"></button>
+                                    <button type="button" id="clear-progress-btn" class="px-3 py-1 bg-transparent text-slate-600 dark:text-slate-300 rounded-md hover:bg-slate-200 dark:hover:bg-slate-700" data-i18n-key="subtitleClearHistory"></button>
+                                </div>
+                            </div>
+                            
+                            <div class="flex flex-wrap gap-4 items-center justify-between">
+                                <div class="flex items-center gap-2">
+                                    <label for="subtitle-batch-size" class="text-sm font-medium" data-i18n-key="subtitleLinesPerRequest"></label>
+                                    <input type="number" id="subtitle-batch-size" value="50" min="1" max="500" class="w-20 bg-slate-100 dark:bg-slate-700 bg-input rounded-lg p-2 border-slate-300 dark:border-transparent focus:ring-2 focus:ring-sky-500 transition duration-200">
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <button type="button" id="break-lines-toggle-btn" disabled class="px-3 py-1 text-sm font-medium rounded-md bg-white dark:bg-slate-600 border border-gray-300 dark:border-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 disabled:opacity-50" data-i18n-key="subtitleBreakLinesBtnLabel"></button>
+                                    <button type="button" id="find-replace-toggle-btn" disabled class="px-3 py-1 text-sm font-medium rounded-md bg-white dark:bg-slate-600 border border-gray-300 dark:border-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 disabled:opacity-50" data-i18n-key="subtitleFindReplaceBtnLabel"></button>
+                                </div>
+                            </div>
+                             <div id="break-lines-panel" class="hidden p-3 bg-slate-100 dark:bg-slate-700 rounded-md flex items-center gap-2">
+                                <label for="break-lines-max-chars" class="text-sm font-medium" data-i18n-key="breakLinesPanelTitle"></label>
+                                <input type="number" id="break-lines-max-chars" value="42" class="w-20 bg-white dark:bg-slate-600 rounded-lg p-2 border-slate-300 dark:border-transparent focus:ring-2 focus:ring-sky-500">
+                                <button id="break-lines-apply-btn" class="px-3 py-1 bg-sky-500 text-white rounded-md hover:bg-sky-600" data-i18n-key="breakLinesApply"></button>
+                             </div>
+                             <div id="find-replace-panel" class="hidden p-3 bg-slate-100 dark:bg-slate-700 rounded-md space-y-2">
+                                <div class="flex flex-col sm:flex-row gap-2">
+                                    <input type="text" id="find-input" data-i18n-placeholder-key="findInputPlaceholder" class="flex-grow bg-white dark:bg-slate-600 rounded-lg p-2 border-slate-300 dark:border-transparent focus:ring-2 focus:ring-sky-500">
+                                    <input type="text" id="replace-input" data-i18n-placeholder-key="replaceInputPlaceholder" class="flex-grow bg-white dark:bg-slate-600 rounded-lg p-2 border-slate-300 dark:border-transparent focus:ring-2 focus:ring-sky-500">
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <input type="checkbox" id="find-case-sensitive" class="h-4 w-4 rounded text-sky-600 focus:ring-sky-500">
+                                        <label for="find-case-sensitive" class="ms-2 rtl:ms-0 rtl:me-2 text-sm" data-i18n-key="findCaseSensitive"></label>
+                                    </div>
+                                    <button id="replace-all-btn" class="px-3 py-1 bg-sky-500 text-white rounded-md hover:bg-sky-600" data-i18n-key="replaceAllBtn"></button>
+                                </div>
+                             </div>
+
+                             <button type="button" id="retry-failed-subs-btn" class="hidden w-full px-4 py-2 rounded-lg bg-amber-500 hover:bg-amber-600 text-white font-bold transition-colors flex items-center justify-center">Retry Failed Translations</button>
+                            
+                            <div class="max-h-[30rem] overflow-y-auto scroll-container relative">
+                                <table class="w-full text-sm">
+                                    <thead class="sticky top-0 bg-slate-200 dark:bg-slate-700 z-10">
+                                        <tr>
+                                            <th class="w-12 text-center" data-i18n-key="subtitleTableHeaderNum"></th>
+                                            <th class="w-48" data-i18n-key="subtitleTableHeaderTime"></th>
+                                            <th data-i18n-key="subtitleTableHeaderOrig"></th>
+                                            <th data-i18n-key="subtitleTableHeaderTrans"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="subtitle-table-body">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div id="video-generator-section" class="hidden">
+                            <div class="space-y-6">
+                                <div>
+                                    <div class="border-b border-slate-300 dark:border-slate-700 mb-4">
+                                        <nav class="-mb-px flex space-x-6" aria-label="Tabs">
+                                            <button id="video-gen-tab-youtube" type="button" class="video-gen-tab-button active font-semibold py-3 px-1 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">YouTube</button>
+                                            <button id="video-gen-tab-upload" type="button" class="video-gen-tab-button font-semibold py-3 px-1 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">Upload File</button>
+                                            <button id="video-gen-tab-url" type="button" class="video-gen-tab-button font-semibold py-3 px-1 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">Direct URL</button>
+                                        </nav>
+                                    </div>
+                
+                                    <div id="video-gen-content-youtube" class="video-gen-tab-content active space-y-4">
+                                        <div>
+                                            <label for="video-gen-youtube-url" class="font-semibold text-slate-700 dark:text-slate-300 mb-2 block">YouTube Video URL</label>
+                                            <div class="relative">
+                                                <i class="fab fa-youtube absolute left-4 top-1/2 -translate-y-1/2 text-red-500"></i>
+                                                <input type="text" id="video-gen-youtube-url" placeholder="Paste YouTube video URL here" class="w-full pl-12 pr-4 py-3 bg-slate-100 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-all duration-200">
+                                            </div>
+                                            <div id="video-gen-url-error" class="text-red-500 dark:text-red-400 text-sm mt-1 hidden">Please enter a valid YouTube URL</div>
+                                        </div>
+                                    </div>
+                
+                                    <div id="video-gen-content-upload" class="video-gen-tab-content space-y-4">
+                                         <div>
+                                            <label class="font-semibold text-slate-700 dark:text-slate-300 mb-2 block">Local Video File</label>
+                                            <label id="video-gen-file-upload-label" for="video-gen-video-upload" class="relative flex items-center justify-center w-full px-4 py-3 bg-slate-100 dark:bg-slate-700 border-2 border-dashed border-slate-300 dark:border-slate-600 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-600 transition-all">
+                                                <i class="fa-solid fa-upload mr-3 text-slate-500 dark:text-slate-400"></i>
+                                                <span id="video-gen-file-upload-text" class="text-slate-500 dark:text-slate-400">Click to choose a video file</span>
+                                            </label>
+                                            <input type="file" id="video-gen-video-upload" accept="video/*" class="hidden">
+                                             <p class="text-xs text-slate-500 mt-1">For best results, use files under 20MB.</p>
+                                        </div>
+                                    </div>
+                
+                                    <div id="video-gen-content-url" class="video-gen-tab-content space-y-4">
+                                        <div>
+                                            <label for="video-gen-direct-url" class="font-semibold text-slate-700 dark:text-slate-300 mb-2 block">Direct Video URL</label>
+                                            <div class="relative">
+                                                <i class="fa-solid fa-link absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                                                <input type="url" id="video-gen-direct-url" placeholder="https://example.com/video.mp4" class="w-full pl-12 pr-4 py-3 bg-slate-100 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-all duration-200">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div id="video-gen-duration-container" class="hidden">
+                                     <label for="video-gen-video-duration" class="font-semibold text-slate-700 dark:text-slate-300 mb-2 block">Video Duration (MM:SS)</label>
+                                    <div class="relative">
+                                        <i class="fa-solid fa-clock absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                                        <input type="text" id="video-gen-video-duration" placeholder="e.g., 12:34" class="w-full pl-12 pr-4 py-3 bg-slate-100 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-all duration-200">
+                                    </div>
+                                    <p class="text-xs text-slate-500 mt-1">Auto-detected. Please edit if incorrect.</p>
+                                </div>
+                                    
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label for="video-gen-output-language" class="font-semibold text-slate-700 dark:text-slate-300 mb-2 block">Output Language</label>
+                                        <select id="video-gen-output-language" class="w-full px-4 py-3 bg-slate-100 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg text-slate-900 dark:text-white focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-all duration-200"></select>
+                                    </div>
+                                    <div>
+                                        <label for="video-gen-output-format" class="font-semibold text-slate-700 dark:text-slate-300 mb-2 block">Output Format</label>
+                                        <select id="video-gen-output-format" class="w-full px-4 py-3 bg-slate-100 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg text-slate-900 dark:text-white focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-all duration-200">
+                                            <option value="srt" selected>SRT (SubRip)</option>
+                                            <option value="vtt">WebVTT</option>
+                                            <option value="txt">Plain Text</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                
+                            <div id="video-gen-video-preview" class="hidden mt-6">
+                                <label class="font-semibold text-slate-700 dark:text-slate-300 mb-2 block">Video Preview</label>
+                                <div id="video-gen-container" class="rounded-lg overflow-hidden border border-slate-300 dark:border-slate-700">
+                                    <div id="video-gen-yt-player-container"></div>
+                                    <video id="video-gen-local-video-player" class="hidden" controls></video>
+                                    <div id="video-gen-subtitle-overlay" aria-live="polite">
+                                        <p id="video-gen-subtitle-text">&nbsp;</p>
+                                    </div>
+                                </div>
+                            </div>
+                
+                            <div class="flex gap-3 mt-8">
+                                <button id="video-gen-generate-btn" class="flex-1 bg-sky-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-sky-700 disabled:bg-sky-800 disabled:cursor-not-allowed focus:outline-none focus:ring-4 focus:ring-sky-500/50 transition-all duration-200 flex items-center justify-center gap-3">
+                                    <span id="video-gen-btn-text">Generate Subtitles</span>
+                                    <svg id="video-gen-spinner" class="spinner h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                    </svg>
+                                </button>
+                                <button id="video-gen-cancel-btn" class="bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg px-4 hidden items-center justify-center transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-red-500/50">
+                                    <i class="fa-solid fa-times"></i>
+                                </button>
+                                <button id="video-gen-preview-btn" class="bg-slate-600 text-slate-200 font-semibold px-4 py-3 rounded-lg hover:bg-slate-500 focus:outline-none focus:ring-4 focus:ring-slate-500/50 transition-all duration-200 disabled:bg-slate-700 disabled:cursor-not-allowed">
+                                    <i class="fa-solid fa-play w-4"></i>
+                                </button>
+                            </div>
+                            
+                            <div id="video-gen-output-container" class="mt-8 hidden">
+                                <div id="video-gen-progress-container" class="mb-4">
+                                    <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2.5">
+                                        <div id="video-gen-progress-bar" class="progress-bar-inner bg-sky-500 h-2.5 rounded-full" style="width: 0%"></div>
+                                    </div>
+                                    <div class="flex justify-between text-xs text-slate-500 dark:text-slate-400 mt-1">
+                                        <span id="video-gen-progress-status">Initializing...</span>
+                                        <span id="video-gen-progress-percentage">0%</span>
+                                    </div>
+                                </div>
+                                
+                                <div id="video-gen-status-container" class="text-center p-4 rounded-lg mb-4">
+                                    <p id="video-gen-status-message" class="font-medium"></p>
+                                </div>
+                                
+                                <div id="video-gen-results-wrapper" class="hidden">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <h3 class="font-semibold text-slate-900 dark:text-white">Generated Subtitles</h3>
+                                        <div class="flex gap-2">
+                                            <button id="video-gen-edit-btn" class="text-sm bg-slate-200 dark:bg-slate-600 text-slate-800 dark:text-slate-200 px-3 py-1 rounded-md hover:bg-slate-300 dark:hover:bg-slate-500 transition-colors">
+                                                <i class="fa-solid fa-edit"></i> Edit
+                                            </button>
+                                            <button id="video-gen-timestamp-btn" class="text-sm bg-slate-200 dark:bg-slate-600 text-slate-800 dark:text-slate-200 px-3 py-1 rounded-md hover:bg-slate-300 dark:hover:bg-slate-500 transition-colors">
+                                                <i class="fa-solid fa-clock"></i> Adjust
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="relative">
+                                        <textarea id="video-gen-subtitle-output" rows="15" readonly dir="auto" class="w-full p-4 border border-slate-300 dark:border-slate-600 bg-slate-100 dark:bg-slate-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 resize-none font-mono text-sm text-slate-800 dark:text-slate-200 transition-colors"></textarea>
+                                        <button id="video-gen-copy-btn" title="Copy to Clipboard" class="absolute top-3 right-3 bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 px-3 py-1 rounded-md text-xs font-semibold hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors">
+                                            <i class="fa-regular fa-copy"></i> Copy
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="mt-4 flex flex-col sm:flex-row gap-3">
+                                        <button id="video-gen-download-btn" class="flex-1 bg-green-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-green-500/50 transition-colors flex items-center justify-center gap-2">
+                                            <i class="fa-solid fa-download"></i> Download Subtitle File
+                                        </button>
+                                        <button id="video-gen-retry-btn" class="flex-1 bg-slate-600 text-slate-200 font-semibold px-6 py-3 rounded-lg hover:bg-slate-500 focus:outline-none focus:ring-4 focus:ring-slate-500/50 transition-colors flex items-center justify-center gap-2 hidden">
+                                            <i class="fa-solid fa-redo"></i> Retry
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="progress-container" class="hidden my-4 p-4 bg-slate-200/50 dark:bg-slate-900/50 rounded-lg">
+                            <div class="flex justify-between items-center mb-2">
+                                <span id="progress-label" class="text-sm font-medium text-slate-700 dark:text-slate-300" data-i18n-key="progressLabelTranslating"></span>
+                                <span id="progress-percentage" class="text-sm font-bold text-sky-600 dark:text-sky-400">0%</span>
+                            </div>
+                            <div class="w-full bg-slate-200 rounded-full h-2.5 dark:bg-slate-700">
+                               <div id="progress-bar-inner" class="bg-sky-500 h-2.5 rounded-full" style="width: 0%"></div>
+                            </div>
+                            <button type="button" id="cancel-translation-btn" class="w-full mt-4 py-2 text-sm font-medium text-red-600 dark:text-red-400 bg-red-100 dark:bg-red-900/30 rounded-lg hover:bg-red-200 dark:hover:bg-red-900/50 transition-colors" data-i18n-key="progressCancel"></button>
+                        </div>
+        
+                        <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                            <button type="submit" id="translate-btn" class="w-full sm:w-auto order-1 sm:order-2 px-8 py-3 rounded-lg bg-sky-500 hover:bg-sky-600 text-white font-bold transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center">
+                                <span id="translate-btn-text" data-i18n-key="translateBtn">Translate</span>
+                                <svg id="translate-btn-spinner" class="spinner w-5 h-5 ml-2 rtl:ml-0 rtl:mr-2 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                            </button>
+                            <div id="error-display" class="order-2 sm:order-1 text-sm text-red-500 dark:text-red-400 text-center sm:text-left rtl:sm:text-right"></div>
+                        </div>
+        
+                        <div id="main-output-section" class="mt-6">
+                           <div class="relative">
+                               <textarea id="output" readonly data-i18n-placeholder-key="outputPlaceholder" placeholder="Translation will appear here..." class="w-full h-48 p-4 bg-slate-100 dark:bg-slate-700 bg-input rounded-lg border-slate-300 dark:border-transparent focus:ring-2 focus:ring-sky-500 resize-none"></textarea>
+                               <div class="absolute top-2 right-2 rtl:right-auto rtl:left-2 flex flex-col gap-2">
+                                  <button type="button" id="copy-btn" disabled class="p-2 rounded-md bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors disabled:opacity-50" data-i18n-title-key="copyBtnLabel" aria-label="Copy output">
+                                      <svg id="copy-icon-default" class="w-5 h-5 text-slate-600 dark:text-slate-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5 .124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" /></svg>
+                                      <svg id="copy-icon-success" class="w-5 h-5 text-green-500 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                  </button>
+                                  <button type="button" id="export-text-btn" disabled class="p-2 rounded-md bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors disabled:opacity-50" data-i18n-title-key="exportTextBtnLabel" aria-label="Export as TXT file">
+                                    <svg class="w-5 h-5 text-slate-600 dark:text-slate-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" /> </svg>
+                                </button>
+                               </div>
+                           </div>
+                           <div id="enhancements-toolbar" class="hidden opacity-0 -translate-y-2 mt-4 p-2 bg-slate-200 dark:bg-slate-700 rounded-lg flex flex-wrap items-center justify-center gap-2">
+                               <span class="text-sm font-semibold mr-2 rtl:mr-0 rtl:ml-2" data-i18n-key="refineToolbarTitle"></span>
+                               <button data-action="shorten" class="enhancement-btn text-sm px-3 py-1 rounded-md bg-white dark:bg-slate-600 border border-gray-300 dark:border-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700" data-i18n-key="refineShorten"></button>
+                               <button data-action="expand" class="enhancement-btn text-sm px-3 py-1 rounded-md bg-white dark:bg-slate-600 border border-gray-300 dark:border-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700" data-i18n-key="refineExpand"></button>
+                               <button data-action="summarize" class="enhancement-btn text-sm px-3 py-1 rounded-md bg-white dark:bg-slate-600 border border-gray-300 dark:border-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700" data-i18n-key="refineSummarize"></button>
+                               <span class="border-l border-slate-400 dark:border-slate-500 h-6 mx-2"></span>
+                               <span class="text-sm font-semibold mr-2 rtl:mr-0 rtl:ml-2" data-i18n-key="styleToolbarTitle"></span>
+                               <button data-action="formal" class="enhancement-btn text-sm px-3 py-1 rounded-md bg-white dark:bg-slate-600 border border-gray-300 dark:border-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700" data-i18n-key="styleFormal"></button>
+                               <button data-action="informal" class="enhancement-btn text-sm px-3 py-1 rounded-md bg-white dark:bg-slate-600 border border-gray-300 dark:border-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700" data-i18n-key="styleInformal"></button>
+                               <button data-action="poetic" class="enhancement-btn text-sm px-3 py-1 rounded-md bg-white dark:bg-slate-600 border border-gray-300 dark:border-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700" data-i18n-key="stylePoetic"></button>
+                               <button data-action="simplify" class="enhancement-btn text-sm px-3 py-1 rounded-md bg-white dark:bg-slate-600 border border-gray-300 dark:border-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700" data-i18n-key="styleSimplify"></button>
+                           </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div id="settings-view" class="hidden">
+                    <div class="space-y-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label for="model" class="block text-sm font-medium mb-1" data-i18n-key="settingsModel"></label>
+                                <select id="model" name="model" class="w-full bg-slate-100 dark:bg-slate-700 bg-input border-slate-300 dark:border-transparent focus:ring-2 focus:ring-sky-500 rounded-lg p-3"></select>
+                            </div>
+                            <div>
+                                <label for="job_field" class="block text-sm font-medium mb-1" data-i18n-key="settingsSpecialization"></label>
+                                <select id="job_field" name="job_field" class="w-full bg-slate-100 dark:bg-slate-700 bg-input border-slate-300 dark:border-transparent focus:ring-2 focus:ring-sky-500 rounded-lg p-3"></select>
+                            </div>
+                            <div>
+                                <label for="translation_tone" class="block text-sm font-medium mb-1" data-i18n-key="settingsTone"></label>
+                                <select id="translation_tone" name="translation_tone" class="w-full bg-slate-100 dark:bg-slate-700 bg-input border-slate-300 dark:border-transparent focus:ring-2 focus:ring-sky-500 rounded-lg p-3"></select>
+                            </div>
+                            <div id="custom-tone-container" class="hidden">
+                                <label for="custom-tone-input" class="block text-sm font-medium mb-1" data-i18n-key="settingsCustomToneLabel"></label>
+                                <input id="custom-tone-input" type="text" data-i18n-placeholder-key="settingsCustomTonePlaceholder" class="w-full bg-slate-100 dark:bg-slate-700 bg-input rounded-lg p-3 border-slate-300 dark:border-transparent focus:ring-2 focus:ring-sky-500">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                             <div>
+                                 <label for="temperature" class="block text-sm font-medium mb-1" data-i18n-key="settingsCreativity"></label>
+                                 <div class="flex items-center gap-3">
+                                     <input id="temperature" name="temperature" type="range" min="0" max="1" step="0.05" value="0.7" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer dark:bg-slate-600">
+                                     <span id="temperature-value" class="font-mono text-sm">0.7</span>
+                                 </div>
+                             </div>
+                             <div>
+                                 <label for="request_delay" class="block text-sm font-medium mb-1" data-i18n-key="settingsRequestDelay"></label>
+                                 <input id="request_delay" name="request_delay" type="number" min="0" step="0.5" value="4" class="w-full bg-slate-100 dark:bg-slate-700 bg-input rounded-lg p-3 border-slate-300 dark:border-transparent focus:ring-2 focus:ring-sky-500">
+                             </div>
+                        </div>
+                        <div>
+                            <label for="api_key" class="block text-sm font-medium mb-1" data-i18n-key="settingsApiKey"></label>
+                            <textarea id="api_key" name="api_key" rows="3" data-i18n-placeholder-key="settingsApiKeyPlaceholder" class="w-full bg-slate-100 dark:bg-slate-700 bg-input rounded-lg p-3 border-slate-300 dark:border-transparent focus:ring-2 focus:ring-sky-500 font-mono"></textarea>
+                            <p class="text-xs text-slate-500 mt-1" data-i18n-key="settingsApiKeyHint"></p>
+                        </div>
+                        <div class="space-y-4 pt-4 border-t border-slate-200 dark:border-slate-700">
+                            <div class="flex items-start">
+                                <div class="flex items-center h-5">
+                                    <input id="use-proxy-checkbox" type="checkbox" class="h-4 w-4 rounded text-sky-600 focus:ring-sky-500">
+                                </div>
+                                <div class="ms-3 rtl:ms-0 rtl:me-3 text-sm">
+                                    <label for="use-proxy-checkbox" class="font-medium" data-i18n-key="settingsUseProxy"></label>
+                                    <div id="custom-proxy-container" class="mt-2 hidden">
+                                        <label for="custom-proxy-input" class="block text-xs font-medium mb-1" data-i18n-key="settingsCustomProxyLabel"></label>
+                                        <input id="custom-proxy-input" type="url" class="w-full bg-slate-100 dark:bg-slate-700 bg-input rounded-lg p-2 text-sm border-slate-300 dark:border-transparent focus:ring-2 focus:ring-sky-500">
+                                        <p class="text-xs text-slate-500 mt-1" data-i18n-key="settingsCustomProxyHint" data-i18n-html></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex items-center h-5">
+                                    <input id="use-custom-prompt-checkbox" type="checkbox" class="h-4 w-4 rounded text-sky-600 focus:ring-sky-500">
+                                </div>
+                                <div class="ms-3 rtl:ms-0 rtl:me-3 text-sm flex-grow">
+                                    <label for="use-custom-prompt-checkbox" class="font-medium" data-i18n-key="settingsUseCustomPrompt"></label>
+                                    <div id="custom-prompt-container" class="mt-2 hidden">
+                                        <textarea id="custom-prompt-input" rows="4" data-i18n-placeholder-key="settingsCustomPromptPlaceholder" class="w-full bg-slate-100 dark:bg-slate-700 bg-input rounded-lg p-2 text-sm border-slate-300 dark:border-transparent focus:ring-2 focus:ring-sky-500"></textarea>
+                                        <button type="button" id="optimize-prompt-btn" class="mt-2 px-3 py-1 text-sm rounded-md bg-white dark:bg-slate-600 border border-gray-300 dark:border-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center justify-center">
+                                            <span id="optimize-prompt-btn-text" data-i18n-key="settingsOptimizePrompt"></span>
+                                            <svg id="optimize-prompt-spinner" class="spinner w-4 h-4 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="pdf-ocr-checkbox" type="checkbox" class="h-4 w-4 rounded text-sky-600 focus:ring-sky-500">
+                                <label for="pdf-ocr-checkbox" class="ms-3 rtl:ms-0 rtl:me-3 text-sm font-medium" data-i18n-key="settingsOcr"></label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="save-settings-checkbox" type="checkbox" class="h-4 w-4 rounded text-sky-600 focus:ring-sky-500">
+                                <label for="save-settings-checkbox" class="ms-3 rtl:ms-0 rtl:me-3 text-sm font-medium" data-i18n-key="settingsSave"></label>
+                            </div>
+                        </div>
+
+                        <div class="pt-6 border-t border-slate-200 dark:border-slate-700">
+                            <button id="log-toggle-btn" class="w-full text-left rtl:text-right font-semibold text-slate-800 dark:text-slate-200 mb-2">
+                                <i class="fas fa-chevron-down w-4 inline-block transform transition-transform"></i> <span data-i18n-key="logTitle"></span>
+                            </button>
+                            <div id="log-viewer" class="max-h-0 overflow-hidden">
+                                <div id="log-content" class="scroll-container h-48 bg-slate-100 dark:bg-slate-900 rounded-md p-3 text-xs font-mono overflow-y-auto">
+                                    <div id="log-output"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <div id="mobile-nav" class="md:hidden fixed bottom-0 left-0 right-0 flex justify-around items-center h-[70px] shadow-lg">
+        <button type="button" data-mode="text" class="mobile-nav-btn active">
+            <i class="fas fa-file-alt"></i>
+            <span data-i18n-key="tabText"></span>
+        </button>
+        <button type="button" data-mode="image" class="mobile-nav-btn">
+            <i class="fas fa-image"></i>
+            <span data-i18n-key="tabImage"></span>
+        </button>
+        <button type="button" data-mode="pdf" class="mobile-nav-btn">
+            <i class="fas fa-file-pdf"></i>
+            <span data-i18n-key="tabPDF"></span>
+        </button>
+        <button type="button" data-mode="subtitle" class="mobile-nav-btn">
+            <i class="fas fa-closed-captioning"></i>
+            <span data-i18n-key="tabSubtitle"></span>
+        </button>
+        <button type="button" data-mode="video" class="mobile-nav-btn">
+            <i class="fas fa-video"></i>
+            <span data-i18n-key="tabVideo"></span>
+        </button>
+        <button type="button" data-view="settings" class="mobile-nav-btn">
+            <i class="fas fa-cog"></i>
+            <span data-i18n-key="advSettingsBtn"></span>
+        </button>
+    </div>
+
+    <div id="how-to-use-modal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-800 rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] flex flex-col">
+            <div class="flex justify-between items-center p-4 border-b dark:border-slate-700">
+                <h2 id="how-to-use-title" class="text-xl font-bold text-slate-800 dark:text-slate-100" data-i18n-key="howToUseModalTitle"></h2>
+                <button id="how-to-use-close-btn" class="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-700">
+                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+            </div>
+            <div id="how-to-use-content" class="p-6 overflow-y-auto scroll-container">
+            </div>
+        </div>
+    </div>
+    
+    <div id="video-gen-timestamp-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 hidden">
+        <div class="bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg p-6 w-full max-w-md">
+            <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-4">Adjust Timestamps</h3>
+            <div class="space-y-4">
+                <div>
+                    <label for="video-gen-offset-seconds" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Offset (seconds)</label>
+                    <input type="number" id="video-gen-offset-seconds" step="0.1" value="0" class="w-full px-3 py-2 bg-slate-100 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-md text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-sky-500">
+                </div>
+                <div>
+                    <label for="video-gen-scale-factor" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Speed Factor</label>
+                    <input type="number" id="video-gen-scale-factor" step="0.1" min="0.1" max="2.0" value="1.0" class="w-full px-3 py-2 bg-slate-100 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-md text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-sky-500">
+                </div>
+            </div>
+            <div class="mt-6 flex justify-end space-x-3">
+                <button id="video-gen-cancel-timestamp" class="px-4 py-2 bg-slate-200 dark:bg-slate-600 text-slate-800 dark:text-slate-200 rounded-md hover:bg-slate-300 dark:hover:bg-slate-500 transition-colors">Cancel</button>
+                <button id="video-gen-apply-timestamp" class="px-4 py-2 bg-sky-600 text-white rounded-md hover:bg-sky-700 transition-colors">Apply</button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="video-gen-yt-player-hidden" style="position: absolute; top: -9999px; left: -9999px;"></div>
+    
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script type="module" src="/dist/index.js"></script>
+</body>
+</html>
