@@ -1,22 +1,21 @@
 // --- START: CONFIGURATION & I1N ---
-// FIX: Update default model and model list to be compliant with guidelines.
 const DEFAULT_WEB_MODEL = "gemini-2.5-flash";
-const DEFAULT_PROXY_URL = "https://middle.youtakefreshfig.workers.dev";
+const DEFAULT_PROXY_URL = "https://middleman.mattew.workers.dev";
 const MODELS = ['gemini-2.5-pro', 'gemini-2.5-flash', 'gemini-2.5-flash-lite', 'gemini-2.0-flash', 'gemini-2.0-flash-lite'];
 const LANGUAGES = [{ value: "auto", text: "Auto-detect Language", i18nKey: "lang_auto" }, { value: "Afrikaans", text: "Afrikaans", i18nKey: "lang_af" }, { value: "Albanian", text: "Albanian", i18nKey: "lang_sq" }, { value: "Amharic", text: "Amharic", i18nKey: "lang_am" }, { value: "Arabic", text: "Arabic", i18nKey: "lang_ar" }, { value: "Armenian", text: "Armenian", i18nKey: "lang_hy" }, { value: "Assamese", text: "Assamese", i18nKey: "lang_as" }, { value: "Aymara", text: "Aymara", i18nKey: "lang_ay" }, { value: "Azerbaijani", text: "Azerbaijani", i18nKey: "lang_az" }, { value: "Bambara", text: "Bambara", i18nKey: "lang_bm" }, { value: "Basque", text: "Basque", i18nKey: "lang_eu" }, { value: "Belarusian", text: "Belarusian", i18nKey: "lang_be" }, { value: "Bengali", text: "Bengali", i18nKey: "lang_bn" }, { value: "Bhojpuri", text: "Bhojpuri", i18nKey: "lang_bho" }, { value: "Bosnian", text: "Bosnian", i18nKey: "lang_bs" }, { value: "Bulgarian", text: "Bulgarian", i18nKey: "lang_bg" }, { value: "Catalan", text: "Catalan", i18nKey: "lang_ca" }, { value: "Cebuano", text: "Cebuano", i18nKey: "lang_ceb" }, { value: "Chichewa", text: "Chichewa (Nyanja)", i18nKey: "lang_ny" }, { value: "Chinese (Simplified)", text: "Chinese (Simplified)", i18nKey: "lang_zh-CN" }, { value: "Chinese (Traditional)", text: "Chinese (Traditional)", i18nKey: "lang_zh-TW" }, { value: "Corsican", text: "Corsican", i18nKey: "lang_co" }, { value: "Croatian", text: "Croatian", i18nKey: "lang_hr" }, { value: "Czech", text: "Czech", i18nKey: "lang_cs" }, { value: "Danish", text: "Danish", i18nKey: "lang_da" }, { value: "Dhivehi", text: "Dhivehi", i18nKey: "lang_dv" }, { value: "Dogri", text: "Dogri", i18nKey: "lang_doi" }, { value: "Dutch", text: "Dutch", i18nKey: "lang_nl" }, { value: "English", text: "English", i18nKey: "lang_en" }, { value: "Esperanto", text: "Esperanto", i18nKey: "lang_eo" }, { value: "Estonian", text: "Estonian", i18nKey: "lang_et" }, { value: "Ewe", text: "Ewe", i18nKey: "lang_ee" }, { value: "Filipino", text: "Filipino (Tagalog)", i18nKey: "lang_tl" }, { value: "Finnish", text: "Finnish", i18nKey: "lang_fi" }, { value: "French", text: "French", i18nKey: "lang_fr" }, { value: "Frisian", text: "Frisian", i18nKey: "lang_fy" }, { value: "Galician", text: "Galician", i18nKey: "lang_gl" }, { value: "Georgian", text: "Georgian", i18nKey: "lang_ka" }, { value: "German", text: "German", i18nKey: "lang_de" }, { value: "Greek", text: "Greek", i18nKey: "lang_el" }, { value: "Guarani", text: "Guarani", i18nKey: "lang_gn" }, { value: "Gujarati", text: "Gujarati", i18nKey: "lang_gu" }, { value: "Haitian Creole", text: "Haitian Creole", i18nKey: "lang_ht" }, { value: "Hausa", text: "Hausa", i18nKey: "lang_ha" }, { value: "Hawaiian", text: "Hawaiian", i18nKey: "lang_haw" }, { value: "Hebrew", text: "Hebrew", i18nKey: "lang_iw" }, { value: "Hindi", text: "Hindi", i18nKey: "lang_hi" }, { value: "Hmong", text: "Hmong", i18nKey: "lang_hmn" }, { value: "Hungarian", text: "Hungarian", i18nKey: "lang_hu" }, { value: "Icelandic", text: "Icelandic", i18nKey: "lang_is" }, { value: "Igbo", text: "Igbo", i18nKey: "lang_ig" }, { value: "Ilocano", text: "Ilocano", i18nKey: "lang_ilo" }, { value: "Indonesian", text: "Indonesian", i18nKey: "lang_id" }, { value: "Irish", text: "Irish", i18nKey: "lang_ga" }, { value: "Italian", text: "Italian", i18nKey: "lang_it" }, { value: "Japanese", text: "Japanese", i18nKey: "lang_ja" }, { value: "Javanese", text: "Javanese", i18nKey: "lang_jw" }, { value: "Kannada", text: "Kannada", i18nKey: "lang_kn" }, { value: "Kazakh", text: "Kazakh", i18nKey: "lang_kk" }, { value: "Khmer", text: "Khmer", i18nKey: "lang_km" }, { value: "Kinyarwanda", text: "Kinyarwanda", i18nKey: "lang_rw" }, { value: "Konkani", text: "Konkani", i18nKey: "lang_gom" }, { value: "Korean", text: "Korean", i18nKey: "lang_ko" }, { value: "Krio", text: "Krio", i18nKey: "lang_kri" }, { value: "Kurdish (Kurmanji)", text: "Kurdish (Kurmanji)", i18nKey: "lang_ku" }, { value: "Kurdish (Sorani)", text: "Kurdish (Sorani)", i18nKey: "lang_ckb" }, { value: "Kyrgyz", text: "Kyrgyz", i18nKey: "lang_ky" }, { value: "Lao", text: "Lao", i18nKey: "lang_lo" }, { value: "Latin", text: "Latin", i18nKey: "lang_la" }, { value: "Latvian", text: "Latvian", i18nKey: "lang_lv" }, { value: "Lingala", text: "Lingala", i18nKey: "lang_ln" }, { value: "Lithuanian", text: "Lithuanian", i18nKey: "lang_lt" }, { value: "Luganda", text: "Luganda", i18nKey: "lang_lg" }, { value: "Luxembourgish", text: "Luxembourgish", i18nKey: "lang_lb" }, { value: "Macedonian", text: "Macedonian", i18nKey: "lang_mk" }, { value: "Maithili", text: "Maithili", i18nKey: "lang_mai" }, { value: "Malagasy", text: "Malagasy", i18nKey: "lang_mg" }, { value: "Malay", text: "Malay", i18nKey: "lang_ms" }, { value: "Malayalam", text: "Malayalam", i18nKey: "lang_ml" }, { value: "Maltese", text: "Maltese", i18nKey: "lang_mt" }, { value: "Maori", text: "Maori", i18nKey: "lang_mi" }, { value: "Marathi", text: "Marathi", i18nKey: "lang_mr" }, { value: "Meiteilon (Manipuri)", text: "Meiteilon (Manipuri)", i18nKey: "lang_mni-Mtei" }, { value: "Mizo", text: "Mizo", i18nKey: "lang_lus" }, { value: "Mongolian", text: "Mongolian", i18nKey: "lang_mn" }, { value: "Myanmar (Burmese)", text: "Myanmar (Burmese)", i18nKey: "lang_my" }, { value: "Nepali", text: "Nepali", i18nKey: "lang_ne" }, { value: "Norwegian", text: "Norwegian", i18nKey: "lang_no" }, { value: "Odia (Oriya)", text: "Odia (Oriya)", i18nKey: "lang_or" }, { value: "Oromo", text: "Oromo", i18nKey: "lang_om" }, { value: "Pashto", text: "Pashto", i18nKey: "lang_ps" }, { value: "Persian", text: "Persian (Farsi)", i18nKey: "lang_fa" }, { value: "Polish", text: "Polish", i18nKey: "lang_pl" }, { value: "Portuguese", text: "Portuguese", i18nKey: "lang_pt" }, { value: "Punjabi", text: "Punjabi", i18nKey: "lang_pa" }, { value: "Quechua", text: "Quechua", i18nKey: "lang_qu" }, { value: "Romanian", text: "Romanian", i18nKey: "lang_ro" }, { value: "Russian", text: "Russian", i18nKey: "lang_ru" }, { value: "Samoan", text: "Samoan", i18nKey: "lang_sm" }, { value: "Sanskrit", text: "Sanskrit", i18nKey: "lang_sa" }, { value: "Scots Gaelic", text: "Scots Gaelic", i18nKey: "lang_gd" }, { value: "Sepedi", text: "Sepedi", i18nKey: "lang_nso" }, { value: "Serbian", text: "Serbian", i18nKey: "lang_sr" }, { value: "Sesotho", text: "Sesotho", i18nKey: "lang_st" }, { value: "Shona", text: "Shona", i18nKey: "lang_sn" }, { value: "Sindhi", text: "Sindhi", i18nKey: "lang_sd" }, { value: "Sinhala", text: "Sinhala", i18nKey: "lang_si" }, { value: "Slovak", text: "Slovak", i18nKey: "lang_sk" }, { value: "Slovenian", text: "Slovenian", i18nKey: "lang_sl" }, { value: "Somali", text: "Somali", i18nKey: "lang_so" }, { value: "Spanish", text: "Spanish", i18nKey: "lang_es" }, { value: "Sundanese", text: "Sundanese", i18nKey: "lang_su" }, { value: "Swahili", text: "Swahili", i18nKey: "lang_sw" }, { value: "Swedish", text: "Swedish", i18nKey: "lang_sv" }, { value: "Tajik", text: "Tajik", i18nKey: "lang_tg" }, { value: "Tamil", text: "Tamil", i18nKey: "lang_ta" }, { value: "Tatar", text: "Tatar", i18nKey: "lang_tt" }, { value: "Telugu", text: "Telugu", i18nKey: "lang_te" }, { value: "Thai", text: "Thai", i18nKey: "lang_th" }, { value: "Tigrinya", text: "Tigrinya", i18nKey: "lang_ti" }, { value: "Tsonga", text: "Tsonga", i18nKey: "lang_ts" }, { value: "Turkish", text: "Turkish", i18nKey: "lang_tr" }, { value: "Turkmen", text: "Turkmen", i18nKey: "lang_tk" }, { value: "Twi", text: "Twi (Akan)", i18nKey: "lang_ak" }, { value: "Ukrainian", text: "Ukrainian", i18nKey: "lang_uk" }, { value: "Urdu", text: "Urdu", i18nKey: "lang_ur" }, { value: "Uyghur", text: "Uyghur", i18nKey: "lang_ug" }, { value: "Uzbek", text: "Uzbek", i18nKey: "lang_uz" }, { value: "Vietnamese", text: "Vietnamese", i18nKey: "lang_vi" }, { value: "Welsh", text: "Welsh", i18nKey: "lang_cy" }, { value: "Xhosa", text: "Xhosa", i18nKey: "lang_xh" }, { value: "Yiddish", text: "Yiddish", i18nKey: "lang_yi" }, { value: "Yoruba", text: "Yoruba", i18nKey: "lang_yo" }, { value: "Zulu", text: "Zulu", i18nKey: "lang_zu" }];
-const JOB_FIELDS = [{ value: "None", text: "None (General)", i18nKey: "job_None" }, { value: "Medical", text: "Medical / Healthcare", i18nKey: "job_Medical" }, { value: "Legal", text: "Legal / Law", i18nKey: "job_Legal" }, { value: "Engineering", text: "Engineering (General)", i18nKey: "job_Engineering" }, { value: "IT", text: "Information Technology / Software", i18nKey: "job_IT" }, { value: "Finance", text: "Finance / Banking", i18nKey: "job_Finance" }, { value: "Academic", text: "Academic / Research", i18nKey: "job_Academic" }, { value: "Marketing", text: "Marketing / Business", i18nKey: "job_Marketing" }, { value: "Cinema", text: "Cinema / TV Series", i18nKey: "job_Cinema" }];
+const JOB_FIELDS = [{ value: "None", text: "None (General)", i18nKey: "job_None" }, { value: "Medical", text: "Medical / Healthcare", i18nKey: "job_Medical" }, { value: "Legal", text: "Legal / Law", i18nKey: "job_Legal" }, { value: "Engineering", text: "Engineering (General)", i18nKey: "job_Engineering" }, { value: "IT", text: "Information Technology / Software", i18nKey: "job_IT" }, { value: "Finance", text: "Finance / Banking", i18nKey: "job_Finance" }, { value: "Academic", text: "Academic / Research", i18nKey: "job_Academic" }, { value: "Marketing", text: "Marketing / Business", i18nKey: "job_Cinema" }, { value: "Cinema", text: "Cinema / TV Series", i18nKey: "job_Cinema" }];
 const TONES = [{ value: "Default", text: "Default", i18nKey: "tone_Default" }, { value: "Formal", text: "Formal", i18nKey: "tone_Formal" }, { value: "Informal", text: "Informal", i18nKey: "tone_Informal" }, { value: "Poetic", text: "Poetic", i18nKey: "tone_Poetic" }, { value: "Technical", text: "Technical", i18nKey: "tone_Technical" }, { value: "Simplify", text: "Simple / Easy to read", i18nKey: "tone_Simplify" }, { value: "Custom", text: "Custom...", i18nKey: "tone_Custom" }];
 const RTL_LANGUAGES = new Set(['Arabic', 'Hebrew', 'Persian', 'Urdu', 'Yiddish', 'Dhivehi', 'Sindhi', 'Pashto', 'Uyghur', 'Kurdish (Sorani)']);
 const TRANSLATIONS = {
-    en: { appTitle: "Fluentify", tabText: "Text", tabImage: "Image", tabPDF: "PDF", tabSubtitle: "Subtitle", tabVideo: "Video", swapBtnLabel: "Swap languages", textInputPlaceholder: "Enter text to translate...", youtubeSectionTitle: "Load from YouTube URL", youtubeUrlPlaceholder: "Enter YouTube Video URL...", youtubeLangPlaceholder: "lang", youtubeFetchBtn: "Fetch", youtubeNotice: ``, fileDragDrop: "Drag & drop a file", fileOr: "or", fileChooseBtn: "Choose File", fileHintImage: "PNG, JPG, WEBP, GIF (MAX. 20MB)", fileHintPDF: "PDF (MAX. 20MB)", fileHintSubtitle: "SRT, VTT, SSA, ASS (MAX. 20MB)", removeFileBtnLabel: "Remove file", pdfSelectPagesTitle: "Select Pages to Translate", pdfSelectAll: "Select All", pdfDeselectAll: "Deselect All", pdfPageCounter: "{count} pages selected", pdfCombinePages: "Combine selected pages before translation", pdfBatchWarning: "Translation may take up to {seconds} seconds to complete.", subtitleEditorTitle: "Subtitle Editor", subtitleLinesPerRequest: "Lines / Request", subtitleBreakLinesBtnLabel: "Break Long Lines", subtitleFindReplaceBtnLabel: "Find & Replace", subtitleExportBtnLabel: "Export as subtitle file", subtitleSavedProgress: "Saved progress found for this file.", subtitleLoadProgress: "Load Progress", subtitleClearHistory: "Clear History", breakLinesPanelTitle: "Max chars / line:", breakLinesApply: "Apply Changes", findInputPlaceholder: "Find text...", replaceInputPlaceholder: "Replace with...", findCaseSensitive: "Case Sensitive", replaceAllBtn: "Replace All", subtitleTableHeaderNum: "#", subtitleTableHeaderTime: "Timestamp", subtitleTableHeaderOrig: "Original Text", subtitleTableHeaderTrans: "Translated Text", progressLabelTranslating: "Translating...", progressCancel: "Cancel", advSettingsBtn: "Settings", translateBtn: "Translate", settingsModel: "AI Model", settingsSpecialization: "Translation Specialization", settingsTone: "Translation Tone", settingsCustomToneLabel: "Custom Tone Instruction", settingsCustomTonePlaceholder: "e.g., 'Translate this in the style of a pirate.'", settingsCreativity: "Creativity (Temperature)", settingsRequestDelay: "Request Delay (seconds)", settingsApiKey: "Google AI API Key(s)", settingsApiKeyPlaceholder: "Enter your API Keys, one per line.", settingsApiKeyHint: "Enter multiple keys to distribute load or as backups.", settingsUseProxy: "Use Proxy", settingsCustomProxyLabel: "Custom Proxy URL (Optional)", settingsCustomProxyHint: `Deploy your own proxy using <a href="https://github.com/yebekhe/middleman" target="_blank" rel="noopener noreferrer" class="underline hover:text-sky-500">Middleman</a>.`, settingsUseCustomPrompt: "Use Custom Prompt", settingsCustomPromptPlaceholder: "Enter your custom prompt. Use {text}, {source_lang}, and {target_lang} as placeholders.", settingsOptimizePrompt: "Optimize", settingsOcr: "Use OCR for scanned PDF pages", settingsSave: "Save all settings in this browser", outputPlaceholder: "Translation will appear here...", copyBtnLabel: "Copy output", exportTextBtnLabel: "Export as TXT file", refineToolbarTitle: "Refine:", refineShorten: "Make Shorter", refineExpand: "Expand", refineSummarize: "Summarize", styleToolbarTitle: "Change Style:", styleFormal: "Formal", styleInformal: "Informal", stylePoetic: "Poetic", styleSimplify: "Simplify", logTitle: "Live Activity Log", footerText: `Created with <i class="fas fa-heart text-red-500 mx-1"></i> by YEBEKHE`, pageTitle: "Fluentify - Modern AI Translator", howToUseBtnLabel: "How to use", howToUseModalTitle: "How to Use Fluentify",
+    en: { appTitle: "Fluentify", tabText: "Text", tabImage: "Image", tabPDF: "PDF", tabSubtitle: "Subtitle", tabVideo: "Video", swapBtnLabel: "Swap languages", textInputPlaceholder: "Enter text to translate...", youtubeSectionTitle: "Load from YouTube URL", youtubeUrlPlaceholder: "Enter YouTube Video URL...", youtubeLangPlaceholder: "lang", youtubeFetchBtn: "Fetch", youtubeNotice: ``, fileDragDrop: "Drag & drop a file", fileOr: "or", fileChooseBtn: "Choose File", fileHintImage: "PNG, JPG, WEBP, GIF (MAX. 20MB)", fileHintPDF: "PDF (MAX. 20MB)", fileHintSubtitle: "SRT, VTT, SSA, ASS (MAX. 20MB)", removeFileBtnLabel: "Remove file", pdfSelectPagesTitle: "Select Pages to Translate", pdfSelectAll: "Select All", pdfDeselectAll: "Deselect All", pdfPageCounter: "{count} pages selected", pdfCombinePages: "Combine selected pages before translation", pdfBatchWarning: "Translation may take up to {seconds} seconds to complete.", subtitleEditorTitle: "Subtitle Editor", subtitleLinesPerRequest: "Lines / Request", subtitleBreakLinesBtnLabel: "Break Long Lines", subtitleFindReplaceBtnLabel: "Find & Replace", subtitleExportBtnLabel: "Export as subtitle file", subtitleSavedProgress: "Saved progress found for this file.", subtitleLoadProgress: "Load Progress", subtitleClearHistory: "Clear History", breakLinesPanelTitle: "Max chars / line:", breakLinesApply: "Apply Changes", findInputPlaceholder: "Find text...", replaceInputPlaceholder: "Replace with...", findCaseSensitive: "Case Sensitive", replaceAllBtn: "Replace All", subtitleTableHeaderNum: "#", subtitleTableHeaderTime: "Timestamp", subtitleTableHeaderOrig: "Original Text", subtitleTableHeaderTrans: "Translated Text", progressLabelTranslating: "Translating...", progressCancel: "Cancel", advSettingsBtn: "Settings", translateBtn: "Translate", settingsModel: "AI Model", settingsSpecialization: "Translation Specialization", settingsTone: "Translation Tone", settingsCustomToneLabel: "Custom Tone Instruction", settingsCustomTonePlaceholder: "e.g., 'Translate this in the style of a pirate.'", settingsCreativity: "Creativity (Temperature)", settingsRequestDelay: "Request Delay (seconds)", settingsApiKey: "Google AI API Key(s)", settingsApiKeyPlaceholder: "Enter your API Keys, one per line.", settingsApiKeyHint: "Enter multiple keys to distribute load or as backups.", settingsUseProxy: "Use Proxy", settingsCustomProxyLabel: "Custom Proxy URL (Optional)", settingsCustomProxyHint: `Deploy your own proxy using <a href="https://github.com/yebekhe/middleman" target="_blank" rel="noopener noreferrer" class="underline hover:text-sky-500">Middleman</a>.`, settingsUseCustomPrompt: "Use Custom Prompt", settingsCustomPromptPlaceholder: "Enter your custom prompt. Use {text}, {source_lang}, and {target_lang} as placeholders.", settingsOptimizePrompt: "Optimize", settingsOcr: "Use OCR for scanned PDF pages", settingsSave: "Save all settings in this browser", outputPlaceholder: "Translation will appear here...", copyBtnLabel: "Copy output", exportTextBtnLabel: "Export as TXT file", refineToolbarTitle: "Refine:", refineShorten: "Make Shorter", refineExpand: "Expand", refineSummarize: "Summarize", styleToolbarTitle: "Change Style:", styleFormal: "Formal", styleInformal: "Informal", stylePoetic: "Poetic", styleSimplify: "Simplify", logTitle: "Live Activity Log", footerText: `Created with <i class="fas fa-heart text-red-500 mx-1"></i> by YEBEKHE`, pageTitle: "Fluentify - Modern AI Translator", howToUseBtnLabel: "How to use", howToUseModalTitle: "How to Use Fluentify", searchLanguagesPlaceholder: "Search languages...",
         lang_auto: "Auto-detect Language", lang_af: "Afrikaans", lang_sq: "Albanian", lang_am: "Amharic", lang_ar: "Arabic", lang_hy: "Armenian", lang_as: "Assamese", lang_ay: "Aymara", lang_az: "Azerbaijani", lang_bm: "Bambara", lang_eu: "Basque", lang_be: "Belarusian", lang_bn: "Bengali", lang_bho: "Bhojpuri", lang_bs: "Bosnian", lang_bg: "Bulgarian", lang_ca: "Catalan", lang_ceb: "Cebuano", lang_ny: "Chichewa (Nyanja)", "lang_zh-CN": "Chinese (Simplified)", "lang_zh-TW": "Chinese (Traditional)", lang_co: "Corsican", lang_hr: "Croatian", lang_cs: "Czech", lang_da: "Danish", lang_dv: "Dhivehi", lang_doi: "Dogri", lang_nl: "Dutch", lang_en: "English", lang_eo: "Esperanto", lang_et: "Estonian", lang_ee: "Ewe", lang_tl: "Filipino (Tagalog)", lang_fi: "Finnish", lang_fr: "French", lang_fy: "Frisian", lang_gl: "Galician", lang_ka: "Georgian", lang_de: "German", lang_el: "Greek", lang_gn: "Guarani", lang_gu: "Gujarati", lang_ht: "Haitian Creole", lang_ha: "Hausa", lang_haw: "Hawaiian", lang_iw: "Hebrew", lang_hi: "Hindi", lang_hmn: "Hmong", lang_hu: "Hungarian", lang_is: "Icelandic", lang_ig: "Igbo", lang_ilo: "Ilocano", lang_id: "Indonesian", lang_ga: "Irish", lang_it: "Italian", lang_ja: "Japanese", lang_jw: "Javanese", lang_kn: "Kannada", lang_kk: "Kazakh", lang_km: "Khmer", lang_rw: "Kinyarwanda", lang_gom: "Konkani", lang_ko: "Korean", lang_kri: "Krio", lang_ku: "Kurdish (Kurmanji)", lang_ckb: "Kurdish (Sorani)", lang_ky: "Kyrgyz", lang_lo: "Lao", lang_la: "Latin", lang_lv: "Latvian", lang_ln: "Lingala", lang_lt: "Lithuanian", lang_lg: "Luganda", lang_lb: "Luxembourgish", lang_mk: "Macedonian", lang_mai: "Maithili", lang_mg: "Malagasy", lang_ms: "Malay", lang_ml: "Malayalam", lang_mt: "Maltese", lang_mi: "Maori", lang_mr: "Marathi", "lang_mni-Mtei": "Meiteilon (Manipuri)", lang_lus: "Mizo", lang_mn: "Mongolian", lang_my: "Myanmar (Burmese)", lang_ne: "Nepali", lang_no: "Norwegian", lang_or: "Odia (Oriya)", lang_om: "Oromo", lang_ps: "Pashto", lang_fa: "Persian (Farsi)", lang_pl: "Polish", lang_pt: "Portuguese", lang_pa: "Punjabi", lang_qu: "Quechua", lang_ro: "Romanian", lang_ru: "Russian", lang_sm: "Samoan", lang_sa: "Sanskrit", lang_gd: "Scots Gaelic", lang_nso: "Sepedi", lang_sr: "Serbian", lang_st: "Sesotho", lang_sn: "Shona", lang_sd: "Sindhi", lang_si: "Sinhala", lang_sk: "Slovak", lang_sl: "Slovenian", lang_so: "Somali", lang_es: "Spanish", lang_su: "Sundanese", lang_sw: "Swahili", lang_sv: "Swedish", lang_tg: "Tajik", lang_ta: "Tamil", lang_tt: "Tatar", lang_te: "Telugu", lang_th: "Thai", lang_ti: "Tigrinya", lang_ts: "Tsonga", lang_tr: "Turkish", lang_tk: "Turkmen", lang_ak: "Twi (Akan)", lang_uk: "Ukrainian", lang_ur: "Urdu", lang_ug: "Uyghur", lang_uz: "Uzbek", lang_vi: "Vietnamese", lang_cy: "Welsh", lang_xh: "Xhosa", lang_yi: "Yiddish", lang_yo: "Yoruba", lang_zu: "Zulu",
         job_None: "None (General)", job_Medical: "Medical / Healthcare", job_Legal: "Legal / Law", job_Engineering: "Engineering (General)", job_IT: "Information Technology / Software", job_Finance: "Finance / Banking", job_Academic: "Academic / Research", job_Marketing: "Marketing / Business", job_Cinema: "Cinema / TV Series",
         tone_Default: "Default", tone_Formal: "Formal", tone_Informal: "Informal", tone_Poetic: "Poetic", tone_Technical: "Technical", tone_Simplify: "Simple / Easy to read", tone_Custom: "Custom..." },
-    fa: { appTitle: "فلوئنتیفای", tabText: "متن", tabImage: "تصویر", tabPDF: "PDF", tabSubtitle: "زیرنویس", tabVideo: "ویدئو", swapBtnLabel: "جابجایی زبان‌ها", textInputPlaceholder: "متن را برای ترجمه وارد کنید...", youtubeSectionTitle: "بارگذاری از آدرس یوتیوب", youtubeUrlPlaceholder: "آدرس ویدیوی یوتیوب را وارد کنید...", youtubeLangPlaceholder: "زبان", youtubeFetchBtn: "دریافت", youtubeNotice: ``, fileDragDrop: "فایل را بکشید و رها کنید", fileOr: "یا", fileChooseBtn: "انتخاب فایل", fileHintImage: "PNG, JPG, WEBP, GIF (حداکثر ۲۰ مگابایت)", fileHintPDF: "PDF (حداکثر ۲۰ مگابایت)", fileHintSubtitle: "SRT, VTT, SSA, ASS (حداکثر ۲۰ مگابایت)", removeFileBtnLabel: "حذف فایل", pdfSelectPagesTitle: "انتخاب صفحات برای ترجمه", pdfSelectAll: "انتخاب همه", pdfDeselectAll: "لغو انتخاب همه", pdfPageCounter: "{count} صفحه انتخاب شد", pdfCombinePages: "ادغام صفحات انتخاب شده قبل از ترجمه", pdfBatchWarning: "ترجمه ممکن است تا {seconds} ثانیه طول بکشد.", subtitleEditorTitle: "ویرایشگر زیرنویس", subtitleLinesPerRequest: "خط / درخواست", subtitleBreakLinesBtnLabel: "شکستن خطوط طولانی", subtitleFindReplaceBtnLabel: "جستجو و جایگزینی", subtitleExportBtnLabel: "خروجی به عنوان فایل زیرنویس", subtitleSavedProgress: "پیشرفت ذخیره شده برای این فایل پیدا شد.", subtitleLoadProgress: "بارگذاری پیشرفت", subtitleClearHistory: "پاک کردن تاریخچه", breakLinesPanelTitle: "حداکثر کاراکتر / خط:", breakLinesApply: "اعمال تغییرات", findInputPlaceholder: "جستجوی متن...", replaceInputPlaceholder: "جایگزینی با...", findCaseSensitive: "حساس به حروف بزرگ و کوچک", replaceAllBtn: "جایگزینی همه", subtitleTableHeaderNum: "#", subtitleTableHeaderTime: "برچسب زمانی", subtitleTableHeaderOrig: "متن اصلی", subtitleTableHeaderTrans: "متن ترجمه شده", progressLabelTranslating: "در حال ترجمه...", progressCancel: "لغو", advSettingsBtn: "تنظیمات", translateBtn: "ترجمه", settingsModel: "مدل هوش مصنوعی", settingsSpecialization: "تخصص ترجمه", settingsTone: "لحن ترجمه", settingsCustomToneLabel: "دستورالعمل لحن سفارشی", settingsCustomTonePlaceholder: "مثال: 'این متن را به سبک دزدان دریایی ترجمه کن.'", settingsCreativity: "خلاقیت (Temperature)", settingsRequestDelay: "تأخیر درخواست (ثانیه)", settingsApiKey: "کلید(های) API گوگل", settingsApiKeyPlaceholder: "کلیدهای API خود را وارد کنید، هر کدام در یک خط.", settingsApiKeyHint: "چندین کلید برای توزیع بار یا به عنوان پشتیبان وارد کنید.", settingsUseProxy: "استفاده از پروکسی", settingsCustomProxyLabel: "آدرس پروکسی سفارشی (اختیاری)", settingsCustomProxyHint: `پروکسی خود را با استفاده از <a href="https://github.com/yebekhe/middleman" target="_blank" rel="noopener noreferrer" class="underline hover:text-sky-500">Middleman</a> مستقر کنید.`, settingsUseCustomPrompt: "استفاده از پرامپت سفارشی", settingsCustomPromptPlaceholder: "پرامپت سفارشی خود را وارد کنید. از {text}، {source_lang} و {target_lang} به عنوان متغیر استفاده کنید.", settingsOptimizePrompt: "بهینه‌سازی", settingsOcr: "استفاده از OCR برای صفحات PDF اسکن شده", settingsSave: "ذخیره تمام تنظیمات در این مرورگر", outputPlaceholder: "ترجمه در اینجا نمایش داده خواهد شد...", copyBtnLabel: "کپی خروجی", exportTextBtnLabel: "خروجی به عنوان فایل TXT", refineToolbarTitle: "اصلاح:", refineShorten: "کوتاه‌تر کردن", refineExpand: "گسترش دادن", refineSummarize: "خلاصه کردن", styleToolbarTitle: "تغییر سبک:", styleFormal: "رسمی", styleInformal: "غیررسمی", stylePoetic: "شاعرانه", styleSimplify: "ساده‌سازی", logTitle: "گزارش فعالیت زنده", footerText: `ساخته شده با <i class="fas fa-heart text-red-500 mx-1"></i> توسط YEBEKHE`, pageTitle: "Fluentify - مترجم مدرن هوش مصنوعی", howToUseBtnLabel: "راهنمای استفاده", howToUseModalTitle: "راهنمای استفاده از Fluentify",
+    fa: { appTitle: "فلوئنتیفای", tabText: "متن", tabImage: "تصویر", tabPDF: "PDF", tabSubtitle: "زیرنویس", tabVideo: "ویدئو", swapBtnLabel: "جابجایی زبان‌ها", textInputPlaceholder: "متن را برای ترجمه وارد کنید...", youtubeSectionTitle: "بارگذاری از آدرس یوتیوب", youtubeUrlPlaceholder: "آدرس ویدیوی یوتیوب را وارد کنید...", youtubeLangPlaceholder: "زبان", youtubeFetchBtn: "دریافت", youtubeNotice: ``, fileDragDrop: "فایل را بکشید و رها کنید", fileOr: "یا", fileChooseBtn: "انتخاب فایل", fileHintImage: "PNG, JPG, WEBP, GIF (حداکثر ۲۰ مگابایت)", fileHintPDF: "PDF (حداکثر ۲۰ مگابایت)", fileHintSubtitle: "SRT, VTT, SSA, ASS (حداکثر ۲۰ مگابایت)", removeFileBtnLabel: "حذف فایل", pdfSelectPagesTitle: "انتخاب صفحات برای ترجمه", pdfSelectAll: "انتخاب همه", pdfDeselectAll: "لغو انتخاب همه", pdfPageCounter: "{count} صفحه انتخاب شد", pdfCombinePages: "ادغام صفحات انتخاب شده قبل از ترجمه", pdfBatchWarning: "ترجمه ممکن است تا {seconds} ثانیه طول بکشد.", subtitleEditorTitle: "ویرایشگر زیرنویس", subtitleLinesPerRequest: "خط / درخواست", subtitleBreakLinesBtnLabel: "شکستن خطوط طولانی", subtitleFindReplaceBtnLabel: "جستجو و جایگزینی", subtitleExportBtnLabel: "خروجی به عنوان فایل زیرنویس", subtitleSavedProgress: "پیشرفت ذخیره شده برای این فایل پیدا شد.", subtitleLoadProgress: "بارگذاری پیشرفت", subtitleClearHistory: "پاک کردن تاریخچه", breakLinesPanelTitle: "حداکثر کاراکتر / خط:", breakLinesApply: "اعمال تغییرات", findInputPlaceholder: "جستجوی متن...", replaceInputPlaceholder: "جایگزینی با...", findCaseSensitive: "حساس به حروف بزرگ و کوچک", replaceAllBtn: "جایگزینی همه", subtitleTableHeaderNum: "#", subtitleTableHeaderTime: "برچسب زمانی", subtitleTableHeaderOrig: "متن اصلی", subtitleTableHeaderTrans: "متن ترجمه شده", progressLabelTranslating: "در حال ترجمه...", progressCancel: "لغو", advSettingsBtn: "تنظیمات", translateBtn: "ترجمه", settingsModel: "مدل هوش مصنوعی", settingsSpecialization: "تخصص ترجمه", settingsTone: "لحن ترجمه", settingsCustomToneLabel: "دستورالعمل لحن سفارشی", settingsCustomTonePlaceholder: "مثال: 'این متن را به سبک دزدان دریایی ترجمه کن.'", settingsCreativity: "خلاقیت (Temperature)", settingsRequestDelay: "تأخیر درخواست (ثانیه)", settingsApiKey: "کلید(های) API گوگل", settingsApiKeyPlaceholder: "کلیدهای API خود را وارد کنید، هر کدام در یک خط.", settingsApiKeyHint: "چندین کلید برای توزیع بار یا به عنوان پشتیبان وارد کنید.", settingsUseProxy: "استفاده از پروکسی", settingsCustomProxyLabel: "آدرس پروکسی سفارشی (اختیاری)", settingsCustomProxyHint: `پروکسی خود را با استفاده از <a href="https://github.com/yebekhe/middleman" target="_blank" rel="noopener noreferrer" class="underline hover:text-sky-500">Middleman</a> مستقر کنید.`, settingsUseCustomPrompt: "استفاده از پرامپت سفارشی", settingsCustomPromptPlaceholder: "پرامپت سفارشی خود را وارد کنید. از {text}، {source_lang} و {target_lang} به عنوان متغیر استفاده کنید.", settingsOptimizePrompt: "بهینه‌سازی", settingsOcr: "استفاده از OCR برای صفحات PDF اسکن شده", settingsSave: "ذخیره تمام تنظیمات در این مرورگر", outputPlaceholder: "ترجمه در اینجا نمایش داده خواهد شد...", copyBtnLabel: "کپی خروجی", exportTextBtnLabel: "خروجی به عنوان فایل TXT", refineToolbarTitle: "اصلاح:", refineShorten: "کوتاه‌تر کردن", refineExpand: "گسترش دادن", refineSummarize: "خلاصه کردن", styleToolbarTitle: "تغییر سبک:", styleFormal: "رسمی", styleInformal: "غیررسمی", stylePoetic: "شاعرانه", styleSimplify: "ساده‌سازی", logTitle: "گزارش فعالیت زنده", footerText: `ساخته شده با <i class="fas fa-heart text-red-500 mx-1"></i> توسط YEBEKHE`, pageTitle: "Fluentify - مترجم مدرن هوش مصنوعی", howToUseBtnLabel: "راهنمای استفاده", howToUseModalTitle: "راهنمای استفاده از Fluentify", searchLanguagesPlaceholder: "جستجوی زبان‌ها...",
         lang_auto: "تشخیص خودکار زبان", lang_af: "آفریکانس", lang_sq: "آلبانیایی", lang_am: "امهری", lang_ar: "عربی", lang_hy: "ارمنی", lang_as: "آسامی", lang_ay: "آیمارا", lang_az: "آذربایجانی", lang_bm: "بامبارا", lang_eu: "باسکی", lang_be: "بلاروسی", lang_bn: "بنگالی", lang_bho: "بوجپوری", lang_bs: "بوسنیایی", lang_bg: "بلغاری", lang_ca: "کاتالان", lang_ceb: "سبوانو", lang_ny: "چیچوا", "lang_zh-CN": "چینی (ساده شده)", "lang_zh-TW": "چینی (سنتی)", lang_co: "کرسی", lang_hr: "کرواتی", lang_cs: "چکی", lang_da: "دانمارکی", lang_dv: "دیوهی", lang_doi: "دوگری", lang_nl: "هلندی", lang_en: "انگلیسی", lang_eo: "اسپرانتو", lang_et: "استونیایی", lang_ee: "اوه", lang_tl: "فیلیپینی (تاگالوگ)", lang_fi: "فنلاندی", lang_fr: "فرانسوی", lang_fy: "فریزی", lang_gl: "گالیسی", lang_ka: "گرجی", lang_de: "آلمانی", lang_el: "یونانی", lang_gn: "گوارانی", lang_gu: "گجراتی", lang_ht: "کریول هائیتی", lang_ha: "هوسا", lang_haw: "هاوایی", lang_iw: "عبری", lang_hi: "هندی", lang_hmn: "همونگ", lang_hu: "مجاری", lang_is: "ایسلندی", lang_ig: "ایگبو", lang_ilo: "ایلوکانو", lang_id: "اندونزیایی", lang_ga: "ایرلندی", lang_it: "ایتالیایی", lang_ja: "ژاپنی", lang_jw: "جاوه‌ای", lang_kn: "کانارا", lang_kk: "قزاقی", lang_km: "خمر", lang_rw: "کینیارواندا", lang_gom: "کونکانی", lang_ko: "کره‌ای", lang_kri: "کریو", lang_ku: "کردی (کرمانجی)", lang_ckb: "کردی (سورانی)", lang_ky: "قرقیزی", lang_lo: "لائوسی", lang_la: "لاتین", lang_lv: "لتونیایی", lang_ln: "لینگالا", lang_lt: "لیتوانیایی", lang_lg: "لوگاندا", lang_lb: "لوکزامبورگی", lang_mk: "مقدونی", lang_mai: "مایتهیلی", lang_mg: "مالاگاسی", lang_ms: "مالایی", lang_ml: "مالایالام", lang_mt: "مالتی", lang_mi: "مائوری", lang_mr: "مراتی", "lang_mni-Mtei": "می‌تیلون (مانیپوری)", lang_lus: "میزو", lang_mn: "مغولی", lang_my: "میانماری (برمه‌ای)", lang_ne: "نپالی", lang_no: "نروژی", lang_or: "اوریا", lang_om: "اورومو", lang_ps: "پشتو", lang_fa: "فارسی", lang_pl: "لهستانی", lang_pt: "پرتغالی", lang_pa: "پنجابی", lang_qu: "کچوآ", lang_ro: "رومانیایی", lang_ru: "روسی", lang_sm: "ساموآیی", lang_sa: "سانسکریت", lang_gd: "گیلی اسکاتلندی", lang_nso: "سپدی", lang_sr: "صربی", lang_st: "سسوتو", lang_sn: "شونا", lang_sd: "سندی", lang_si: "سینهالی", lang_sk: "اسلواکی", lang_sl: "اسلوونیایی", lang_so: "سومالیایی", lang_es: "اسپانیایی", lang_su: "سوندانی", lang_sw: "سواحیلی", lang_sv: "سوئدی", lang_tg: "تاجیکی", lang_ta: "تامیلی", lang_tt: "تاتاری", lang_te: "تلوگو", lang_th: "تایلندی", lang_ti: "تیگرینیا", lang_ts: "تسونگا", lang_tr: "ترکی", lang_tk: "ترکمنی", lang_ak: "توی (آکان)", lang_uk: "اوکراینی", lang_ur: "اردو", lang_ug: "اویغوری", lang_uz: "ازبکی", lang_vi: "ویتنامی", lang_cy: "ولزی", lang_xh: "خوسا", lang_yi: "ییدیش", lang_yo: "یوروبا", lang_zu: "زولو",
         job_None: "هیچکدام (عمومی)", job_Medical: "پزشکی / بهداشت", job_Legal: "حقوقی / قانون", job_Engineering: "مهندسی (عمومی)", job_IT: "فناوری اطلاعات / نرم‌افزار", job_Finance: "مالی / بانکداری", job_Academic: "دانشگاهی / تحقیقاتی", job_Marketing: "بازاریابی / کسب و کار", job_Cinema: "سینما / سریال تلویزیونی",
         tone_Default: "پیش‌فرض", tone_Formal: "رسمی", tone_Informal: "غیررسمی", tone_Poetic: "شاعرانه", tone_Technical: "فنی", tone_Simplify: "ساده / روان", tone_Custom: "سفارشی..." },
-    ru: { appTitle: "Fluentify", tabText: "Текст", tabImage: "Изображение", tabPDF: "PDF", tabSubtitle: "Субтитры", tabVideo: "Видео", swapBtnLabel: "Поменять языки", textInputPlaceholder: "Введите текст для перевода...", youtubeSectionTitle: "Загрузить с YouTube URL", youtubeUrlPlaceholder: "Введите URL видео YouTube...", youtubeLangPlaceholder: "язык", youtubeFetchBtn: "Получить", youtubeNotice: ``, fileDragDrop: "Перетащите файл", fileOr: "или", fileChooseBtn: "Выберите файл", fileHintImage: "PNG, JPG, WEBP, GIF (МАКС. 20МБ)", fileHintPDF: "PDF (МАКС. 20МБ)", fileHintSubtitle: "SRT, VTT, SSA, ASS (МАКС. 20МБ)", removeFileBtnLabel: "Удалить файл", pdfSelectPagesTitle: "Выберите страницы для перевода", pdfSelectAll: "Выбрать все", pdfDeselectAll: "Снять выбор", pdfPageCounter: "Выбрано страниц: {count}", pdfCombinePages: "Объединить выбранные страницы перед переводом", pdfBatchWarning: "Перевод может занять до {seconds} секунд.", subtitleEditorTitle: "Редактор субтитров", subtitleLinesPerRequest: "Строк / запрос", subtitleBreakLinesBtnLabel: "Разбить длинные строки", subtitleFindReplaceBtnLabel: "Найти и заменить", subtitleExportBtnLabel: "Экспортировать как файл субтитров", subtitleSavedProgress: "Найден сохраненный прогресс для этого файла.", subtitleLoadProgress: "Загрузить прогресс", subtitleClearHistory: "Очистить историю", breakLinesPanelTitle: "Макс. символов / строка:", breakLinesApply: "Применить изменения", findInputPlaceholder: "Найти текст...", replaceInputPlaceholder: "Заменить на...", findCaseSensitive: "Учитывать регистр", replaceAllBtn: "Заменить все", subtitleTableHeaderNum: "#", subtitleTableHeaderTime: "Временная метка", subtitleTableHeaderOrig: "Оригинальный текст", subtitleTableHeaderTrans: "Переведенный текст", progressLabelTranslating: "Перевод...", progressCancel: "Отмена", advSettingsBtn: "Настройки", translateBtn: "Перевести", settingsModel: "Модель ИИ", settingsSpecialization: "Специализация перевода", settingsTone: "Тон перевода", settingsCustomToneLabel: "Инструкция для пользовательского тона", settingsCustomTonePlaceholder: "напр., 'Переведи это в стиле пирата.'", settingsCreativity: "Креативность (Temperature)", settingsRequestDelay: "Задержка запроса (секунды)", settingsApiKey: "Ключ(и) API Google AI", settingsApiKeyPlaceholder: "Введите ваши ключи API, по одному на строку.", settingsApiKeyHint: "Введите несколько ключей для распределения нагрузки или как резервные.", settingsUseProxy: "Использовать прокси", settingsCustomProxyLabel: "Пользовательский URL прокси (необязательно)", settingsCustomProxyHint: `Разверните свой собственный прокси с помощью <a href="https://github.com/yebekhe/middleman" target="_blank" rel="noopener noreferrer" class="underline hover:text-sky-500">Middleman</a>.`, settingsUseCustomPrompt: "Использовать свой промпт", settingsCustomPromptPlaceholder: "Введите свой промпт. Используйте {text}, {source_lang} и {target_lang} как переменные.", settingsOptimizePrompt: "Оптимизировать", settingsOcr: "Использовать OCR для сканированных PDF", settingsSave: "Сохранить все настройки в этом браузере", outputPlaceholder: "Перевод появится здесь...", copyBtnLabel: "Копировать результат", exportTextBtnLabel: "Экспортировать в TXT", refineToolbarTitle: "Улучшить:", refineShorten: "Сделать короче", refineExpand: "Расширить", refineSummarize: "Суммировать", styleToolbarTitle: "Изменить стиль:", styleFormal: "Формальный", styleInformal: "Неформальный", stylePoetic: "Поэтический", styleSimplify: "Упростить", logTitle: "Журнал активности", footerText: `Создано с <i class="fas fa-heart text-red-500 mx-1"></i> YEBEKHE`, pageTitle: "Fluentify - Современный ИИ-переводчик", howToUseBtnLabel: "Как использовать", howToUseModalTitle: "Как использовать Fluentify",
+    ru: { appTitle: "Fluentify", tabText: "Текст", tabImage: "Изображение", tabPDF: "PDF", tabSubtitle: "Субтитры", tabVideo: "Видео", swapBtnLabel: "Поменять языки", textInputPlaceholder: "Введите текст для перевода...", youtubeSectionTitle: "Загрузить с YouTube URL", youtubeUrlPlaceholder: "Введите URL видео YouTube...", youtubeLangPlaceholder: "язык", youtubeFetchBtn: "Получить", youtubeNotice: ``, fileDragDrop: "Перетащите файл", fileOr: "или", fileChooseBtn: "Выберите файл", fileHintImage: "PNG, JPG, WEBP, GIF (МАКС. 20МБ)", fileHintPDF: "PDF (МАКС. 20МБ)", fileHintSubtitle: "SRT, VTT, SSA, ASS (МАКС. 20МБ)", removeFileBtnLabel: "Удалить файл", pdfSelectPagesTitle: "Выберите страницы для перевода", pdfSelectAll: "Выбрать все", pdfDeselectAll: "Снять выбор", pdfPageCounter: "Выбрано страниц: {count}", pdfCombinePages: "Объединить выбранные страницы перед переводом", pdfBatchWarning: "Перевод может занять до {seconds} секунд.", subtitleEditorTitle: "Редактор субтитров", subtitleLinesPerRequest: "Строк / запрос", subtitleBreakLinesBtnLabel: "Разбить длинные строки", subtitleFindReplaceBtnLabel: "Найти и заменить", subtitleExportBtnLabel: "Экспортировать как файл субтитров", subtitleSavedProgress: "Найден сохраненный прогресс для этого файла.", subtitleLoadProgress: "Загрузить прогресс", subtitleClearHistory: "Очистить историю", breakLinesPanelTitle: "Макс. символов / строка:", breakLinesApply: "Применить изменения", findInputPlaceholder: "Найти текст...", replaceInputPlaceholder: "Заменить на...", findCaseSensitive: "Учитывать регистр", replaceAllBtn: "Заменить все", subtitleTableHeaderNum: "#", subtitleTableHeaderTime: "Временная метка", subtitleTableHeaderOrig: "Оригинальный текст", subtitleTableHeaderTrans: "Переведенный текст", progressLabelTranslating: "Перевод...", progressCancel: "Отмена", advSettingsBtn: "Настройки", translateBtn: "Перевести", settingsModel: "Модель ИИ", settingsSpecialization: "Специализация перевода", settingsTone: "Тон перевода", settingsCustomToneLabel: "Инструкция для пользовательского тона", settingsCustomTonePlaceholder: "напр., 'Переведи это в стиле пирата.'", settingsCreativity: "Креативность (Temperature)", settingsRequestDelay: "Задержка запроса (секунды)", settingsApiKey: "Ключ(и) API Google AI", settingsApiKeyPlaceholder: "Введите ваши ключи API, по одному на строку.", settingsApiKeyHint: "Введите несколько ключей для распределения нагрузки или как резервные.", settingsUseProxy: "Использовать прокси", settingsCustomProxyLabel: "Пользовательский URL прокси (необязательно)", settingsCustomProxyHint: `Разверните свой собственный прокси с помощью <a href="https://github.com/yebekhe/middleman" target="_blank" rel="noopener noreferrer" class="underline hover:text-sky-500">Middleman</a>.`, settingsUseCustomPrompt: "Использовать свой промпт", settingsCustomPromptPlaceholder: "Введите свой промпт. Используйте {text}, {source_lang} и {target_lang} как переменные.", settingsOptimizePrompt: "Оптимизировать", settingsOcr: "Использовать OCR для сканированных PDF", settingsSave: "Сохранить все настройки в этом браузере", outputPlaceholder: "Перевод появится здесь...", copyBtnLabel: "Копировать результат", exportTextBtnLabel: "Экспортировать в TXT", refineToolbarTitle: "Улучшить:", refineShorten: "Сделать короче", refineExpand: "Расширить", refineSummarize: "Суммировать", styleToolbarTitle: "Изменить стиль:", styleFormal: "Формальный", styleInformal: "Неформальный", stylePoetic: "Поэтический", styleSimplify: "Упростить", logTitle: "Журнал активности", footerText: `Создано с <i class="fas fa-heart text-red-500 mx-1"></i> YEBEKHE`, pageTitle: "Fluentify - Современный ИИ-переводчик", howToUseBtnLabel: "Как использовать", howToUseModalTitle: "Как использовать Fluentify", searchLanguagesPlaceholder: "Поиск языков...",
         lang_auto: "Автоопределение языка", lang_af: "Африкаанс", lang_sq: "Албанский", lang_am: "Амхарский", lang_ar: "Арабский", lang_hy: "Армянский", lang_as: "Ассамский", lang_ay: "Аймара", lang_az: "Азербайджанский", lang_bm: "Бамбара", lang_eu: "Баскский", lang_be: "Белорусский", lang_bn: "Бенгальский", lang_bho: "Бходжпури", lang_bs: "Боснийский", lang_bg: "Болгарский", lang_ca: "Каталанский", lang_ceb: "Себуанский", lang_ny: "Чичева", "lang_zh-CN": "Китайский (упрощенный)", "lang_zh-TW": "Китайский (традиционный)", lang_co: "Корсиканский", lang_hr: "Хорватский", lang_cs: "Чешский", lang_da: "Датский", lang_dv: "Дивехи", lang_doi: "Догри", lang_nl: "Голландский", lang_en: "Английский", lang_eo: "Эсперанто", lang_et: "Эстонский", lang_ee: "Эве", lang_tl: "Филиппинский (тагальский)", lang_fi: "Финский", lang_fr: "Французский", lang_fy: "Фризский", lang_gl: "Галисийский", lang_ka: "Грузинский", lang_de: "Немецкий", lang_el: "Греческий", lang_gn: "Гуарани", lang_gu: "Гуджарати", lang_ht: "Гаитянский креольский", lang_ha: "Хауса", lang_haw: "Гавайский", lang_iw: "Иврит", lang_hi: "Хинди", lang_hmn: "Хмонг", lang_hu: "Венгерский", lang_is: "Исландский", lang_ig: "Игбо", lang_ilo: "Илоканский", lang_id: "Индонезийский", lang_ga: "Ирландский", lang_it: "Итальянский", lang_ja: "Японский", lang_jw: "Яванский", lang_kn: "Каннада", lang_kk: "Казахский", lang_km: "Кхмерский", lang_rw: "Киньяруанда", lang_gom: "Конкани", lang_ko: "Корейский", lang_kri: "Крио", lang_ku: "Курдский (курманджи)", lang_ckb: "Курдский (сорани)", lang_ky: "Киргизский", lang_lo: "Лаосский", lang_la: "Латинский", lang_lv: "Латышский", lang_ln: "Лингала", lang_lt: "Литовский", lang_lg: "Луганда", lang_lb: "Люксембургский", lang_mk: "Македонский", lang_mai: "Майтхили", lang_mg: "Малагасийский", lang_ms: "Малайский", lang_ml: "Малаялам", lang_mt: "Мальтийский", lang_mi: "Маори", lang_mr: "Маратхи", "lang_mni-Mtei": "Меитеилон (манипури)", lang_lus: "Мизо", lang_mn: "Монгольский", lang_my: "Бирманский", lang_ne: "Непальский", lang_no: "Норвежский", lang_or: "Ория", lang_om: "Оромо", lang_ps: "Пушту", lang_fa: "Персидский (фарси)", lang_pl: "Польский", lang_pt: "Португальский", lang_pa: "Панджаби", lang_qu: "Кечуа", lang_ro: "Румынский", lang_ru: "Русский", lang_sm: "Самоанский", lang_sa: "Санскрит", lang_gd: "Шотландский гэльский", lang_nso: "Сепеди", lang_sr: "Сербский", lang_st: "Сесото", lang_sn: "Шона", lang_sd: "Синдхи", lang_si: "Сингальский", lang_sk: "Словацкий", lang_sl: "Словенский", lang_so: "Сомалийский", lang_es: "Испанский", lang_su: "Сунданский", lang_sw: "Суахили", lang_sv: "Шведский", lang_tg: "Таджикский", lang_ta: "Тамильский", lang_tt: "Татарский", lang_te: "Телугу", lang_th: "Тайский", lang_ti: "Тигринья", lang_ts: "Тсонга", lang_tr: "Турецкий", lang_tk: "Туркменский", lang_ak: "Тви (акан)", lang_uk: "Украинский", lang_ur: "Урду", lang_ug: "Уйгурский", lang_uz: "Узбекский", lang_vi: "Вьетнамский", lang_cy: "Валлийский", lang_xh: "Коса", lang_yi: "Идиш", lang_yo: "Йоруба", lang_zu: "Зулу",
         job_None: "Нет (общий)", job_Medical: "Медицина / Здравоохранение", job_Legal: "Юриспруденция / Право", job_Engineering: "Инженерия (общая)", job_IT: "ИТ / Программное обеспечение", job_Finance: "Финансы / Банковское дело", job_Academic: "Наука / Исследования", job_Marketing: "Маркетинг / Бизнес", job_Cinema: "Кино / Сериалы",
         tone_Default: "По умолчанию", tone_Formal: "Формальный", tone_Informal: "Неформальный", tone_Poetic: "Поэтический", tone_Technical: "Технический", tone_Simplify: "Простой / Легко читаемый", tone_Custom: "Пользовательский..." }
@@ -27,7 +26,6 @@ const HOW_TO_USE_CONTENT = {
     ru: `<div class="space-y-6 text-slate-700 dark:text-slate-300"><div><h3 class="text-lg font-bold mb-2 text-slate-800 dark:text-slate-100">1. Начальная настройка (API-ключ)</h3><p class="mb-2">Перед началом работы вам понадобится API-ключ от Google AI.</p><ol class="list-decimal list-inside space-y-2 pl-4"><li>Перейдите в <a href="https://aistudio.google.com/" target="_blank" rel="noopener noreferrer" class="text-sky-500 underline">Google AI Studio</a> и войдите в систему.</li><li>Нажмите <strong>"Get API key"</strong>, затем <strong>"Create API key in new project"</strong>.</li><li>Скопируйте сгенерированный ключ.</li><li>В Fluentify перейдите на страницу <strong>Настройки</strong>, используя иконку шестеренки (<i class="fas fa-cog inline-block"></i>) в правом верхнем углу (настольная версия) или на нижней панели (мобильная версия).</li><li>Вставьте ваш ключ в поле <strong>"Ключ(и) API Google AI"</strong>.</li><li>(Рекомендуется) Установите флажок <strong>"Сохранить все настройки в этом браузере"</strong>, чтобы безопасно сохранить ваш ключ для будущего использования.</li></ol></div><div><h3 class="text-lg font-bold mb-2 text-slate-800 dark:text-slate-100">2. Перевод контента</h3><p class="mb-3">Выберите желаемый тип ввода на вкладках навигации.</p><div class="space-y-4 pl-4 border-l-2 dark:border-slate-600"><div><h4 class="font-semibold">📝 Перевод текста</h4><p>Выберите вкладку <strong>Текст</strong>, выберите языки, введите текст и нажмите <strong>Перевести</strong>. Используйте кнопки <strong>Улучшить</strong> и <strong>Изменить стиль</strong> для доработки результата.</p></div><div><h4 class="font-semibold">🖼️ Перевод изображений</h4><p>Выберите вкладку <strong>Изображение</strong>, укажите целевой язык и перетащите файл изображения. Приложение выполнит OCR для извлечения текста, а затем переведет его.</p></div><div><h4 class="font-semibold">📄 Перевод PDF</h4><p>Загрузите PDF. Нажмите на страницы, которые вы хотите перевести. Для сканированных PDF включите опцию <strong>"Использовать OCR"</strong> в Настройках. Нажмите <strong>Перевести</strong>.</p></div><div><h4 class="font-semibold">🎬 Перевод субтитров</h4><p class="mb-2">Вы можете загрузить файл субтитров (SRT, VTT и т.д.) или вставить URL-адрес YouTube и нажать <strong>Получить</strong>, чтобы загрузить субтитры в редактор.</p><ul class="list-disc list-inside space-y-1"><li><strong>Перевести:</strong> Нажмите главную кнопку «Перевести», чтобы перевести все непереведенные строки пакетами.</li><li><strong>Редактировать:</strong> Нажмите прямо на переведенный текст, чтобы отредактировать его вручную.</li><li><strong>Инструменты:</strong> Используйте инструменты "Найти и заменить" и "Разбить длинные строки" для расширенного редактирования.</li><li><strong>Экспорт:</strong> Нажмите кнопку экспорта в заголовке редактора, чтобы скачать переведенный файл.</li></ul></div></div></div></div>`
 };
 // --- START: DOM Element Selection ---
-// FIX: Add specific types to DOM elements to enable type-safe property access.
 const dom = {
     html: document.documentElement,
     form: document.getElementById('translate-form'),
@@ -134,10 +132,10 @@ const dom = {
     howToUseContent: document.getElementById('how-to-use-content'),
     howToUseTitle: document.getElementById('how-to-use-title'),
     howToUseCloseBtn: document.getElementById('how-to-use-close-btn'),
+    languageSearch: document.getElementById('language-search'),
 };
 // --- START: State Management ---
 let pdfDoc = null;
-// FIX: Explicitly type `selectedPages` as a Set of numbers.
 let selectedPages = new Set();
 let currentFile = null;
 let currentFileHash = null;
@@ -188,10 +186,36 @@ function updateUI() {
     const isSubtitleMode = currentMode === 'subtitle';
     const isVideoMode = currentMode === 'video';
     const isFileMode = isImageMode || isPdfMode || isSubtitleMode;
+    // Check for file compatibility and reset if necessary
+    if (currentFile) {
+        const fileType = currentFile.type;
+        const fileName = currentFile.name.toLowerCase();
+        const isCompatible = (isImageMode && fileType.startsWith('image/')) ||
+            (isPdfMode && fileType === 'application/pdf') ||
+            (isSubtitleMode && (fileName.endsWith('.srt') || fileName.endsWith('.vtt') || fileName.endsWith('.ssa') || fileName.endsWith('.ass')));
+        if (isFileMode && !isCompatible) {
+            // File is loaded, but we switched to an incompatible file-based mode. Reset.
+            resetFileInput(false); // Pass false to prevent recursive updateUI call
+        }
+    }
     // Show/hide main sections based on mode
     dom.textInputSection.classList.toggle('hidden', !isTextMode);
     dom.fileInputSection.classList.toggle('hidden', !isFileMode);
     dom.videoGeneratorSection.classList.toggle('hidden', !isVideoMode);
+    // Manage file input UI state
+    if (isFileMode) {
+        if (currentFile) {
+            dom.dropzonePrompt.classList.add('hidden');
+            dom.filePreviewContainer.classList.remove('hidden');
+            // Toggle visibility of specific previews based on mode
+            dom.imagePreview.classList.toggle('hidden', !isImageMode);
+            dom.subtitlePreview.classList.toggle('hidden', !isSubtitleMode);
+        }
+        else {
+            dom.dropzonePrompt.classList.remove('hidden');
+            dom.filePreviewContainer.classList.add('hidden');
+        }
+    }
     // Show/hide sub-sections
     dom.youtubeInputSection.classList.toggle('hidden', !isSubtitleMode);
     dom.pdfViewerSection.classList.toggle('hidden', !isPdfMode || !pdfDoc);
@@ -225,6 +249,18 @@ function updateUI() {
     validateForm();
 }
 // --- START: I1N & Language Switching ---
+function filterAndRepopulateLanguages() {
+    const searchTerm = dom.languageSearch.value.toLowerCase();
+    const translations = TRANSLATIONS[currentLanguage];
+    const languageFilter = (opt) => {
+        const translatedText = translations[opt.i18nKey] || opt.text;
+        return translatedText.toLowerCase().includes(searchTerm);
+    };
+    const sourceFilter = (opt) => opt.value === 'auto' || languageFilter(opt);
+    const targetFilter = (opt) => opt.value !== 'auto' && languageFilter(opt);
+    populateSelect(dom.sourceLangSelect, LANGUAGES, dom.sourceLangSelect.value, sourceFilter);
+    populateSelect(dom.targetLangSelect, LANGUAGES, dom.targetLangSelect.value, targetFilter);
+}
 function setLanguage(lang) {
     currentLanguage = lang;
     const translations = TRANSLATIONS[lang];
@@ -236,7 +272,6 @@ function setLanguage(lang) {
     dom.html.dir = lang === 'fa' || lang === 'ar' ? 'rtl' : 'ltr'; // Basic RTL for Persian/Arabic
     document.title = translations.pageTitle;
     document.querySelectorAll('[data-i18n-key]').forEach(el => {
-        // FIX: Cast el to HTMLElement to access dataset property.
         const htmlEl = el;
         const key = htmlEl.dataset.i18nKey;
         const translation = translations[key];
@@ -250,14 +285,12 @@ function setLanguage(lang) {
         }
     });
     document.querySelectorAll('[data-i18n-placeholder-key]').forEach(el => {
-        // FIX: Cast el to HTMLElement and HTMLInputElement to access dataset and placeholder properties.
         const htmlEl = el;
         const key = htmlEl.dataset.i18nPlaceholderKey;
         if (translations[key])
             el.placeholder = translations[key];
     });
     document.querySelectorAll('[data-i18n-title-key]').forEach(el => {
-        // FIX: Cast el to HTMLElement to access dataset and title properties.
         const htmlEl = el;
         const key = htmlEl.dataset.i18nTitleKey;
         if (translations[key]) {
@@ -265,8 +298,7 @@ function setLanguage(lang) {
             el.setAttribute('aria-label', translations[key]);
         }
     });
-    populateSelect(dom.sourceLangSelect, LANGUAGES, dom.sourceLangSelect.value);
-    populateSelect(dom.targetLangSelect, LANGUAGES, dom.targetLangSelect.value, opt => opt.value !== 'auto');
+    filterAndRepopulateLanguages();
     populateSelect(dom.jobFieldSelect, JOB_FIELDS, dom.jobFieldSelect.value);
     populateSelect(dom.translationToneSelect, TONES, dom.translationToneSelect.value);
     videoGen_populateLanguages();
@@ -706,7 +738,30 @@ function populateSelect(selectElement, options, defaultValue, filter = (opt) => 
     const translations = TRANSLATIONS[currentLanguage];
     selectElement.innerHTML = options.filter(filter).map(opt => `<option value="${opt.value}" ${opt.value === defaultValue ? 'selected' : ''}>${translations[opt.i18nKey] || opt.text}</option>`).join('');
 }
-function resetFileInput() { dom.fileUpload.value = ''; dom.dropzonePrompt.classList.remove('hidden'); dom.filePreviewContainer.classList.add('hidden'); dom.imagePreview.src = ''; dom.subtitlePreview.classList.add('hidden'); dom.subtitleFilename.textContent = ''; dom.youtubeUrlInput.value = ''; currentFile = null; currentFileHash = null; dom.pdfPageViewer.innerHTML = ''; pdfDoc = null; selectedPages.clear(); dom.subtitleTableBody.innerHTML = ''; subtitleData = null; dom.savedProgressNotification.classList.add('hidden'); dom.retryFailedSubsBtn.classList.add('hidden'); updatePageSelectionCounter(); validateForm(); clearOutput(); updateUI(); }
+function resetFileInput(shouldUpdateUI = true) {
+    dom.fileUpload.value = '';
+    dom.dropzonePrompt.classList.remove('hidden');
+    dom.filePreviewContainer.classList.add('hidden');
+    dom.imagePreview.src = '';
+    dom.subtitlePreview.classList.add('hidden');
+    dom.subtitleFilename.textContent = '';
+    dom.youtubeUrlInput.value = '';
+    currentFile = null;
+    currentFileHash = null;
+    dom.pdfPageViewer.innerHTML = '';
+    pdfDoc = null;
+    selectedPages.clear();
+    dom.subtitleTableBody.innerHTML = '';
+    subtitleData = null;
+    dom.savedProgressNotification.classList.add('hidden');
+    dom.retryFailedSubsBtn.classList.add('hidden');
+    updatePageSelectionCounter();
+    validateForm();
+    clearOutput();
+    if (shouldUpdateUI) {
+        updateUI();
+    }
+}
 function swapLanguages() { const sourceVal = dom.sourceLangSelect.value; const targetVal = dom.targetLangSelect.value; if (sourceVal === 'auto')
     return; dom.sourceLangSelect.value = targetVal; dom.targetLangSelect.value = sourceVal; validateForm(); if (dom.output.value)
     dom.output.dir = RTL_LANGUAGES.has(dom.targetLangSelect.value) ? 'rtl' : 'ltr'; }
@@ -807,7 +862,6 @@ async function renderPdf(file) {
     catch (error) {
         console.error("Error rendering PDF:", error);
         showError("Could not load or render the PDF file.");
-        // FIX: Safely access error message from unknown type, addressing error on line 631.
         log(`Failed to render PDF: ${error instanceof Error ? error.message : String(error)}`, 'error');
         dom.pdfPageViewer.innerHTML = '<p class="text-center text-red-500 col-span-full">Failed to load PDF</p>';
     }
@@ -822,7 +876,6 @@ async function createPdfPageView(pageNum) {
     await page.render({ canvasContext: canvas.getContext('2d'), viewport: viewport }).promise;
     const pageContainer = document.createElement('div');
     pageContainer.className = "pdf-page-item relative cursor-pointer border-2 border-slate-400 dark:border-slate-600 rounded-lg overflow-hidden bg-white";
-    // FIX: Convert pageNum to string for dataset property.
     pageContainer.dataset.pageNumber = String(pageNum);
     pageContainer.title = `Page ${pageNum}`;
     if (selectedPages.has(pageNum))
@@ -835,7 +888,6 @@ async function createPdfPageView(pageNum) {
     pageContainer.addEventListener('click', () => togglePageSelection(pageNum));
     return pageContainer;
 }
-// FIX: Add explicit type `number` to the pageNumber parameter to ensure type safety.
 function togglePageSelection(pageNumber) { const thumbElement = dom.pdfPageViewer.querySelector(`.pdf-page-item[data-page-number="${pageNumber}"]`); if (selectedPages.has(pageNumber)) {
     selectedPages.delete(pageNumber);
     thumbElement?.classList.remove('selected');
@@ -902,7 +954,6 @@ async function handleFormSubmit(event) {
                     throw new Error("Please select an image file.");
                 dom.output.value = 'Extracting text from image...';
                 const base64Image = await fileToBase64(currentFile);
-                // FIX: Safely access error message from unknown type, addressing error on line 784.
                 textToTranslate = await performOcr(base64Image, currentFile.type, model, useProxy, customProxyUrl, signal);
                 if (!textToTranslate) {
                     dom.output.value = "(No text detected)";
@@ -970,44 +1021,69 @@ async function handleEnhancement(action) {
 }
 // --- START: Local Storage and Settings ---
 const LS_SETTINGS_KEY = 'fluentify_settings_v9';
-function saveSettings() { if (!dom.saveSettingsCheckbox.checked) {
-    localStorage.removeItem(LS_SETTINGS_KEY);
-    return;
-} apiKeyManager.loadKeys(); const settings = { apiKey: dom.apiKeyInput.value, model: dom.modelSelect.value, targetLang: dom.targetLangSelect.value, jobField: dom.jobFieldSelect.value, theme: dom.html.classList.contains('dark') ? 'dark' : 'light', useProxy: dom.useProxyCheckbox.checked, customProxyUrl: dom.customProxyInput.value, useCustomPrompt: dom.useCustomPromptCheckbox.checked, customPrompt: dom.customPromptInput.value, temperature: dom.temperatureSlider.value, requestDelay: dom.requestDelayInput.value, translationTone: dom.translationToneSelect.value, customTone: dom.customToneInput.value, pdfOcr: dom.pdfOcrCheckbox.checked, language: currentLanguage }; localStorage.setItem(LS_SETTINGS_KEY, JSON.stringify(settings)); }
-function loadSettings() { try {
-    const savedSettings = localStorage.getItem(LS_SETTINGS_KEY);
-    if (savedSettings) {
-        const settings = JSON.parse(savedSettings);
-        dom.apiKeyInput.value = settings.apiKey || '';
-        dom.modelSelect.value = settings.model || DEFAULT_WEB_MODEL;
-        dom.targetLangSelect.value = settings.targetLang || 'English';
-        dom.jobFieldSelect.value = settings.jobField || 'None';
-        dom.translationToneSelect.value = settings.translationTone || 'Default';
-        dom.customToneInput.value = settings.customTone || '';
-        dom.customToneContainer.classList.toggle('hidden', dom.translationToneSelect.value !== 'Custom');
-        applyTheme(settings.theme || 'dark');
-        dom.useProxyCheckbox.checked = settings.useProxy || false;
-        dom.customProxyInput.value = settings.customProxyUrl || DEFAULT_PROXY_URL;
-        dom.useCustomPromptCheckbox.checked = settings.useCustomPrompt || false;
-        dom.customPromptInput.value = settings.customPrompt || '';
-        dom.temperatureSlider.value = settings.temperature || 0.7;
-        dom.temperatureValue.textContent = settings.temperature || 0.7;
-        dom.requestDelayInput.value = settings.requestDelay || 4;
-        dom.pdfOcrCheckbox.checked = settings.pdfOcr || false;
-        dom.saveSettingsCheckbox.checked = true;
-        currentLanguage = settings.language || 'en';
+function saveSettings() {
+    if (!dom.saveSettingsCheckbox.checked) {
+        localStorage.removeItem(LS_SETTINGS_KEY);
+        return;
     }
-    else {
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        applyTheme(prefersDark ? 'dark' : 'light');
-        dom.customProxyInput.value = DEFAULT_PROXY_URL;
-        currentLanguage = navigator.language.startsWith('fa') ? 'fa' : (navigator.language.startsWith('ru') ? 'ru' : 'en');
+    apiKeyManager.loadKeys();
+    const settings = {
+        apiKey: dom.apiKeyInput.value,
+        model: dom.modelSelect.value,
+        sourceLang: dom.sourceLangSelect.value,
+        targetLang: dom.targetLangSelect.value,
+        jobField: dom.jobFieldSelect.value,
+        theme: dom.html.classList.contains('dark') ? 'dark' : 'light',
+        useProxy: dom.useProxyCheckbox.checked,
+        customProxyUrl: dom.customProxyInput.value,
+        useCustomPrompt: dom.useCustomPromptCheckbox.checked,
+        customPrompt: dom.customPromptInput.value,
+        temperature: dom.temperatureSlider.value,
+        requestDelay: dom.requestDelayInput.value,
+        translationTone: dom.translationToneSelect.value,
+        customTone: dom.customToneInput.value,
+        pdfOcr: dom.pdfOcrCheckbox.checked,
+        language: currentLanguage
+    };
+    localStorage.setItem(LS_SETTINGS_KEY, JSON.stringify(settings));
+}
+function loadSettings() {
+    try {
+        const savedSettings = localStorage.getItem(LS_SETTINGS_KEY);
+        if (savedSettings) {
+            const settings = JSON.parse(savedSettings);
+            dom.apiKeyInput.value = settings.apiKey || '';
+            dom.modelSelect.value = settings.model || DEFAULT_WEB_MODEL;
+            dom.sourceLangSelect.value = settings.sourceLang || 'auto';
+            dom.targetLangSelect.value = settings.targetLang || 'English';
+            dom.jobFieldSelect.value = settings.jobField || 'None';
+            dom.translationToneSelect.value = settings.translationTone || 'Default';
+            dom.customToneInput.value = settings.customTone || '';
+            dom.customToneContainer.classList.toggle('hidden', dom.translationToneSelect.value !== 'Custom');
+            applyTheme(settings.theme || 'dark');
+            dom.useProxyCheckbox.checked = settings.useProxy || false;
+            dom.customProxyInput.value = settings.customProxyUrl || DEFAULT_PROXY_URL;
+            dom.useCustomPromptCheckbox.checked = settings.useCustomPrompt || false;
+            dom.customPromptInput.value = settings.customPrompt || '';
+            dom.temperatureSlider.value = settings.temperature || 0.7;
+            dom.temperatureValue.textContent = settings.temperature || 0.7;
+            dom.requestDelayInput.value = settings.requestDelay || 4;
+            dom.pdfOcrCheckbox.checked = settings.pdfOcr || false;
+            dom.saveSettingsCheckbox.checked = true;
+            currentLanguage = settings.language || 'en';
+        }
+        else {
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            applyTheme(prefersDark ? 'dark' : 'light');
+            dom.customProxyInput.value = DEFAULT_PROXY_URL;
+            currentLanguage = navigator.language.startsWith('fa') ? 'fa' : (navigator.language.startsWith('ru') ? 'ru' : 'en');
+        }
+    }
+    catch (e) {
+        console.error("Failed to load settings", e);
+        localStorage.removeItem(LS_SETTINGS_KEY);
     }
 }
-catch (e) {
-    console.error("Failed to load settings", e);
-    localStorage.removeItem(LS_SETTINGS_KEY);
-} }
 // --- START: Theme Management ---
 function applyTheme(theme) { dom.html.classList.toggle('dark', theme === 'dark'); dom.themeIconLight.classList.toggle('hidden', theme === 'dark'); dom.themeIconDark.classList.toggle('hidden', theme !== 'dark'); }
 function toggleTheme() { const newTheme = dom.html.classList.contains('dark') ? 'light' : 'dark'; applyTheme(newTheme); saveSettings(); }
@@ -1240,6 +1316,11 @@ const dom_video = {
     subtitleOutput: document.getElementById('video-gen-subtitle-output'),
     copyBtn: document.getElementById('video-gen-copy-btn'),
     downloadBtn: document.getElementById('video-gen-download-btn'),
+    exportVideoBtn: document.getElementById('video-gen-export-video-btn'),
+    exportProgressContainer: document.getElementById('video-gen-export-progress-container'),
+    exportProgressBar: document.getElementById('video-gen-export-progress-bar'),
+    exportProgressPercentage: document.getElementById('video-gen-export-progress-percentage'),
+    exportCancelBtn: document.getElementById('video-gen-export-cancel-btn'),
     retryBtn: document.getElementById('video-gen-retry-btn'),
     editBtn: document.getElementById('video-gen-edit-btn'),
     timestampBtn: document.getElementById('video-gen-timestamp-btn'),
@@ -1274,6 +1355,7 @@ const dom_video = {
 };
 let videoGen_finalSubtitleContent = '';
 let videoGen_abortController = null;
+let videoGen_exportAbortController = null;
 let videoGen_player = null; // For YT duration check
 let videoGen_isYTAPILoaded = false;
 let videoGen_parsedSubtitles = [];
@@ -1304,6 +1386,12 @@ function videoGen_setupEventListeners() {
     });
     dom_video.copyBtn.addEventListener('click', videoGen_copyToClipboard);
     dom_video.downloadBtn.addEventListener('click', videoGen_downloadSubtitleFile);
+    dom_video.exportVideoBtn.addEventListener('click', videoGen_startVideoExport);
+    dom_video.exportCancelBtn.addEventListener('click', () => {
+        if (videoGen_exportAbortController) {
+            videoGen_exportAbortController.abort('User cancelled export.');
+        }
+    });
     dom_video.retryBtn.addEventListener('click', videoGen_handleGeneration);
     dom_video.editBtn.addEventListener('click', videoGen_toggleEditMode);
     dom_video.timestampBtn.addEventListener('click', () => dom_video.timestampModal.classList.remove('hidden'));
@@ -1318,11 +1406,12 @@ function videoGen_setupEventListeners() {
     dom_video.localPlayer.addEventListener('seeked', () => { videoGen_updateSubtitles(dom_video.localPlayer.currentTime); });
     dom_video.localPlayer.addEventListener('play', videoGen_onPlayerReady);
 }
-// FIX: Reworked the status display to correctly apply styles to the container.
-function videoGen_showStatus(message, type = 'info') {
+function videoGen_showStatus(message, type = 'info', isTransient = false) {
     dom_video.outputContainer.classList.remove('hidden');
     dom_video.statusContainer.classList.remove('hidden');
-    dom_video.resultsWrapper.classList.add('hidden');
+    if (!isTransient) {
+        dom_video.resultsWrapper.classList.add('hidden');
+    }
     dom_video.statusMessage.textContent = message;
     const classes = {
         success: 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 border border-green-300 dark:border-green-700',
@@ -1331,6 +1420,13 @@ function videoGen_showStatus(message, type = 'info') {
         warning: 'bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 border border-amber-300 dark:border-amber-700'
     };
     dom_video.statusContainer.className = `text-center p-4 rounded-lg mb-4 ${classes[type] || classes.info}`;
+    if (isTransient) {
+        setTimeout(() => {
+            if (dom_video.statusMessage.textContent === message) {
+                dom_video.statusContainer.classList.add('hidden');
+            }
+        }, 3000);
+    }
 }
 function videoGen_toggleLoading(isLoading) {
     dom_video.generateBtn.disabled = isLoading;
@@ -1349,7 +1445,7 @@ function videoGen_copyToClipboard() {
     if (!dom_video.subtitleOutput.value)
         return;
     navigator.clipboard.writeText(dom_video.subtitleOutput.value).then(() => {
-        videoGen_showStatus('Copied to clipboard!', 'success');
+        videoGen_showStatus('Copied to clipboard!', 'success', true);
     }).catch(err => {
         console.error('Failed to copy text:', err);
         videoGen_showStatus('Could not copy text.', 'error');
@@ -1375,7 +1471,6 @@ function videoGen_downloadSubtitleFile() {
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
 }
-// FIX: Added necessary helper functions for subtitle processing.
 function videoGen_normalizeTimestamp(ts, format = 'srt') {
     const sep = format === 'vtt' ? '.' : ',';
     if (!ts || typeof ts !== 'string')
@@ -1397,27 +1492,25 @@ function videoGen_normalizeTimestamp(ts, format = 'srt') {
     return `${String(nH).padStart(2, '0')}:${String(nM).padStart(2, '0')}:${String(nS).padStart(2, '0')}${sep}${String(totalMs % 1000).padStart(3, '0')}`;
 }
 function videoGen_filterAndValidateSubtitles(data) {
-    if (!Array.isArray(data))
+    if (!Array.isArray(data)) {
         return [];
-    let lastEndTimeMs = -1;
-    const timeToMs = (ts) => {
-        if (!ts)
-            return 0;
-        const sep = ts.includes(',') ? ',' : '.';
-        const [time, msStr] = ts.split(sep);
-        const [h, m, s] = time.split(':').map(Number);
-        return (h * 3600 + m * 60 + s) * 1000 + Number(msStr || 0);
-    };
-    return data.filter(item => {
-        if (!item || typeof item.text !== 'string' || !item.startTime || !item.endTime)
+    }
+    // Filter for basic structural validity and positive duration
+    const validItems = data.filter(item => {
+        if (!item || typeof item.text !== 'string' || !item.startTime || !item.endTime) {
             return false;
-        const startTimeMs = timeToMs(videoGen_normalizeTimestamp(item.startTime));
-        const endTimeMs = timeToMs(videoGen_normalizeTimestamp(item.endTime));
-        if (endTimeMs <= startTimeMs || startTimeMs < lastEndTimeMs - 100)
-            return false; // allow 100ms overlap
-        lastEndTimeMs = endTimeMs;
-        return true;
+        }
+        const startTimeSec = videoGen_timeStringToSeconds(item.startTime);
+        const endTimeSec = videoGen_timeStringToSeconds(item.endTime);
+        return endTimeSec > startTimeSec;
     });
+    // Sort by start time to correct any model-induced ordering issues
+    validItems.sort((a, b) => {
+        const aStart = videoGen_timeStringToSeconds(a.startTime);
+        const bStart = videoGen_timeStringToSeconds(b.startTime);
+        return aStart - bStart;
+    });
+    return validItems;
 }
 function videoGen_formatSubtitlesFromJSON(data, format) {
     if (!Array.isArray(data))
@@ -1429,7 +1522,6 @@ function videoGen_formatSubtitlesFromJSON(data, format) {
         default: return "Unsupported format";
     }
 }
-// FIX: Re-implemented the entire video generation logic to support streaming, URL inputs, and proper JSON schema handling.
 async function videoGen_handleGeneration() {
     apiKeyManager.loadKeys();
     if (apiKeyManager.keys.length === 0) {
@@ -1473,6 +1565,9 @@ async function videoGen_handleGeneration() {
     dom_video.retryBtn.classList.add('hidden');
     dom_video.subtitleOutput.value = '';
     videoGen_finalSubtitleContent = '';
+    videoGen_parsedSubtitles = [];
+    dom_video.exportVideoBtn.disabled = true;
+    dom_video.exportVideoBtn.title = 'Generate subtitles first to enable export.';
     videoGen_toggleLoading(true);
     dom_video.progressContainer.classList.remove('hidden');
     dom_video.progressBar.style.width = `0%`;
@@ -1523,7 +1618,6 @@ async function videoGen_handleGeneration() {
         dom_video.progressStatus.textContent = 'Receiving response...';
         dom_video.progressBar.style.width = '20%';
         dom_video.progressPercentage.textContent = '20%';
-        dom_video.resultsWrapper.classList.remove('hidden');
         const reader = response.body.getReader();
         const decoder = new TextDecoder();
         let buffer = '', finalSubtitleJsonString = '';
@@ -1563,13 +1657,15 @@ async function videoGen_handleGeneration() {
             videoGen_finalSubtitleContent = videoGen_formatSubtitlesFromJSON(subtitleData, dom_video.outputFormatSelect.value);
             dom_video.subtitleOutput.value = videoGen_finalSubtitleContent;
             videoGen_parsedSubtitles = videoGen_parseSubtitlesForPlayback(videoGen_finalSubtitleContent);
-            if (!dom_video.videoPreview.classList.contains('hidden') && videoGen_parsedSubtitles.length > 0) {
-                dom_video.subtitleOverlay.classList.remove('hidden');
+            if (videoGen_currentInputMode === 'upload' && videoGen_parsedSubtitles.length > 0) {
+                dom_video.exportVideoBtn.disabled = false;
+                dom_video.exportVideoBtn.title = 'Export video with burned-in subtitles';
             }
             dom_video.progressStatus.textContent = 'Complete!';
             dom_video.progressBar.style.width = '100%';
             dom_video.progressPercentage.textContent = '100%';
-            videoGen_showStatus('Subtitle generation complete!', 'success');
+            dom_video.resultsWrapper.classList.remove('hidden');
+            videoGen_showStatus('Subtitle generation complete!', 'success', true);
         }
         catch (jsonError) {
             videoGen_showStatus(`Failed to parse final response. Error: ${jsonError.message}`, 'error');
@@ -1597,6 +1693,8 @@ function videoGen_switchTab(mode) {
         dom_video.tabContents[key].classList.toggle('hidden', key !== mode);
     });
     dom_video.previewBtn.disabled = !(mode === 'youtube' || mode === 'upload');
+    dom_video.exportVideoBtn.disabled = true;
+    dom_video.exportVideoBtn.title = 'Video export is only available for uploaded files.';
     videoGen_destroyPlayers();
     dom_video.durationContainer.classList.add('hidden');
     if (mode === 'youtube' && dom_video.youtubeUrlInput.value)
@@ -1606,7 +1704,10 @@ function videoGen_switchTab(mode) {
 }
 function videoGen_validateYouTubeUrl() {
     const url = dom_video.youtubeUrlInput.value.trim();
-    const youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com\/(watch\?v=|embed\/)|youtu\.be\/)[\w-]{11}/;
+
+    // Regex to match YouTube videos, shorts, live, playlists, clips, embeds, and youtu.be links
+    const youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com\/(watch\?v=|embed\/|shorts\/|live\/|playlist\?list=|clip\/)|youtu\.be\/)[\w-]{11,}/;
+
     const isValid = url && youtubeRegex.test(url);
     dom_video.urlError.classList.toggle('hidden', isValid || !url);
     return isValid;
@@ -1826,8 +1927,11 @@ function videoGen_updateSubtitles(currentTime) {
         dom_video.subtitleText.innerHTML = newHtml;
 }
 function videoGen_onPlayerReady() {
-    if (videoGen_parsedSubtitles.length > 0)
+    if (videoGen_parsedSubtitles && videoGen_parsedSubtitles.length > 0) {
         dom_video.subtitleOverlay.classList.remove('hidden');
+    } else {
+        dom_video.subtitleOverlay.classList.add('hidden');
+    }
     const selectedLanguage = dom_video.outputLanguageSelect.value;
     if (RTL_LANGUAGES.has(selectedLanguage)) {
         dom_video.subtitleOverlay.classList.add('text-right');
@@ -1870,7 +1974,7 @@ function videoGen_toggleEditMode() {
     else {
         videoGen_finalSubtitleContent = dom_video.subtitleOutput.value;
         videoGen_parsedSubtitles = videoGen_parseSubtitlesForPlayback(videoGen_finalSubtitleContent);
-        videoGen_showStatus('Subtitles updated locally', 'success');
+        videoGen_showStatus('Subtitles updated locally', 'success', true);
     }
 }
 function videoGen_adjustTimestamps() {
@@ -1881,11 +1985,10 @@ function videoGen_adjustTimestamps() {
         dom_video.subtitleOutput.value = adjusted;
         videoGen_finalSubtitleContent = adjusted;
         videoGen_parsedSubtitles = videoGen_parseSubtitlesForPlayback(videoGen_finalSubtitleContent);
-        videoGen_showStatus('Timestamps adjusted successfully', 'success');
+        videoGen_showStatus('Timestamps adjusted successfully', 'success', true);
     }
     dom_video.timestampModal.classList.add('hidden');
 }
-// FIX: Complete the truncated function for adjusting subtitle timestamps.
 function videoGen_adjustTimestampsInContent(content, offset, scale) {
     if (dom_video.outputFormatSelect.value === 'txt')
         return content;
@@ -1925,6 +2028,174 @@ function videoGen_adjustTimestampsInContent(content, offset, scale) {
         return line;
     }).join('\n');
 }
+
+async function videoGen_startVideoExport() {
+    if (!videoGen_uploadedFile.fileObject) {
+        videoGen_showStatus('No local video file found for export.', 'error');
+        return;
+    }
+    if (videoGen_parsedSubtitles.length === 0) {
+        videoGen_showStatus('No subtitles available to export.', 'error');
+        return;
+    }
+
+    videoGen_exportAbortController = new AbortController();
+    const signal = videoGen_exportAbortController.signal;
+
+    dom_video.exportProgressContainer.classList.remove('hidden');
+    dom_video.resultsWrapper.classList.add('hidden'); // Hide the main results buttons
+    
+    const updateExportProgress = (percentage) => {
+        const p = Math.min(100, Math.max(0, Math.round(percentage)));
+        dom_video.exportProgressBar.style.width = `${p}%`;
+        dom_video.exportProgressPercentage.textContent = `${p}%`;
+    };
+    updateExportProgress(0);
+
+    const video = document.createElement('video');
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    let mediaRecorder;
+    const recordedChunks = [];
+    
+    const cleanup = () => {
+        video.pause();
+        video.src = '';
+        if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+            mediaRecorder.stop();
+        }
+        dom_video.exportProgressContainer.classList.add('hidden');
+        dom_video.resultsWrapper.classList.remove('hidden');
+    };
+    
+    signal.addEventListener('abort', () => {
+        log(`Video export cancelled by user.`, 'warn');
+        videoGen_showStatus('Video export cancelled.', 'info');
+        cleanup();
+    });
+
+    try {
+        log('Starting video export process...');
+        video.src = URL.createObjectURL(videoGen_uploadedFile.fileObject);
+        await new Promise((resolve, reject) => {
+            video.onloadedmetadata = resolve;
+            video.onerror = () => reject(new Error('Failed to load video metadata.'));
+            if (signal.aborted) reject(new Error(signal.reason));
+        });
+
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        
+        const canvasStream = canvas.captureStream(30);
+
+        // Use Web Audio API for robust audio capture
+        const audioContext = new AudioContext();
+        const sourceNode = audioContext.createMediaElementSource(video);
+        const destinationNode = audioContext.createMediaStreamDestination();
+        sourceNode.connect(destinationNode);
+        
+        const finalStream = new MediaStream([
+            ...canvasStream.getVideoTracks(),
+            ...destinationNode.stream.getAudioTracks()
+        ]);
+        
+        const MimeTypes = [
+            'video/webm; codecs=vp9,opus',
+            'video/webm; codecs=vp8,opus',
+            'video/webm',
+        ];
+        const supportedType = MimeTypes.find(type => MediaRecorder.isTypeSupported(type));
+
+        if (!supportedType) {
+            throw new Error('Your browser does not support the required MediaRecorder codecs for video export with audio.');
+        }
+
+        log(`Using supported MIME type for recording: ${supportedType}`);
+        mediaRecorder = new MediaRecorder(finalStream, { mimeType: supportedType });
+        
+        mediaRecorder.ondataavailable = (event) => {
+            if (event.data.size > 0) {
+                recordedChunks.push(event.data);
+            }
+        };
+
+        mediaRecorder.onstop = () => {
+            if (signal.aborted) return;
+            log('MediaRecorder stopped. Creating final video file.');
+            const blob = new Blob(recordedChunks, { type: supportedType });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            const originalName = videoGen_uploadedFile.name.substring(0, videoGen_uploadedFile.name.lastIndexOf('.'));
+            a.download = `${originalName}_subtitled.webm`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            videoGen_showStatus('Video export successful!', 'success');
+            cleanup();
+        };
+        
+        video.volume = 0; // Use volume=0 instead of muted=true to ensure audio is captured
+        await video.play();
+        mediaRecorder.start();
+
+        let lastTime = -1;
+        const renderFrame = (now) => {
+            if (signal.aborted || video.ended || video.paused) {
+                if (!video.ended && !signal.aborted) {
+                    video.play().catch(e => console.error("Could not resume video", e));
+                }
+                if (video.ended) {
+                   cleanup();
+                }
+                return;
+            }
+
+            if (video.currentTime !== lastTime) {
+                lastTime = video.currentTime;
+                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                
+                const currentSub = videoGen_parsedSubtitles.find(s => video.currentTime >= s.start && video.currentTime <= s.end);
+                if (currentSub) {
+                    const fontSize = Math.max(20, canvas.height * 0.04);
+                    ctx.font = `bold ${fontSize}px Arial, sans-serif`;
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'bottom';
+                    const textLines = currentSub.text.split('<br>');
+                    const padding = fontSize * 0.4;
+                    
+                    textLines.forEach((line, index) => {
+                        const y = canvas.height - ((textLines.length - 1 - index) * (fontSize + padding)) - padding * 2;
+                        
+                        ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
+                        const textMetrics = ctx.measureText(line);
+                        ctx.fillRect(
+                            canvas.width / 2 - textMetrics.width / 2 - padding,
+                            y - fontSize - padding / 2,
+                            textMetrics.width + padding * 2,
+                            fontSize + padding
+                        );
+
+                        ctx.fillStyle = 'white';
+                        ctx.fillText(line, canvas.width / 2, y);
+                    });
+                }
+                updateExportProgress((video.currentTime / video.duration) * 100);
+            }
+            requestAnimationFrame(renderFrame);
+        };
+        requestAnimationFrame(renderFrame);
+        
+    } catch (error) {
+        if (!signal.aborted) {
+            log(`Video export failed: ${error.message}`, 'error');
+            videoGen_showStatus(`Video export failed: ${error.message}`, 'error');
+        }
+        cleanup();
+    }
+}
+
 // --- START: App Initialization ---
 function init() {
     // Populate static dropdowns first
@@ -1936,33 +2207,53 @@ function init() {
         currentMode = btn.dataset.mode;
         currentView = 'translation';
         updateUI();
-        resetFileInput();
     }));
-    document.querySelectorAll('[data-view]').forEach(btn => btn.addEventListener('click', () => { currentView = btn.dataset.view; updateUI(); }));
+    document.querySelectorAll('[data-view]').forEach(btn => btn.addEventListener('click', () => {
+        const view = btn.dataset.view;
+        if (view === 'settings' && currentView === 'settings') {
+            currentView = 'translation';
+        }
+        else {
+            currentView = view;
+        }
+        updateUI();
+    }));
     dom.swapBtn.addEventListener('click', swapLanguages);
     dom.textInput.addEventListener('input', () => { updateCharCounter(); validateForm(); });
-    dom.sourceLangSelect.addEventListener('change', validateForm);
-    dom.targetLangSelect.addEventListener('change', () => { if (dom.output.value)
-        dom.output.dir = RTL_LANGUAGES.has(dom.targetLangSelect.value) ? 'rtl' : 'ltr'; });
+    dom.sourceLangSelect.addEventListener('change', () => {
+        validateForm();
+        saveSettings();
+    });
+    dom.targetLangSelect.addEventListener('change', () => {
+        if (dom.output.value)
+            dom.output.dir = RTL_LANGUAGES.has(dom.targetLangSelect.value) ? 'rtl' : 'ltr';
+        saveSettings();
+    });
     dom.form.addEventListener('submit', handleFormSubmit);
     dom.copyBtn.addEventListener('click', copyToClipboard);
     dom.exportBtn.addEventListener('click', exportOutput);
     dom.exportTextBtn.addEventListener('click', exportOutput);
     dom.cancelTranslationBtn.addEventListener('click', cancelTranslation);
     dom.enhancementsToolbar.querySelectorAll('.enhancement-btn').forEach(btn => btn.addEventListener('click', () => handleEnhancement(btn.dataset.action)));
-    // FIX: Correct typo from dom.themeToggle to dom.themeToggleBtn.
     dom.themeToggleBtn.addEventListener('click', toggleTheme);
     dom.apiKeyInput.addEventListener('input', validateForm);
+    dom.languageSearch.addEventListener('input', filterAndRepopulateLanguages);
     // File input listeners
     dom.dropzoneContainer.addEventListener('dragover', (e) => { e.preventDefault(); e.stopPropagation(); dom.dropzoneContainer.classList.add('bg-slate-200', 'dark:bg-slate-600'); });
     dom.dropzoneContainer.addEventListener('dragleave', (e) => { e.preventDefault(); e.stopPropagation(); dom.dropzoneContainer.classList.remove('bg-slate-200', 'dark:bg-slate-600'); });
-    dom.dropzoneContainer.addEventListener('drop', (e) => { e.preventDefault(); e.stopPropagation(); dom.dropzoneContainer.classList.remove('bg-slate-200', 'dark:bg-slate-600'); const file = e.dataTransfer.files[0]; if (file) {
-        dom.fileUpload.files = e.dataTransfer.files;
-        dom.fileUpload.dispatchEvent(new Event('change'));
-    } });
+    dom.dropzoneContainer.addEventListener('drop', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dom.dropzoneContainer.classList.remove('bg-slate-200', 'dark:bg-slate-600');
+        const file = e.dataTransfer.files[0];
+        if (file) {
+            dom.fileUpload.files = e.dataTransfer.files;
+            dom.fileUpload.dispatchEvent(new Event('change'));
+        }
+    });
     dom.chooseFileBtn.addEventListener('click', () => dom.fileUpload.click());
     dom.fileUpload.addEventListener('change', handleFileChange);
-    dom.removeFileBtn.addEventListener('click', resetFileInput);
+    dom.removeFileBtn.addEventListener('click', () => resetFileInput());
     // PDF listeners
     dom.selectAllPagesBtn.addEventListener('click', () => { if (!pdfDoc)
         return; selectedPages = new Set(Array.from({ length: pdfDoc.numPages }, (_, i) => i + 1)); dom.pdfPageViewer.querySelectorAll('.pdf-page-item').forEach(el => el.classList.add('selected')); updatePageSelectionCounter(); validateForm(); });
@@ -2045,14 +2336,6 @@ function init() {
     // Modal listeners
     dom.howToUseBtn.addEventListener('click', () => dom.howToUseModal.classList.remove('hidden'));
     dom.howToUseCloseBtn.addEventListener('click', () => dom.howToUseModal.classList.add('hidden'));
-    // Promo banner listener
-    const closeBannerBtn = document.getElementById('close-banner-btn');
-    const promoBanner = document.getElementById('promo-banner');
-    if (closeBannerBtn && promoBanner) {
-        closeBannerBtn.addEventListener('click', () => {
-            promoBanner.style.display = 'none';
-        });
-    }
     // Initialize Video Generator
     videoGen_setupEventListeners();
     updateUI();
