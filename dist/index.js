@@ -144,31 +144,42 @@ let translationAbortController = null;
 let currentLanguage = 'en';
 let currentMode = 'text';
 let currentView = 'translation';
+// --- START: State Management ---
+// ... (متغیرهای دیگر مثل pdfDoc سر جای خود بمانند)
+
 const apiKeyManager = {
     keys: [],
-    currentIndex: 0,
-    loadKeys() {
-        this.keys = dom.apiKeyInput.value.split('\n').map(k => k.trim()).filter(Boolean);
-        if (this.currentIndex >= this.keys.length)
-            this.currentIndex = 0;
+    
+    // بارگذاری اولیه کلیدها از ورودی
+    refreshKeys() {
+        const rawKeys = dom.apiKeyInput.value.split('\n').map(k => k.trim()).filter(Boolean);
+        // اگر کلیدهای فعلی خالی هستند یا تعداد تغییر کرده، لیست را آپدیت کن
+        // اما اگر کلید داریم، سعی میکنیم ترتیب فعلی (چرخش شده) را حفظ کنیم مگر اینکه کاربر کلیدها را عوض کرده باشد
+        if (this.keys.length === 0 || rawKeys.length !== this.keys.length) {
+            this.keys = rawKeys;
+        }
     },
-    getNextKey() {
-        if (this.keys.length === 0)
-            return null;
-        const key = this.keys[this.currentIndex];
-        this.currentIndex = (this.currentIndex + 1) % this.keys.length;
-        return key;
+
+    // گرفتن کلید اول صف (بدون چرخش)
+    getCurrentKey() {
+        if (this.keys.length === 0) this.refreshKeys();
+        if (this.keys.length === 0) return null;
+        return this.keys[0];
     },
+
+    // چرخش کلید: اولی را برمی‌دارد و می‌گذارد آخر صف
+    rotateKey() {
+        if (this.keys.length > 1) {
+            const usedKey = this.keys.shift();
+            this.keys.push(usedKey);
+        }
+    },
+
+    // حذف کلید نامعتبر
     invalidateKey(key) {
         const index = this.keys.indexOf(key);
         if (index > -1) {
             this.keys.splice(index, 1);
-            if (this.currentIndex > index)
-                this.currentIndex--;
-            if (this.keys.length > 0)
-                this.currentIndex %= this.keys.length;
-            else
-                this.currentIndex = 0;
             log(`Removed invalid API Key ending in ...${key.slice(-4)}. ${this.keys.length} key(s) remaining.`, 'warn');
         }
     }
@@ -324,17 +335,20 @@ function log(message, type = 'info') {
     dom.logOutput.appendChild(entry);
     dom.logContent.scrollTop = dom.logContent.scrollHeight;
 }
-// --- START: Core Translation Logic ---
 async function apiCallWithRetry(buildRequest, signal) {
-    apiKeyManager.loadKeys();
-    const keysToTry = [...apiKeyManager.keys];
-    if (keysToTry.length === 0)
-        throw new Error("An API Key is required.");
+    apiKeyManager.refreshKeys();
+    
+    // تعداد تلاش‌ها: مثلا اگر ۱۰ تا کلید داریم، تا ۲۰ بار تلاش میکنیم که اگر چندتا پشت هم لیمیت بودن رد بشه
+    let maxAttempts = Math.max(apiKeyManager.keys.length * 2, 5); 
+    let attempts = 0;
     let lastError = null;
-    for (let i = 0; i < keysToTry.length; i++) {
-        const key = apiKeyManager.getNextKey();
-        if (!key)
-            continue;
+
+    while (attempts < maxAttempts) {
+        // همیشه کلید اول صف را برمی‌داریم
+        const key = apiKeyManager.getCurrentKey();
+        
+        if (!key) throw new Error("An API Key is required.");
+
         try {
             const { url, payload } = buildRequest(key);
             const response = await fetch(url, {
@@ -343,30 +357,55 @@ async function apiCallWithRetry(buildRequest, signal) {
                 body: JSON.stringify(payload),
                 signal
             });
+
+            // مدیریت خطای 429 (Quota Limit)
+            if (response.status === 429) {
+                log(`Key ending in ...${key.slice(-4)} hit Rate Limit (429). Rotating to end of queue...`, 'warn');
+                // کلید را می‌فرستیم ته صف
+                apiKeyManager.rotateKey();
+                attempts++;
+                // «continue» باعث میشه بلافاصله بره اول حلقه و با کلید جدید (که الان اومده اول صف) ریکوئست بزنه
+                continue; 
+            }
+
             const responseBody = await response.json();
+
             if (!response.ok) {
                 const errorDetails = responseBody?.error || { message: 'Unknown API error' };
-                let userMessage = errorDetails.message.includes("API key not valid") ? "The provided Google AI API Key is invalid." : `API Error: ${errorDetails.message}`;
-                if (response.status === 429)
-                    userMessage = "API rate limit exceeded. Please try again later.";
-                throw new Error(userMessage);
+                
+                // اگر کلید کلاً نامعتبر بود (نه لیمیت)، حذفش میکنیم
+                if (errorDetails.message.includes("API key not valid") || errorDetails.message.includes("key expired")) {
+                    apiKeyManager.invalidateKey(key);
+                    attempts++;
+                    continue; // تلاش مجدد با کلید بعدی
+                }
+
+                throw new Error(`API Error: ${errorDetails.message}`);
             }
+
+            // *** موفقیت آمیز بود ***
+            // کلید را می‌چرخانیم تا برای چانک بعدی (در فراخوانی بعدی تابع) از کلید بعدی استفاده شود
+            // این باعث توزیع بار (Round Robin) در حالت عادی می‌شود
+            apiKeyManager.rotateKey();
+            
             return responseBody;
-        }
-        catch (error) {
+
+        } catch (error) {
             lastError = error;
+            
             if (error.name === 'AbortError') {
                 throw new Error('Translation was cancelled by the user.');
             }
-            if (error.message.includes("API key not valid")) {
-                apiKeyManager.invalidateKey(key);
-            }
-            else {
-                throw error; // For other errors, fail immediately.
+
+            // اگر خطای شبکه بود (نه خطای API)، شاید بخواهید باز هم تلاش کنید یا ارور دهید
+            // در اینجا فرض بر این است که اگر fetch فیل شد (مثلا اینترنت قطع شد) ارور بدهیم
+            if (!error.message.includes("API key")) { 
+                 throw error;
             }
         }
     }
-    throw new Error(`All API keys failed. Last error: ${lastError?.message || 'Unknown error'}`);
+
+    throw new Error(`Failed to complete request after multiple attempts. Last error: ${lastError?.message || 'Unknown'}`);
 }
 async function callGoogleAI(prompt, model, useProxy, customProxyUrl, signal, temperature = 0.7) {
     log(`Calling Google AI model: ${model}...`);
