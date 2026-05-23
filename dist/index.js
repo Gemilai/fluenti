@@ -1094,7 +1094,7 @@ function loadSettings() {
             dom.apiKeyInput.value = settings.apiKey || '';
             dom.modelSelect.value = settings.model || DEFAULT_WEB_MODEL;
             dom.sourceLangSelect.value = settings.sourceLang || 'auto';
-            dom.targetLangSelect.value = settings.targetLang || 'Persian';
+            dom.targetLangSelect.value = settings.targetLang || 'Persian (Farsi)';
             dom.jobFieldSelect.value = settings.jobField || 'None';
             dom.translationToneSelect.value = settings.translationTone || 'Default';
             dom.customToneInput.value = settings.customTone || '';
