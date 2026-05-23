@@ -373,7 +373,7 @@ async function apiCallWithRetry(buildRequest, signal) {
             if (!response.ok) {
                 const errorDetails = responseBody?.error || { message: 'Unknown API error' };
                 
-                // если ключ полностью недействителен (не лимит), удаляем его
+                // اگر کلید کلاً نامعتبر بود (نه لیمیت)، حذفش میکنیم
                 if (errorDetails.message.includes("API key not valid") || errorDetails.message.includes("key expired")) {
                     apiKeyManager.invalidateKey(key);
                     attempts++;
@@ -1094,7 +1094,7 @@ function loadSettings() {
             dom.apiKeyInput.value = settings.apiKey || '';
             dom.modelSelect.value = settings.model || DEFAULT_WEB_MODEL;
             dom.sourceLangSelect.value = settings.sourceLang || 'auto';
-            dom.targetLangSelect.value = settings.targetLang || 'Persian';
+            dom.targetLangSelect.value = settings.targetLang || 'Persian (Farsi)';
             dom.jobFieldSelect.value = settings.jobField || 'None';
             dom.translationToneSelect.value = settings.translationTone || 'Default';
             dom.customToneInput.value = settings.customTone || '';
@@ -1116,10 +1116,6 @@ function loadSettings() {
             applyTheme(prefersDark ? 'dark' : 'light');
             dom.customProxyInput.value = DEFAULT_PROXY_URL;
             currentLanguage = navigator.language.startsWith('fa') ? 'fa' : (navigator.language.startsWith('ru') ? 'ru' : 'en');
-            
-            // Force Persian as the default target language for new visitors
-            dom.sourceLangSelect.value = 'auto';
-            dom.targetLangSelect.value = 'Persian';
         }
     }
     catch (e) {
@@ -1632,7 +1628,7 @@ async function videoGen_handleGeneration() {
         contents: [{ "role": "user", "parts": [videoPart, { "text": promptText }] }],
         generationConfig: { "responseMimeType": "application/json", "responseSchema": responseSchema }
     };
-    let key = apiKeyManager.getCurrentKey();
+    let key = apiKeyManager.getNextKey();
     if (!key) {
         videoGen_showStatus("API Key not found.", 'error');
         videoGen_toggleLoading(false);
@@ -1658,9 +1654,6 @@ async function videoGen_handleGeneration() {
                 throw new Error(`API Error (${response.status}): ${errText}`);
             }
         }
-        
-        apiKeyManager.rotateKey();
-
         dom_video.progressStatus.textContent = 'Receiving response...';
         dom_video.progressBar.style.width = '20%';
         dom_video.progressPercentage.textContent = '20%';
@@ -2306,7 +2299,7 @@ function init() {
     dom.deselectAllPagesBtn.addEventListener('click', () => { selectedPages.clear(); dom.pdfPageViewer.querySelectorAll('.pdf-page-item').forEach(el => el.classList.remove('selected')); updatePageSelectionCounter(); validateForm(); });
     dom.combinePagesCheckbox.addEventListener('change', updatePageSelectionCounter);
     // Subtitle listeners
-    dom.fetchYoutubeSubsBtn.addEventListener('click', handleFetchYoutubeSubs);
+    dom.fetchYoutubeSubsBtn.addEventListener('click', handleFetchYouTubeSubs);
     // Subtitle Editor Tools listeners
     dom.retryFailedSubsBtn.addEventListener('click', () => startSubtitleTranslation(row => row.cells[3].textContent === '(Translation failed)'));
     dom.subtitleTableBody.addEventListener('input', saveCurrentSubtitleProgress);
