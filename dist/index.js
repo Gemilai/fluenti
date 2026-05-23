@@ -808,7 +808,7 @@ function validateForm() {
     let hasInput = false;
     const isApiKeyValid = dom.apiKeyInput.value.trim().length > 0;
     if (currentMode === 'text') {
-        hasInput = dom.textInput.value.trim().length > 0 && dom.textInput.value.length <= 5000;
+        hasInput = dom.textInput.value.trim().length > 0 && dom.textInput.value.length <= 10000;
     }
     else if (currentMode === 'image') {
         hasInput = currentFile !== null;
@@ -2413,3 +2413,56 @@ window.resetTranslationDefaults = function() {
         console.error(e);
     }
 };
+
+setTimeout(() => {
+    const el = document.querySelector('#target_lang');
+    if(el && (!el.value || el.value === 'Afrikaans')) {
+        el.value = 'Persian';
+        el.dispatchEvent(new Event('change'));
+    }
+}, 100);
+
+setTimeout(() => {
+    const parent =
+        document.querySelector('#ai_model')?.parentElement ||
+        document.body;
+
+    if(parent && !document.querySelector('#reset_translation_settings_btn')) {
+        parent.insertAdjacentHTML('beforeend', `
+<button id="reset_translation_settings_btn"
+style="margin-top:10px;padding:10px 14px;border-radius:8px;background:#dc2626;color:white;font-weight:bold;">
+Reset Translation Settings
+</button>
+`);
+
+        document.querySelector('#reset_translation_settings_btn')
+        .addEventListener('click', () => {
+
+            const defaults = {
+                ai_model: '',
+                translation_specialization: '',
+                translation_tone: '',
+                temperature: '0.7',
+                request_delay: '0'
+            };
+
+            Object.keys(defaults).forEach(k => {
+                localStorage.removeItem(k);
+            });
+
+            const model=document.querySelector('#ai_model');
+            const spec=document.querySelector('#translation_specialization');
+            const tone=document.querySelector('#translation_tone');
+            const temp=document.querySelector('#temperature');
+            const delay=document.querySelector('#request_delay');
+
+            if(model) model.selectedIndex=0;
+            if(spec) spec.selectedIndex=0;
+            if(tone) tone.selectedIndex=0;
+            if(temp) temp.value='0.7';
+            if(delay) delay.value='0';
+
+            alert('Translation settings reset.');
+        });
+    }
+}, 500);
