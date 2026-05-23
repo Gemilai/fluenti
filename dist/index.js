@@ -25,6 +25,7 @@ const HOW_TO_USE_CONTENT = {
     fa: `<div class="space-y-6 text-slate-700 dark:text-slate-300 text-right"><div><h3 class="text-lg font-bold mb-2 text-slate-800 dark:text-slate-100">۱. راه‌اندازی اولیه (کلید API)</h3><p class="mb-2">قبل از شروع ترجمه، به یک کلید API از Google AI نیاز دارید.</p><ol class="list-decimal list-inside space-y-2 pr-4"><li>به <a href="https://aistudio.google.com/" target="_blank" rel="noopener noreferrer" class="text-sky-500 underline">Google AI Studio</a> بروید و وارد شوید.</li><li>روی <strong>"Get API key"</strong> و سپس <strong>"Create API key in new project"</strong> کلیک کنید.</li><li>کلید تولید شده را کپی کنید.</li><li>در Fluentify، با استفاده از آیکون چرخ‌دنده (<i class="fas fa-cog inline-block"></i>) در بالا سمت راست (دسکتاپ) یا نوار پایین (موبایل) به صفحه <strong>تنظیمات</strong> بروید.</li><li>کلید خود را در فیلد <strong>"کلید(های) API گوگل"</strong> الصاق کنید.</li><li>(توصیه‌شده) تیک گزینه <strong>"ذخیره تمام تنظیمات در این مرورگر"</strong> را بزنید تا کلید شما برای استفاده‌های بعدی ذخیره شود.</li></ol></div><div><h3 class="text-lg font-bold mb-2 text-slate-800 dark:text-slate-100">۲. ترجمه محتوا</h3><p class="mb-3">نوع ورودی مورد نظر خود را از تب‌های ناوبری انتخاب کنید.</p><div class="space-y-4 pr-4 border-r-2 dark:border-slate-600"><div><h4 class="font-semibold">📝 ترجمه متن</h4><p>تب <strong>متن</strong> را انتخاب کنید، زبان مبدأ و مقصد را انتخاب کنید، متن خود را وارد کرده و روی <strong>ترجمه</strong> کلیک کنید. از دکمه‌های <strong>اصلاح</strong> و <strong>تغییر سبک</strong> برای بهبود خروجی استفاده کنید.</p></div><div><h4 class="font-semibold">🖼️ ترجمه تصویر</h4><p>تب <strong>تصویر</strong> را انتخاب کنید، زبان مقصد خود را برگزینید و یک فایل تصویر را رها کنید. برنامه متن را با OCR استخراج کرده و سپس آن را ترجمه می‌کند.</p></div><div><h4 class="font-semibold">📄 ترجمه PDF</h4><p>یک فایل PDF آپلود کنید. روی صفحاتی که می‌خواهید ترجمه شوند کلیک کنید. برای PDFهای اسکن شده، گزینه <strong>"استفاده از OCR"</strong> را در تنظیمات فعال کنید. روی <strong>ترجمه</strong> کلیک کنید.</p></div><div><h4 class="font-semibold">🎬 ترجمه زیرنویس</h4><p class="mb-2">می‌توانید یک فایل زیرنویس (SRT, VTT, و غیره) آپلود کنید یا یک آدرس یوتیوب را وارد کرده و روی <strong>دریافت</strong> کلیک کنید تا زیرنویس‌ها در ویرایشگر بارگذاری شوند.</p><ul class="list-disc list-inside space-y-1"><li><strong>ترجمه:</strong> روی دکمه اصلی «ترجمه» کلیک کنید تا تمام خطوط ترجمه نشده به صورت دسته‌ای ترجمه شوند.</li><li><strong>ویرایش:</strong> برای ویرایش دستی، مستقیماً روی متن ترجمه شده کلیک کنید.</li><li><strong>ابزارها:</strong> از ابزارهای جستجو و جایگزینی و شکستن خطوط طولانی برای ویرایش پیشرفته استفاده کنید.</li><li><strong>خروجی:</strong> برای دانلود فایل ترجمه شده، روی دکمه خروجی در هدر ویرایشگر کلیک کنید.</li></ul></div></div></div></div>`,
     ru: `<div class="space-y-6 text-slate-700 dark:text-slate-300"><div><h3 class="text-lg font-bold mb-2 text-slate-800 dark:text-slate-100">1. Начальная настройка (API-ключ)</h3><p class="mb-2">Перед началом работы вам понадобится API-ключ от Google AI.</p><ol class="list-decimal list-inside space-y-2 pl-4"><li>Перейдите в <a href="https://aistudio.google.com/" target="_blank" rel="noopener noreferrer" class="text-sky-500 underline">Google AI Studio</a> и войдите в систему.</li><li>Нажмите <strong>"Get API key"</strong>, затем <strong>"Create API key in new project"</strong>.</li><li>Скопируйте сгенерированный ключ.</li><li>В Fluentify перейдите на страницу <strong>Настройки</strong>, используя иконку шестеренки (<i class="fas fa-cog inline-block"></i>) в правом верхнем углу (настольная версия) или на нижней панели (мобильная версия).</li><li>Вставьте ваш ключ в поле <strong>"Ключ(и) API Google AI"</strong>.</li><li>(Рекомендуется) Установите флажок <strong>"Сохранить все настройки в этом браузере"</strong>, чтобы безопасно сохранить ваш ключ для будущего использования.</li></ol></div><div><h3 class="text-lg font-bold mb-2 text-slate-800 dark:text-slate-100">2. Перевод контента</h3><p class="mb-3">Выберите желаемый тип ввода на вкладках навигации.</p><div class="space-y-4 pl-4 border-l-2 dark:border-slate-600"><div><h4 class="font-semibold">📝 Перевод текста</h4><p>Выберите вкладку <strong>Текст</strong>, выберите языки, введите текст и нажмите <strong>Перевести</strong>. Используйте кнопки <strong>Улучшить</strong> и <strong>Изменить стиль</strong> для доработки результата.</p></div><div><h4 class="font-semibold">🖼️ Перевод изображений</h4><p>Выберите вкладку <strong>Изображение</strong>, укажите целевой язык и перетащите файл изображения. Приложение выполнит OCR для извлечения текста, а затем переведет его.</p></div><div><h4 class="font-semibold">📄 Перевод PDF</h4><p>Загрузите PDF. Нажмите на страницы, которые вы хотите перевести. Для сканированных PDF включите опцию <strong>"Использовать OCR"</strong> в Настройках. Нажмите <strong>Перевести</strong>.</p></div><div><h4 class="font-semibold">🎬 Перевод субтитров</h4><p class="mb-2">Вы можете загрузить файл субтитров (SRT, VTT и т.д.) или вставить URL-адрес YouTube и нажать <strong>Получить</strong>, чтобы загрузить субтитры в редактор.</p><ul class="list-disc list-inside space-y-1"><li><strong>Перевести:</strong> Нажмите главную кнопку «Перевести», чтобы перевести все непереведенные строки пакетами.</li><li><strong>Редактировать:</strong> Нажмите прямо на переведенный текст, чтобы отредактировать его вручную.</li><li><strong>Инструменты:</strong> Используйте инструменты "Найти и заменить" и "Разбить длинные строки" для расширенного редактирования.</li><li><strong>Экспорт:</strong> Нажмите кнопку экспорта в заголовке редактора, чтобы скачать переведенный файл.</li></ul></div></div></div></div>`
 };
+
 // --- START: DOM Element Selection ---
 const dom = {
     html: document.documentElement,
@@ -134,6 +135,7 @@ const dom = {
     howToUseCloseBtn: document.getElementById('how-to-use-close-btn'),
     languageSearch: document.getElementById('language-search'),
 };
+
 // --- START: State Management ---
 let pdfDoc = null;
 let selectedPages = new Set();
@@ -144,30 +146,23 @@ let translationAbortController = null;
 let currentLanguage = 'en';
 let currentMode = 'text';
 let currentView = 'translation';
-// --- START: State Management ---
-// ... (متغیرهای دیگر مثل pdfDoc سر جای خود بمانند)
 
 const apiKeyManager = {
     keys: [],
     
-    // بارگذاری اولیه کلیدها از ورودی
     refreshKeys() {
         const rawKeys = dom.apiKeyInput.value.split('\n').map(k => k.trim()).filter(Boolean);
-        // اگر کلیدهای فعلی خالی هستند یا تعداد تغییر کرده، لیست را آپدیت کن
-        // اما اگر کلید داریم، سعی میکنیم ترتیب فعلی (چرخش شده) را حفظ کنیم مگر اینکه کاربر کلیدها را عوض کرده باشد
         if (this.keys.length === 0 || rawKeys.length !== this.keys.length) {
             this.keys = rawKeys;
         }
     },
 
-    // گرفتن کلید اول صف (بدون چرخش)
     getCurrentKey() {
         if (this.keys.length === 0) this.refreshKeys();
         if (this.keys.length === 0) return null;
         return this.keys[0];
     },
 
-    // چرخش کلید: اولی را برمی‌دارد و می‌گذارد آخر صف
     rotateKey() {
         if (this.keys.length > 1) {
             const usedKey = this.keys.shift();
@@ -175,7 +170,6 @@ const apiKeyManager = {
         }
     },
 
-    // حذف کلید نامعتبر
     invalidateKey(key) {
         const index = this.keys.indexOf(key);
         if (index > -1) {
@@ -184,20 +178,19 @@ const apiKeyManager = {
         }
     }
 };
-// --- END: State Management ---
+
 // --- START: UI Mode Management ---
 function updateUI() {
-    // 1. Handle main view visibility
     dom.translationView.classList.toggle('hidden', currentView !== 'translation');
     dom.settingsView.classList.toggle('hidden', currentView !== 'settings');
-    // 2. Handle input visibility within translation view
+
     const isTextMode = currentMode === 'text';
     const isImageMode = currentMode === 'image';
     const isPdfMode = currentMode === 'pdf';
     const isSubtitleMode = currentMode === 'subtitle';
     const isVideoMode = currentMode === 'video';
     const isFileMode = isImageMode || isPdfMode || isSubtitleMode;
-    // Check for file compatibility and reset if necessary
+
     if (currentFile) {
         const fileType = currentFile.type;
         const fileName = currentFile.name.toLowerCase();
@@ -205,20 +198,18 @@ function updateUI() {
             (isPdfMode && fileType === 'application/pdf') ||
             (isSubtitleMode && (fileName.endsWith('.srt') || fileName.endsWith('.vtt') || fileName.endsWith('.ssa') || fileName.endsWith('.ass')));
         if (isFileMode && !isCompatible) {
-            // File is loaded, but we switched to an incompatible file-based mode. Reset.
-            resetFileInput(false); // Pass false to prevent recursive updateUI call
+            resetFileInput(false); 
         }
     }
-    // Show/hide main sections based on mode
+
     dom.textInputSection.classList.toggle('hidden', !isTextMode);
     dom.fileInputSection.classList.toggle('hidden', !isFileMode);
     dom.videoGeneratorSection.classList.toggle('hidden', !isVideoMode);
-    // Manage file input UI state
+
     if (isFileMode) {
         if (currentFile) {
             dom.dropzonePrompt.classList.add('hidden');
             dom.filePreviewContainer.classList.remove('hidden');
-            // Toggle visibility of specific previews based on mode
             dom.imagePreview.classList.toggle('hidden', !isImageMode);
             dom.subtitlePreview.classList.toggle('hidden', !isSubtitleMode);
         }
@@ -227,18 +218,17 @@ function updateUI() {
             dom.filePreviewContainer.classList.add('hidden');
         }
     }
-    // Show/hide sub-sections
+
     dom.youtubeInputSection.classList.toggle('hidden', !isSubtitleMode);
     dom.pdfViewerSection.classList.toggle('hidden', !isPdfMode || !pdfDoc);
     dom.subtitleEditorSection.classList.toggle('hidden', !isSubtitleMode || !subtitleData);
-    // Show/hide shared elements
     dom.mainOutputSection.classList.toggle('hidden', isSubtitleMode || isVideoMode);
-    dom.translateBtn.parentElement.classList.toggle('hidden', isVideoMode); // Hides the main translate button and error display row
-    dom.form.querySelector('.grid').classList.toggle('hidden', isVideoMode); // Hides language selectors and swap button
-    // Configure UI elements based on mode
+    dom.translateBtn.parentElement.classList.toggle('hidden', isVideoMode); 
+    dom.form.querySelector('.grid').classList.toggle('hidden', isVideoMode); 
+
     dom.sourceLangSelect.disabled = !isTextMode;
-    if (!isTextMode)
-        dom.sourceLangSelect.value = 'auto';
+    if (!isTextMode) dom.sourceLangSelect.value = 'auto';
+
     if (isImageMode) {
         dom.fileUpload.accept = "image/png, image/jpeg, image/webp, image/gif";
         dom.fileUploadHint.textContent = TRANSLATIONS[currentLanguage].fileHintImage;
@@ -251,7 +241,7 @@ function updateUI() {
         dom.fileUpload.accept = ".srt,.vtt,.ssa,.ass";
         dom.fileUploadHint.textContent = TRANSLATIONS[currentLanguage].fileHintSubtitle;
     }
-    // 3. Update active state of nav buttons
+
     document.querySelectorAll('.mobile-nav-btn, .desktop-tab-btn, #settings-btn').forEach(btn => {
         const htmlBtn = btn;
         const isActive = (htmlBtn.dataset.mode === currentMode && currentView === 'translation') || (htmlBtn.dataset.view === currentView);
@@ -259,6 +249,7 @@ function updateUI() {
     });
     validateForm();
 }
+
 // --- START: I1N & Language Switching ---
 function filterAndRepopulateLanguages() {
     const searchTerm = dom.languageSearch.value.toLowerCase();
@@ -272,6 +263,7 @@ function filterAndRepopulateLanguages() {
     populateSelect(dom.sourceLangSelect, LANGUAGES, dom.sourceLangSelect.value, sourceFilter);
     populateSelect(dom.targetLangSelect, LANGUAGES, dom.targetLangSelect.value, targetFilter);
 }
+
 function setLanguage(lang) {
     currentLanguage = lang;
     const translations = TRANSLATIONS[lang];
@@ -280,7 +272,7 @@ function setLanguage(lang) {
         return;
     }
     dom.html.lang = lang;
-    dom.html.dir = lang === 'fa' || lang === 'ar' ? 'rtl' : 'ltr'; // Basic RTL for Persian/Arabic
+    dom.html.dir = lang === 'fa' || lang === 'ar' ? 'rtl' : 'ltr';
     document.title = translations.pageTitle;
     document.querySelectorAll('[data-i18n-key]').forEach(el => {
         const htmlEl = el;
@@ -319,6 +311,7 @@ function setLanguage(lang) {
     updateCharCounter();
     validateForm();
 }
+
 // --- START: Logging ---
 function log(message, type = 'info') {
     const timestamp = new Date().toLocaleTimeString();
@@ -335,18 +328,15 @@ function log(message, type = 'info') {
     dom.logOutput.appendChild(entry);
     dom.logContent.scrollTop = dom.logContent.scrollHeight;
 }
+
 async function apiCallWithRetry(buildRequest, signal) {
     apiKeyManager.refreshKeys();
-    
-    // تعداد تلاش‌ها: مثلا اگر ۱۰ تا کلید داریم، تا ۲۰ بار تلاش میکنیم که اگر چندتا پشت هم لیمیت بودن رد بشه
     let maxAttempts = Math.max(apiKeyManager.keys.length * 2, 5); 
     let attempts = 0;
     let lastError = null;
 
     while (attempts < maxAttempts) {
-        // همیشه کلید اول صف را برمی‌داریم
         const key = apiKeyManager.getCurrentKey();
-        
         if (!key) throw new Error("An API Key is required.");
 
         try {
@@ -358,13 +348,10 @@ async function apiCallWithRetry(buildRequest, signal) {
                 signal
             });
 
-            // مدیریت خطای 429 (Quota Limit)
             if (response.status === 429) {
                 log(`Key ending in ...${key.slice(-4)} hit Rate Limit (429). Rotating to end of queue...`, 'warn');
-                // کلید را می‌فرستیم ته صف
                 apiKeyManager.rotateKey();
                 attempts++;
-                // «continue» باعث میشه بلافاصله بره اول حلقه و با کلید جدید (که الان اومده اول صف) ریکوئست بزنه
                 continue; 
             }
 
@@ -372,41 +359,30 @@ async function apiCallWithRetry(buildRequest, signal) {
 
             if (!response.ok) {
                 const errorDetails = responseBody?.error || { message: 'Unknown API error' };
-                
-                // اگر کلید کلاً نامعتبر بود (نه لیمیت)، حذفش میکنیم
                 if (errorDetails.message.includes("API key not valid") || errorDetails.message.includes("key expired")) {
                     apiKeyManager.invalidateKey(key);
                     attempts++;
-                    continue; // تلاش مجدد با کلید بعدی
+                    continue;
                 }
-
                 throw new Error(`API Error: ${errorDetails.message}`);
             }
 
-            // *** موفقیت آمیز بود ***
-            // کلید را می‌چرخانیم تا برای چانک بعدی (در فراخوانی بعدی تابع) از کلید بعدی استفاده شود
-            // این باعث توزیع بار (Round Robin) در حالت عادی می‌شود
             apiKeyManager.rotateKey();
-            
             return responseBody;
 
         } catch (error) {
             lastError = error;
-            
             if (error.name === 'AbortError') {
                 throw new Error('Translation was cancelled by the user.');
             }
-
-            // اگر خطای شبکه بود (نه خطای API)، شاید بخواهید باز هم تلاش کنید یا ارور دهید
-            // در اینجا فرض بر این است که اگر fetch فیل شد (مثلا اینترنت قطع شد) ارور بدهیم
             if (!error.message.includes("API key")) { 
                  throw error;
             }
         }
     }
-
     throw new Error(`Failed to complete request after multiple attempts. Last error: ${lastError?.message || 'Unknown'}`);
 }
+
 async function callGoogleAI(prompt, model, useProxy, customProxyUrl, signal, temperature = 0.7) {
     log(`Calling Google AI model: ${model}...`);
     const buildRequest = (apiKey) => {
@@ -442,6 +418,7 @@ async function callGoogleAI(prompt, model, useProxy, customProxyUrl, signal, tem
     log('Successfully received response from AI.', 'success');
     return resultText;
 }
+
 async function callGoogleAIBatch(itemsToTranslate, sourceLang, targetLang, jobField, model, useProxy, customProxyUrl, signal, temperature = 0.7) {
     log(`Starting batch translation for ${itemsToTranslate.length} lines...`);
     const useCustomPrompt = dom.useCustomPromptCheckbox.checked;
@@ -508,6 +485,7 @@ async function callGoogleAIBatch(itemsToTranslate, sourceLang, targetLang, jobFi
         throw error;
     }
 }
+
 async function performOcr(base64Image, mimeType, model, useProxy, customProxyUrl, signal) {
     log('Performing OCR on image...');
     const prompt = "Extract all text content from this image. Output ONLY the text found, preserving line breaks as accurately as possible. If no text is found, output nothing.";
@@ -530,6 +508,7 @@ async function performOcr(base64Image, mimeType, model, useProxy, customProxyUrl
     log(text ? 'OCR completed successfully.' : 'OCR completed, but no text was found.', text ? 'success' : 'warn');
     return text;
 }
+
 async function extractTextFromPdfPage(pageNumber, ocrOptions) {
     if (!pdfDoc)
         return null;
@@ -554,6 +533,7 @@ async function extractTextFromPdfPage(pageNumber, ocrOptions) {
     }
     return extractedText;
 }
+
 function getPrompt(text, sourceLang, targetLang, jobField, customPrompt) {
     if (dom.useCustomPromptCheckbox.checked && customPrompt && customPrompt.trim()) {
         log('Using custom prompt.');
@@ -576,10 +556,12 @@ function getPrompt(text, sourceLang, targetLang, jobField, customPrompt) {
     }
     return `You are an expert translator... Translate the following text from ${sourceLang === 'auto' ? 'the auto-detected language' : sourceLang} into **${targetLang}**:\n---\n${text}\n---`.trim();
 }
+
 async function translateText(text, sourceLang, targetLang, jobField, model, useProxy, customProxyUrl, signal, customPrompt = '', temperature = 0.7) {
     const prompt = getPrompt(text, sourceLang, targetLang, jobField, customPrompt);
     return callGoogleAI(prompt, model, useProxy, customProxyUrl, signal, temperature);
 }
+
 async function enhanceText(text, action, targetLang, model, useProxy, customProxyUrl, signal, temperature = 0.7) {
     let actionInstruction = '';
     switch (action) {
@@ -589,12 +571,27 @@ async function enhanceText(text, action, targetLang, model, useProxy, customProx
         case 'expand':
             actionInstruction = `Expand on this text in ${targetLang}.`;
             break;
-        // ... (other cases)
+        case 'summarize':
+            actionInstruction = `Provide a summary in ${targetLang}.`;
+            break;
+        case 'formal':
+            actionInstruction = `Rewrite to be more formal in ${targetLang}.`;
+            break;
+        case 'informal':
+            actionInstruction = `Rewrite to be more informal in ${targetLang}.`;
+            break;
+        case 'poetic':
+            actionInstruction = `Rewrite to be more poetic in ${targetLang}.`;
+            break;
+        case 'simplify':
+            actionInstruction = `Simplify the language in ${targetLang}.`;
+            break;
         default: return text;
     }
     const prompt = `${actionInstruction}\n\n---\n${text}\n---`;
     return callGoogleAI(prompt, model, useProxy, customProxyUrl, signal, temperature);
 }
+
 // --- START: Progress & Cancellation ---
 function showProgress(label) { dom.progressContainer.classList.remove('hidden'); dom.progressLabel.textContent = label; updateProgress(0, 1); }
 function updateProgress(current, total) { const percentage = total > 0 ? Math.round((current / total) * 100) : 0; dom.progressBarInner.style.width = `${percentage}%`; dom.progressPercentage.textContent = `${percentage}%`; }
@@ -603,6 +600,7 @@ function cancelTranslation() { if (translationAbortController) {
     translationAbortController.abort();
     log('Cancellation request sent.', 'warn');
 } }
+
 // --- START: PDF Smart Translation ---
 async function translatePdfPagesRecursively(pagesToTranslate, translationOptions) {
     const { signal } = translationOptions;
@@ -630,6 +628,7 @@ async function translatePdfPagesRecursively(pagesToTranslate, translationOptions
         return [...firstHalf, ...secondHalf];
     }
 }
+
 // --- START: Subtitle Parsers & Editor ---
 function parseSrt(data) { const lines = []; const blocks = data.trim().replace(/\r\n/g, '\n').split(/\n\n+/); for (const block of blocks) {
     const blockLines = block.split('\n');
@@ -691,6 +690,7 @@ function parseSsaAss(data) { const sections = data.split(/\[(.*?)\]/); const res
     }
 } return result; }
 function reconstructSsaAss(parsedData, translatedLines) { const eventsHeader = `[Events]\n${parsedData.events.format}\n`; const eventLines = parsedData.events.lines.map((line, index) => `Dialogue: ${line.meta},${translatedLines[index] || line.text}`).join('\n'); let scriptInfoSection = parsedData.info ? `[Script Info]\n${parsedData.info}\n\n` : ''; let stylesSection = parsedData.styles ? `[V4+ Styles]\n${parsedData.styles}\n\n` : ''; return `${scriptInfoSection}${stylesSection}${eventsHeader}${eventLines}`; }
+
 function processAndDisplaySubtitles(fileContent, fileName, preservedTranslations = null) {
     try {
         if (fileContent) {
@@ -752,6 +752,7 @@ function processAndDisplaySubtitles(fileContent, fileName, preservedTranslations
         resetFileInput();
     }
 }
+
 async function renderSubtitleEditor(file) {
     currentFile = file;
     const fileContent = await fileToString(file);
@@ -772,11 +773,13 @@ async function renderSubtitleEditor(file) {
     }
     processAndDisplaySubtitles(fileContent, file.name);
 }
+
 // --- START: UI and Event Handlers ---
 function populateSelect(selectElement, options, defaultValue, filter = (opt) => true) {
     const translations = TRANSLATIONS[currentLanguage];
     selectElement.innerHTML = options.filter(filter).map(opt => `<option value="${opt.value}" ${opt.value === defaultValue ? 'selected' : ''}>${translations[opt.i18nKey] || opt.text}</option>`).join('');
 }
+
 function resetFileInput(shouldUpdateUI = true) {
     dom.fileUpload.value = '';
     dom.dropzonePrompt.classList.remove('hidden');
@@ -801,9 +804,9 @@ function resetFileInput(shouldUpdateUI = true) {
         updateUI();
     }
 }
-function swapLanguages() { const sourceVal = dom.sourceLangSelect.value; const targetVal = dom.targetLangSelect.value; if (sourceVal === 'auto')
-    return; dom.sourceLangSelect.value = targetVal; dom.targetLangSelect.value = sourceVal; validateForm(); if (dom.output.value)
-    dom.output.dir = RTL_LANGUAGES.has(dom.targetLangSelect.value) ? 'rtl' : 'ltr'; }
+
+function swapLanguages() { const sourceVal = dom.sourceLangSelect.value; const targetVal = dom.targetLangSelect.value; if (sourceVal === 'auto') return; dom.sourceLangSelect.value = targetVal; dom.targetLangSelect.value = sourceVal; validateForm(); if (dom.output.value) dom.output.dir = RTL_LANGUAGES.has(dom.targetLangSelect.value) ? 'rtl' : 'ltr'; }
+
 function validateForm() {
     let hasInput = false;
     const isApiKeyValid = dom.apiKeyInput.value.trim().length > 0;
@@ -824,15 +827,16 @@ function validateForm() {
         dom.breakLinesToggleBtn.disabled = !hasSubs || subtitleData.type === 'ass';
     }
     else if (currentMode === 'video') {
-        // Video form has its own validation and button
-        hasInput = false; // Prevents main translate button from enabling
+        hasInput = false; 
     }
     dom.translateBtn.disabled = !hasInput || !isApiKeyValid;
     dom.swapBtn.disabled = dom.sourceLangSelect.value === 'auto' || currentMode !== 'text';
 }
+
 function updateCharCounter() { const len = dom.textInput.value.length; dom.charCounter.textContent = `${len} / 5000`; dom.charCounter.classList.toggle('text-red-500', len > 5000); dom.charCounter.classList.toggle('dark:text-red-400', len > 5000); }
 function showError(message) { dom.errorDisplay.textContent = message; }
 function clearOutput() { dom.output.value = ''; dom.copyBtn.disabled = true; dom.exportTextBtn.disabled = true; dom.enhancementsToolbar.classList.add('hidden', 'opacity-0', '-translate-y-2'); showError(''); }
+
 async function handleFileChange(event) {
     const file = event.target.files[0];
     if (!file) {
@@ -864,6 +868,7 @@ async function handleFileChange(event) {
     }
     validateForm();
 }
+
 async function renderPdf(file) {
     try {
         log('Loading PDF...');
@@ -905,6 +910,7 @@ async function renderPdf(file) {
         dom.pdfPageViewer.innerHTML = '<p class="text-center text-red-500 col-span-full">Failed to load PDF</p>';
     }
 }
+
 async function createPdfPageView(pageNum) {
     const page = await pdfDoc.getPage(pageNum);
     const viewport = page.getViewport({ scale: 1.2 });
@@ -927,6 +933,7 @@ async function createPdfPageView(pageNum) {
     pageContainer.addEventListener('click', () => togglePageSelection(pageNum));
     return pageContainer;
 }
+
 function togglePageSelection(pageNumber) { const thumbElement = dom.pdfPageViewer.querySelector(`.pdf-page-item[data-page-number="${pageNumber}"]`); if (selectedPages.has(pageNumber)) {
     selectedPages.delete(pageNumber);
     thumbElement?.classList.remove('selected');
@@ -935,6 +942,7 @@ else {
     selectedPages.add(pageNumber);
     thumbElement?.classList.add('selected');
 } updatePageSelectionCounter(); validateForm(); }
+
 function updatePageSelectionCounter() {
     const translations = TRANSLATIONS[currentLanguage];
     if (!translations)
@@ -945,6 +953,7 @@ function updatePageSelectionCounter() {
     const timeEstimate = Math.round(count * delay);
     dom.batchWarning.textContent = count > 1 && !dom.combinePagesCheckbox.checked ? (translations.pdfBatchWarning || '').replace('{seconds}', String(timeEstimate)) : '';
 }
+
 async function handleFormSubmit(event) {
     event.preventDefault();
     if (dom.translateBtn.disabled)
@@ -988,7 +997,7 @@ async function handleFormSubmit(event) {
             if (currentMode === 'text') {
                 textToTranslate = dom.textInput.value.trim();
             }
-            else { // Image mode
+            else { 
                 if (!currentFile)
                     throw new Error("Please select an image file.");
                 dom.output.value = 'Extracting text from image...';
@@ -1029,6 +1038,7 @@ async function handleFormSubmit(event) {
         translationAbortController = null;
     }
 }
+
 async function handleEnhancement(action) {
     const currentText = dom.output.value;
     if (!currentText) {
@@ -1058,8 +1068,10 @@ async function handleEnhancement(action) {
         translationAbortController = null;
     }
 }
+
 // --- START: Local Storage and Settings ---
-const LS_SETTINGS_KEY = 'fluentify_settings_v9';
+const LS_SETTINGS_KEY = 'fluentify_settings_v10';
+
 function saveSettings() {
     if (!dom.saveSettingsCheckbox.checked) {
         localStorage.removeItem(LS_SETTINGS_KEY);
@@ -1086,6 +1098,7 @@ function saveSettings() {
     };
     localStorage.setItem(LS_SETTINGS_KEY, JSON.stringify(settings));
 }
+
 function loadSettings() {
     try {
         const savedSettings = localStorage.getItem(LS_SETTINGS_KEY);
@@ -1094,7 +1107,7 @@ function loadSettings() {
             dom.apiKeyInput.value = settings.apiKey || '';
             dom.modelSelect.value = settings.model || DEFAULT_WEB_MODEL;
             dom.sourceLangSelect.value = settings.sourceLang || 'auto';
-            dom.targetLangSelect.value = settings.targetLang || 'Persian (Farsi)';
+            dom.targetLangSelect.value = settings.targetLang || 'Persian';
             dom.jobFieldSelect.value = settings.jobField || 'None';
             dom.translationToneSelect.value = settings.translationTone || 'Default';
             dom.customToneInput.value = settings.customTone || '';
@@ -1116,6 +1129,10 @@ function loadSettings() {
             applyTheme(prefersDark ? 'dark' : 'light');
             dom.customProxyInput.value = DEFAULT_PROXY_URL;
             currentLanguage = navigator.language.startsWith('fa') ? 'fa' : (navigator.language.startsWith('ru') ? 'ru' : 'en');
+            
+            // Force Persian as the default target language for new visitors
+            dom.sourceLangSelect.value = 'auto';
+            dom.targetLangSelect.value = 'Persian';
         }
     }
     catch (e) {
@@ -1123,15 +1140,17 @@ function loadSettings() {
         localStorage.removeItem(LS_SETTINGS_KEY);
     }
 }
+
 // --- START: Theme Management ---
 function applyTheme(theme) { dom.html.classList.toggle('dark', theme === 'dark'); dom.themeIconLight.classList.toggle('hidden', theme === 'dark'); dom.themeIconDark.classList.toggle('hidden', theme !== 'dark'); }
 function toggleTheme() { const newTheme = dom.html.classList.contains('dark') ? 'light' : 'dark'; applyTheme(newTheme); saveSettings(); }
+
 // --- START: Helper Functions ---
 function fileToString(file) { return new Promise((resolve, reject) => { const reader = new FileReader(); reader.readAsText(file); reader.onload = () => resolve(reader.result); reader.onerror = (error) => reject(error); }); }
 function fileToBase64(file) { return new Promise((resolve, reject) => { const reader = new FileReader(); reader.readAsDataURL(file); reader.onload = () => resolve(reader.result.split(',')[1]); reader.onerror = (error) => reject(error); }); }
 async function calculateFileHash(file) { const buffer = await file.arrayBuffer(); const hashBuffer = await crypto.subtle.digest('SHA-256', buffer); const hashArray = Array.from(new Uint8Array(hashBuffer)); return hashArray.map(b => b.toString(16).padStart(2, '0')).join(''); }
-function copyToClipboard() { if (!dom.output.value)
-    return; navigator.clipboard.writeText(dom.output.value).then(() => { dom.copyIconDefault.classList.add('hidden'); dom.copyIconSuccess.classList.remove('hidden'); setTimeout(() => { dom.copyIconDefault.classList.remove('hidden'); dom.copyIconSuccess.classList.add('hidden'); }, 2000); }).catch(err => { console.error('Failed to copy text:', err); showError('Could not copy text.'); }); }
+function copyToClipboard() { if (!dom.output.value) return; navigator.clipboard.writeText(dom.output.value).then(() => { dom.copyIconDefault.classList.add('hidden'); dom.copyIconSuccess.classList.remove('hidden'); setTimeout(() => { dom.copyIconDefault.classList.remove('hidden'); dom.copyIconSuccess.classList.add('hidden'); }, 2000); }).catch(err => { console.error('Failed to copy text:', err); showError('Could not copy text.'); }); }
+
 function exportOutput() {
     let content = dom.output.value;
     let filename = 'translation.txt';
@@ -1174,9 +1193,11 @@ function exportOutput() {
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
 }
+
 function parseVideoIdFromUrl(url) { const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/; const match = url.match(regex); return match ? match[1] : null; }
 function formatSrtTimestamp(totalSeconds) { const hours = Math.floor(totalSeconds / 3600), minutes = Math.floor((totalSeconds % 3600) / 60), seconds = Math.floor(totalSeconds % 60), milliseconds = Math.round((totalSeconds - Math.floor(totalSeconds)) * 1000); const pad = (num, len = 2) => String(num).padStart(len, '0'); return `${pad(hours)}:${pad(minutes)}:${pad(seconds)},${pad(milliseconds, 3)}`; }
 function generateSrtFromYT(subtitles) { return subtitles.map((line, index) => { const startSeconds = parseFloat(line.start); const endSeconds = startSeconds + parseFloat(line.dur); const startTime = formatSrtTimestamp(startSeconds); const endTime = formatSrtTimestamp(endSeconds); return `${index + 1}\n${startTime} --> ${endTime}\n${line.text}\n`; }).join('\n'); }
+
 async function handleFetchYouTubeSubs() {
     const url = dom.youtubeUrlInput.value;
     const videoId = parseVideoIdFromUrl(url);
@@ -1228,6 +1249,7 @@ async function handleFetchYouTubeSubs() {
         dom.fetchYoutubeSubsBtn.disabled = false;
     }
 }
+
 async function startSubtitleTranslation(rowFilter) {
     translationAbortController = new AbortController();
     const { signal } = translationAbortController;
@@ -1294,6 +1316,7 @@ async function startSubtitleTranslation(rowFilter) {
         dom.retryFailedSubsBtn.classList.toggle('hidden', failedRows.length === 0);
     }
 }
+
 // --- START: Subtitle Editor Tools ---
 function highlightMatchesInSubtitles() { const findText = dom.findInput.value; const isCaseSensitive = dom.findCaseSensitive.checked; const flags = isCaseSensitive ? 'g' : 'gi'; const regex = new RegExp(findText.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), flags); dom.subtitleTableBody.querySelectorAll('td.translated-text').forEach(cell => { const originalText = cell.textContent; if (findText) {
     cell.innerHTML = originalText.replace(regex, match => `<mark>${match}</mark>`);
@@ -1301,6 +1324,7 @@ function highlightMatchesInSubtitles() { const findText = dom.findInput.value; c
 else {
     cell.innerHTML = originalText;
 } }); }
+
 function handleReplaceAllInSubtitles() { const findText = dom.findInput.value; if (!findText) {
     showError("Please enter text to find.");
     return;
@@ -1308,8 +1332,10 @@ function handleReplaceAllInSubtitles() { const findText = dom.findInput.value; i
     cell.textContent = cell.textContent.replace(regex, replaceText);
     replacements++;
 } }); log(`Replaced ${replacements} instance(s).`, 'success'); dom.findInput.value = ''; highlightMatchesInSubtitles(); saveCurrentSubtitleProgress(); }
+
 function timeToMs(time) { const parts = time.split(/[:,.]/); return parseInt(parts[0], 10) * 3600000 + parseInt(parts[1], 10) * 60000 + parseInt(parts[2], 10) * 1000 + parseInt(parts[3], 10); }
 function msToTime(ms, isVTT) { const d = new Date(ms); const pad = (n) => n.toString().padStart(2, '0'); const padMs = (n) => n.toString().padStart(3, '0'); const separator = isVTT ? '.' : ','; return `${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())}:${pad(d.getUTCSeconds())}${separator}${padMs(d.getUTCMilliseconds())}`; }
+
 function handleBreakLongLines() { if (!subtitleData || !subtitleData.lines)
     return; if (!confirm('This will permanently modify your subtitle data by splitting long lines. This action cannot be undone. Are you sure?'))
     return; const maxLength = parseInt(dom.breakLinesMaxChars.value, 10); if (isNaN(maxLength) || maxLength < 10) {
@@ -1333,8 +1359,10 @@ else {
 } if (subtitleData.type === 'srt') {
     newLines.forEach((line, index) => { line.id = index + 1; });
 } subtitleData.lines = newLines.map(({ translatedText, ...rest }) => rest); const newTranslations = newLines.map(line => line.translatedText); log(`Split complete. Total lines are now ${newLines.length}. Re-rendering table.`); processAndDisplaySubtitles(null, null, newTranslations); saveCurrentSubtitleProgress(); }
+
 function saveCurrentSubtitleProgress() { if (!currentFileHash || !subtitleData)
     return; const translatedLines = Array.from(dom.subtitleTableBody.querySelectorAll('tr')).map(row => row.cells[3].textContent); const progress = { originalFileName: currentFile.name, translations: translatedLines, }; localStorage.setItem(`fluentify_progress_${currentFileHash}`, JSON.stringify(progress)); log('Translation progress saved.', 'info'); }
+
 // --- START: VIDEO SUBTITLE GENERATOR ---
 const dom_video = {
     outputLanguageSelect: document.getElementById('video-gen-output-language'),
@@ -1392,10 +1420,11 @@ const dom_video = {
     localPlayer: document.getElementById('video-gen-local-video-player'),
     ytPlayerContainer: document.getElementById('video-gen-yt-player-container'),
 };
+
 let videoGen_finalSubtitleContent = '';
 let videoGen_abortController = null;
 let videoGen_exportAbortController = null;
-let videoGen_player = null; // For YT duration check
+let videoGen_player = null; 
 let videoGen_isYTAPILoaded = false;
 let videoGen_parsedSubtitles = [];
 let videoGen_subtitleSyncInterval = null;
@@ -1408,11 +1437,13 @@ let videoGen_uploadedFile = {
     fileObject: null,
 };
 window.onYouTubeIframeAPIReady = () => { videoGen_isYTAPILoaded = true; };
+
 function videoGen_populateLanguages() {
     const translations = TRANSLATIONS[currentLanguage];
     dom_video.outputLanguageSelect.innerHTML = LANGUAGES.map(lang => `<option value="${lang.value}">${translations[lang.i18nKey] || lang.text}</option>`).join('');
     dom_video.outputLanguageSelect.value = 'en';
 }
+
 function videoGen_setupEventListeners() {
     dom_video.generateBtn.addEventListener('click', videoGen_handleGeneration);
     dom_video.previewBtn.addEventListener('click', videoGen_toggleVideoPreview);
@@ -1445,6 +1476,7 @@ function videoGen_setupEventListeners() {
     dom_video.localPlayer.addEventListener('seeked', () => { videoGen_updateSubtitles(dom_video.localPlayer.currentTime); });
     dom_video.localPlayer.addEventListener('play', videoGen_onPlayerReady);
 }
+
 function videoGen_showStatus(message, type = 'info', isTransient = false) {
     dom_video.outputContainer.classList.remove('hidden');
     dom_video.statusContainer.classList.remove('hidden');
@@ -1467,12 +1499,12 @@ function videoGen_showStatus(message, type = 'info', isTransient = false) {
         }, 3000);
     }
 }
+
 function videoGen_toggleLoading(isLoading) {
     dom_video.generateBtn.disabled = isLoading;
     dom_video.spinner.classList.toggle('hidden', !isLoading);
     dom_video.btnText.classList.toggle('hidden', isLoading);
     dom_video.cancelBtn.classList.toggle('hidden', !isLoading);
-    // Disable form elements while loading
     dom_video.outputLanguageSelect.disabled = isLoading;
     dom_video.outputFormatSelect.disabled = isLoading;
     dom_video.youtubeUrlInput.disabled = isLoading;
@@ -1480,9 +1512,9 @@ function videoGen_toggleLoading(isLoading) {
     dom_video.directUrlInput.disabled = isLoading;
     Object.values(dom_video.tabButtons).forEach(btn => btn.disabled = isLoading);
 }
+
 function videoGen_copyToClipboard() {
-    if (!dom_video.subtitleOutput.value)
-        return;
+    if (!dom_video.subtitleOutput.value) return;
     navigator.clipboard.writeText(dom_video.subtitleOutput.value).then(() => {
         videoGen_showStatus('Copied to clipboard!', 'success', true);
     }).catch(err => {
@@ -1490,6 +1522,7 @@ function videoGen_copyToClipboard() {
         videoGen_showStatus('Could not copy text.', 'error');
     });
 }
+
 function videoGen_downloadSubtitleFile() {
     if (!videoGen_finalSubtitleContent) {
         videoGen_showStatus('No subtitle content to download.', 'warning');
@@ -1510,18 +1543,15 @@ function videoGen_downloadSubtitleFile() {
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
 }
+
 function videoGen_normalizeTimestamp(ts, format = 'srt') {
     const sep = format === 'vtt' ? '.' : ',';
-    if (!ts || typeof ts !== 'string')
-        return `00:00:00${sep}000`;
+    if (!ts || typeof ts !== 'string') return `00:00:00${sep}000`;
     const parts = ts.split(/[:.,]/).map(p => parseInt(p, 10) || 0);
     let h = 0, m = 0, s = 0, ms = 0;
-    if (parts.length === 4)
-        [h, m, s, ms] = parts;
-    else if (parts.length === 3)
-        [h, m, s] = parts;
-    else if (parts.length === 2)
-        [m, s] = parts;
+    if (parts.length === 4) [h, m, s, ms] = parts;
+    else if (parts.length === 3) [h, m, s] = parts;
+    else if (parts.length === 2) [m, s] = parts;
     let totalMs = h * 3600000 + m * 60000 + s * 1000 + ms;
     const nH = Math.floor(totalMs / 3600000);
     totalMs %= 3600000;
@@ -1530,20 +1560,15 @@ function videoGen_normalizeTimestamp(ts, format = 'srt') {
     const nS = Math.floor(totalMs / 1000);
     return `${String(nH).padStart(2, '0')}:${String(nM).padStart(2, '0')}:${String(nS).padStart(2, '0')}${sep}${String(totalMs % 1000).padStart(3, '0')}`;
 }
+
 function videoGen_filterAndValidateSubtitles(data) {
-    if (!Array.isArray(data)) {
-        return [];
-    }
-    // Filter for basic structural validity and positive duration
+    if (!Array.isArray(data)) return [];
     const validItems = data.filter(item => {
-        if (!item || typeof item.text !== 'string' || !item.startTime || !item.endTime) {
-            return false;
-        }
+        if (!item || typeof item.text !== 'string' || !item.startTime || !item.endTime) return false;
         const startTimeSec = videoGen_timeStringToSeconds(item.startTime);
         const endTimeSec = videoGen_timeStringToSeconds(item.endTime);
         return endTimeSec > startTimeSec;
     });
-    // Sort by start time to correct any model-induced ordering issues
     validItems.sort((a, b) => {
         const aStart = videoGen_timeStringToSeconds(a.startTime);
         const bStart = videoGen_timeStringToSeconds(b.startTime);
@@ -1551,9 +1576,9 @@ function videoGen_filterAndValidateSubtitles(data) {
     });
     return validItems;
 }
+
 function videoGen_formatSubtitlesFromJSON(data, format) {
-    if (!Array.isArray(data))
-        return "Error: Invalid subtitle data.";
+    if (!Array.isArray(data)) return "Error: Invalid subtitle data.";
     switch (format) {
         case 'srt': return data.map((item, i) => `${i + 1}\n${videoGen_normalizeTimestamp(item.startTime, 'srt')} --> ${videoGen_normalizeTimestamp(item.endTime, 'srt')}\n${(item.text || "").trim()}`).join('\n\n');
         case 'vtt': return "WEBVTT\n\n" + data.map(item => `${videoGen_normalizeTimestamp(item.startTime, 'vtt')} --> ${videoGen_normalizeTimestamp(item.endTime, 'vtt')}\n${(item.text || "").trim()}`).join('\n\n');
@@ -1561,6 +1586,7 @@ function videoGen_formatSubtitlesFromJSON(data, format) {
         default: return "Unsupported format";
     }
 }
+
 async function videoGen_handleGeneration() {
     apiKeyManager.refreshKeys();
     if (apiKeyManager.keys.length === 0) {
@@ -1595,9 +1621,9 @@ async function videoGen_handleGeneration() {
         videoGen_showStatus('No valid video source selected.', 'error');
         return;
     }
+
     videoGen_abortController = new AbortController();
     const { signal } = videoGen_abortController;
-    // Reset UI for new generation
     dom_video.outputContainer.classList.remove('hidden');
     dom_video.statusContainer.classList.add('hidden');
     dom_video.resultsWrapper.classList.add('hidden');
@@ -1613,6 +1639,7 @@ async function videoGen_handleGeneration() {
     dom_video.progressStatus.textContent = 'Initializing...';
     dom_video.progressPercentage.textContent = `0%`;
     videoGen_showStatus('Sending request to Gemini API...', 'info');
+
     const model = dom.modelSelect.value;
     const useProxy = dom.useProxyCheckbox.checked;
     const customProxyUrl = dom.customProxyInput.value.trim();
@@ -1628,7 +1655,7 @@ async function videoGen_handleGeneration() {
         contents: [{ "role": "user", "parts": [videoPart, { "text": promptText }] }],
         generationConfig: { "responseMimeType": "application/json", "responseSchema": responseSchema }
     };
-    let key = apiKeyManager.getNextKey();
+    let key = apiKeyManager.getCurrentKey();
     if (!key) {
         videoGen_showStatus("API Key not found.", 'error');
         videoGen_toggleLoading(false);
@@ -1637,6 +1664,7 @@ async function videoGen_handleGeneration() {
     const directApiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${model}:streamGenerateContent?alt=sse&key=${key}`;
     const API_URL = useProxy ? customProxyUrl : directApiUrl;
     const finalRequestBody = useProxy ? { endpoint: directApiUrl, ...baseRequestBody } : baseRequestBody;
+
     try {
         const response = await fetch(API_URL, {
             method: 'POST',
@@ -1654,6 +1682,9 @@ async function videoGen_handleGeneration() {
                 throw new Error(`API Error (${response.status}): ${errText}`);
             }
         }
+        
+        apiKeyManager.rotateKey();
+
         dom_video.progressStatus.textContent = 'Receiving response...';
         dom_video.progressBar.style.width = '20%';
         dom_video.progressPercentage.textContent = '20%';
@@ -1662,8 +1693,7 @@ async function videoGen_handleGeneration() {
         let buffer = '', finalSubtitleJsonString = '';
         while (true) {
             const { done, value } = await reader.read();
-            if (done)
-                break;
+            if (done) break;
             buffer += decoder.decode(value, { stream: true });
             let lineEndIndex;
             while ((lineEndIndex = buffer.indexOf('\n')) >= 0) {
@@ -1675,13 +1705,10 @@ async function videoGen_handleGeneration() {
                         if (jsonText) {
                             const jsonChunk = JSON.parse(jsonText);
                             const textPart = jsonChunk?.candidates?.[0]?.content?.parts?.[0]?.text;
-                            if (textPart)
-                                finalSubtitleJsonString += textPart;
+                            if (textPart) finalSubtitleJsonString += textPart;
                         }
                     }
-                    catch (e) {
-                        console.warn("Skipping invalid JSON chunk:", line, e);
-                    }
+                    catch (e) { console.warn("Skipping invalid JSON chunk:", line, e); }
                 }
             }
             const progress = Math.min(90, 20 + (finalSubtitleJsonString.length / 500));
@@ -1724,6 +1751,7 @@ async function videoGen_handleGeneration() {
         setTimeout(() => { dom_video.progressContainer.classList.add('hidden'); }, 2000);
     }
 }
+
 function videoGen_switchTab(mode) {
     videoGen_currentInputMode = mode;
     Object.keys(dom_video.tabButtons).forEach(key => {
@@ -1736,47 +1764,42 @@ function videoGen_switchTab(mode) {
     dom_video.exportVideoBtn.title = 'Video export is only available for uploaded files.';
     videoGen_destroyPlayers();
     dom_video.durationContainer.classList.add('hidden');
-    if (mode === 'youtube' && dom_video.youtubeUrlInput.value)
-        videoGen_handleUrlInputChange();
-    if (mode === 'url' && dom_video.directUrlInput.value)
-        videoGen_handleDirectUrlChange();
+    if (mode === 'youtube' && dom_video.youtubeUrlInput.value) videoGen_handleUrlInputChange();
+    if (mode === 'url' && dom_video.directUrlInput.value) videoGen_handleDirectUrlChange();
 }
+
 function videoGen_validateYouTubeUrl() {
     const url = dom_video.youtubeUrlInput.value.trim();
-
-    // Regex to match YouTube videos, shorts, live, playlists, clips, embeds, and youtu.be links
     const youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com\/(watch\?v=|embed\/|shorts\/|live\/|playlist\?list=|clip\/)|youtu\.be\/)[\w-]{11,}/;
-
     const isValid = url && youtubeRegex.test(url);
     dom_video.urlError.classList.toggle('hidden', isValid || !url);
     return isValid;
 }
+
 function videoGen_formatDuration(seconds) {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = Math.floor(seconds % 60);
     return `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
 }
+
 function videoGen_getVideoDuration(source) {
     const video = document.createElement('video');
     video.preload = 'metadata';
     video.onloadedmetadata = () => {
-        if (video.src.startsWith('blob:'))
-            window.URL.revokeObjectURL(video.src);
+        if (video.src.startsWith('blob:')) window.URL.revokeObjectURL(video.src);
         if (video.duration && isFinite(video.duration)) {
             dom_video.videoDurationInput.value = videoGen_formatDuration(video.duration);
             dom_video.durationContainer.classList.remove('hidden');
         }
     };
     video.onerror = () => {
-        if (video.src.startsWith('blob:'))
-            window.URL.revokeObjectURL(video.src);
+        if (video.src.startsWith('blob:')) window.URL.revokeObjectURL(video.src);
         videoGen_showStatus('Could not get video duration.', 'warning');
     };
-    if (source instanceof File)
-        video.src = URL.createObjectURL(source);
-    else
-        video.src = source;
+    if (source instanceof File) video.src = URL.createObjectURL(source);
+    else video.src = source;
 }
+
 function videoGen_getYouTubeVideoDuration(videoId) {
     if (!videoGen_isYTAPILoaded) {
         setTimeout(() => videoGen_getYouTubeVideoDuration(videoId), 500);
@@ -1798,13 +1821,11 @@ function videoGen_getYouTubeVideoDuration(videoId) {
                 event.target.destroy();
                 videoGen_player = null;
             },
-            'onError': () => { if (videoGen_player) {
-                videoGen_player.destroy();
-                videoGen_player = null;
-            } }
+            'onError': () => { if (videoGen_player) { videoGen_player.destroy(); videoGen_player = null; } }
         }
     });
 }
+
 function videoGen_handleUrlInputChange() {
     const url = dom_video.youtubeUrlInput.value.trim();
     if (videoGen_validateYouTubeUrl()) {
@@ -1813,15 +1834,14 @@ function videoGen_handleUrlInputChange() {
             dom_video.durationContainer.classList.add('hidden');
             videoGen_getYouTubeVideoDuration(match[1]);
         }
-    }
-    else {
+    } else {
         dom_video.durationContainer.classList.add('hidden');
     }
 }
+
 function videoGen_handleFileUpload(event) {
     const file = event.target.files[0];
-    if (!file)
-        return;
+    if (!file) return;
     dom_video.youtubeUrlInput.value = '';
     dom_video.directUrlInput.value = '';
     videoGen_uploadedFile.name = file.name;
@@ -1836,18 +1856,19 @@ function videoGen_handleFileUpload(event) {
     reader.onerror = () => { videoGen_showStatus('Error reading the selected file.', 'error'); videoGen_uploadedFile.base64 = null; };
     reader.readAsDataURL(file);
 }
+
 function videoGen_handleDirectUrlChange() {
     const url = dom_video.directUrlInput.value.trim();
-    if (!url)
-        return;
+    if (!url) return;
     dom_video.youtubeUrlInput.value = '';
     dom_video.videoUploadInput.value = '';
     dom_video.fileUploadText.textContent = 'Click to choose a video file';
     videoGen_uploadedFile = { base64: null, mimeType: null, name: null, fileObject: null };
     videoGen_getVideoDuration(url);
 }
+
 function videoGen_toggleVideoPreview() {
-    if (dom_video.videoPreview.classList.contains('hidden')) { // SHOW PLAYER
+    if (dom_video.videoPreview.classList.contains('hidden')) {
         if (videoGen_currentInputMode === 'youtube') {
             const url = dom_video.youtubeUrlInput.value.trim();
             if (!videoGen_validateYouTubeUrl()) {
@@ -1858,8 +1879,7 @@ function videoGen_toggleVideoPreview() {
             if (match && match[1]) {
                 videoGen_setupYouTubePlayer(match[1]);
                 dom_video.previewBtn.innerHTML = '<i class="fa-solid fa-eye-slash w-4"></i>';
-            }
-            else {
+            } else {
                 videoGen_showStatus('Could not extract video ID from URL', 'error');
             }
         }
@@ -1872,11 +1892,12 @@ function videoGen_toggleVideoPreview() {
             dom_video.previewBtn.innerHTML = '<i class="fa-solid fa-eye-slash w-4"></i>';
         }
     }
-    else { // HIDE PLAYER
+    else {
         videoGen_destroyPlayers();
         dom_video.previewBtn.innerHTML = '<i class="fa-solid fa-play w-4"></i>';
     }
 }
+
 function videoGen_setupYouTubePlayer(videoId) {
     videoGen_destroyPlayers();
     dom_video.videoPreview.classList.remove('hidden');
@@ -1888,6 +1909,7 @@ function videoGen_setupYouTubePlayer(videoId) {
         events: { 'onReady': videoGen_onPlayerReady, 'onStateChange': videoGen_onPlayerStateChange }
     });
 }
+
 function videoGen_setupLocalPlayer(file) {
     videoGen_destroyPlayers();
     dom_video.videoPreview.classList.remove('hidden');
@@ -1897,6 +1919,7 @@ function videoGen_setupLocalPlayer(file) {
     dom_video.localPlayer.src = fileURL;
     videoGen_onPlayerReady();
 }
+
 function videoGen_destroyPlayers() {
     if (videoGen_previewPlayer && typeof videoGen_previewPlayer.destroy === 'function') {
         videoGen_previewPlayer.destroy();
@@ -1910,29 +1933,25 @@ function videoGen_destroyPlayers() {
     }
     dom_video.localPlayer.classList.add('hidden');
     dom_video.ytPlayerContainer.classList.remove('hidden');
-    if (videoGen_subtitleSyncInterval)
-        clearInterval(videoGen_subtitleSyncInterval);
+    if (videoGen_subtitleSyncInterval) clearInterval(videoGen_subtitleSyncInterval);
     videoGen_subtitleSyncInterval = null;
     dom_video.videoPreview.classList.add('hidden');
     dom_video.subtitleText.innerHTML = '&nbsp;';
 }
+
 function videoGen_timeStringToSeconds(timeString) {
-    if (!timeString)
-        return 0;
+    if (!timeString) return 0;
     const [timePart, msPart] = timeString.split(/[,.]/);
-    if (!timePart)
-        return 0;
+    if (!timePart) return 0;
     const timeParts = timePart.split(':').map(Number);
     let seconds = 0;
-    if (timeParts.length === 3)
-        seconds = timeParts[0] * 3600 + timeParts[1] * 60 + timeParts[2];
-    else if (timeParts.length === 2)
-        seconds = timeParts[0] * 60 + timeParts[1];
+    if (timeParts.length === 3) seconds = timeParts[0] * 3600 + timeParts[1] * 60 + timeParts[2];
+    else if (timeParts.length === 2) seconds = timeParts[0] * 60 + timeParts[1];
     return seconds + (parseInt(msPart || '0', 10) / 1000);
 }
+
 function videoGen_parseSubtitlesForPlayback(content) {
-    if (!content)
-        return [];
+    if (!content) return [];
     const lines = content.trim().split(/\r?\n/);
     const subtitles = [];
     const startIndex = lines[0] && lines[0].toUpperCase().startsWith('WEBVTT') ? 1 : 0;
@@ -1955,16 +1974,16 @@ function videoGen_parseSubtitlesForPlayback(content) {
     }
     return subtitles;
 }
+
 function videoGen_updateSubtitles(currentTime) {
-    if (!videoGen_parsedSubtitles || videoGen_parsedSubtitles.length === 0)
-        return;
+    if (!videoGen_parsedSubtitles || videoGen_parsedSubtitles.length === 0) return;
     const currentSubtitle = videoGen_parsedSubtitles.find(sub => currentTime >= sub.start && currentTime <= sub.end);
     let newHtml = currentSubtitle && currentSubtitle.text
         ? currentSubtitle.text.split('<br>').map(line => `<div dir="auto"><span class="subtitle-line">${line}</span></div>`).join('')
         : '&nbsp;';
-    if (dom_video.subtitleText.innerHTML !== newHtml)
-        dom_video.subtitleText.innerHTML = newHtml;
+    if (dom_video.subtitleText.innerHTML !== newHtml) dom_video.subtitleText.innerHTML = newHtml;
 }
+
 function videoGen_onPlayerReady() {
     if (videoGen_parsedSubtitles && videoGen_parsedSubtitles.length > 0) {
         dom_video.subtitleOverlay.classList.remove('hidden');
@@ -1975,31 +1994,29 @@ function videoGen_onPlayerReady() {
     if (RTL_LANGUAGES.has(selectedLanguage)) {
         dom_video.subtitleOverlay.classList.add('text-right');
         dom_video.subtitleOverlay.classList.remove('text-center');
-    }
-    else {
+    } else {
         dom_video.subtitleOverlay.classList.remove('text-right');
         dom_video.subtitleOverlay.classList.add('text-center');
     }
 }
+
 function videoGen_onPlayerStateChange(event) {
     if (event.data === YT.PlayerState.PLAYING) {
-        if (videoGen_subtitleSyncInterval)
-            clearInterval(videoGen_subtitleSyncInterval);
+        if (videoGen_subtitleSyncInterval) clearInterval(videoGen_subtitleSyncInterval);
         videoGen_subtitleSyncInterval = window.setInterval(() => {
             if (videoGen_previewPlayer && typeof videoGen_previewPlayer.getCurrentTime === 'function') {
                 videoGen_updateSubtitles(videoGen_previewPlayer.getCurrentTime());
             }
         }, 100);
-    }
-    else {
+    } else {
         if (videoGen_subtitleSyncInterval) {
             clearInterval(videoGen_subtitleSyncInterval);
             videoGen_subtitleSyncInterval = null;
         }
-        if (event.data !== YT.PlayerState.PAUSED)
-            dom_video.subtitleText.innerHTML = '&nbsp;';
+        if (event.data !== YT.PlayerState.PAUSED) dom_video.subtitleText.innerHTML = '&nbsp;';
     }
 }
+
 function videoGen_toggleEditMode() {
     const isReadOnly = dom_video.subtitleOutput.readOnly;
     dom_video.subtitleOutput.readOnly = !isReadOnly;
@@ -2008,14 +2025,14 @@ function videoGen_toggleEditMode() {
     dom_video.subtitleOutput.classList.toggle('bg-slate-200', !isReadOnly);
     dom_video.subtitleOutput.classList.toggle('dark:bg-slate-700', !isReadOnly);
     dom_video.editBtn.innerHTML = `<i class="fa-solid ${!isReadOnly ? 'fa-save' : 'fa-edit'}"></i> ${!isReadOnly ? 'Save' : 'Edit'}`;
-    if (!isReadOnly)
-        dom_video.subtitleOutput.focus();
+    if (!isReadOnly) dom_video.subtitleOutput.focus();
     else {
         videoGen_finalSubtitleContent = dom_video.subtitleOutput.value;
         videoGen_parsedSubtitles = videoGen_parseSubtitlesForPlayback(videoGen_finalSubtitleContent);
         videoGen_showStatus('Subtitles updated locally', 'success', true);
     }
 }
+
 function videoGen_adjustTimestamps() {
     const offset = parseFloat(dom_video.offsetSecondsInput.value) || 0;
     const scale = parseFloat(dom_video.scaleFactorInput.value) || 1.0;
@@ -2028,9 +2045,9 @@ function videoGen_adjustTimestamps() {
     }
     dom_video.timestampModal.classList.add('hidden');
 }
+
 function videoGen_adjustTimestampsInContent(content, offset, scale) {
-    if (dom_video.outputFormatSelect.value === 'txt')
-        return content;
+    if (dom_video.outputFormatSelect.value === 'txt') return content;
     const timeToSeconds = (timeStr) => {
         const [timePart, msPart] = timeStr.split(/[,.]/);
         const timeSegments = timePart.split(':').map(Number);
@@ -2041,8 +2058,7 @@ function videoGen_adjustTimestampsInContent(content, offset, scale) {
         return (hours * 3600) + (minutes * 60) + seconds + (milliseconds / 1000);
     };
     const secondsToTime = (totalSeconds, separator = ',') => {
-        if (totalSeconds < 0)
-            totalSeconds = 0;
+        if (totalSeconds < 0) totalSeconds = 0;
         const hours = Math.floor(totalSeconds / 3600);
         const minutes = Math.floor((totalSeconds % 3600) / 60);
         const seconds = Math.floor(totalSeconds % 60);
@@ -2082,7 +2098,7 @@ async function videoGen_startVideoExport() {
     const signal = videoGen_exportAbortController.signal;
 
     dom_video.exportProgressContainer.classList.remove('hidden');
-    dom_video.resultsWrapper.classList.add('hidden'); // Hide the main results buttons
+    dom_video.resultsWrapper.classList.add('hidden'); 
     
     const updateExportProgress = (percentage) => {
         const p = Math.min(100, Math.max(0, Math.round(percentage)));
@@ -2127,7 +2143,6 @@ async function videoGen_startVideoExport() {
         
         const canvasStream = canvas.captureStream(30);
 
-        // Use Web Audio API for robust audio capture
         const audioContext = new AudioContext();
         const sourceNode = audioContext.createMediaElementSource(video);
         const destinationNode = audioContext.createMediaStreamDestination();
@@ -2175,7 +2190,7 @@ async function videoGen_startVideoExport() {
             cleanup();
         };
         
-        video.volume = 0; // Use volume=0 instead of muted=true to ensure audio is captured
+        video.volume = 0; 
         await video.play();
         mediaRecorder.start();
 
@@ -2237,11 +2252,10 @@ async function videoGen_startVideoExport() {
 
 // --- START: App Initialization ---
 function init() {
-    // Populate static dropdowns first
     dom.modelSelect.innerHTML = MODELS.map(model => `<option value="${model}">${model}</option>`).join('');
     loadSettings();
     setLanguage(currentLanguage);
-    // Main event listeners
+
     document.querySelectorAll('[data-mode]').forEach(btn => btn.addEventListener('click', () => {
         currentMode = btn.dataset.mode;
         currentView = 'translation';
@@ -2257,6 +2271,7 @@ function init() {
         }
         updateUI();
     }));
+
     dom.swapBtn.addEventListener('click', swapLanguages);
     dom.textInput.addEventListener('input', () => { updateCharCounter(); validateForm(); });
     dom.sourceLangSelect.addEventListener('change', () => {
@@ -2277,7 +2292,7 @@ function init() {
     dom.themeToggleBtn.addEventListener('click', toggleTheme);
     dom.apiKeyInput.addEventListener('input', validateForm);
     dom.languageSearch.addEventListener('input', filterAndRepopulateLanguages);
-    // File input listeners
+
     dom.dropzoneContainer.addEventListener('dragover', (e) => { e.preventDefault(); e.stopPropagation(); dom.dropzoneContainer.classList.add('bg-slate-200', 'dark:bg-slate-600'); });
     dom.dropzoneContainer.addEventListener('dragleave', (e) => { e.preventDefault(); e.stopPropagation(); dom.dropzoneContainer.classList.remove('bg-slate-200', 'dark:bg-slate-600'); });
     dom.dropzoneContainer.addEventListener('drop', (e) => {
@@ -2293,14 +2308,13 @@ function init() {
     dom.chooseFileBtn.addEventListener('click', () => dom.fileUpload.click());
     dom.fileUpload.addEventListener('change', handleFileChange);
     dom.removeFileBtn.addEventListener('click', () => resetFileInput());
-    // PDF listeners
-    dom.selectAllPagesBtn.addEventListener('click', () => { if (!pdfDoc)
-        return; selectedPages = new Set(Array.from({ length: pdfDoc.numPages }, (_, i) => i + 1)); dom.pdfPageViewer.querySelectorAll('.pdf-page-item').forEach(el => el.classList.add('selected')); updatePageSelectionCounter(); validateForm(); });
+
+    dom.selectAllPagesBtn.addEventListener('click', () => { if (!pdfDoc) return; selectedPages = new Set(Array.from({ length: pdfDoc.numPages }, (_, i) => i + 1)); dom.pdfPageViewer.querySelectorAll('.pdf-page-item').forEach(el => el.classList.add('selected')); updatePageSelectionCounter(); validateForm(); });
     dom.deselectAllPagesBtn.addEventListener('click', () => { selectedPages.clear(); dom.pdfPageViewer.querySelectorAll('.pdf-page-item').forEach(el => el.classList.remove('selected')); updatePageSelectionCounter(); validateForm(); });
     dom.combinePagesCheckbox.addEventListener('change', updatePageSelectionCounter);
-    // Subtitle listeners
+
     dom.fetchYoutubeSubsBtn.addEventListener('click', handleFetchYouTubeSubs);
-    // Subtitle Editor Tools listeners
+
     dom.retryFailedSubsBtn.addEventListener('click', () => startSubtitleTranslation(row => row.cells[3].textContent === '(Translation failed)'));
     dom.subtitleTableBody.addEventListener('input', saveCurrentSubtitleProgress);
     dom.findReplaceToggleBtn.addEventListener('click', () => dom.findReplacePanel.classList.toggle('hidden'));
@@ -2322,19 +2336,20 @@ function init() {
         dom.savedProgressNotification.classList.add('hidden');
         log('Cleared saved progress.', 'info');
     });
-    // Settings listeners
+
     dom.translationToneSelect.addEventListener('change', () => dom.customToneContainer.classList.toggle('hidden', dom.translationToneSelect.value !== 'Custom'));
     dom.temperatureSlider.addEventListener('input', () => dom.temperatureValue.textContent = dom.temperatureSlider.value);
     dom.useProxyCheckbox.addEventListener('change', () => dom.customProxyContainer.classList.toggle('hidden', !dom.useProxyCheckbox.checked));
     dom.useCustomPromptCheckbox.addEventListener('change', () => dom.customPromptContainer.classList.toggle('hidden', !dom.useCustomPromptCheckbox.checked));
+    
     document.querySelectorAll('#settings-view input, #settings-view select, #settings-view textarea').forEach(el => {
         el.addEventListener('change', saveSettings);
         el.addEventListener('input', saveSettings);
     });
+
     dom.optimizePromptBtn.addEventListener('click', async () => {
         const currentPrompt = dom.customPromptInput.value;
-        if (!currentPrompt)
-            return;
+        if (!currentPrompt) return;
         dom.optimizePromptBtnText.classList.add('hidden');
         dom.optimizePromptSpinner.classList.remove('hidden');
         dom.optimizePromptBtn.disabled = true;
@@ -2357,6 +2372,7 @@ function init() {
             dom.optimizePromptBtn.disabled = false;
         }
     });
+
     dom.logToggleBtn.addEventListener('click', () => {
         const icon = dom.logToggleBtn.querySelector('i');
         const isHidden = dom.logViewer.classList.contains('max-h-0');
@@ -2367,17 +2383,46 @@ function init() {
         }
         else {
             dom.logViewer.style.maxHeight = '0';
-            setTimeout(() => dom.logViewer.classList.add('max-h-0'), 500); // Wait for transition
+            setTimeout(() => dom.logViewer.classList.add('max-h-0'), 500); 
             icon.classList.remove('rotate-180');
         }
     });
     dom.languageSwitcher.addEventListener('change', (e) => setLanguage(e.target.value));
-    // Modal listeners
+
     dom.howToUseBtn.addEventListener('click', () => dom.howToUseModal.classList.remove('hidden'));
     dom.howToUseCloseBtn.addEventListener('click', () => dom.howToUseModal.classList.add('hidden'));
-    // Initialize Video Generator
+
+    // Inject Custom Reset Button Dynamically 
+    const resetBtn = document.createElement('button');
+    resetBtn.type = 'button';
+    resetBtn.className = 'w-full px-4 py-3 bg-white/20 dark:bg-black/20 backdrop-blur-md border border-slate-300/50 dark:border-slate-600/50 shadow-lg rounded-xl text-slate-800 dark:text-slate-200 hover:bg-white/30 dark:hover:bg-black/30 transition-all duration-300 mt-8 font-semibold flex items-center justify-center';
+    resetBtn.innerHTML = '<i class="fa-solid fa-rotate-left mr-2"></i> Reset Settings to Default (Keep API & Checkboxes)';
+    resetBtn.addEventListener('click', () => {
+        if (!confirm('Reset UI settings (Tone, Specialization, Model, etc.) to default? Your API keys and checkboxes will NOT be affected.')) return;
+        
+        dom.modelSelect.value = DEFAULT_WEB_MODEL;
+        dom.jobFieldSelect.value = 'None';
+        dom.translationToneSelect.value = 'Default';
+        dom.customToneInput.value = '';
+        dom.customToneContainer.classList.add('hidden');
+        dom.temperatureSlider.value = 0.7;
+        dom.temperatureValue.textContent = '0.7';
+        dom.requestDelayInput.value = 4;
+        
+        dom.sourceLangSelect.value = 'auto';
+        dom.targetLangSelect.value = 'Persian';
+        
+        saveSettings();
+        validateForm();
+        log('Settings reset to default. API keys and checkboxes kept intact.', 'info');
+    });
+
+    const settingsContainer = dom.settingsView.querySelector('.space-y-6') || dom.settingsView;
+    settingsContainer.appendChild(resetBtn);
+
     videoGen_setupEventListeners();
     updateUI();
     validateForm();
 }
+
 document.addEventListener('DOMContentLoaded', init);
