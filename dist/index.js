@@ -1116,6 +1116,10 @@ function loadSettings() {
             applyTheme(prefersDark ? 'dark' : 'light');
             dom.customProxyInput.value = DEFAULT_PROXY_URL;
             currentLanguage = navigator.language.startsWith('fa') ? 'fa' : (navigator.language.startsWith('ru') ? 'ru' : 'en');
+            
+            // Force Persian as the default target language for new visitors
+            dom.sourceLangSelect.value = 'auto';
+            dom.targetLangSelect.value = 'Persian';
         }
     }
     catch (e) {
