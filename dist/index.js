@@ -1060,7 +1060,7 @@ async function handleEnhancement(action) {
 }
 // --- START: Local Storage and Settings ---
 const LS_SETTINGS_KEY = 'fluentify_settings_v9';
-let currentDesign = 'classic'; // 'classic' or 'glassy'
+let currentDesign = 'classic'; // 'classic' or 'futuristic'
 function saveSettings() {
     if (!dom.saveSettingsCheckbox.checked) {
         localStorage.removeItem(LS_SETTINGS_KEY);
@@ -1092,6 +1092,10 @@ function saveSettings() {
 function loadSettings() {
     try {
         const savedSettings = localStorage.getItem(LS_SETTINGS_KEY);
+        // First populate the dropdowns with options
+        if (dom.modelSelect && dom.modelSelect.options.length === 0) {
+            dom.modelSelect.innerHTML = MODELS.map(model => `<option value="${model}">${model}</option>`).join('');
+        }
         if (savedSettings) {
             const settings = JSON.parse(savedSettings);
             dom.apiKeyInput.value = settings.apiKey || '';
@@ -1118,6 +1122,7 @@ function loadSettings() {
             if (dom.subtitleBatchSizeInput && settings.subtitleBatchSize) {
                 dom.subtitleBatchSizeInput.value = settings.subtitleBatchSize;
             }
+            log('Settings loaded successfully.', 'success');
         }
         else {
             // Default values for new users
@@ -1146,22 +1151,26 @@ function toggleTheme() { const newTheme = dom.html.classList.contains('dark') ? 
 function applyDesign(design) {
     currentDesign = design;
     const designToggleBtn = document.getElementById('design-toggle');
-    if (design === 'glassy') {
-        document.body.classList.add('glassy-theme');
+    if (design === 'futuristic') {
+        document.body.classList.add('futuristic-theme');
         if (designToggleBtn) {
             designToggleBtn.title = 'Switch to Classic Theme';
             designToggleBtn.innerHTML = '<i class="fas fa-desktop"></i>';
+            designToggleBtn.classList.remove('from-cyan-500', 'to-purple-500', 'hover:from-cyan-600', 'hover:to-purple-600');
+            designToggleBtn.classList.add('from-purple-600', 'to-pink-600', 'hover:from-purple-700', 'hover:to-pink-700');
         }
     } else {
-        document.body.classList.remove('glassy-theme');
+        document.body.classList.remove('futuristic-theme');
         if (designToggleBtn) {
-            designToggleBtn.title = 'Switch to Glassy iPhone Theme';
-            designToggleBtn.innerHTML = '<i class="fas fa-mobile-alt"></i>';
+            designToggleBtn.title = 'Switch to Futuristic Theme';
+            designToggleBtn.innerHTML = '<i class="fas fa-bolt"></i>';
+            designToggleBtn.classList.remove('from-purple-600', 'to-pink-600', 'hover:from-purple-700', 'hover:to-pink-700');
+            designToggleBtn.classList.add('from-cyan-500', 'to-purple-500', 'hover:from-cyan-600', 'hover:to-purple-600');
         }
     }
 }
 function toggleDesign() {
-    const newDesign = currentDesign === 'classic' ? 'glassy' : 'classic';
+    const newDesign = currentDesign === 'classic' ? 'futuristic' : 'classic';
     applyDesign(newDesign);
     saveSettings();
 }
@@ -2329,6 +2338,10 @@ async function videoGen_startVideoExport() {
 function init() {
     // Populate static dropdowns first
     dom.modelSelect.innerHTML = MODELS.map(model => `<option value="${model}">${model}</option>`).join('');
+    // Populate job field and translation tone dropdowns
+    const translations = TRANSLATIONS[currentLanguage];
+    dom.jobFieldSelect.innerHTML = JOB_FIELDS.map(opt => `<option value="${opt.value}">${translations[opt.i18nKey] || opt.text}</option>`).join('');
+    dom.translationToneSelect.innerHTML = TONES.map(opt => `<option value="${opt.value}">${translations[opt.i18nKey] || opt.text}</option>`).join('');
     loadSettings();
     setLanguage(currentLanguage);
     // Main event listeners
@@ -2483,15 +2496,3 @@ function init() {
     validateForm();
 }
 document.addEventListener('DOMContentLoaded', init);
-
-// Set default language values on load
-setTimeout(() => {
-    const sourceEl = document.querySelector('#source_lang');
-    const targetEl = document.querySelector('#target_lang');
-    if (sourceEl && !sourceEl.value) {
-        sourceEl.value = 'auto';
-    }
-    if (targetEl && (!targetEl.value || targetEl.value === 'Afrikaans')) {
-        targetEl.value = 'Persian';
-    }
-}, 100);
