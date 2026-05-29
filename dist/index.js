@@ -2260,8 +2260,8 @@ function init() {
     // Populate static dropdowns first
     dom.modelSelect.innerHTML = MODELS.map(model => `<option value="${model}">${model}</option>`).join('');
     loadSettings();
-    loadTranslationSettings();
     setLanguage(currentLanguage);
+    loadTranslationSettings();
     // Main event listeners
     document.querySelectorAll('[data-mode]').forEach(btn => btn.addEventListener('click', () => {
         currentMode = btn.dataset.mode;
@@ -2432,7 +2432,4 @@ function init() {
     updateUI();
     validateForm();
 }
-document.addEventListener('DOMContentLoaded', init);
-
-
 document.addEventListener('DOMContentLoaded', init);
