@@ -212,14 +212,15 @@ function updateUI() {
     // Show/hide main sections based on mode
     dom.textInputSection.classList.toggle('hidden', !isTextMode);
     dom.fileInputSection.classList.toggle('hidden', !isFileMode);
-    if (dom.videoGeneratorSection) dom.videoGeneratorSection.classList.toggle('hidden', !isVideoMode);
+    dom.videoGeneratorSection.classList.toggle('hidden', !isVideoMode);
     // Manage file input UI state
     if (isFileMode) {
         if (currentFile) {
             dom.dropzonePrompt.classList.add('hidden');
             dom.filePreviewContainer.classList.remove('hidden');
-            if (dom.imagePreview) dom.imagePreview.classList.toggle('hidden', !isImageMode);
-            if (dom.subtitlePreview) dom.subtitlePreview.classList.toggle('hidden', !isSubtitleMode);
+            // Toggle visibility of specific previews based on mode
+            dom.imagePreview.classList.toggle('hidden', !isImageMode);
+            dom.subtitlePreview.classList.toggle('hidden', !isSubtitleMode);
         }
         else {
             dom.dropzonePrompt.classList.remove('hidden');
@@ -260,7 +261,7 @@ function updateUI() {
 }
 // --- START: I1N & Language Switching ---
 function filterAndRepopulateLanguages() {
-    const searchTerm = dom.languageSearch ? dom.languageSearch.value.toLowerCase() : '';
+    const searchTerm = dom.languageSearch.value.toLowerCase();
     const translations = TRANSLATIONS[currentLanguage];
     const languageFilter = (opt) => {
         const translatedText = translations[opt.i18nKey] || opt.text;
@@ -443,8 +444,8 @@ async function callGoogleAI(prompt, model, useProxy, customProxyUrl, signal, tem
 }
 async function callGoogleAIBatch(itemsToTranslate, sourceLang, targetLang, jobField, model, useProxy, customProxyUrl, signal, temperature = 0.7) {
     log(`Starting batch translation for ${itemsToTranslate.length} lines...`);
-    const useCustomPrompt = dom.useCustomPromptCheckbox ? dom.useCustomPromptCheckbox.checked : false;
-    const customPromptText = dom.customPromptInput ? dom.customPromptInput.value.trim() : '';
+    const useCustomPrompt = dom.useCustomPromptCheckbox.checked;
+    const customPromptText = dom.customPromptInput.value.trim();
     let prompt;
     if (useCustomPrompt && customPromptText) {
         let finalCustomPrompt = customPromptText
@@ -554,7 +555,7 @@ async function extractTextFromPdfPage(pageNumber, ocrOptions) {
     return extractedText;
 }
 function getPrompt(text, sourceLang, targetLang, jobField, customPrompt) {
-    if (dom.useCustomPromptCheckbox && dom.useCustomPromptCheckbox.checked && customPrompt && customPrompt.trim()) {
+    if (dom.useCustomPromptCheckbox.checked && customPrompt && customPrompt.trim()) {
         log('Using custom prompt.');
         return customPrompt
             .replace(/\{text\}/g, text)
@@ -612,7 +613,7 @@ async function translatePdfPagesRecursively(pagesToTranslate, translationOptions
         return pagesToTranslate.map(p => ({ pageNum: p.pageNum, translatedText: "(No text found or page is empty)" }));
     }
     try {
-        const translatedText = await translateText(combinedText, 'auto', translationOptions.targetLang, translationOptions.jobField, translationOptions.model, translationOptions.useProxy, translationOptions.customProxyUrl, signal, dom.customPromptInput ? dom.customPromptInput.value : '', translationOptions.temperature);
+        const translatedText = await translateText(combinedText, 'auto', translationOptions.targetLang, translationOptions.jobField, translationOptions.model, translationOptions.useProxy, translationOptions.customProxyUrl, signal, dom.customPromptInput.value, translationOptions.temperature);
         const pageNumbers = pagesToTranslate.map(p => p.pageNum).join('-');
         return [{ pageNum: pageNumbers, translatedText: translatedText }];
     }
@@ -738,9 +739,9 @@ function processAndDisplaySubtitles(fileContent, fileName, preservedTranslations
         if (fileName) {
             dom.dropzonePrompt.classList.add('hidden');
             dom.filePreviewContainer.classList.remove('hidden');
-            if (dom.subtitlePreview) dom.subtitlePreview.classList.remove('hidden');
-            if (dom.imagePreview) dom.imagePreview.classList.add('hidden');
-            if (dom.subtitleFilename) dom.subtitleFilename.textContent = fileName;
+            dom.subtitlePreview.classList.remove('hidden');
+            dom.imagePreview.classList.add('hidden');
+            dom.subtitleFilename.textContent = fileName;
         }
         validateForm();
         updateUI();
@@ -756,11 +757,11 @@ async function renderSubtitleEditor(file) {
     const fileContent = await fileToString(file);
     currentFileHash = await calculateFileHash(file);
     const savedProgressRaw = localStorage.getItem(`fluentify_progress_${currentFileHash}`);
-    if (dom.savedProgressNotification) dom.savedProgressNotification.classList.add('hidden');
+    dom.savedProgressNotification.classList.add('hidden');
     if (savedProgressRaw) {
         try {
             const savedProgress = JSON.parse(savedProgressRaw);
-            if (savedProgress && savedProgress.translations && dom.savedProgressNotification) {
+            if (savedProgress && savedProgress.translations) {
                 dom.savedProgressNotification.classList.remove('hidden');
             }
         }
@@ -781,8 +782,8 @@ function resetFileInput(shouldUpdateUI = true) {
     dom.dropzonePrompt.classList.remove('hidden');
     dom.filePreviewContainer.classList.add('hidden');
     dom.imagePreview.src = '';
-    if (dom.subtitlePreview) dom.subtitlePreview.classList.add('hidden');
-    if (dom.subtitleFilename) dom.subtitleFilename.textContent = '';
+    dom.subtitlePreview.classList.add('hidden');
+    dom.subtitleFilename.textContent = '';
     dom.youtubeUrlInput.value = '';
     currentFile = null;
     currentFileHash = null;
@@ -792,7 +793,7 @@ function resetFileInput(shouldUpdateUI = true) {
     dom.subtitleTableBody.innerHTML = '';
     subtitleData = null;
     dom.savedProgressNotification.classList.add('hidden');
-    if (dom.retryFailedSubsBtn) dom.retryFailedSubsBtn.classList.add('hidden');
+    dom.retryFailedSubsBtn.classList.add('hidden');
     updatePageSelectionCounter();
     validateForm();
     clearOutput();
@@ -849,7 +850,7 @@ async function handleFileChange(event) {
         currentFile = file;
         dom.dropzonePrompt.classList.add('hidden');
         dom.filePreviewContainer.classList.remove('hidden');
-        if (dom.subtitlePreview) dom.subtitlePreview.classList.add('hidden');
+        dom.subtitlePreview.classList.add('hidden');
         dom.imagePreview.classList.remove('hidden');
         dom.imagePreview.src = URL.createObjectURL(file);
     }
@@ -942,7 +943,7 @@ function updatePageSelectionCounter() {
     dom.pageSelectionCounter.textContent = (translations.pdfPageCounter || '').replace('{count}', String(count));
     const delay = parseFloat(dom.requestDelayInput.value) || 2;
     const timeEstimate = Math.round(count * delay);
-    if (dom.batchWarning) dom.batchWarning.textContent = count > 1 && !dom.combinePagesCheckbox.checked ? (translations.pdfBatchWarning || '').replace('{seconds}', String(timeEstimate)) : '';
+    dom.batchWarning.textContent = count > 1 && !dom.combinePagesCheckbox.checked ? (translations.pdfBatchWarning || '').replace('{seconds}', String(timeEstimate)) : '';
 }
 async function handleFormSubmit(event) {
     event.preventDefault();
@@ -959,15 +960,16 @@ async function handleFormSubmit(event) {
     const targetLang = dom.targetLangSelect.value;
     const sourceLang = dom.sourceLangSelect.value;
     const jobField = dom.jobFieldSelect.value;
-    const useProxy = dom.useProxyCheckbox ? dom.useProxyCheckbox.checked : false;
-    const customProxyUrl = dom.customProxyInput ? dom.customProxyInput.value : '';
+    const useProxy = dom.useProxyCheckbox.checked;
+    const customProxyUrl = dom.customProxyInput.value;
     const temperature = dom.temperatureSlider.value;
+    try {
         if (currentMode === 'pdf') {
             const sortedPages = Array.from(selectedPages).sort((a, b) => a - b);
             showProgress(`${TRANSLATIONS[currentLanguage].progressLabelTranslating} ${sortedPages.length} pages...`);
             dom.output.value = `Extracting text from ${sortedPages.length} pages...`;
             const pageData = [];
-            const usePdfOcr = dom.pdfOcrCheckbox ? dom.pdfOcrCheckbox.checked : false;
+            const usePdfOcr = dom.pdfOcrCheckbox.checked;
             for (const pageNum of sortedPages) {
                 if (signal.aborted)
                     throw new Error("Translation cancelled.");
@@ -998,7 +1000,7 @@ async function handleFormSubmit(event) {
                 }
             }
             dom.output.value = TRANSLATIONS[currentLanguage].progressLabelTranslating;
-            dom.output.value = await translateText(textToTranslate, sourceLang, targetLang, jobField, model, useProxy, customProxyUrl, signal, dom.customPromptInput ? dom.customPromptInput.value : '', temperature);
+            dom.output.value = await translateText(textToTranslate, sourceLang, targetLang, jobField, model, useProxy, customProxyUrl, signal, dom.customPromptInput.value, temperature);
         }
         else if (currentMode === 'subtitle') {
             await startSubtitleTranslation(row => !row.cells[3].textContent.trim());
@@ -1040,8 +1042,8 @@ async function handleEnhancement(action) {
     } });
     translationAbortController = new AbortController();
     const model = dom.modelSelect.value;
-    const useProxy = dom.useProxyCheckbox ? dom.useProxyCheckbox.checked : false;
-    const customProxyUrl = dom.customProxyInput ? dom.customProxyInput.value : '';
+    const useProxy = dom.useProxyCheckbox.checked;
+    const customProxyUrl = dom.customProxyInput.value;
     const targetLang = dom.targetLangSelect.value;
     const temperature = dom.temperatureSlider.value;
     try {
@@ -1058,7 +1060,7 @@ async function handleEnhancement(action) {
 }
 // --- START: Local Storage and Settings ---
 const LS_SETTINGS_KEY = 'fluentify_settings_v9';
-let currentDesign = 'classic'; // 'classic' or 'glassy'
+let currentDesign = 'classic'; // 'classic' or 'futuristic'
 function saveSettings() {
     if (!dom.saveSettingsCheckbox.checked) {
         localStorage.removeItem(LS_SETTINGS_KEY);
@@ -1073,15 +1075,15 @@ function saveSettings() {
         jobField: dom.jobFieldSelect.value,
         theme: dom.html.classList.contains('dark') ? 'dark' : 'light',
         design: currentDesign,
-        useProxy: dom.useProxyCheckbox ? dom.useProxyCheckbox.checked : false,
-        customProxyUrl: dom.customProxyInput ? dom.customProxyInput.value : '',
-        useCustomPrompt: dom.useCustomPromptCheckbox ? dom.useCustomPromptCheckbox.checked : false,
-        customPrompt: dom.customPromptInput ? dom.customPromptInput.value : '',
+        useProxy: dom.useProxyCheckbox.checked,
+        customProxyUrl: dom.customProxyInput.value,
+        useCustomPrompt: dom.useCustomPromptCheckbox.checked,
+        customPrompt: dom.customPromptInput.value,
         temperature: dom.temperatureSlider.value,
         requestDelay: dom.requestDelayInput.value,
         translationTone: dom.translationToneSelect.value,
         customTone: dom.customToneInput.value,
-        pdfOcr: dom.pdfOcrCheckbox ? dom.pdfOcrCheckbox.checked : false,
+        pdfOcr: dom.pdfOcrCheckbox.checked,
         language: currentLanguage,
         subtitleBatchSize: dom.subtitleBatchSizeInput ? dom.subtitleBatchSizeInput.value : 100
     };
@@ -1107,14 +1109,14 @@ function loadSettings() {
             applyTheme(settings.theme || 'dark');
             currentDesign = settings.design || 'classic';
             applyDesign(currentDesign);
-            if (dom.useProxyCheckbox) dom.useProxyCheckbox.checked = settings.useProxy || false;
-            if (dom.customProxyInput) dom.customProxyInput.value = settings.customProxyUrl || DEFAULT_PROXY_URL;
-            if (dom.useCustomPromptCheckbox) dom.useCustomPromptCheckbox.checked = settings.useCustomPrompt || false;
-            if (dom.customPromptInput) dom.customPromptInput.value = settings.customPrompt || '';
+            dom.useProxyCheckbox.checked = settings.useProxy || false;
+            dom.customProxyInput.value = settings.customProxyUrl || DEFAULT_PROXY_URL;
+            dom.useCustomPromptCheckbox.checked = settings.useCustomPrompt || false;
+            dom.customPromptInput.value = settings.customPrompt || '';
             dom.temperatureSlider.value = settings.temperature || 0.7;
             dom.temperatureValue.textContent = settings.temperature || 0.7;
             dom.requestDelayInput.value = settings.requestDelay || 4;
-            if (dom.pdfOcrCheckbox) dom.pdfOcrCheckbox.checked = settings.pdfOcr || false;
+            dom.pdfOcrCheckbox.checked = settings.pdfOcr || false;
             dom.saveSettingsCheckbox.checked = true;
             currentLanguage = settings.language || 'en';
             if (dom.subtitleBatchSizeInput && settings.subtitleBatchSize) {
@@ -1126,7 +1128,7 @@ function loadSettings() {
             // Default values for new users
             const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
             applyTheme(prefersDark ? 'dark' : 'light');
-            if (dom.customProxyInput) dom.customProxyInput.value = DEFAULT_PROXY_URL;
+            dom.customProxyInput.value = DEFAULT_PROXY_URL;
             currentLanguage = navigator.language.startsWith('fa') ? 'fa' : (navigator.language.startsWith('ru') ? 'ru' : 'en');
             // Set default language values
             dom.sourceLangSelect.value = 'auto';
@@ -1143,72 +1145,58 @@ function loadSettings() {
     }
 }
 // --- START: Theme Management ---
-function applyTheme(theme) {
-    dom.html.classList.toggle('dark', theme === 'dark');
-    if (dom.themeToggleBtn) {
-        const icon = dom.themeToggleBtn.querySelector('i');
-        if (icon) {
-            icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
-        }
-    }
-    if (dom.themeIconLight) dom.themeIconLight.classList.toggle('hidden', theme === 'dark');
-    if (dom.themeIconDark) dom.themeIconDark.classList.toggle('hidden', theme !== 'dark');
-}
+function applyTheme(theme) { dom.html.classList.toggle('dark', theme === 'dark'); dom.themeIconLight.classList.toggle('hidden', theme === 'dark'); dom.themeIconDark.classList.toggle('hidden', theme !== 'dark'); }
 function toggleTheme() { const newTheme = dom.html.classList.contains('dark') ? 'light' : 'dark'; applyTheme(newTheme); saveSettings(); }
 // --- START: Design Management ---
 function applyDesign(design) {
     currentDesign = design;
     const designToggleBtn = document.getElementById('design-toggle');
-    if (design === 'glassy') {
-        document.body.classList.add('glassy-theme');
+    if (design === 'futuristic') {
+        document.body.classList.add('futuristic-theme');
         if (designToggleBtn) {
             designToggleBtn.title = 'Switch to Classic Theme';
             designToggleBtn.innerHTML = '<i class="fas fa-desktop"></i>';
+            designToggleBtn.classList.remove('from-cyan-500', 'to-purple-500', 'hover:from-cyan-600', 'hover:to-purple-600');
+            designToggleBtn.classList.add('from-purple-600', 'to-pink-600', 'hover:from-purple-700', 'hover:to-pink-700');
         }
     } else {
-        document.body.classList.remove('glassy-theme');
+        document.body.classList.remove('futuristic-theme');
         if (designToggleBtn) {
-            designToggleBtn.title = 'Switch to Glassy iPhone Theme';
-            designToggleBtn.innerHTML = '<i class="fas fa-gem"></i>';
+            designToggleBtn.title = 'Switch to Futuristic Theme';
+            designToggleBtn.innerHTML = '<i class="fas fa-bolt"></i>';
+            designToggleBtn.classList.remove('from-purple-600', 'to-pink-600', 'hover:from-purple-700', 'hover:to-pink-700');
+            designToggleBtn.classList.add('from-cyan-500', 'to-purple-500', 'hover:from-cyan-600', 'hover:to-purple-600');
         }
     }
 }
 function toggleDesign() {
-    const newDesign = currentDesign === 'classic' ? 'glassy' : 'classic';
+    const newDesign = currentDesign === 'classic' ? 'futuristic' : 'classic';
     applyDesign(newDesign);
     saveSettings();
 }
 // --- START: Reset and Clear Memory Functions ---
 function handleResetTranslationSettings() {
-    // Reset only: AI Model, Translation Specialization, Translation Tone, Custom Tone
-    dom.modelSelect.value = DEFAULT_WEB_MODEL;
-    dom.jobFieldSelect.value = 'None';
-    dom.translationToneSelect.value = 'Default';
+    // Reset specific translation settings to defaults
+    dom.modelSelect.selectedIndex = 0;
+    dom.jobFieldSelect.selectedIndex = 0;
+    dom.translationToneSelect.selectedIndex = 0;
     dom.customToneInput.value = '';
     dom.customToneContainer.classList.add('hidden');
-
-    // Update saved settings but keep other settings
+    // Clear saved translation settings from localStorage but keep other settings
     const settings = JSON.parse(localStorage.getItem(LS_SETTINGS_KEY) || '{}');
     settings.model = DEFAULT_WEB_MODEL;
     settings.jobField = 'None';
     settings.translationTone = 'Default';
     settings.customTone = '';
     localStorage.setItem(LS_SETTINGS_KEY, JSON.stringify(settings));
-
     log('Translation settings reset to defaults.', 'info');
-
+    // Show visual feedback
     const resetBtn = document.getElementById('reset-settings-btn');
     if (resetBtn) {
-        const originalHTML = resetBtn.innerHTML;
-        resetBtn.innerHTML = '<i class="fas fa-check-circle"></i> Reset Complete!';
-        resetBtn.style.background = '#10b981';
-        resetBtn.style.color = 'white';
-        resetBtn.style.borderColor = '#10b981';
+        const originalText = resetBtn.innerHTML;
+        resetBtn.innerHTML = '<i class="fas fa-check"></i> Reset Complete!';
         setTimeout(() => {
-            resetBtn.innerHTML = originalHTML;
-            resetBtn.style.background = '';
-            resetBtn.style.color = '';
-            resetBtn.style.borderColor = '';
+            resetBtn.innerHTML = originalText;
         }, 2000);
     }
 }
@@ -1242,7 +1230,7 @@ function fileToString(file) { return new Promise((resolve, reject) => { const re
 function fileToBase64(file) { return new Promise((resolve, reject) => { const reader = new FileReader(); reader.readAsDataURL(file); reader.onload = () => resolve(reader.result.split(',')[1]); reader.onerror = (error) => reject(error); }); }
 async function calculateFileHash(file) { const buffer = await file.arrayBuffer(); const hashBuffer = await crypto.subtle.digest('SHA-256', buffer); const hashArray = Array.from(new Uint8Array(hashBuffer)); return hashArray.map(b => b.toString(16).padStart(2, '0')).join(''); }
 function copyToClipboard() { if (!dom.output.value)
-    return; navigator.clipboard.writeText(dom.output.value).then(() => { if (dom.copyIconDefault && dom.copyIconSuccess) { dom.copyIconDefault.classList.add('hidden'); dom.copyIconSuccess.classList.remove('hidden'); setTimeout(() => { dom.copyIconDefault.classList.remove('hidden'); dom.copyIconSuccess.classList.add('hidden'); }, 2000); } }).catch(err => { console.error('Failed to copy text:', err); showError('Could not copy text.'); }); }
+    return; navigator.clipboard.writeText(dom.output.value).then(() => { dom.copyIconDefault.classList.add('hidden'); dom.copyIconSuccess.classList.remove('hidden'); setTimeout(() => { dom.copyIconDefault.classList.remove('hidden'); dom.copyIconSuccess.classList.add('hidden'); }, 2000); }).catch(err => { console.error('Failed to copy text:', err); showError('Could not copy text.'); }); }
 function exportOutput() {
     let content = dom.output.value;
     let filename = 'translation.txt';
@@ -1345,8 +1333,10 @@ async function startSubtitleTranslation(rowFilter) {
     const model = dom.modelSelect.value;
     const targetLang = dom.targetLangSelect.value;
     const jobField = dom.jobFieldSelect.value;
-    const useProxy = dom.useProxyCheckbox ? dom.useProxyCheckbox.checked : false;
-    const customProxyUrl = dom.customProxyInput ? dom.customProxyInput.value : '';
+    const useProxy = dom.useProxyCheckbox.checked;
+    const customProxyUrl = dom.customProxyInput.value;
+    const temperature = dom.temperatureSlider.value;
+    const allRows = Array.from(dom.subtitleTableBody.querySelectorAll('tr'));
     const rowsToTranslate = allRows.filter(rowFilter).map(row => ({
         row: row,
         targetCell: row.cells[3],
@@ -1400,7 +1390,7 @@ async function startSubtitleTranslation(rowFilter) {
     }
     finally {
         const failedRows = allRows.filter(row => row.cells[3].textContent === '(Translation failed)');
-        if (dom.retryFailedSubsBtn) dom.retryFailedSubsBtn.classList.toggle('hidden', failedRows.length === 0);
+        dom.retryFailedSubsBtn.classList.toggle('hidden', failedRows.length === 0);
     }
 }
 // --- START: Subtitle Editor Tools ---
@@ -1523,7 +1513,6 @@ function videoGen_populateLanguages() {
     dom_video.outputLanguageSelect.value = 'en';
 }
 function videoGen_setupEventListeners() {
-    if (!dom_video.generateBtn) return; // video gen section not present
     dom_video.generateBtn.addEventListener('click', videoGen_handleGeneration);
     dom_video.previewBtn.addEventListener('click', videoGen_toggleVideoPreview);
     dom_video.cancelBtn.addEventListener('click', () => {
@@ -1738,7 +1727,7 @@ async function videoGen_handleGeneration() {
         contents: [{ "role": "user", "parts": [videoPart, { "text": promptText }] }],
         generationConfig: { "responseMimeType": "application/json", "responseSchema": responseSchema }
     };
-    let key = apiKeyManager.getCurrentKey();
+    let key = apiKeyManager.getNextKey();
     if (!key) {
         videoGen_showStatus("API Key not found.", 'error');
         videoGen_toggleLoading(false);
@@ -2402,7 +2391,7 @@ function init() {
         clearMemoryBtn.addEventListener('click', handleClearBrowserMemory);
     }
     dom.apiKeyInput.addEventListener('input', validateForm);
-    if (dom.languageSearch) dom.languageSearch.addEventListener('input', filterAndRepopulateLanguages);
+    dom.languageSearch.addEventListener('input', filterAndRepopulateLanguages);
     // File input listeners
     dom.dropzoneContainer.addEventListener('dragover', (e) => { e.preventDefault(); e.stopPropagation(); dom.dropzoneContainer.classList.add('bg-slate-200', 'dark:bg-slate-600'); });
     dom.dropzoneContainer.addEventListener('dragleave', (e) => { e.preventDefault(); e.stopPropagation(); dom.dropzoneContainer.classList.remove('bg-slate-200', 'dark:bg-slate-600'); });
@@ -2427,51 +2416,50 @@ function init() {
     // Subtitle listeners
     dom.fetchYoutubeSubsBtn.addEventListener('click', handleFetchYouTubeSubs);
     // Subtitle Editor Tools listeners
-    if (dom.retryFailedSubsBtn) dom.retryFailedSubsBtn.addEventListener('click', () => startSubtitleTranslation(row => row.cells[3].textContent === '(Translation failed)'));
+    dom.retryFailedSubsBtn.addEventListener('click', () => startSubtitleTranslation(row => row.cells[3].textContent === '(Translation failed)'));
     dom.subtitleTableBody.addEventListener('input', saveCurrentSubtitleProgress);
-    if (dom.findReplaceToggleBtn && dom.findReplacePanel) dom.findReplaceToggleBtn.addEventListener('click', () => dom.findReplacePanel.classList.toggle('hidden'));
-    if (dom.breakLinesToggleBtn && dom.breakLinesPanel) dom.breakLinesToggleBtn.addEventListener('click', () => dom.breakLinesPanel.classList.toggle('hidden'));
-    if (dom.findInput) dom.findInput.addEventListener('input', highlightMatchesInSubtitles);
-    if (dom.findCaseSensitive) dom.findCaseSensitive.addEventListener('change', highlightMatchesInSubtitles);
-    if (dom.replaceAllBtn) dom.replaceAllBtn.addEventListener('click', handleReplaceAllInSubtitles);
-    if (dom.breakLinesApplyBtn) dom.breakLinesApplyBtn.addEventListener('click', handleBreakLongLines);
-    if (dom.loadProgressBtn) dom.loadProgressBtn.addEventListener('click', () => {
+    dom.findReplaceToggleBtn.addEventListener('click', () => dom.findReplacePanel.classList.toggle('hidden'));
+    dom.breakLinesToggleBtn.addEventListener('click', () => dom.breakLinesPanel.classList.toggle('hidden'));
+    dom.findInput.addEventListener('input', highlightMatchesInSubtitles);
+    dom.findCaseSensitive.addEventListener('change', highlightMatchesInSubtitles);
+    dom.replaceAllBtn.addEventListener('click', handleReplaceAllInSubtitles);
+    dom.breakLinesApplyBtn.addEventListener('click', handleBreakLongLines);
+    dom.loadProgressBtn.addEventListener('click', () => {
         const savedProgressRaw = localStorage.getItem(`fluentify_progress_${currentFileHash}`);
         if (savedProgressRaw) {
             const savedProgress = JSON.parse(savedProgressRaw);
             processAndDisplaySubtitles(null, null, savedProgress.translations);
-            if (dom.savedProgressNotification) dom.savedProgressNotification.classList.add('hidden');
+            dom.savedProgressNotification.classList.add('hidden');
         }
     });
-    if (dom.clearProgressBtn) dom.clearProgressBtn.addEventListener('click', () => {
+    dom.clearProgressBtn.addEventListener('click', () => {
         localStorage.removeItem(`fluentify_progress_${currentFileHash}`);
-        if (dom.savedProgressNotification) dom.savedProgressNotification.classList.add('hidden');
+        dom.savedProgressNotification.classList.add('hidden');
         log('Cleared saved progress.', 'info');
     });
     // Settings listeners
     dom.translationToneSelect.addEventListener('change', () => dom.customToneContainer.classList.toggle('hidden', dom.translationToneSelect.value !== 'Custom'));
     dom.temperatureSlider.addEventListener('input', () => dom.temperatureValue.textContent = dom.temperatureSlider.value);
-    if (dom.useProxyCheckbox) dom.useProxyCheckbox.addEventListener('change', () => { if (dom.customProxyContainer) dom.customProxyContainer.classList.toggle('hidden', !dom.useProxyCheckbox.checked); });
-    if (dom.useCustomPromptCheckbox) dom.useCustomPromptCheckbox.addEventListener('change', () => { if (dom.customPromptContainer) dom.customPromptContainer.classList.toggle('hidden', !dom.useCustomPromptCheckbox.checked); });
+    dom.useProxyCheckbox.addEventListener('change', () => dom.customProxyContainer.classList.toggle('hidden', !dom.useProxyCheckbox.checked));
+    dom.useCustomPromptCheckbox.addEventListener('change', () => dom.customPromptContainer.classList.toggle('hidden', !dom.useCustomPromptCheckbox.checked));
     document.querySelectorAll('#settings-view input, #settings-view select, #settings-view textarea').forEach(el => {
         el.addEventListener('change', saveSettings);
         el.addEventListener('input', saveSettings);
     });
-    if (dom.optimizePromptBtn) dom.optimizePromptBtn.addEventListener('click', async () => {
-        const currentPrompt = dom.customPromptInput ? dom.customPromptInput.value : '';
+    dom.optimizePromptBtn.addEventListener('click', async () => {
+        const currentPrompt = dom.customPromptInput.value;
         if (!currentPrompt)
             return;
-        if (dom.optimizePromptBtnText) dom.optimizePromptBtnText.classList.add('hidden');
-        if (dom.optimizePromptSpinner) dom.optimizePromptSpinner.classList.remove('hidden');
+        dom.optimizePromptBtnText.classList.add('hidden');
+        dom.optimizePromptSpinner.classList.remove('hidden');
         dom.optimizePromptBtn.disabled = true;
         try {
             const optimizationPrompt = `You are a prompt engineering expert. Analyze and improve the following custom prompt for an AI translation task. The goal is to make it clearer, more effective, and less ambiguous. The final output should ONLY be the improved prompt text, without any explanations or markdown. The original prompt is:\n\n---\n${currentPrompt}\n---`;
             const model = dom.modelSelect.value;
-    const useProxy = dom.useProxyCheckbox ? dom.useProxyCheckbox.checked : false;
-    const customProxyUrl = dom.customProxyInput ? dom.customProxyInput.value : '';
-    const temperature = dom.temperatureSlider.value;
+            const useProxy = dom.useProxyCheckbox.checked;
+            const customProxyUrl = dom.customProxyInput.value;
             const optimizedPrompt = await callGoogleAI(optimizationPrompt, model, useProxy, customProxyUrl, new AbortController().signal, 0.5);
-            if (dom.customPromptInput) dom.customPromptInput.value = optimizedPrompt;
+            dom.customPromptInput.value = optimizedPrompt;
             log('Prompt optimized successfully.', 'success');
         }
         catch (error) {
@@ -2479,8 +2467,8 @@ function init() {
             showError(`Prompt optimization failed: ${error.message}`);
         }
         finally {
-            if (dom.optimizePromptBtnText) dom.optimizePromptBtnText.classList.remove('hidden');
-            if (dom.optimizePromptSpinner) dom.optimizePromptSpinner.classList.add('hidden');
+            dom.optimizePromptBtnText.classList.remove('hidden');
+            dom.optimizePromptSpinner.classList.add('hidden');
             dom.optimizePromptBtn.disabled = false;
         }
     });
