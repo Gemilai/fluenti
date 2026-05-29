@@ -1060,7 +1060,7 @@ async function handleEnhancement(action) {
 }
 // --- START: Local Storage and Settings ---
 const LS_SETTINGS_KEY = 'fluentify_settings_v9';
-let currentDesign = 'classic'; // 'classic' or 'futuristic'
+let currentDesign = 'classic'; // 'classic' or 'glassy'
 function saveSettings() {
     if (!dom.saveSettingsCheckbox.checked) {
         localStorage.removeItem(LS_SETTINGS_KEY);
@@ -1151,52 +1151,56 @@ function toggleTheme() { const newTheme = dom.html.classList.contains('dark') ? 
 function applyDesign(design) {
     currentDesign = design;
     const designToggleBtn = document.getElementById('design-toggle');
-    if (design === 'futuristic') {
-        document.body.classList.add('futuristic-theme');
+    if (design === 'glassy') {
+        document.body.classList.add('glassy-theme');
         if (designToggleBtn) {
             designToggleBtn.title = 'Switch to Classic Theme';
             designToggleBtn.innerHTML = '<i class="fas fa-desktop"></i>';
-            designToggleBtn.classList.remove('from-cyan-500', 'to-purple-500', 'hover:from-cyan-600', 'hover:to-purple-600');
-            designToggleBtn.classList.add('from-purple-600', 'to-pink-600', 'hover:from-purple-700', 'hover:to-pink-700');
         }
     } else {
-        document.body.classList.remove('futuristic-theme');
+        document.body.classList.remove('glassy-theme');
         if (designToggleBtn) {
-            designToggleBtn.title = 'Switch to Futuristic Theme';
-            designToggleBtn.innerHTML = '<i class="fas fa-bolt"></i>';
-            designToggleBtn.classList.remove('from-purple-600', 'to-pink-600', 'hover:from-purple-700', 'hover:to-pink-700');
-            designToggleBtn.classList.add('from-cyan-500', 'to-purple-500', 'hover:from-cyan-600', 'hover:to-purple-600');
+            designToggleBtn.title = 'Switch to Glassy iPhone Theme';
+            designToggleBtn.innerHTML = '<i class="fas fa-gem"></i>';
         }
     }
 }
 function toggleDesign() {
-    const newDesign = currentDesign === 'classic' ? 'futuristic' : 'classic';
+    const newDesign = currentDesign === 'classic' ? 'glassy' : 'classic';
     applyDesign(newDesign);
     saveSettings();
 }
 // --- START: Reset and Clear Memory Functions ---
 function handleResetTranslationSettings() {
-    // Reset specific translation settings to defaults
-    dom.modelSelect.selectedIndex = 0;
-    dom.jobFieldSelect.selectedIndex = 0;
-    dom.translationToneSelect.selectedIndex = 0;
+    // Reset only: AI Model, Translation Specialization, Translation Tone, Custom Tone
+    dom.modelSelect.value = DEFAULT_WEB_MODEL;
+    dom.jobFieldSelect.value = 'None';
+    dom.translationToneSelect.value = 'Default';
     dom.customToneInput.value = '';
     dom.customToneContainer.classList.add('hidden');
-    // Clear saved translation settings from localStorage but keep other settings
+
+    // Update saved settings but keep other settings
     const settings = JSON.parse(localStorage.getItem(LS_SETTINGS_KEY) || '{}');
     settings.model = DEFAULT_WEB_MODEL;
     settings.jobField = 'None';
     settings.translationTone = 'Default';
     settings.customTone = '';
     localStorage.setItem(LS_SETTINGS_KEY, JSON.stringify(settings));
+
     log('Translation settings reset to defaults.', 'info');
-    // Show visual feedback
+
     const resetBtn = document.getElementById('reset-settings-btn');
     if (resetBtn) {
-        const originalText = resetBtn.innerHTML;
-        resetBtn.innerHTML = '<i class="fas fa-check"></i> Reset Complete!';
+        const originalHTML = resetBtn.innerHTML;
+        resetBtn.innerHTML = '<i class="fas fa-check-circle"></i> Reset Complete!';
+        resetBtn.style.background = '#10b981';
+        resetBtn.style.color = 'white';
+        resetBtn.style.borderColor = '#10b981';
         setTimeout(() => {
-            resetBtn.innerHTML = originalText;
+            resetBtn.innerHTML = originalHTML;
+            resetBtn.style.background = '';
+            resetBtn.style.color = '';
+            resetBtn.style.borderColor = '';
         }, 2000);
     }
 }
@@ -1727,7 +1731,7 @@ async function videoGen_handleGeneration() {
         contents: [{ "role": "user", "parts": [videoPart, { "text": promptText }] }],
         generationConfig: { "responseMimeType": "application/json", "responseSchema": responseSchema }
     };
-    let key = apiKeyManager.getNextKey();
+    let key = apiKeyManager.getCurrentKey();
     if (!key) {
         videoGen_showStatus("API Key not found.", 'error');
         videoGen_toggleLoading(false);
