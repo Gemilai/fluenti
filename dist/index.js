@@ -134,6 +134,19 @@ const dom = {
     howToUseCloseBtn: document.getElementById('how-to-use-close-btn'),
     languageSearch: document.getElementById('language-search'),
 };
+function __nullSafeDom(obj) {
+    const dummy = document.createElement('div');
+    dummy.style.display = 'none';
+    Object.keys(obj).forEach(key => {
+        const val = obj[key];
+        if (val === null) {
+            obj[key] = dummy;
+        } else if (typeof val === 'object' && !Array.isArray(val) && !(val instanceof HTMLElement)) {
+            Object.keys(val).forEach(k => { if (val[k] === null) val[k] = dummy; });
+        }
+    });
+}
+__nullSafeDom(dom);
 // --- START: State Management ---
 let pdfDoc = null;
 let selectedPages = new Set();
@@ -1516,6 +1529,7 @@ const dom_video = {
     localPlayer: document.getElementById('video-gen-local-video-player'),
     ytPlayerContainer: document.getElementById('video-gen-yt-player-container'),
 };
+__nullSafeDom(dom_video);
 let videoGen_finalSubtitleContent = '';
 let videoGen_abortController = null;
 let videoGen_exportAbortController = null;
