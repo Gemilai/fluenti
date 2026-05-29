@@ -16,385 +16,1576 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&family=Noto+Sans+Mono&display=swap" rel="stylesheet">
 
     <style type="text/css">
-        body, .bg-card, .bg-input { transition: background-color 0.3s ease, color 0.3s ease; }
-        textarea::-webkit-scrollbar, .scroll-container::-webkit-scrollbar { width: 8px; }
-        textarea::-webkit-scrollbar-track, .scroll-container::-webkit-scrollbar-track { background: transparent; }
-        textarea::-webkit-scrollbar-thumb, .scroll-container::-webkit-scrollbar-thumb { background-color: rgba(100, 116, 139, 0.5); border-radius: 20px; }
-        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        .spinner { animation: spin 1s linear infinite; }
+        /* ========================================
+           CLASSIC THEME - PROFESSIONAL & ELEGANT
+           ======================================== */
 
-        /* Futuristic Cyberpunk Theme Styles */
+        :root {
+            /* Classic Theme Colors */
+            --classic-primary: #3b82f6;
+            --classic-primary-dark: #2563eb;
+            --classic-secondary: #8b5cf6;
+            --classic-accent: #06b6d4;
+            --classic-success: #10b981;
+            --classic-warning: #f59e0b;
+            --classic-danger: #ef4444;
+
+            /* Light Mode */
+            --classic-bg-primary: #ffffff;
+            --classic-bg-secondary: #f8fafc;
+            --classic-bg-tertiary: #f1f5f9;
+            --classic-text-primary: #0f172a;
+            --classic-text-secondary: #475569;
+            --classic-text-muted: #94a3b8;
+            --classic-border: #e2e8f0;
+            --classic-border-hover: #cbd5e1;
+            --classic-shadow: rgba(0, 0, 0, 0.1);
+            --classic-shadow-lg: rgba(0, 0, 0, 0.15);
+        }
+
+        /* Classic Dark Mode */
+        .dark {
+            --classic-bg-primary: #1e293b;
+            --classic-bg-secondary: #0f172a;
+            --classic-bg-tertiary: #334155;
+            --classic-text-primary: #f1f5f9;
+            --classic-text-secondary: #cbd5e1;
+            --classic-text-muted: #94a3b8;
+            --classic-border: #334155;
+            --classic-border-hover: #475569;
+        }
+
+        /* Base styles - Classic Theme */
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, var(--classic-bg-secondary) 0%, var(--classic-bg-tertiary) 100%);
+            color: var(--classic-text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            transition: all 0.3s ease;
+        }
+
+        .dark body {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+        }
+
+        /* Custom Scrollbar - Classic */
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--classic-bg-secondary);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--classic-primary), var(--classic-secondary));
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, var(--classic-primary-dark), #7c3aed);
+        }
+
+        /* Main Container - Classic */
+        #app-container {
+            background: var(--classic-bg-primary);
+            border: 1px solid var(--classic-border);
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 40px var(--classic-shadow-lg), 0 0 0 1px rgba(255,255,255,0.1) inset;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #app-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--classic-primary), var(--classic-secondary), var(--classic-accent));
+        }
+
+        /* Header - Classic */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--classic-border);
+        }
+
+        header h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--classic-primary), var(--classic-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Buttons - Classic */
+        button, select, input[type="submit"] {
+            font-family: inherit;
+            transition: all 0.2s ease;
+        }
+
+        #translate-btn, .btn-primary {
+            background: linear-gradient(135deg, var(--classic-primary), var(--classic-secondary));
+            color: white;
+            border: none;
+            padding: 0.875rem 2rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        #translate-btn:hover, .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(59, 130, 246, 0.4);
+        }
+
+        #translate-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Form Inputs - Classic */
+        input, select, textarea {
+            background: var(--classic-bg-secondary);
+            border: 1px solid var(--classic-border);
+            color: var(--classic-text-primary);
+            border-radius: 0.75rem;
+            padding: 0.875rem 1rem;
+            transition: all 0.2s ease;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--classic-primary);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+            background: var(--classic-bg-primary);
+        }
+
+        /* Desktop Tabs - Classic */
+        #desktop-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            background: var(--classic-bg-secondary);
+            padding: 0.5rem;
+            border-radius: 1rem;
+            border: 1px solid var(--classic-border);
+        }
+
+        .desktop-tab-btn {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border-radius: 0.75rem;
+            border: none;
+            background: transparent;
+            color: var(--classic-text-secondary);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .desktop-tab-btn:hover {
+            color: var(--classic-text-primary);
+            background: var(--classic-bg-tertiary);
+        }
+
+        .desktop-tab-btn.active {
+            background: linear-gradient(135deg, var(--classic-primary), var(--classic-secondary));
+            color: white;
+            font-weight: 600;
+            box-shadow: 0 2px 10px rgba(59, 130, 246, 0.2);
+        }
+
+        /* Swap Button - Classic */
+        #swap-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--classic-bg-secondary);
+            border: 1px solid var(--classic-border);
+            color: var(--classic-text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #swap-btn:hover {
+            background: var(--classic-primary);
+            border-color: var(--classic-primary);
+            color: white;
+            transform: rotate(180deg);
+        }
+
+        /* Output Section - Classic */
+        #output {
+            background: var(--classic-bg-secondary);
+            border: 1px solid var(--classic-border);
+            color: var(--classic-text-primary);
+            border-radius: 0.75rem;
+        }
+
+        /* Enhancement Toolbar - Classic */
+        #enhancements-toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            padding: 1rem;
+            background: var(--classic-bg-secondary);
+            border-radius: 0.75rem;
+            margin-top: 1rem;
+            border: 1px solid var(--classic-border);
+        }
+
+        .enhancement-btn {
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            background: var(--classic-bg-primary);
+            border: 1px solid var(--classic-border);
+            color: var(--classic-text-secondary);
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .enhancement-btn:hover {
+            border-color: var(--classic-primary);
+            color: var(--classic-primary);
+        }
+
+        /* Progress Bar - Classic */
+        .progress-bar {
+            height: 8px;
+            background: var(--classic-bg-tertiary);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-bar-inner, #progress-bar-inner {
+            height: 100%;
+            background: linear-gradient(90deg, var(--classic-primary), var(--classic-secondary));
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        /* Settings Panel - Classic */
+        #settings-view .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        #settings-view label {
+            display: block;
+            font-weight: 600;
+            color: var(--classic-text-primary);
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+        }
+
+        /* Mobile Navigation - Classic */
+        #mobile-nav {
+            background: var(--classic-bg-primary);
+            border-top: 1px solid var(--classic-border);
+            box-shadow: 0 -4px 20px var(--classic-shadow);
+        }
+
+        .mobile-nav-btn {
+            color: var(--classic-text-secondary);
+            transition: all 0.2s ease;
+        }
+
+        .mobile-nav-btn.active {
+            color: var(--classic-primary);
+        }
+
+        /* Control Buttons - Classic */
+        .control-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: var(--classic-bg-secondary);
+            border: 1px solid var(--classic-border);
+            color: var(--classic-text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .control-btn:hover {
+            border-color: var(--classic-primary);
+            color: var(--classic-primary);
+        }
+
+        #theme-toggle, #settings-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: var(--classic-bg-secondary);
+            border: 1px solid var(--classic-border);
+            color: var(--classic-text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        #theme-toggle:hover, #settings-btn:hover {
+            border-color: var(--classic-primary);
+            color: var(--classic-primary);
+        }
+
+        /* Subtitle Table - Classic */
+        #subtitle-editor-section table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--classic-bg-secondary);
+            border-radius: 0.75rem;
+            overflow: hidden;
+            border: 1px solid var(--classic-border);
+        }
+
+        #subtitle-editor-section th,
+        #subtitle-editor-section td {
+            padding: 0.875rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--classic-border);
+        }
+
+        #subtitle-editor-section th {
+            background: var(--classic-bg-tertiary);
+            font-weight: 600;
+            color: var(--classic-text-primary);
+        }
+
+        #subtitle-editor-section td[contenteditable="true"]:focus {
+            background: var(--classic-bg-tertiary);
+            outline: 2px solid var(--classic-primary);
+            outline-offset: -2px;
+        }
+
+        /* File Upload - Classic */
+        #dropzone-container {
+            border: 2px dashed var(--classic-border);
+            border-radius: 1rem;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: var(--classic-bg-secondary);
+        }
+
+        #dropzone-container:hover {
+            border-color: var(--classic-primary);
+            background: var(--classic-bg-tertiary);
+        }
+
+        /* PDF Viewer - Classic */
+        .pdf-page-item {
+            border: 2px solid var(--classic-border);
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .pdf-page-item:hover {
+            border-color: var(--classic-primary);
+        }
+
+        .pdf-page-item.selected {
+            border-color: var(--classic-primary);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+
+        /* Quick Action Buttons - Classic */
+        .quick-action-btn {
+            flex: 1;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        #reset-settings-btn {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+        }
+
+        #reset-settings-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(239, 68, 68, 0.3);
+        }
+
+        #clear-memory-btn {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            color: white;
+        }
+
+        #clear-memory-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.3);
+        }
+
+        /* ========================================
+           FUTURISTIC THEME - CYBERPUNK & NEON
+           ======================================== */
+
+        /* Futuristic Theme Styles */
         .futuristic-theme {
             --neon-cyan: #00f5ff;
             --neon-pink: #ff00ff;
             --neon-purple: #bf00ff;
-            --dark-bg: #0a0a0f;
-            --card-bg: #12121a;
+            --neon-green: #00ff88;
+            --neon-yellow: #ffff00;
+            --cyber-black: #050508;
+            --cyber-dark: #0a0a10;
+            --cyber-card: #0f0f18;
+            --cyber-border: rgba(0, 245, 255, 0.2);
         }
+
         .futuristic-theme body {
-            background-color: var(--dark-bg);
+            font-family: 'Orbitron', sans-serif;
+            background-color: var(--cyber-black);
             background-image:
-                radial-gradient(circle at 20% 50%, rgba(191, 0, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(0, 245, 255, 0.1) 0%, transparent 50%),
-                linear-gradient(0deg, rgba(0, 245, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 245, 255, 0.03) 1px, transparent 1px);
-            background-size: 100% 100%, 100% 100%, 50px 50px, 50px 50px;
+                radial-gradient(ellipse at 20% 20%, rgba(191, 0, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(0, 245, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(255, 0, 255, 0.05) 0%, transparent 50%),
+                linear-gradient(0deg, rgba(0, 245, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 245, 255, 0.02) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+            color: #e0e0ff;
             min-height: 100vh;
+            animation: bgPulse 10s ease-in-out infinite;
         }
+
+        @keyframes bgPulse {
+            0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 0 0, 0 0; }
+            50% { background-position: 100% 100%, 0% 0%, 50% 50%, 40px 0, 0 40px; }
+        }
+
         .futuristic-theme #app-container {
-            background: var(--card-bg);
-            border: 1px solid rgba(0, 245, 255, 0.2);
-            box-shadow: 0 0 40px rgba(0, 245, 255, 0.1), inset 0 0 60px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(180deg, rgba(15, 15, 24, 0.95), rgba(10, 10, 16, 0.98));
+            border: 1px solid var(--cyber-border);
+            border-radius: 0;
+            padding: 0;
+            box-shadow:
+                0 0 60px rgba(0, 245, 255, 0.15),
+                0 0 120px rgba(191, 0, 255, 0.1),
+                inset 0 0 100px rgba(0, 0, 0, 0.5);
             position: relative;
+            overflow: hidden;
         }
+
         .futuristic-theme #app-container::before {
             content: '';
             position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, var(--neon-cyan), var(--neon-purple), var(--neon-pink), var(--neon-cyan));
-            background-size: 400% 400%;
-            z-index: -1;
-            border-radius: 1rem;
-            opacity: 0.1;
-            animation: borderGlow 10s ease infinite;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg,
+                transparent,
+                var(--neon-cyan),
+                var(--neon-purple),
+                var(--neon-pink),
+                var(--neon-cyan),
+                transparent);
+            background-size: 200% 100%;
+            animation: topBorderGlow 4s linear infinite;
         }
+
+        @keyframes topBorderGlow {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        .futuristic-theme #app-container::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg,
+                transparent,
+                var(--neon-purple),
+                var(--neon-cyan),
+                var(--neon-pink),
+                var(--neon-purple),
+                transparent);
+            background-size: 200% 100%;
+            animation: bottomBorderGlow 3s linear infinite reverse;
+        }
+
+        @keyframes bottomBorderGlow {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        .futuristic-theme header {
+            padding: 1.5rem 2rem;
+            margin-bottom: 0;
+            border-bottom: 1px solid var(--cyber-border);
+            background: linear-gradient(180deg, rgba(0, 245, 255, 0.05), transparent);
+        }
+
         .futuristic-theme header h1 {
-            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple), var(--neon-pink), var(--neon-cyan));
+            background-size: 300% 100%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            animation: titleShimmer 5s linear infinite;
             text-shadow: 0 0 30px rgba(0, 245, 255, 0.5);
+            text-transform: uppercase;
         }
-        .futuristic-theme .bg-card, .futuristic-theme .bg-input {
-            background: rgba(18, 18, 26, 0.8);
-            border: 1px solid rgba(0, 245, 255, 0.15);
-            color: #e0e0e0;
+
+        @keyframes titleShimmer {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 300% 50%; }
         }
-        .futuristic-theme #desktop-tabs {
-            background: rgba(18, 18, 26, 0.9);
-            border: 1px solid rgba(0, 245, 255, 0.2);
-            box-shadow: 0 0 20px rgba(0, 245, 255, 0.05);
+
+        .futuristic-theme .header-controls {
+            display: flex;
+            gap: 0.75rem;
         }
-        .futuristic-theme .desktop-tab-btn {
-            color: #888;
+
+        .futuristic-theme .control-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 0;
+            background: rgba(0, 245, 255, 0.1);
+            border: 1px solid var(--cyber-border);
+            color: var(--neon-cyan);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .futuristic-theme .control-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, var(--neon-cyan), transparent);
+            transform: translate(-50%, -50%);
             transition: all 0.3s ease;
         }
+
+        .futuristic-theme .control-btn:hover::before {
+            width: 100px;
+            height: 100px;
+        }
+
+        .futuristic-theme .control-btn:hover {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 30px rgba(0, 245, 255, 0.3), inset 0 0 20px rgba(0, 245, 255, 0.1);
+            text-shadow: 0 0 10px var(--neon-cyan);
+        }
+
+        /* Futuristic Tabs */
+        .futuristic-theme #desktop-tabs {
+            background: rgba(10, 10, 16, 0.9);
+            border: 1px solid var(--cyber-border);
+            border-radius: 0;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            border-bottom: 1px solid var(--cyber-border);
+            border-left: none;
+            border-right: none;
+        }
+
+        .futuristic-theme .desktop-tab-btn {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border: none;
+            background: transparent;
+            color: #666;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            position: relative;
+        }
+
+        .futuristic-theme .desktop-tab-btn::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--neon-cyan);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
         .futuristic-theme .desktop-tab-btn:hover {
             color: var(--neon-cyan);
             text-shadow: 0 0 10px var(--neon-cyan);
         }
+
         .futuristic-theme .desktop-tab-btn.active {
-            background: linear-gradient(135deg, rgba(0, 245, 255, 0.2), rgba(191, 0, 255, 0.2));
             color: var(--neon-cyan);
-            text-shadow: 0 0 15px var(--neon-cyan);
-            border: 1px solid rgba(0, 245, 255, 0.3);
+            background: linear-gradient(180deg, rgba(0, 245, 255, 0.15), transparent);
         }
-        .futuristic-theme #mobile-nav {
-            background: rgba(10, 10, 15, 0.95);
-            border-top: 1px solid rgba(0, 245, 255, 0.2);
-            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.5);
+
+        .futuristic-theme .desktop-tab-btn.active::before {
+            transform: scaleX(1);
         }
-        .futuristic-theme .mobile-nav-btn {
-            color: #666;
+
+        /* Futuristic Form Content */
+        .futuristic-theme #view-container {
+            padding: 2rem;
+        }
+
+        .futuristic-theme input,
+        .futuristic-theme select,
+        .futuristic-theme textarea {
+            background: rgba(15, 15, 24, 0.8);
+            border: 1px solid var(--cyber-border);
+            color: #e0e0ff;
+            border-radius: 0;
+            padding: 1rem;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 0.5px;
             transition: all 0.3s ease;
         }
-        .futuristic-theme .mobile-nav-btn:hover {
-            color: var(--neon-cyan);
-        }
-        .futuristic-theme .mobile-nav-btn.active {
-            color: var(--neon-cyan);
-            text-shadow: 0 0 10px var(--neon-cyan);
-        }
-        .futuristic-theme .mobile-nav-btn.active i {
-            filter: drop-shadow(0 0 5px var(--neon-cyan));
-        }
-        .futuristic-theme button {
-            background: linear-gradient(135deg, rgba(0, 245, 255, 0.1), rgba(191, 0, 255, 0.1));
-            border: 1px solid rgba(0, 245, 255, 0.3);
-            color: var(--neon-cyan);
-            transition: all 0.3s ease;
-        }
-        .futuristic-theme button:hover {
-            background: linear-gradient(135deg, rgba(0, 245, 255, 0.2), rgba(191, 0, 255, 0.2));
-            box-shadow: 0 0 20px rgba(0, 245, 255, 0.3);
-            border-color: var(--neon-cyan);
-        }
-        .futuristic-theme select, .futuristic-theme input, .futuristic-theme textarea {
-            background: rgba(18, 18, 26, 0.8);
-            border: 1px solid rgba(0, 245, 255, 0.15);
-            color: #e0e0e0;
-            transition: all 0.3s ease;
-        }
-        .futuristic-theme select:focus, .futuristic-theme input:focus, .futuristic-theme textarea:focus {
-            border-color: var(--neon-cyan);
-            box-shadow: 0 0 15px rgba(0, 245, 255, 0.2);
+
+        .futuristic-theme input:focus,
+        .futuristic-theme select:focus,
+        .futuristic-theme textarea:focus {
             outline: none;
+            border-color: var(--neon-cyan);
+            box-shadow:
+                0 0 20px rgba(0, 245, 255, 0.2),
+                inset 0 0 20px rgba(0, 245, 255, 0.05);
+            background: rgba(15, 15, 24, 0.95);
         }
+
         .futuristic-theme select option {
-            background: var(--card-bg);
-            color: #e0e0e0;
+            background: var(--cyber-card);
+            color: #e0e0ff;
         }
-        .futuristic-theme .progress-bar {
-            background-color: rgba(0, 245, 255, 0.1);
-            border: 1px solid rgba(0, 245, 255, 0.2);
+
+        /* Futuristic Language Grid */
+        .futuristic-theme .grid {
+            gap: 1rem;
         }
-        .futuristic-theme .progress-bar-inner {
-            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple));
-            box-shadow: 0 0 10px var(--neon-cyan);
-        }
-        .futuristic-theme .log-timestamp {
-            color: var(--neon-cyan);
-            opacity: 0.7;
-        }
-        .futuristic-theme #log-content {
-            background: rgba(10, 10, 15, 0.9);
-            border: 1px solid rgba(0, 245, 255, 0.1);
-        }
-        .futuristic-theme h1, .futuristic-theme h2, .futuristic-theme h3, .futuristic-theme label {
-            color: #e0e0e0 !important;
-        }
-        .futuristic-theme .log-message.success {
-            color: var(--neon-cyan);
-            text-shadow: 0 0 5px var(--neon-cyan);
-        }
-        .futuristic-theme .log-message.error {
-            color: var(--neon-pink);
-            text-shadow: 0 0 5px var(--neon-pink);
-        }
-        .futuristic-theme #subtitle-editor-section table {
-            border-color: rgba(0, 245, 255, 0.2);
-        }
-        .futuristic-theme #subtitle-editor-section th, .futuristic-theme #subtitle-editor-section td {
-            border-color: rgba(0, 245, 255, 0.15);
-            color: #e0e0e0;
-        }
-        .futuristic-theme #subtitle-editor-section th {
+
+        .futuristic-theme #swap-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
             background: rgba(0, 245, 255, 0.1);
+            border: 1px solid var(--cyber-border);
             color: var(--neon-cyan);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
         }
-        .futuristic-theme #subtitle-editor-section td[contenteditable="true"]:focus {
-            background: rgba(0, 245, 255, 0.1);
-            border-color: var(--neon-cyan);
-            box-shadow: 0 0 10px rgba(0, 245, 255, 0.2);
+
+        .futuristic-theme #swap-btn::after {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: 50%;
+            border: 1px solid var(--neon-cyan);
+            opacity: 0;
+            transition: all 0.3s ease;
         }
-        .futuristic-theme .pdf-page-item.selected {
-            border-color: var(--neon-cyan);
-            box-shadow: 0 0 0 3px rgba(0, 245, 255, 0.3);
+
+        .futuristic-theme #swap-btn:hover {
+            background: rgba(0, 245, 255, 0.2);
+            transform: rotate(180deg);
+            box-shadow: 0 0 30px rgba(0, 245, 255, 0.3);
         }
-        .futuristic-theme .pdf-page-item.selected::after {
-            background-color: var(--neon-cyan);
-            box-shadow: 0 0 10px var(--neon-cyan);
+
+        .futuristic-theme #swap-btn:hover::after {
+            opacity: 1;
+            animation: spinRing 2s linear infinite;
         }
-        @keyframes borderGlow {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+
+        @keyframes spinRing {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
-        .design-switcher-btn {
+
+        /* Futuristic Translate Button */
+        .futuristic-theme #translate-btn {
+            background: linear-gradient(135deg, rgba(0, 245, 255, 0.2), rgba(191, 0, 255, 0.2));
+            border: 1px solid var(--neon-cyan);
+            color: var(--neon-cyan);
+            padding: 1rem 2.5rem;
+            border-radius: 0;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
             position: relative;
             overflow: hidden;
         }
-        .design-switcher-btn::before {
+
+        .futuristic-theme #translate-btn::before {
             content: '';
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.5s;
+            background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.3), transparent);
+            transition: left 0.5s ease;
         }
-        .design-switcher-btn:hover::before {
+
+        .futuristic-theme #translate-btn:hover::before {
             left: 100%;
         }
-        .reset-btn {
+
+        .futuristic-theme #translate-btn:hover {
+            background: linear-gradient(135deg, rgba(0, 245, 255, 0.3), rgba(191, 0, 255, 0.3));
+            box-shadow: 0 0 40px rgba(0, 245, 255, 0.4);
+            text-shadow: 0 0 20px var(--neon-cyan);
+        }
+
+        /* Futuristic Output Section */
+        .futuristic-theme #output {
+            background: rgba(15, 15, 24, 0.8);
+            border: 1px solid var(--cyber-border);
+            color: #e0e0ff;
+            border-radius: 0;
+            padding: 1rem;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        .futuristic-theme #main-output-section {
+            margin-top: 2rem;
+        }
+
+        /* Futuristic Enhancement Toolbar */
+        .futuristic-theme #enhancements-toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            padding: 1rem;
+            background: rgba(10, 10, 16, 0.8);
+            border: 1px solid var(--cyber-border);
+            border-radius: 0;
+            margin-top: 1rem;
+        }
+
+        .futuristic-theme .enhancement-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--cyber-border);
+            background: rgba(15, 15, 24, 0.8);
+            color: var(--neon-cyan);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+        }
+
+        .futuristic-theme .enhancement-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .futuristic-theme .enhancement-btn:hover::before {
+            left: 100%;
+        }
+
+        .futuristic-theme .enhancement-btn:hover {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 20px rgba(0, 245, 255, 0.2);
+            text-shadow: 0 0 10px var(--neon-cyan);
+        }
+
+        /* Futuristic Progress Bar */
+        .futuristic-theme .progress-bar {
+            height: 4px;
+            background: rgba(0, 245, 255, 0.1);
+            border-radius: 0;
+            overflow: hidden;
+        }
+
+        .futuristic-theme .progress-bar-inner,
+        .futuristic-theme #progress-bar-inner {
+            height: 100%;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple), var(--neon-pink));
+            background-size: 200% 100%;
+            animation: progressGlow 2s linear infinite;
+            box-shadow: 0 0 10px var(--neon-cyan);
+        }
+
+        @keyframes progressGlow {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* Futuristic Settings Panel */
+        .futuristic-theme #settings-view {
+            padding: 2rem;
+        }
+
+        .futuristic-theme #settings-view h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: var(--neon-cyan);
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 20px rgba(0, 245, 255, 0.3);
+        }
+
+        .futuristic-theme #settings-view label {
+            display: block;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: var(--neon-cyan);
+            margin-bottom: 0.5rem;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+        }
+
+        .futuristic-theme #settings-view .grid {
+            gap: 1.5rem;
+        }
+
+        .futuristic-theme .quick-actions {
+            display: flex;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: rgba(10, 10, 16, 0.8);
+            border: 1px solid var(--cyber-border);
+            margin-top: 2rem;
+        }
+
+        .futuristic-theme .quick-action-btn {
+            flex: 1;
+            padding: 1rem;
+            border: 1px solid;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .futuristic-theme #reset-settings-btn {
+            background: transparent;
+            border-color: var(--neon-pink);
+            color: var(--neon-pink);
+        }
+
+        .futuristic-theme #reset-settings-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 0, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .futuristic-theme #reset-settings-btn:hover::before {
+            left: 100%;
+        }
+
+        .futuristic-theme #reset-settings-btn:hover {
+            background: rgba(255, 0, 255, 0.1);
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.3);
+            text-shadow: 0 0 10px var(--neon-pink);
+        }
+
+        .futuristic-theme #clear-memory-btn {
+            background: transparent;
+            border-color: var(--neon-purple);
+            color: var(--neon-purple);
+        }
+
+        .futuristic-theme #clear-memory-btn:hover {
+            background: rgba(191, 0, 255, 0.1);
+            box-shadow: 0 0 30px rgba(191, 0, 255, 0.3);
+            text-shadow: 0 0 10px var(--neon-purple);
+        }
+
+        /* Futuristic Subtitle Table */
+        .futuristic-theme #subtitle-editor-section {
+            margin-top: 2rem;
+            padding: 0;
+        }
+
+        .futuristic-theme #subtitle-editor-section > div {
+            padding: 0 0 1rem 0;
+        }
+
+        .futuristic-theme #subtitle-editor-section table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: transparent;
+            border: 1px solid var(--cyber-border);
+        }
+
+        .futuristic-theme #subtitle-editor-section th {
+            background: rgba(0, 245, 255, 0.1);
+            border-bottom: 1px solid var(--cyber-border);
+            border-right: 1px solid var(--cyber-border);
+            padding: 1rem;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--neon-cyan);
+            text-shadow: 0 0 10px rgba(0, 245, 255, 0.3);
+        }
+
+        .futuristic-theme #subtitle-editor-section th:last-child {
+            border-right: none;
+        }
+
+        .futuristic-theme #subtitle-editor-section td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--cyber-border);
+            border-right: 1px solid var(--cyber-border);
+            color: #e0e0ff;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
+        }
+
+        .futuristic-theme #subtitle-editor-section td:last-child {
+            border-right: none;
+        }
+
+        .futuristic-theme #subtitle-editor-section tr:hover td {
+            background: rgba(0, 245, 255, 0.05);
+        }
+
+        .futuristic-theme #subtitle-editor-section td[contenteditable="true"]:focus {
+            background: rgba(0, 245, 255, 0.1);
+            outline: none;
+            box-shadow: inset 0 0 20px rgba(0, 245, 255, 0.1);
+        }
+
+        /* Futuristic File Upload */
+        .futuristic-theme #dropzone-container {
+            border: 2px dashed var(--cyber-border);
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(10, 10, 16, 0.5);
+        }
+
+        .futuristic-theme #dropzone-container:hover {
+            border-color: var(--neon-cyan);
+            background: rgba(0, 245, 255, 0.05);
+            box-shadow: inset 0 0 30px rgba(0, 245, 255, 0.1);
+        }
+
+        /* Futuristic PDF Viewer */
+        .futuristic-theme .pdf-page-item {
+            border: 2px solid var(--cyber-border);
+            cursor: pointer;
             transition: all 0.3s ease;
         }
-        .reset-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+
+        .futuristic-theme .pdf-page-item:hover {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 20px rgba(0, 245, 255, 0.2);
         }
-        .reset-btn::after {
-            content: '↻';
+
+        .futuristic-theme .pdf-page-item.selected {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 30px rgba(0, 245, 255, 0.3);
+        }
+
+        .futuristic-theme .pdf-page-item.selected::after {
+            background-color: var(--neon-cyan);
+            box-shadow: 0 0 10px var(--neon-cyan);
+        }
+
+        /* Futuristic Mobile Navigation */
+        .futuristic-theme #mobile-nav {
+            background: rgba(5, 5, 8, 0.95);
+            border-top: 1px solid var(--cyber-border);
+            box-shadow: 0 -5px 30px rgba(0, 0, 0, 0.5), 0 -5px 20px rgba(0, 245, 255, 0.1);
+        }
+
+        .futuristic-theme .mobile-nav-btn {
+            color: #666;
+            transition: all 0.3s ease;
+        }
+
+        .futuristic-theme .mobile-nav-btn.active {
+            color: var(--neon-cyan);
+            text-shadow: 0 0 10px var(--neon-cyan);
+        }
+
+        .futuristic-theme .mobile-nav-btn.active i {
+            filter: drop-shadow(0 0 5px var(--neon-cyan));
+        }
+
+        /* Futuristic Checkbox */
+        .futuristic-theme input[type="checkbox"] {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: rgba(15, 15, 24, 0.8);
+            border: 1px solid var(--cyber-border);
+            border-radius: 0;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .futuristic-theme input[type="checkbox"]:checked {
+            background: var(--neon-cyan);
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 10px var(--neon-cyan);
+        }
+
+        .futuristic-theme input[type="checkbox"]:checked::after {
+            content: '✓';
             position: absolute;
-            right: 8px;
             top: 50%;
-            transform: translateY(-50%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #000;
+            font-size: 12px;
+            font-weight: bold;
         }
-        .reset-btn:hover::after {
-            opacity: 1;
+
+        /* Futuristic Range Slider */
+        .futuristic-theme input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            height: 6px;
+            background: rgba(0, 245, 255, 0.1);
+            border-radius: 0;
+            outline: none;
         }
-        .clear-memory-btn {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+
+        .futuristic-theme input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            background: var(--neon-cyan);
+            cursor: pointer;
+            box-shadow: 0 0 10px var(--neon-cyan);
+            transition: all 0.3s ease;
         }
-        .clear-memory-btn:hover {
-            background: linear-gradient(135deg, #f5576c 0%, #f093fb 100%);
+
+        .futuristic-theme input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 20px var(--neon-cyan);
         }
-        
-        .pdf-page-item { transition: border-color 0.2s ease, box-shadow 0.2s ease; }
-        .pdf-page-item.selected {
-            border-color: #0ea5e9;
-            box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.5);
+
+        /* Futuristic Textarea */
+        .futuristic-theme textarea {
+            resize: vertical;
+            min-height: 150px;
         }
-        .pdf-page-item.selected::after {
-            content: '✔';
-            position: absolute;
-            top: 8px;
-            right: 8px;
-            background-color: #0ea5e9;
+
+        /* Futuristic Youtube Section */
+        .futuristic-theme #youtube-input-section {
+            background: rgba(10, 10, 16, 0.8);
+            border: 1px solid var(--cyber-border);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .futuristic-theme #youtube-input-section label {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: var(--neon-cyan);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        /* Futuristic Buttons */
+        .futuristic-theme #fetch-youtube-subs-btn {
+            background: linear-gradient(135deg, rgba(0, 245, 255, 0.2), rgba(191, 0, 255, 0.2));
+            border: 1px solid var(--neon-cyan);
+            color: var(--neon-cyan);
+            padding: 0.875rem 1.5rem;
+            border-radius: 0;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .futuristic-theme #fetch-youtube-subs-btn:hover {
+            box-shadow: 0 0 30px rgba(0, 245, 255, 0.3);
+            text-shadow: 0 0 10px var(--neon-cyan);
+        }
+
+        /* Futuristic Tool Buttons */
+        .futuristic-theme .tool-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--cyber-border);
+            background: rgba(15, 15, 24, 0.8);
+            color: var(--neon-cyan);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .futuristic-theme .tool-btn:hover {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 20px rgba(0, 245, 255, 0.2);
+            text-shadow: 0 0 10px var(--neon-cyan);
+        }
+
+        /* Futuristic Activity Log */
+        .futuristic-theme #log-toggle-btn {
+            background: rgba(10, 10, 16, 0.8);
+            border: 1px solid var(--cyber-border);
+            color: var(--neon-cyan);
+            padding: 1rem;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .futuristic-theme #log-content {
+            background: rgba(5, 5, 8, 0.9);
+            border: 1px solid var(--cyber-border);
+            max-height: 200px;
+            overflow-y: auto;
+            font-family: 'Noto Sans Mono', monospace;
+        }
+
+        /* Futuristic Scrollbar */
+        .futuristic-theme ::-webkit-scrollbar-track {
+            background: rgba(10, 10, 16, 0.9);
+        }
+
+        .futuristic-theme ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--neon-cyan), var(--neon-purple));
+            border-radius: 0;
+        }
+
+        /* Futuristic Copy/Export Buttons */
+        .futuristic-theme #copy-btn,
+        .futuristic-theme #export-text-btn,
+        .futuristic-theme .action-btn {
+            background: rgba(15, 15, 24, 0.8);
+            border: 1px solid var(--cyber-border);
+            color: var(--neon-cyan);
+            transition: all 0.3s ease;
+        }
+
+        .futuristic-theme #copy-btn:hover,
+        .futuristic-theme #export-text-btn:hover,
+        .futuristic-theme .action-btn:hover {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 20px rgba(0, 245, 255, 0.2);
+        }
+
+        /* Design Switcher Button - Shared */
+        #design-toggle {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #8b5cf6, #ec4899);
+            border: none;
             color: white;
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
-            font-weight: bold;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
         }
 
-        #enhancements-toolbar { transition: opacity 0.3s ease, transform 0.3s ease; }
-        .progress-bar { height: 8px; background-color: #e5e7eb; border-radius: 9999px; overflow: hidden; }
-        .dark .progress-bar { background-color: #374151; }
-        .progress-bar-inner { height: 100%; background-color: #0ea5e9; border-radius: 9999px; transition: width 0.3s ease; }
-        #log-viewer { transition: max-height 0.5s ease-in-out; }
-        #log-output { white-space: pre-wrap; word-break: break-all; }
-        .log-entry { display: flex; gap: 0.75rem; }
-        .log-timestamp { flex-shrink: 0; color: #64748b; }
-        .dark .log-timestamp { color: #94a3b8; }
-        .log-message.error { color: #ef4444; }
-        .dark .log-message.error { color: #f87171; }
-        .log-message.success { color: #22c55e; }
-        .dark .log-message.success { color: #4ade80; }
+        #design-toggle::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
 
-        #subtitle-editor-section table { width: 100%; border-collapse: collapse; }
-        #subtitle-editor-section th, #subtitle-editor-section td { padding: 8px 12px; border: 1px solid #d1d5db; text-align: left; vertical-align: middle;}
-        html[dir="rtl"] #subtitle-editor-section th, html[dir="rtl"] #subtitle-editor-section td { text-align: right; }
-        .dark #subtitle-editor-section th, .dark #subtitle-editor-section td { border-color: #4b5563; }
-        #subtitle-editor-section th { background-color: #f3f4f6; }
-        .dark #subtitle-editor-section th { background-color: #374151; }
-        #subtitle-editor-section td[contenteditable="true"]:focus { background-color: #f0f9ff; outline: 2px solid #0ea5e9; }
-        .dark #subtitle-editor-section td[contenteditable="true"]:focus { background-color: #0c4a6e; }
-        #subtitle-editor-section .failed-translation { color: #ef4444; font-style: italic; }
-        .dark #subtitle-editor-section .failed-translation { color: #f87171; }
+        #design-toggle:hover::before {
+            left: 100%;
+        }
 
+        #design-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+        }
 
-        /* New Layout & Navigation Styles */
-        body { padding-bottom: 70px; }
-        @media (min-width: 768px) { body { padding-bottom: 0; } }
+        /* Futuristic Design Switcher */
+        .futuristic-theme #design-toggle {
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+            box-shadow: 0 0 30px rgba(0, 245, 255, 0.3);
+            border-radius: 0;
+        }
 
-        #mobile-nav {
-            background-color: rgba(255, 255, 255, 0.8);
+        .futuristic-theme #design-toggle:hover {
+            box-shadow: 0 0 40px rgba(0, 245, 255, 0.5);
+        }
+
+        /* Common Animations */
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .spinner {
+            animation: spin 1s linear infinite;
+        }
+
+        /* Language Switcher - Shared */
+        #language-switcher {
+            background: var(--classic-bg-secondary);
+            border: 1px solid var(--classic-border);
+            color: var(--classic-text-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 0.75rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+        }
+
+        .futuristic-theme #language-switcher {
+            background: rgba(15, 15, 24, 0.8);
+            border: 1px solid var(--cyber-border);
+            color: var(--neon-cyan);
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        /* How to Use Button - Shared */
+        #how-to-use-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: var(--classic-bg-secondary);
+            border: 1px solid var(--classic-border);
+            color: var(--classic-text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        #how-to-use-btn:hover {
+            border-color: var(--classic-primary);
+            color: var(--classic-primary);
+        }
+
+        .futuristic-theme #how-to-use-btn {
+            background: rgba(0, 245, 255, 0.1);
+            border: 1px solid var(--cyber-border);
+            color: var(--neon-cyan);
+        }
+
+        .futuristic-theme #how-to-use-btn:hover {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 20px rgba(0, 245, 255, 0.2);
+        }
+
+        /* Character Counter */
+        #char-counter {
+            position: absolute;
+            bottom: 0.5rem;
+            right: 1rem;
+            font-size: 0.75rem;
+            color: var(--classic-text-muted);
+            background: var(--classic-bg-primary);
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+        }
+
+        .futuristic-theme #char-counter {
+            background: rgba(15, 15, 24, 0.8);
+            color: var(--neon-cyan);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.7rem;
+        }
+
+        /* Error Display */
+        #error-display {
+            color: var(--classic-danger);
+            font-size: 0.875rem;
+        }
+
+        .futuristic-theme #error-display {
+            color: var(--neon-pink);
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 0 0 10px var(--neon-pink);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            #app-container {
+                border-radius: 1rem;
+                padding: 1rem;
+            }
+
+            header {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .header-controls {
+                flex-wrap: wrap;
+            }
+
+            #desktop-tabs {
+                overflow-x: auto;
+                padding-bottom: 0.5rem;
+            }
+
+            .desktop-tab-btn {
+                white-space: nowrap;
+                min-width: 80px;
+            }
+
+            #mobile-nav {
+                display: flex !important;
+            }
+        }
+
+        @media (min-width: 768px) {
+            #mobile-nav {
+                display: none !important;
+            }
+        }
+
+        /* Modal Styles */
+        #how-to-use-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            border-top: 1px solid #e2e8f0;
-        }
-        .dark #mobile-nav {
-            background-color: rgba(30, 41, 59, 0.85);
-            border-top-color: #334155;
-        }
-        .mobile-nav-btn {
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            flex: 1;
-            padding: 8px 4px;
-            gap: 2px;
-            font-size: 0.65rem;
-            line-height: 1rem;
-            color: #475569;
-            transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+            z-index: 1000;
+            padding: 1rem;
         }
-        .dark .mobile-nav-btn { color: #94a3b8; }
-        .mobile-nav-btn:hover { background-color: rgba(0,0,0,0.05); }
-        .dark .mobile-nav-btn:hover { background-color: rgba(255,255,255,0.05); }
-        .mobile-nav-btn.active { color: #0ea5e9; }
-        .dark .mobile-nav-btn.active { color: #38bdf8; }
-        .mobile-nav-btn i { font-size: 1.25rem; margin-bottom: 2px; }
 
-        .desktop-tab-btn {
-            flex: 1;
-            text-align: center;
-            padding: 0.75rem 0.5rem;
-            border-radius: 0.375rem;
+        #how-to-use-modal > div {
+            background: var(--classic-bg-primary);
+            border-radius: 1.5rem;
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+        }
+
+        .dark #how-to-use-modal > div {
+            background: var(--classic-bg-secondary);
+            border: 1px solid var(--classic-border);
+        }
+
+        .futuristic-theme #how-to-use-modal > div {
+            background: var(--cyber-card);
+            border: 1px solid var(--cyber-border);
+            box-shadow: 0 25px 50px rgba(0, 245, 255, 0.2);
+        }
+
+        #how-to-use-content {
+            padding: 1.5rem;
+            overflow-y: auto;
+            max-height: calc(90vh - 120px);
+        }
+
+        .futuristic-theme #how-to-use-content {
+            font-family: 'Orbitron', sans-serif;
+            color: #e0e0ff;
+        }
+
+        /* Progress Container */
+        #progress-container {
+            padding: 1rem;
+            background: var(--classic-bg-secondary);
+            border-radius: 0.75rem;
+            margin: 1.5rem 0;
+        }
+
+        .futuristic-theme #progress-container {
+            background: rgba(10, 10, 16, 0.8);
+            border: 1px solid var(--cyber-border);
+            border-radius: 0;
+        }
+
+        /* Cancel Button */
+        #cancel-translation-btn {
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--classic-bg-tertiary);
+            border: 1px solid var(--classic-border);
+            color: var(--classic-text-secondary);
+            border-radius: 0.5rem;
             cursor: pointer;
-            transition: color 0.2s ease, background-color 0.2s ease;
-            color: #475569;
+            transition: all 0.2s ease;
+        }
+
+        #cancel-translation-btn:hover {
+            background: var(--classic-bg-primary);
+            border-color: var(--classic-border-hover);
+        }
+
+        .futuristic-theme #cancel-translation-btn {
+            background: rgba(255, 0, 255, 0.1);
+            border: 1px solid var(--neon-pink);
+            color: var(--neon-pink);
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .futuristic-theme #cancel-translation-btn:hover {
+            background: rgba(255, 0, 255, 0.2);
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.2);
+        }
+
+        /* Progress Labels */
+        #progress-label, #progress-percentage {
+            font-size: 0.875rem;
             font-weight: 500;
         }
-        .dark .desktop-tab-btn {
-             color: #94a3b8;
-        }
-        .desktop-tab-btn.active {
-            background-color: #0ea5e9;
-            color: white;
-        }
-        #settings-btn.active {
-            background-color: #0ea5e9;
-        }
-        #settings-btn.active i {
-            color: white;
-        }
-        
-        /* Video Generator Styles */
-        #video-gen-container { position: relative; width: 100%; height: 0; padding-bottom: 56.25%; /* 16:9 aspect ratio */ background-color: #000; }
-        #video-gen-yt-player-container, #video-gen-local-video-player, #video-gen-subtitle-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-        #video-gen-subtitle-overlay { z-index: 10; display: flex; flex-direction: column; justify-content: flex-end; padding: 1% 2% 2%; box-sizing: border-box; color: white; text-align: center; pointer-events: none; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8); font-size: 1.5vw; }
-        #video-gen-subtitle-overlay .subtitle-line { background-color: rgba(0, 0, 0, 0.5); padding: 0.2em 0.4em; display: inline; line-height: 1.4; }
-        @media (max-width: 768px) { #video-gen-subtitle-overlay { font-size: 2.5vw; } }
-        @media (min-width: 1200px) { #video-gen-subtitle-overlay { font-size: 18px; } }
-        .video-gen-tab-button { transition: all 0.2s ease-in-out; border-bottom: 2px solid transparent; }
-        .video-gen-tab-button.active { border-bottom-color: #3b82f6; /* blue-500 */ color: #d1d5db; /* gray-300 */ }
-        .video-gen-tab-content { display: none; }
-        .video-gen-tab-content.active { display: block; }
-        #video-gen-file-upload-label { cursor: pointer; }
-        #video-gen-subtitle-output { font-family: 'Noto Sans Mono', monospace; }
 
+        .futuristic-theme #progress-label,
+        .futuristic-theme #progress-percentage {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--neon-cyan);
+        }
+
+        /* Hide/Show Utilities */
+        .hidden { display: none !important; }
+
+        /* Footer */
+        .footer {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--classic-border);
+            text-align: center;
+            color: var(--classic-text-muted);
+            font-size: 0.875rem;
+        }
+
+        .futuristic-theme .footer {
+            border-top-color: var(--cyber-border);
+            color: #666;
+        }
     </style>
 </head>
 
-<body class="bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-300 font-sans antialiased">
+<body class="dark">
 
     <main class="w-full max-w-4xl mx-auto p-4">
-        <div id="app-container" class="bg-white dark:bg-slate-800 bg-card rounded-2xl shadow-lg dark:shadow-2xl dark:shadow-black/30 p-6 md:p-8 relative overflow-hidden flex flex-col">
-            
-            <header class="flex justify-between items-center mb-6">
-                <h1 class="text-3xl font-bold text-slate-900 dark:text-white" data-i18n-key="appTitle">Fluentify</h1>
-                <div class="flex items-center gap-2">
-                    <select id="language-switcher" class="bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-300 rounded-md p-2 text-sm focus:ring-2 focus:ring-sky-500 focus:outline-none appearance-none cursor-pointer">
+        <div id="app-container" class="relative overflow-hidden flex flex-col">
+
+            <header class="flex justify-between items-center">
+                <h1 data-i18n-key="appTitle">Fluentify</h1>
+                <div class="header-controls flex items-center gap-2">
+                    <select id="language-switcher">
                         <option value="en">English</option>
                         <option value="fa">فارسی</option>
                         <option value="ru">Русский</option>
                     </select>
-                    <button id="how-to-use-btn" class="p-2 rounded-full bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors" data-i18n-title-key="howToUseBtnLabel" aria-label="How to use">
-                        <svg class="w-5 h-5 text-slate-600 dark:text-slate-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" /></svg>
+                    <button id="how-to-use-btn" title="How to use">
+                        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" /></svg>
                     </button>
-                    <button id="design-toggle" class="design-switcher-btn p-2 rounded-full bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-600 hover:to-purple-600 text-white transition-all duration-300 shadow-lg" aria-label="Toggle design" title="Switch to Futuristic Theme">
+                    <button id="design-toggle" title="Switch Theme">
                         <i class="fas fa-bolt"></i>
                     </button>
-                    <button id="theme-toggle" class="p-2 rounded-full bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors" aria-label="Toggle theme">
-                        <svg id="theme-icon-light" class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                        <svg id="theme-icon-dark" class="w-5 h-5 text-slate-400 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                    <button id="theme-toggle" title="Toggle Dark/Light">
+                        <i class="fas fa-sun"></i>
                     </button>
-                    <button id="settings-btn" data-view="settings" class="hidden md:flex items-center justify-center p-2 rounded-full bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors" data-i18n-title-key="advSettingsBtn" aria-label="Settings">
-                         <i class="fas fa-cog text-slate-600 dark:text-slate-300"></i>
+                    <button id="settings-btn" data-view="settings" title="Settings">
+                        <i class="fas fa-cog"></i>
                     </button>
                 </div>
             </header>
 
-            <div id="desktop-tabs" class="hidden md:flex items-center space-x-2 rtl:space-x-reverse mb-4 bg-slate-200 dark:bg-slate-700 p-1 rounded-lg">
+            <div id="desktop-tabs">
                 <button type="button" data-mode="text" class="desktop-tab-btn active"><span data-i18n-key="tabText">Text</span></button>
                 <button type="button" data-mode="image" class="desktop-tab-btn"><span data-i18n-key="tabImage">Image</span></button>
                 <button type="button" data-mode="pdf" class="desktop-tab-btn"><span data-i18n-key="tabPDF">PDF</span></button>
@@ -405,130 +1596,91 @@
             <div id="view-container" class="flex-grow">
                 <div id="translation-view">
                     <form id="translate-form" onsubmit="return false;">
-                        <div id="language-selection-area">
-                            <div class="relative mb-4">
-                                <span class="absolute inset-y-0 left-0 flex items-center pl-3 rtl:left-auto rtl:right-0 rtl:pr-3">
-                                    <svg class="w-5 h-5 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-                                    </svg>
-                                </span>
-                                <input type="search" id="language-search" data-i18n-placeholder-key="searchLanguagesPlaceholder" class="w-full bg-slate-100 dark:bg-slate-700 bg-input border-slate-300 dark:border-transparent focus:ring-2 focus:ring-sky-500 rounded-lg p-3 pl-10 rtl:pl-4 rtl:pr-10">
-                            </div>
-                            <div class="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-4 items-center mb-4">
-                                <select id="source_lang" name="source_lang" class="w-full bg-slate-100 dark:bg-slate-700 bg-input border-slate-300 dark:border-transparent focus:ring-2 focus:ring-sky-500 rounded-lg p-3"></select>
-                                <button type="button" id="swap-btn" class="p-3 rounded-full bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed md:mx-0 mx-auto" data-i18n-title-key="swapBtnLabel" aria-label="Swap languages">
-                                    <svg class="w-5 h-5 text-slate-600 dark:text-slate-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" /></svg>
-                                </button>
-                                <select id="target_lang" name="target_lang" class="w-full bg-slate-100 dark:bg-slate-700 bg-input border-slate-300 dark:border-transparent focus:ring-2 focus:ring-sky-500 rounded-lg p-3"></select>
-                            </div>
+                        <div class="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-4 items-center mb-4">
+                            <select id="source_lang" name="source_lang" class="w-full"></select>
+                            <button type="button" id="swap-btn" title="Swap languages">
+                                <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" /></svg>
+                            </button>
+                            <select id="target_lang" name="target_lang" class="w-full"></select>
                         </div>
-        
+
                         <div class="relative mb-4">
                             <div id="text-input-section">
-                                <textarea id="text-input" name="text" maxlength="5000" data-i18n-placeholder-key="textInputPlaceholder" placeholder="Enter text to translate..." class="w-full h-40 p-4 bg-slate-100 dark:bg-slate-700 bg-input rounded-lg border-slate-300 dark:border-transparent focus:ring-2 focus:ring-sky-500 resize-none"></textarea>
-                                <span id="char-counter" class="absolute bottom-2 right-3 rtl:right-auto rtl:left-3 text-xs text-slate-500 dark:text-slate-400">0 / 5000</span>
+                                <textarea id="text-input" name="text" maxlength="5000" placeholder="Enter text to translate..." class="w-full h-40 resize-none"></textarea>
+                                <span id="char-counter" class="absolute bottom-2 right-3 text-xs">0 / 5000</span>
                             </div>
-        
-                            <div id="youtube-input-section" class="hidden mb-4 p-4 bg-slate-200/50 dark:bg-slate-900/50 rounded-lg space-y-3">
-                                <label class="block text-sm font-medium text-slate-700 dark:text-slate-300" data-i18n-key="youtubeSectionTitle">Load from YouTube URL</label>
+
+                            <div id="youtube-input-section" class="hidden mb-4 p-4 rounded-lg space-y-3">
+                                <label class="block text-sm font-medium" data-i18n-key="youtubeSectionTitle">Load from YouTube URL</label>
                                 <div class="flex flex-col sm:flex-row gap-2">
-                                    <input type="text" id="youtube-url-input" data-i18n-placeholder-key="youtubeUrlPlaceholder" placeholder="Enter YouTube Video URL..." class="w-full flex-grow bg-slate-100 dark:bg-slate-700 bg-input rounded-lg p-3 border-slate-300 dark:border-transparent focus:ring-2 focus:ring-sky-500 transition duration-200">
-                                    <input type="text" id="youtube-lang-input" value="en" data-i18n-placeholder-key="youtubeLangPlaceholder" placeholder="lang" class="sm:w-20 bg-slate-100 dark:bg-slate-700 bg-input text-center rounded-lg p-3 border-slate-300 dark:border-transparent focus:ring-2 focus:ring-sky-500 transition duration-200">
-                                    <button type="button" id="fetch-youtube-subs-btn" class="w-full sm:w-auto px-4 py-2 rounded-lg bg-sky-500 hover:bg-sky-600 text-white font-bold transition-colors flex items-center justify-center">
+                                    <input type="text" id="youtube-url-input" placeholder="Enter YouTube Video URL..." class="w-full flex-grow">
+                                    <input type="text" id="youtube-lang-input" value="en" placeholder="lang" class="sm:w-20 text-center">
+                                    <button type="button" id="fetch-youtube-subs-btn" class="flex items-center justify-center">
                                        <span id="fetch-youtube-btn-text" data-i18n-key="youtubeFetchBtn">Fetch</span>
-                                       <svg id="fetch-youtube-btn-spinner" class="spinner w-5 h-5 ml-2 rtl:ml-0 rtl:mr-2 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                                       <svg id="fetch-youtube-btn-spinner" class="spinner w-5 h-5 ml-2 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
                                     </button>
                                 </div>
-                                <p class="text-xs text-slate-600 dark:text-slate-400 text-center pt-3 border-t border-slate-300 dark:border-slate-700" data-i18n-key="youtubeNotice" data-i18n-html></p>
-                           </div>
-                            
+                            </div>
+
                             <div id="file-input-section" class="hidden">
-                                <div id="dropzone-container" class="relative flex flex-col items-center justify-center w-full h-40 border-2 border-slate-300 dark:border-slate-600 border-dashed rounded-lg cursor-pointer bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors p-2">
+                                <div id="dropzone-container" class="relative flex flex-col items-center justify-center w-full h-40 border-2 border-dashed rounded-lg cursor-pointer p-2">
                                     <div id="dropzone-prompt" class="flex flex-col items-center justify-center text-center p-4">
-                                        <svg class="w-8 h-8 mb-4 text-slate-500 dark:text-slate-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/></svg>
-                                        <p class="mb-2 text-sm text-slate-500 dark:text-slate-400"><span class="font-semibold" data-i18n-key="fileDragDrop"></span> <span data-i18n-key="fileOr"></span></p>
-                                        <button type="button" id="choose-file-btn" class="px-4 py-2 bg-white dark:bg-slate-600 border border-gray-300 dark:border-gray-500 rounded-lg text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-700" data-i18n-key="fileChooseBtn"></button>
-                                        <p id="file-upload-hint" class="text-xs text-slate-500 mt-2"></p>
+                                        <svg class="w-8 h-8 mb-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/></svg>
+                                        <p class="mb-2 text-sm"><span class="font-semibold" data-i18n-key="fileDragDrop"></span> <span data-i18n-key="fileOr"></span></p>
+                                        <button type="button" id="choose-file-btn" class="px-4 py-2 rounded-md text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-700" data-i18n-key="fileChooseBtn"></button>
+                                        <p id="file-upload-hint" class="text-xs mt-2"></p>
                                     </div>
                                     <div id="file-preview-container" class="hidden relative w-full h-full flex items-center justify-center">
                                         <img id="image-preview" class="max-w-full max-h-full object-contain rounded-md" alt="Image preview">
-                                        <div id="subtitle-preview" class="hidden text-center p-4 w-full"><svg class="w-12 h-12 mx-auto text-slate-500 dark:text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg><p id="subtitle-filename" class="mt-2 font-semibold text-slate-700 dark:text-slate-300 truncate w-full"></p></div>
-                                        <button type="button" id="remove-file-btn" class="absolute top-1 right-1 rtl:right-auto rtl:left-1 p-1.5 rounded-full bg-black/50 hover:bg-red-600 text-white transition-colors" data-i18n-title-key="removeFileBtnLabel" aria-label="Remove file"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+                                        <button type="button" id="remove-file-btn" class="absolute top-1 right-1 p-1.5 rounded-full bg-black/50 hover:bg-red-600 text-white">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                        </button>
                                     </div>
                                 </div>
                                 <input id="file-upload" name="file" type="file" class="hidden" />
                             </div>
                         </div>
-        
-                        <div id="pdf-viewer-section" class="hidden mb-4 bg-slate-200/50 dark:bg-slate-900/50 rounded-lg p-4 space-y-4">
-                            <div class="flex flex-wrap gap-4 justify-between items-center pb-3 border-b border-slate-300 dark:border-slate-700">
-                                <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-200" data-i18n-key="pdfSelectPagesTitle"></h3>
+
+                        <div id="pdf-viewer-section" class="hidden mb-4 p-4 rounded-lg space-y-4">
+                            <div class="flex flex-wrap gap-4 justify-between items-center pb-3 border-b">
+                                <h3 class="text-lg font-semibold" data-i18n-key="pdfSelectPagesTitle"></h3>
                                 <div class="flex items-center gap-2">
-                                     <button type="button" id="select-all-pages-btn" class="px-3 py-1 text-sm font-medium rounded-md bg-white dark:bg-slate-600 border border-gray-300 dark:border-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700" data-i18n-key="pdfSelectAll"></button>
-                                     <button type="button" id="deselect-all-pages-btn" class="px-3 py-1 text-sm font-medium rounded-md bg-white dark:bg-slate-600 border border-gray-300 dark:border-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700" data-i18n-key="pdfDeselectAll"></button>
+                                     <button type="button" id="select-all-pages-btn" class="px-3 py-1 text-sm font-medium rounded-md" data-i18n-key="pdfSelectAll"></button>
+                                     <button type="button" id="deselect-all-pages-btn" class="px-3 py-1 text-sm font-medium rounded-md" data-i18n-key="pdfDeselectAll"></button>
                                 </div>
                             </div>
-                            <div id="pdf-page-viewer" class="scroll-container max-h-[30rem] overflow-y-auto grid grid-cols-1 md:grid-cols-2 gap-4 p-2 bg-slate-100 dark:bg-slate-800 rounded-md"></div>
-                             <div class="pt-3 border-t border-slate-300 dark:border-slate-700 flex flex-wrap gap-x-4 gap-y-2 justify-between items-center">
-                                <span id="page-selection-counter" class="text-sm font-medium text-slate-600 dark:text-slate-400"></span>
+                            <div id="pdf-page-viewer" class="max-h-[30rem] overflow-y-auto grid grid-cols-1 md:grid-cols-2 gap-4 p-2 rounded-md"></div>
+                             <div class="pt-3 border-t flex flex-wrap gap-x-4 gap-y-2 justify-between items-center">
+                                <span id="page-selection-counter" class="text-sm font-medium"></span>
                                 <div class="flex items-center">
-                                    <input id="combine-pages-checkbox" name="combine_pages" type="checkbox" class="h-4 w-4 rounded border-slate-400 dark:border-slate-600 bg-slate-200 dark:bg-slate-700 text-sky-600 focus:ring-sky-500">
-                                    <label for="combine-pages-checkbox" class="ms-2 rtl:ms-0 rtl:me-2 text-sm font-medium text-slate-700 dark:text-slate-300" data-i18n-key="pdfCombinePages"></label>
+                                    <input id="combine-pages-checkbox" name="combine_pages" type="checkbox" class="h-4 w-4 rounded">
+                                    <label for="combine-pages-checkbox" class="ms-2 text-sm font-medium" data-i18n-key="pdfCombinePages"></label>
                                 </div>
                             </div>
-                             <p id="batch-warning" class="text-center text-xs text-amber-600 dark:text-amber-400 mt-2"></p>
                         </div>
-                        
-                        <div id="subtitle-editor-section" class="hidden mb-4 bg-slate-200/50 dark:bg-slate-900/50 rounded-lg p-4 space-y-4">
-                            <div class="flex flex-wrap gap-4 justify-between items-center pb-3 border-b border-slate-300 dark:border-slate-700">
-                                <h3 class="text-lg font-semibold text-slate-800 dark:text-slate-200" data-i18n-key="subtitleEditorTitle"></h3>
+
+                        <div id="subtitle-editor-section" class="hidden mb-4 p-4 rounded-lg space-y-4">
+                            <div class="flex flex-wrap gap-4 justify-between items-center pb-3 border-b">
+                                <h3 class="text-lg font-semibold" data-i18n-key="subtitleEditorTitle"></h3>
                                 <div class="flex items-center gap-2">
-                                     <button type="button" id="export-btn" disabled class="px-3 py-1 text-sm font-medium rounded-md bg-white dark:bg-slate-600 border border-gray-300 dark:border-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed" data-i18n-key="subtitleExportBtnLabel"></button>
+                                     <button type="button" id="export-btn" disabled class="px-3 py-1 text-sm font-medium rounded-md disabled:opacity-50" data-i18n-key="subtitleExportBtnLabel"></button>
                                 </div>
                             </div>
 
-                            <div id="saved-progress-notification" class="hidden p-3 bg-sky-100 dark:bg-sky-900/50 border border-sky-300 dark:border-sky-700 rounded-lg text-sm text-sky-800 dark:text-sky-200 flex flex-wrap items-center justify-between gap-2">
-                                <span data-i18n-key="subtitleSavedProgress"></span>
-                                <div class="flex items-center gap-2">
-                                    <button type="button" id="load-progress-btn" class="px-3 py-1 bg-sky-500 text-white rounded-md hover:bg-sky-600" data-i18n-key="subtitleLoadProgress"></button>
-                                    <button type="button" id="clear-progress-btn" class="px-3 py-1 bg-transparent text-slate-600 dark:text-slate-300 rounded-md hover:bg-slate-200 dark:hover:bg-slate-700" data-i18n-key="subtitleClearHistory"></button>
-                                </div>
-                            </div>
-                            
                             <div class="flex flex-wrap gap-4 items-center justify-between">
                                 <div class="flex items-center gap-2">
                                     <label for="subtitle-batch-size" class="text-sm font-medium" data-i18n-key="subtitleLinesPerRequest"></label>
-                                    <input type="number" id="subtitle-batch-size" value="100" min="1" max="500" class="w-20 bg-slate-100 dark:bg-slate-700 bg-input rounded-lg p-2 border-slate-300 dark:border-transparent focus:ring-2 focus:ring-sky-500 transition duration-200">
+                                    <input type="number" id="subtitle-batch-size" value="100" min="1" max="500" class="w-20">
                                 </div>
                                 <div class="flex items-center gap-2">
-                                    <button type="button" id="break-lines-toggle-btn" disabled class="px-3 py-1 text-sm font-medium rounded-md bg-white dark:bg-slate-600 border border-gray-300 dark:border-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 disabled:opacity-50" data-i18n-key="subtitleBreakLinesBtnLabel"></button>
-                                    <button type="button" id="find-replace-toggle-btn" disabled class="px-3 py-1 text-sm font-medium rounded-md bg-white dark:bg-slate-600 border border-gray-300 dark:border-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 disabled:opacity-50" data-i18n-key="subtitleFindReplaceBtnLabel"></button>
+                                    <button type="button" id="break-lines-toggle-btn" disabled class="px-3 py-1 text-sm font-medium rounded-md disabled:opacity-50" data-i18n-key="subtitleBreakLinesBtnLabel"></button>
+                                    <button type="button" id="find-replace-toggle-btn" disabled class="px-3 py-1 text-sm font-medium rounded-md disabled:opacity-50" data-i18n-key="subtitleFindReplaceBtnLabel"></button>
                                 </div>
                             </div>
-                             <div id="break-lines-panel" class="hidden p-3 bg-slate-100 dark:bg-slate-700 rounded-md flex items-center gap-2">
-                                <label for="break-lines-max-chars" class="text-sm font-medium" data-i18n-key="breakLinesPanelTitle"></label>
-                                <input type="number" id="break-lines-max-chars" value="42" class="w-20 bg-white dark:bg-slate-600 rounded-lg p-2 border-slate-300 dark:border-transparent focus:ring-2 focus:ring-sky-500">
-                                <button id="break-lines-apply-btn" class="px-3 py-1 bg-sky-500 text-white rounded-md hover:bg-sky-600" data-i18n-key="breakLinesApply"></button>
-                             </div>
-                             <div id="find-replace-panel" class="hidden p-3 bg-slate-100 dark:bg-slate-700 rounded-md space-y-2">
-                                <div class="flex flex-col sm:flex-row gap-2">
-                                    <input type="text" id="find-input" data-i18n-placeholder-key="findInputPlaceholder" class="flex-grow bg-white dark:bg-slate-600 rounded-lg p-2 border-slate-300 dark:border-transparent focus:ring-2 focus:ring-sky-500">
-                                    <input type="text" id="replace-input" data-i18n-placeholder-key="replaceInputPlaceholder" class="flex-grow bg-white dark:bg-slate-600 rounded-lg p-2 border-slate-300 dark:border-transparent focus:ring-2 focus:ring-sky-500">
-                                </div>
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-center">
-                                        <input type="checkbox" id="find-case-sensitive" class="h-4 w-4 rounded text-sky-600 focus:ring-sky-500">
-                                        <label for="find-case-sensitive" class="ms-2 rtl:ms-0 rtl:me-2 text-sm" data-i18n-key="findCaseSensitive"></label>
-                                    </div>
-                                    <button id="replace-all-btn" class="px-3 py-1 bg-sky-500 text-white rounded-md hover:bg-sky-600" data-i18n-key="replaceAllBtn"></button>
-                                </div>
-                             </div>
 
-                             <button type="button" id="retry-failed-subs-btn" class="hidden w-full px-4 py-2 rounded-lg bg-amber-500 hover:bg-amber-600 text-white font-bold transition-colors flex items-center justify-center">Retry Failed Translations</button>
-                            
-                            <div class="max-h-[30rem] overflow-y-auto scroll-container relative">
+                            <div class="max-h-[30rem] overflow-y-auto relative">
                                 <table class="w-full text-sm">
-                                    <thead class="sticky top-0 bg-slate-200 dark:bg-slate-700 z-10">
+                                    <thead class="sticky top-0 z-10">
                                         <tr>
                                             <th class="w-12 text-center" data-i18n-key="subtitleTableHeaderNum"></th>
                                             <th class="w-48" data-i18n-key="subtitleTableHeaderTime"></th>
@@ -536,324 +1688,138 @@
                                             <th data-i18n-key="subtitleTableHeaderTrans"></th>
                                         </tr>
                                     </thead>
-                                    <tbody id="subtitle-table-body">
-                                    </tbody>
+                                    <tbody id="subtitle-table-body"></tbody>
                                 </table>
                             </div>
                         </div>
 
-                        <div id="video-generator-section" class="hidden">
-                            <div class="space-y-6">
-                                <div>
-                                    <div class="border-b border-slate-300 dark:border-slate-700 mb-4">
-                                        <nav class="-mb-px flex space-x-6" aria-label="Tabs">
-                                            <button id="video-gen-tab-youtube" type="button" class="video-gen-tab-button active font-semibold py-3 px-1 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">YouTube</button>
-                                            <button id="video-gen-tab-upload" type="button" class="video-gen-tab-button font-semibold py-3 px-1 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">Upload File</button>
-                                            <button id="video-gen-tab-url" type="button" class="video-gen-tab-button font-semibold py-3 px-1 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">Direct URL</button>
-                                        </nav>
-                                    </div>
-                
-                                    <div id="video-gen-content-youtube" class="video-gen-tab-content active space-y-4">
-                                        <div>
-                                            <label for="video-gen-youtube-url" class="font-semibold text-slate-700 dark:text-slate-300 mb-2 block">YouTube Video URL</label>
-                                            <div class="relative">
-                                                <i class="fab fa-youtube absolute left-4 top-1/2 -translate-y-1/2 text-red-500"></i>
-                                                <input type="text" id="video-gen-youtube-url" placeholder="Paste YouTube video URL here" class="w-full pl-12 pr-4 py-3 bg-slate-100 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-all duration-200">
-                                            </div>
-                                            <div id="video-gen-url-error" class="text-red-500 dark:text-red-400 text-sm mt-1 hidden">Please enter a valid YouTube URL</div>
-                                        </div>
-                                    </div>
-                
-                                    <div id="video-gen-content-upload" class="video-gen-tab-content space-y-4">
-                                         <div>
-                                            <label class="font-semibold text-slate-700 dark:text-slate-300 mb-2 block">Local Video File</label>
-                                            <label id="video-gen-file-upload-label" for="video-gen-video-upload" class="relative flex items-center justify-center w-full px-4 py-3 bg-slate-100 dark:bg-slate-700 border-2 border-dashed border-slate-300 dark:border-slate-600 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-600 transition-all">
-                                                <i class="fa-solid fa-upload mr-3 text-slate-500 dark:text-slate-400"></i>
-                                                <span id="video-gen-file-upload-text" class="text-slate-500 dark:text-slate-400">Click to choose a video file</span>
-                                            </label>
-                                            <input type="file" id="video-gen-video-upload" accept="video/*" class="hidden">
-                                             <p class="text-xs text-slate-500 mt-1">For best results, use files under 20MB.</p>
-                                        </div>
-                                    </div>
-                
-                                    <div id="video-gen-content-url" class="video-gen-tab-content space-y-4">
-                                        <div>
-                                            <label for="video-gen-direct-url" class="font-semibold text-slate-700 dark:text-slate-300 mb-2 block">Direct Video URL</label>
-                                            <div class="relative">
-                                                <i class="fa-solid fa-link absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
-                                                <input type="url" id="video-gen-direct-url" placeholder="https://example.com/video.mp4" class="w-full pl-12 pr-4 py-3 bg-slate-100 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-all duration-200">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                
-                                <div id="video-gen-duration-container" class="hidden">
-                                     <label for="video-gen-video-duration" class="font-semibold text-slate-700 dark:text-slate-300 mb-2 block">Video Duration (MM:SS)</label>
-                                    <div class="relative">
-                                        <i class="fa-solid fa-clock absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
-                                        <input type="text" id="video-gen-video-duration" placeholder="e.g., 12:34" class="w-full pl-12 pr-4 py-3 bg-slate-100 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg text-slate-900 dark:text-white placeholder-slate-400 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-all duration-200">
-                                    </div>
-                                    <p class="text-xs text-slate-500 mt-1">Auto-detected. Please edit if incorrect.</p>
-                                </div>
-                                    
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div>
-                                        <label for="video-gen-output-language" class="font-semibold text-slate-700 dark:text-slate-300 mb-2 block">Output Language</label>
-                                        <select id="video-gen-output-language" class="w-full px-4 py-3 bg-slate-100 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg text-slate-900 dark:text-white focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-all duration-200"></select>
-                                    </div>
-                                    <div>
-                                        <label for="video-gen-output-format" class="font-semibold text-slate-700 dark:text-slate-300 mb-2 block">Output Format</label>
-                                        <select id="video-gen-output-format" class="w-full px-4 py-3 bg-slate-100 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-lg text-slate-900 dark:text-white focus:ring-2 focus:ring-sky-500 focus:border-sky-500 transition-all duration-200">
-                                            <option value="srt" selected>SRT (SubRip)</option>
-                                            <option value="vtt">WebVTT</option>
-                                            <option value="txt">Plain Text</option>
-                                        </select>
-                                    </div>
-                                </div>
+                        <div id="progress-container" class="hidden">
+                            <div class="flex justify-between items-center mb-2">
+                                <span id="progress-label" class="text-sm font-medium" data-i18n-key="progressLabelTranslating"></span>
+                                <span id="progress-percentage" class="text-sm font-bold">0%</span>
                             </div>
-                
-                            <div id="video-gen-video-preview" class="hidden mt-6">
-                                <label class="font-semibold text-slate-700 dark:text-slate-300 mb-2 block">Video Preview</label>
-                                <div id="video-gen-container" class="rounded-lg overflow-hidden border border-slate-300 dark:border-slate-700">
-                                    <div id="video-gen-yt-player-container"></div>
-                                    <video id="video-gen-local-video-player" class="hidden" controls></video>
-                                    <div id="video-gen-subtitle-overlay" aria-live="polite">
-                                        <p id="video-gen-subtitle-text">&nbsp;</p>
-                                    </div>
-                                </div>
+                            <div class="w-full progress-bar">
+                               <div id="progress-bar-inner" class="progress-bar-inner" style="width: 0%"></div>
                             </div>
-                
-                            <div class="flex gap-3 mt-8">
-                                <button id="video-gen-generate-btn" class="flex-1 bg-sky-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-sky-700 disabled:bg-sky-800 disabled:cursor-not-allowed focus:outline-none focus:ring-4 focus:ring-sky-500/50 transition-all duration-200 flex items-center justify-center gap-3">
-                                    <span id="video-gen-btn-text">Generate Subtitles</span>
-                                    <svg id="video-gen-spinner" class="spinner h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                    </svg>
-                                </button>
-                                <button id="video-gen-cancel-btn" class="bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg px-4 hidden items-center justify-center transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-red-500/50">
-                                    <i class="fa-solid fa-times"></i>
-                                </button>
-                                <button id="video-gen-preview-btn" class="bg-slate-600 text-slate-200 font-semibold px-4 py-3 rounded-lg hover:bg-slate-500 focus:outline-none focus:ring-4 focus:ring-slate-500/50 transition-all duration-200 disabled:bg-slate-700 disabled:cursor-not-allowed">
-                                    <i class="fa-solid fa-play w-4"></i>
-                                </button>
-                            </div>
-                            
-                            <div id="video-gen-output-container" class="mt-8 hidden">
-                                <div id="video-gen-progress-container" class="mb-4">
-                                    <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2.5">
-                                        <div id="video-gen-progress-bar" class="progress-bar-inner bg-sky-500 h-2.5 rounded-full" style="width: 0%"></div>
-                                    </div>
-                                    <div class="flex justify-between text-xs text-slate-500 dark:text-slate-400 mt-1">
-                                        <span id="video-gen-progress-status">Initializing...</span>
-                                        <span id="video-gen-progress-percentage">0%</span>
-                                    </div>
-                                </div>
-                                
-                                <div id="video-gen-status-container" class="text-center p-4 rounded-lg mb-4">
-                                    <p id="video-gen-status-message" class="font-medium"></p>
-                                </div>
-                                
-                                <div id="video-gen-results-wrapper" class="hidden">
-                                    <div class="flex justify-between items-center mb-2">
-                                        <h3 class="font-semibold text-slate-900 dark:text-white">Generated Subtitles</h3>
-                                        <div class="flex gap-2">
-                                            <button id="video-gen-edit-btn" class="text-sm bg-slate-200 dark:bg-slate-600 text-slate-800 dark:text-slate-200 px-3 py-1 rounded-md hover:bg-slate-300 dark:hover:bg-slate-500 transition-colors">
-                                                <i class="fa-solid fa-edit"></i> Edit
-                                            </button>
-                                            <button id="video-gen-timestamp-btn" class="text-sm bg-slate-200 dark:bg-slate-600 text-slate-800 dark:text-slate-200 px-3 py-1 rounded-md hover:bg-slate-300 dark:hover:bg-slate-500 transition-colors">
-                                                <i class="fa-solid fa-clock"></i> Adjust
-                                            </button>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="relative">
-                                        <textarea id="video-gen-subtitle-output" rows="15" readonly dir="auto" class="w-full p-4 border border-slate-300 dark:border-slate-600 bg-slate-100 dark:bg-slate-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500 resize-none font-mono text-sm text-slate-800 dark:text-slate-200 transition-colors"></textarea>
-                                        <button id="video-gen-copy-btn" title="Copy to Clipboard" class="absolute top-3 right-3 bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 px-3 py-1 rounded-md text-xs font-semibold hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors">
-                                            <i class="fa-regular fa-copy"></i> Copy
-                                        </button>
-                                    </div>
-                                    
-                                    <div class="mt-4 flex flex-col sm:flex-row gap-3">
-                                        <button id="video-gen-download-btn" class="flex-1 bg-green-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-green-500/50 transition-colors flex items-center justify-center gap-2">
-                                            <i class="fa-solid fa-download"></i> Download Subtitle File
-                                        </button>
-                                        <button id="video-gen-export-video-btn" class="flex-1 bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-500/50 transition-colors flex items-center justify-center gap-2" disabled title="Generate subtitles first to enable export.">
-                                            <i class="fa-solid fa-film"></i> Export Video
-                                        </button>
-                                        <button id="video-gen-retry-btn" class="flex-1 bg-slate-600 text-slate-200 font-semibold px-6 py-3 rounded-lg hover:bg-slate-500 focus:outline-none focus:ring-4 focus:ring-slate-500/50 transition-colors flex items-center justify-center gap-2 hidden">
-                                            <i class="fa-solid fa-redo"></i> Retry
-                                        </button>
-                                    </div>
-                                </div>
-                                <div id="video-gen-export-progress-container" class="mt-4 hidden">
-                                    <div class="flex justify-between items-center mb-2">
-                                        <span id="video-gen-export-progress-label" class="text-sm font-medium text-slate-700 dark:text-slate-300">Exporting video...</span>
-                                        <span id="video-gen-export-progress-percentage" class="text-sm font-bold text-sky-600 dark:text-sky-400">0%</span>
-                                    </div>
-                                    <div class="w-full bg-slate-200 rounded-full h-2.5 dark:bg-slate-700">
-                                        <div id="video-gen-export-progress-bar" class="bg-sky-500 h-2.5 rounded-full" style="width: 0%"></div>
-                                    </div>
-                                    <button type="button" id="video-gen-export-cancel-btn" class="w-full mt-4 py-2 text-sm font-medium text-red-600 dark:text-red-400 bg-red-100 dark:bg-red-900/30 rounded-lg hover:bg-red-200 dark:hover:bg-red-900/50 transition-colors">Cancel Export</button>
-                                </div>
-                            </div>
+                            <button type="button" id="cancel-translation-btn" class="mt-4 text-sm font-medium" data-i18n-key="progressCancel"></button>
                         </div>
 
-                        <div id="progress-container" class="hidden my-4 p-4 bg-slate-200/50 dark:bg-slate-900/50 rounded-lg">
-                            <div class="flex justify-between items-center mb-2">
-                                <span id="progress-label" class="text-sm font-medium text-slate-700 dark:text-slate-300" data-i18n-key="progressLabelTranslating"></span>
-                                <span id="progress-percentage" class="text-sm font-bold text-sky-600 dark:text-sky-400">0%</span>
-                            </div>
-                            <div class="w-full bg-slate-200 rounded-full h-2.5 dark:bg-slate-700">
-                               <div id="progress-bar-inner" class="bg-sky-500 h-2.5 rounded-full" style="width: 0%"></div>
-                            </div>
-                            <button type="button" id="cancel-translation-btn" class="w-full mt-4 py-2 text-sm font-medium text-red-600 dark:text-red-400 bg-red-100 dark:bg-red-900/30 rounded-lg hover:bg-red-200 dark:hover:bg-red-900/50 transition-colors" data-i18n-key="progressCancel"></button>
-                        </div>
-        
-                        <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
-                            <button type="submit" id="translate-btn" class="w-full sm:w-auto order-1 sm:order-2 px-8 py-3 rounded-lg bg-sky-500 hover:bg-sky-600 text-white font-bold transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center">
+                        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mt-4">
+                            <button type="submit" id="translate-btn" class="flex items-center justify-center gap-2">
                                 <span id="translate-btn-text" data-i18n-key="translateBtn">Translate</span>
-                                <svg id="translate-btn-spinner" class="spinner w-5 h-5 ml-2 rtl:ml-0 rtl:mr-2 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                                <svg id="translate-btn-spinner" class="spinner w-5 h-5 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
                             </button>
-                            <div id="error-display" class="order-2 sm:order-1 text-sm text-red-500 dark:text-red-400 text-center sm:text-left rtl:sm:text-right"></div>
+                            <div id="error-display" class="text-sm text-red-500 dark:text-red-400 text-center sm:text-left"></div>
                         </div>
-        
+
                         <div id="main-output-section" class="mt-6">
                            <div class="relative">
-                               <textarea id="output" readonly data-i18n-placeholder-key="outputPlaceholder" placeholder="Translation will appear here..." class="w-full h-48 p-4 bg-slate-100 dark:bg-slate-700 bg-input rounded-lg border-slate-300 dark:border-transparent focus:ring-2 focus:ring-sky-500 resize-none"></textarea>
-                               <div class="absolute top-2 right-2 rtl:right-auto rtl:left-2 flex flex-col gap-2">
-                                  <button type="button" id="copy-btn" disabled class="p-2 rounded-md bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors disabled:opacity-50" data-i18n-title-key="copyBtnLabel" aria-label="Copy output">
-                                      <svg id="copy-icon-default" class="w-5 h-5 text-slate-600 dark:text-slate-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5 .124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75" /></svg>
-                                      <svg id="copy-icon-success" class="w-5 h-5 text-green-500 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                               <textarea id="output" readonly placeholder="Translation will appear here..." class="w-full h-48 resize-none"></textarea>
+                               <div class="absolute top-2 right-2 flex flex-col gap-2">
+                                  <button type="button" id="copy-btn" disabled class="action-btn p-2 rounded-md transition-colors disabled:opacity-50">
+                                      <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
                                   </button>
-                                  <button type="button" id="export-text-btn" disabled class="p-2 rounded-md bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors disabled:opacity-50" data-i18n-title-key="exportTextBtnLabel" aria-label="Export as TXT file">
-                                    <svg class="w-5 h-5 text-slate-600 dark:text-slate-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" /> </svg>
-                                </button>
+                                  <button type="button" id="export-text-btn" disabled class="action-btn p-2 rounded-md transition-colors disabled:opacity-50">
+                                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" /> </svg>
+                                  </button>
                                </div>
                            </div>
-                           <div id="enhancements-toolbar" class="hidden opacity-0 -translate-y-2 mt-4 p-2 bg-slate-200 dark:bg-slate-700 rounded-lg flex flex-wrap items-center justify-center gap-2">
-                               <span class="text-sm font-semibold mr-2 rtl:mr-0 rtl:ml-2" data-i18n-key="refineToolbarTitle"></span>
-                               <button data-action="shorten" class="enhancement-btn text-sm px-3 py-1 rounded-md bg-white dark:bg-slate-600 border border-gray-300 dark:border-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700" data-i18n-key="refineShorten"></button>
-                               <button data-action="expand" class="enhancement-btn text-sm px-3 py-1 rounded-md bg-white dark:bg-slate-600 border border-gray-300 dark:border-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700" data-i18n-key="refineExpand"></button>
-                               <button data-action="summarize" class="enhancement-btn text-sm px-3 py-1 rounded-md bg-white dark:bg-slate-600 border border-gray-300 dark:border-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700" data-i18n-key="refineSummarize"></button>
-                               <span class="border-l border-slate-400 dark:border-slate-500 h-6 mx-2"></span>
-                               <span class="text-sm font-semibold mr-2 rtl:mr-0 rtl:ml-2" data-i18n-key="styleToolbarTitle"></span>
-                               <button data-action="formal" class="enhancement-btn text-sm px-3 py-1 rounded-md bg-white dark:bg-slate-600 border border-gray-300 dark:border-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700" data-i18n-key="styleFormal"></button>
-                               <button data-action="informal" class="enhancement-btn text-sm px-3 py-1 rounded-md bg-white dark:bg-slate-600 border border-gray-300 dark:border-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700" data-i18n-key="styleInformal"></button>
-                               <button data-action="poetic" class="enhancement-btn text-sm px-3 py-1 rounded-md bg-white dark:bg-slate-600 border border-gray-300 dark:border-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700" data-i18n-key="stylePoetic"></button>
-                               <button data-action="simplify" class="enhancement-btn text-sm px-3 py-1 rounded-md bg-white dark:bg-slate-600 border border-gray-300 dark:border-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700" data-i18n-key="styleSimplify"></button>
+                           <div id="enhancements-toolbar" class="hidden opacity-0 -translate-y-2 mt-4 p-2 rounded-lg flex flex-wrap items-center justify-center gap-2">
+                               <span class="text-sm font-semibold mr-2" data-i18n-key="refineToolbarTitle"></span>
+                               <button data-action="shorten" class="enhancement-btn text-sm px-3 py-1 rounded-md" data-i18n-key="refineShorten"></button>
+                               <button data-action="expand" class="enhancement-btn text-sm px-3 py-1 rounded-md" data-i18n-key="refineExpand"></button>
+                               <button data-action="summarize" class="enhancement-btn text-sm px-3 py-1 rounded-md" data-i18n-key="refineSummarize"></button>
+                               <span class="border-l h-6 mx-2"></span>
+                               <span class="text-sm font-semibold mr-2" data-i18n-key="styleToolbarTitle"></span>
+                               <button data-action="formal" class="enhancement-btn text-sm px-3 py-1 rounded-md" data-i18n-key="styleFormal"></button>
+                               <button data-action="informal" class="enhancement-btn text-sm px-3 py-1 rounded-md" data-i18n-key="styleInformal"></button>
+                               <button data-action="poetic" class="enhancement-btn text-sm px-3 py-1 rounded-md" data-i18n-key="stylePoetic"></button>
+                               <button data-action="simplify" class="enhancement-btn text-sm px-3 py-1 rounded-md" data-i18n-key="styleSimplify"></button>
                            </div>
                         </div>
                     </form>
                 </div>
 
                 <div id="settings-view" class="hidden">
-                    <div class="space-y-6">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                            <div>
-                                <label for="model" class="block text-sm font-medium mb-1" data-i18n-key="settingsModel"></label>
-                                <select id="model" name="model" class="w-full bg-slate-100 dark:bg-slate-700 bg-input border-slate-300 dark:border-transparent focus:ring-2 focus:ring-sky-500 rounded-lg p-3"></select>
-                            </div>
-                            <div>
-                                <label for="job_field" class="block text-sm font-medium mb-1" data-i18n-key="settingsSpecialization"></label>
-                                <select id="job_field" name="job_field" class="w-full bg-slate-100 dark:bg-slate-700 bg-input border-slate-300 dark:border-transparent focus:ring-2 focus:ring-sky-500 rounded-lg p-3"></select>
-                            </div>
-                            <div>
-                                <label for="translation_tone" class="block text-sm font-medium mb-1" data-i18n-key="settingsTone"></label>
-                                <select id="translation_tone" name="translation_tone" class="w-full bg-slate-100 dark:bg-slate-700 bg-input border-slate-300 dark:border-transparent focus:ring-2 focus:ring-sky-500 rounded-lg p-3"></select>
-                            </div>
-                            <div id="custom-tone-container" class="hidden">
-                                <label for="custom-tone-input" class="block text-sm font-medium mb-1" data-i18n-key="settingsCustomToneLabel"></label>
-                                <input id="custom-tone-input" type="text" data-i18n-placeholder-key="settingsCustomTonePlaceholder" class="w-full bg-slate-100 dark:bg-slate-700 bg-input rounded-lg p-3 border-slate-300 dark:border-transparent focus:ring-2 focus:ring-sky-500">
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                             <div>
-                                 <label for="temperature" class="block text-sm font-medium mb-1" data-i18n-key="settingsCreativity"></label>
-                                 <div class="flex items-center gap-3">
-                                     <input id="temperature" name="temperature" type="range" min="0" max="1" step="0.05" value="0.7" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer dark:bg-slate-600">
-                                     <span id="temperature-value" class="font-mono text-sm">0.7</span>
-                                 </div>
-                             </div>
-                             <div>
-                                 <label for="request_delay" class="block text-sm font-medium mb-1" data-i18n-key="settingsRequestDelay"></label>
-                                 <input id="request_delay" name="request_delay" type="number" min="0" step="0.5" value="4" class="w-full bg-slate-100 dark:bg-slate-700 bg-input rounded-lg p-3 border-slate-300 dark:border-transparent focus:ring-2 focus:ring-sky-500">
-                             </div>
+                    <h2>Settings</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label for="model" class="block text-sm font-medium mb-1" data-i18n-key="settingsModel"></label>
+                            <select id="model" name="model" class="w-full"></select>
                         </div>
                         <div>
-                            <label for="api_key" class="block text-sm font-medium mb-1" data-i18n-key="settingsApiKey"></label>
-                            <textarea id="api_key" name="api_key" rows="3" data-i18n-placeholder-key="settingsApiKeyPlaceholder" class="w-full bg-slate-100 dark:bg-slate-700 bg-input rounded-lg p-3 border-slate-300 dark:border-transparent focus:ring-2 focus:ring-sky-500 font-mono"></textarea>
-                            <p class="text-xs text-slate-500 mt-1" data-i18n-key="settingsApiKeyHint"></p>
+                            <label for="job_field" class="block text-sm font-medium mb-1" data-i18n-key="settingsSpecialization"></label>
+                            <select id="job_field" name="job_field" class="w-full"></select>
                         </div>
-                        <div class="space-y-4 pt-4 border-t border-slate-200 dark:border-slate-700">
-                            <div class="flex items-start">
-                                <div class="flex items-center h-5">
-                                    <input id="use-proxy-checkbox" type="checkbox" class="h-4 w-4 rounded text-sky-600 focus:ring-sky-500">
-                                </div>
-                                <div class="ms-3 rtl:ms-0 rtl:me-3 text-sm">
-                                    <label for="use-proxy-checkbox" class="font-medium" data-i18n-key="settingsUseProxy"></label>
-                                    <div id="custom-proxy-container" class="mt-2 hidden">
-                                        <label for="custom-proxy-input" class="block text-xs font-medium mb-1" data-i18n-key="settingsCustomProxyLabel"></label>
-                                        <input id="custom-proxy-input" type="url" class="w-full bg-slate-100 dark:bg-slate-700 bg-input rounded-lg p-2 text-sm border-slate-300 dark:border-transparent focus:ring-2 focus:ring-sky-500">
-                                        <p class="text-xs text-slate-500 mt-1" data-i18n-key="settingsCustomProxyHint" data-i18n-html></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="flex items-start">
-                                <div class="flex items-center h-5">
-                                    <input id="use-custom-prompt-checkbox" type="checkbox" class="h-4 w-4 rounded text-sky-600 focus:ring-sky-500">
-                                </div>
-                                <div class="ms-3 rtl:ms-0 rtl:me-3 text-sm flex-grow">
-                                    <label for="use-custom-prompt-checkbox" class="font-medium" data-i18n-key="settingsUseCustomPrompt"></label>
-                                    <div id="custom-prompt-container" class="mt-2 hidden">
-                                        <textarea id="custom-prompt-input" rows="4" data-i18n-placeholder-key="settingsCustomPromptPlaceholder" class="w-full bg-slate-100 dark:bg-slate-700 bg-input rounded-lg p-2 text-sm border-slate-300 dark:border-transparent focus:ring-2 focus:ring-sky-500"></textarea>
-                                        <button type="button" id="optimize-prompt-btn" class="mt-2 px-3 py-1 text-sm rounded-md bg-white dark:bg-slate-600 border border-gray-300 dark:border-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center justify-center">
-                                            <span id="optimize-prompt-btn-text" data-i18n-key="settingsOptimizePrompt"></span>
-                                            <svg id="optimize-prompt-spinner" class="spinner w-4 h-4 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="flex items-center">
-                                <input id="pdf-ocr-checkbox" type="checkbox" class="h-4 w-4 rounded text-sky-600 focus:ring-sky-500">
-                                <label for="pdf-ocr-checkbox" class="ms-3 rtl:ms-0 rtl:me-3 text-sm font-medium" data-i18n-key="settingsOcr"></label>
-                            </div>
-                            <div class="flex items-center">
-                                <input id="save-settings-checkbox" type="checkbox" class="h-4 w-4 rounded text-sky-600 focus:ring-sky-500">
-                                <label for="save-settings-checkbox" class="ms-3 rtl:ms-0 rtl:me-3 text-sm font-medium" data-i18n-key="settingsSave"></label>
-                            </div>
+                        <div>
+                            <label for="translation_tone" class="block text-sm font-medium mb-1" data-i18n-key="settingsTone"></label>
+                            <select id="translation_tone" name="translation_tone" class="w-full"></select>
                         </div>
+                        <div id="custom-tone-container" class="hidden">
+                            <label for="custom-tone-input" class="block text-sm font-medium mb-1" data-i18n-key="settingsCustomToneLabel"></label>
+                            <input id="custom-tone-input" type="text" class="w-full">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-6">
+                         <div>
+                             <label for="temperature" class="block text-sm font-medium mb-1" data-i18n-key="settingsCreativity"></label>
+                             <div class="flex items-center gap-3">
+                                 <input id="temperature" name="temperature" type="range" min="0" max="1" step="0.05" value="0.7" class="w-full">
+                                 <span id="temperature-value" class="font-mono text-sm">0.7</span>
+                             </div>
+                         </div>
+                         <div>
+                             <label for="request_delay" class="block text-sm font-medium mb-1" data-i18n-key="settingsRequestDelay"></label>
+                             <input id="request_delay" name="request_delay" type="number" min="0" step="0.5" value="4" class="w-full">
+                         </div>
+                    </div>
+                    <div class="mt-6">
+                        <label for="api_key" class="block text-sm font-medium mb-1" data-i18n-key="settingsApiKey"></label>
+                        <textarea id="api_key" name="api_key" rows="3" class="w-full font-mono"></textarea>
+                        <p class="text-xs mt-1" data-i18n-key="settingsApiKeyHint"></p>
+                    </div>
+                    <div class="mt-6 space-y-4 pt-4 border-t">
+                        <div class="flex items-center">
+                            <input id="use-proxy-checkbox" type="checkbox" class="h-4 w-4 rounded">
+                            <label for="use-proxy-checkbox" class="ms-3 text-sm font-medium" data-i18n-key="settingsUseProxy"></label>
+                        </div>
+                        <div class="flex items-center">
+                            <input id="save-settings-checkbox" type="checkbox" class="h-4 w-4 rounded">
+                            <label for="save-settings-checkbox" class="ms-3 text-sm font-medium" data-i18n-key="settingsSave"></label>
+                        </div>
+                    </div>
 
-                        <div class="pt-6 border-t border-slate-200 dark:border-slate-700">
-                            <h3 class="text-sm font-semibold text-slate-800 dark:text-slate-200 mb-3">Quick Actions</h3>
-                            <div class="flex flex-wrap gap-3">
-                                <button id="reset-settings-btn" class="reset-btn px-4 py-2 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white rounded-lg font-semibold shadow-md transition-all duration-300 flex items-center gap-2">
-                                    <i class="fas fa-undo"></i>
-                                    Reset Translation Settings
-                                </button>
-                                <button id="clear-memory-btn" class="clear-memory-btn px-4 py-2 text-white rounded-lg font-semibold shadow-md transition-all duration-300 flex items-center gap-2">
-                                    <i class="fas fa-trash-alt"></i>
-                                    Clear Browser Memory
-                                </button>
-                            </div>
-                        </div>
+                    <div class="quick-actions">
+                        <button id="reset-settings-btn" class="quick-action-btn">
+                            <i class="fas fa-undo"></i>
+                            Reset Translation Settings
+                        </button>
+                        <button id="clear-memory-btn" class="quick-action-btn">
+                            <i class="fas fa-trash-alt"></i>
+                            Clear Browser Memory
+                        </button>
+                    </div>
 
-                        <div class="pt-6 border-t border-slate-200 dark:border-slate-700">
-                            <button id="log-toggle-btn" class="w-full text-left rtl:text-right font-semibold text-slate-800 dark:text-slate-200 mb-2">
-                                <i class="fas fa-chevron-down w-4 inline-block transform transition-transform"></i> <span data-i18n-key="logTitle"></span>
-                            </button>
-                            <div id="log-viewer" class="max-h-0 overflow-hidden">
-                                <div id="log-content" class="scroll-container h-48 bg-slate-100 dark:bg-slate-900 rounded-md p-3 text-xs font-mono overflow-y-auto">
-                                    <div id="log-output"></div>
-                                </div>
+                    <div class="mt-6 pt-6 border-t">
+                        <button id="log-toggle-btn" class="w-full text-left font-semibold mb-2">
+                            <i class="fas fa-chevron-down w-4 inline-block transform transition-transform"></i> <span data-i18n-key="logTitle"></span>
+                        </button>
+                        <div id="log-viewer" class="max-h-0 overflow-hidden transition-all">
+                            <div id="log-content" class="h-48 overflow-y-auto">
+                                <div id="log-output"></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Footer -->
+            <div class="footer">
+                <p>Created with <i class="fas fa-heart text-red-500 mx-1"></i> by YEBEKHE</p>
+            </div>
         </div>
     </main>
-    
+
     <div id="mobile-nav" class="md:hidden fixed bottom-0 left-0 right-0 flex justify-around items-center h-[70px] shadow-lg">
         <button type="button" data-mode="text" class="mobile-nav-btn active">
             <i class="fas fa-file-alt"></i>
@@ -881,41 +1847,18 @@
         </button>
     </div>
 
-    <div id="how-to-use-modal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-slate-800 rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] flex flex-col">
-            <div class="flex justify-between items-center p-4 border-b dark:border-slate-700">
-                <h2 id="how-to-use-title" class="text-xl font-bold text-slate-800 dark:text-slate-100" data-i18n-key="howToUseModalTitle"></h2>
-                <button id="how-to-use-close-btn" class="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-700">
+    <div id="how-to-use-modal" class="hidden">
+        <div>
+            <div class="flex justify-between items-center p-4 border-b">
+                <h2 id="how-to-use-title" class="text-xl font-bold" data-i18n-key="howToUseModalTitle"></h2>
+                <button id="how-to-use-close-btn" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700">
                     <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
                 </button>
             </div>
-            <div id="how-to-use-content" class="p-6 overflow-y-auto scroll-container">
-            </div>
+            <div id="how-to-use-content"></div>
         </div>
     </div>
-    
-    <div id="video-gen-timestamp-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 hidden">
-        <div class="bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg p-6 w-full max-w-md">
-            <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-4">Adjust Timestamps</h3>
-            <div class="space-y-4">
-                <div>
-                    <label for="video-gen-offset-seconds" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Offset (seconds)</label>
-                    <input type="number" id="video-gen-offset-seconds" step="0.1" value="0" class="w-full px-3 py-2 bg-slate-100 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-md text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-sky-500">
-                </div>
-                <div>
-                    <label for="video-gen-scale-factor" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Speed Factor</label>
-                    <input type="number" id="video-gen-scale-factor" step="0.1" min="0.1" max="2.0" value="1.0" class="w-full px-3 py-2 bg-slate-100 dark:bg-slate-700 border border-slate-300 dark:border-slate-600 rounded-md text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-sky-500">
-                </div>
-            </div>
-            <div class="mt-6 flex justify-end space-x-3">
-                <button id="video-gen-cancel-timestamp" class="px-4 py-2 bg-slate-200 dark:bg-slate-600 text-slate-800 dark:text-slate-200 rounded-md hover:bg-slate-300 dark:hover:bg-slate-500 transition-colors">Cancel</button>
-                <button id="video-gen-apply-timestamp" class="px-4 py-2 bg-sky-600 text-white rounded-md hover:bg-sky-700 transition-colors">Apply</button>
-            </div>
-        </div>
-    </div>
-    
-    <div id="video-gen-yt-player-hidden" style="position: absolute; top: -9999px; left: -9999px;"></div>
-    
+
     <script src="https://www.youtube.com/iframe_api"></script>
     <script type="module" src="/dist/index.js"></script>
 </body>
