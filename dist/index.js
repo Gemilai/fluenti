@@ -2377,6 +2377,8 @@ async function videoGen_startVideoExport() {
 function init() {
     // Populate static dropdowns first
     dom.modelSelect.innerHTML = MODELS.map(model => `<option value="${model}">${model}</option>`).join('');
+    // Populate language selects BEFORE loadSettings so defaults can be applied
+    filterAndRepopulateLanguages();
     // Populate job field and translation tone dropdowns
     const translations = TRANSLATIONS[currentLanguage];
     dom.jobFieldSelect.innerHTML = JOB_FIELDS.map(opt => `<option value="${opt.value}">${translations[opt.i18nKey] || opt.text}</option>`).join('');
