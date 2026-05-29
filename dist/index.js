@@ -1092,8 +1092,6 @@ function loadSettings() {
         if (savedSettings) {
             const settings = JSON.parse(savedSettings);
             dom.apiKeyInput.value = settings.apiKey || '';
-            dom.sourceLangSelect.value = settings.sourceLang || 'auto';
-            dom.targetLangSelect.value = settings.targetLang || 'Persian';
             applyTheme(settings.theme || 'dark');
             dom.useProxyCheckbox.checked = settings.useProxy || false;
             dom.customProxyInput.value = settings.customProxyUrl || DEFAULT_PROXY_URL;
@@ -1107,8 +1105,6 @@ function loadSettings() {
             currentLanguage = settings.language || 'en';
         }
         else {
-            dom.sourceLangSelect.value = 'auto';
-            dom.targetLangSelect.value = 'Persian';
             const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
             applyTheme(prefersDark ? 'dark' : 'light');
             dom.customProxyInput.value = DEFAULT_PROXY_URL;
@@ -2263,6 +2259,17 @@ function init() {
     dom.modelSelect.innerHTML = MODELS.map(model => `<option value="${model}">${model}</option>`).join('');
     loadSettings();
     setLanguage(currentLanguage);
+    // Now that dropdowns are built, restore language selections
+    const savedForLang = localStorage.getItem(LS_SETTINGS_KEY);
+    if (savedForLang) {
+        const settings = JSON.parse(savedForLang);
+        dom.sourceLangSelect.value = settings.sourceLang || 'auto';
+        dom.targetLangSelect.value = settings.targetLang || 'Persian';
+    }
+    else {
+        dom.sourceLangSelect.value = 'auto';
+        dom.targetLangSelect.value = 'Persian';
+    }
     loadTranslationSettings();
     // Main event listeners
     document.querySelectorAll('[data-mode]').forEach(btn => btn.addEventListener('click', () => {
