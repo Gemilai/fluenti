@@ -214,6 +214,17 @@
             transition: all 0.2s ease;
         }
 
+        select {
+            padding: 0.85rem 2.25rem 0.85rem 1.25rem;
+            min-height: 3rem;
+        }
+
+        #source_lang, #target_lang {
+            padding: 0.85rem 2.25rem 0.85rem 1.25rem;
+            min-height: 3rem;
+            font-size: 0.9375rem;
+        }
+
         input:focus, select:focus, textarea:focus {
             outline: none;
             border-color: var(--classic-primary);
@@ -460,16 +471,6 @@
             box-shadow: 0 3px 12px rgba(245, 158, 11, 0.3);
         }
 
-        #design-toggle {
-            background: rgba(139, 92, 246, 0.12);
-            color: var(--classic-secondary);
-        }
-
-        #design-toggle:hover {
-            background: var(--classic-secondary);
-            color: white;
-            box-shadow: 0 3px 12px rgba(139, 92, 246, 0.3);
-        }
 
         #settings-btn {
             background: var(--classic-bg-tertiary);
@@ -698,8 +699,8 @@
             --glass-text-secondary-dark: #98989d;
             --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
             --glass-shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.12);
-            --glass-blur: blur(12px);
-            --glass-blur-heavy: blur(16px);
+            --glass-blur: blur(6px);
+            --glass-blur-heavy: blur(8px);
             --glass-radius: 16px;
             --glass-radius-lg: 24px;
             --glass-radius-sm: 12px;
@@ -707,7 +708,7 @@
 
         body.glass-theme {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
-            background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 25%, #a6c1ee 50%, #84fab0 75%, #8fd3f4 100%);
+            background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 50%, #8fd3f4 100%);
             color: var(--glass-text);
             min-height: 100vh;
         }
@@ -727,6 +728,8 @@
             box-shadow: var(--glass-shadow-lg), inset 0 1px 0 rgba(255,255,255,0.4);
             position: relative;
             overflow: hidden;
+            transform: translateZ(0);
+            will-change: transform;
         }
 
         .dark .glass-theme #app-container {
@@ -1747,52 +1750,72 @@
 
 
 
-        /* Design Switcher Button - Shared */
+        /* Design Toggle Pill */
         #design-toggle {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            background: linear-gradient(135deg, #8b5cf6, #ec4899);
-            border: none;
-            color: white;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 3px;
+            border-radius: 999px;
+            background: var(--classic-bg-tertiary);
+            border: 1px solid var(--classic-border);
+            cursor: pointer;
+            transition: all 0.25s ease;
+            position: relative;
+            overflow: hidden;
+            min-width: 104px;
+        }
+
+        #design-toggle .toggle-option {
+            flex: 1;
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            gap: 5px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--classic-text-muted);
+            transition: all 0.25s ease;
             position: relative;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+            z-index: 1;
+            white-space: nowrap;
         }
 
-        #design-toggle::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.5s ease;
-        }
-
-        #design-toggle:hover::before {
-            left: 100%;
+        #design-toggle .toggle-option.active {
+            background: linear-gradient(135deg, var(--classic-primary), var(--classic-secondary));
+            color: white;
+            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.25);
         }
 
         #design-toggle:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+            border-color: var(--classic-border-hover);
         }
 
-        /* Glass Design Switcher */
+        #design-toggle:hover .toggle-option:not(.active):hover {
+            color: var(--classic-text-primary);
+        }
+
+        /* Glass Design Toggle */
         .glass-theme #design-toggle {
+            background: var(--glass-surface);
+            border-color: var(--glass-border);
+        }
+
+        .glass-theme #design-toggle .toggle-option {
+            color: var(--glass-text-secondary);
+        }
+
+        .glass-theme #design-toggle .toggle-option.active {
             background: linear-gradient(135deg, var(--glass-primary), var(--glass-secondary));
             color: white;
+            box-shadow: 0 2px 8px rgba(0, 122, 255, 0.25);
         }
 
-        .glass-theme #design-toggle:hover {
-            box-shadow: 0 4px 16px rgba(0, 122, 255, 0.35);
+        .dark .glass-theme #design-toggle {
+            background: var(--glass-surface-dark);
+            border-color: var(--glass-border-dark);
         }
 
         .glass-theme #theme-toggle {
@@ -2099,17 +2122,21 @@
             <header class="flex justify-between items-center">
                 <h1 data-i18n-key="appTitle">Fluentify</h1>
                 <div class="header-controls flex items-center gap-2">
-                    <select id="language-switcher">
-                        <option value="en">English</option>
-                        <option value="fa">فارسی</option>
-                        <option value="ru">Русский</option>
-                    </select>
+                     <select id="language-switcher">
+                         <option value="en">English</option>
+                         <option value="fa">فارسی</option>
+                     </select>
                     <button id="how-to-use-btn" title="How to use">
                         <i class="fas fa-question-circle"></i>
                     </button>
-                    <button id="design-toggle" title="Switch to Glass Theme">
-                        <i class="fas fa-gem"></i>
-                    </button>
+                     <button id="design-toggle" title="Switch Theme Design">
+                         <span class="toggle-option active" data-design="classic">
+                             <i class="fas fa-desktop text-xs"></i> Classic
+                         </span>
+                         <span class="toggle-option" data-design="glass">
+                             <i class="fas fa-gem text-xs"></i> Glass
+                         </span>
+                     </button>
                     <button id="theme-toggle" title="Toggle Dark/Light">
                         <i id="theme-icon-light" class="fas fa-sun"></i>
                         <i id="theme-icon-dark" class="fas fa-moon hidden"></i>
@@ -2441,7 +2468,7 @@
                          </div>
                          <div class="flex items-center">
                              <input id="pdf-ocr-checkbox" type="checkbox" class="h-4 w-4 rounded">
-                             <label for="pdf-ocr-checkbox" class="ms-3 text-sm font-medium" data-i18n-key="settingsPdfOcr"></label>
+                              <label for="pdf-ocr-checkbox" class="ms-3 text-sm font-medium" data-i18n-key="settingsOcr"></label>
                          </div>
                          <div class="flex items-center">
                              <input id="save-settings-checkbox" type="checkbox" class="h-4 w-4 rounded">
