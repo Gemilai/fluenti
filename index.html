@@ -2035,11 +2035,12 @@
                     <button id="how-to-use-btn" title="How to use">
                         <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" /></svg>
                     </button>
-                    <button id="design-toggle" title="Switch to Glass Theme">
+                                    <button id="design-toggle" title="Switch to Glass Theme">
                         <i class="fas fa-gem"></i>
                     </button>
                     <button id="theme-toggle" title="Toggle Dark/Light">
-                        <i class="fas fa-sun"></i>
+                        <i id="theme-icon-light" class="fas fa-sun"></i>
+                        <i id="theme-icon-dark" class="fas fa-moon hidden"></i>
                     </button>
                     <button id="settings-btn" data-view="settings" title="Settings">
                         <i class="fas fa-cog"></i>
@@ -2058,6 +2059,7 @@
             <div id="view-container" class="flex-grow">
                 <div id="translation-view">
                     <form id="translate-form" onsubmit="return false;">
+                        <input type="text" id="language-search" placeholder="Search languages..." class="hidden w-full mb-2">
                         <div class="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-4 items-center mb-4">
                             <select id="source_lang" name="source_lang" class="w-full"></select>
                             <button type="button" id="swap-btn" title="Swap languages">
@@ -2094,6 +2096,9 @@
                                     </div>
                                     <div id="file-preview-container" class="hidden relative w-full h-full flex items-center justify-center">
                                         <img id="image-preview" class="max-w-full max-h-full object-contain rounded-md" alt="Image preview">
+                                        <div id="subtitle-preview" class="hidden w-full h-full overflow-auto p-4">
+                                            <p id="subtitle-filename" class="text-sm font-medium mb-2"></p>
+                                        </div>
                                         <button type="button" id="remove-file-btn" class="absolute top-1 right-1 p-1.5 rounded-full bg-black/50 hover:bg-red-600 text-white">
                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                                         </button>
@@ -2126,8 +2131,11 @@
                                 <h3 class="text-lg font-semibold" data-i18n-key="subtitleEditorTitle"></h3>
                                 <div class="flex items-center gap-2">
                                      <button type="button" id="export-btn" disabled class="px-3 py-1 text-sm font-medium rounded-md disabled:opacity-50" data-i18n-key="subtitleExportBtnLabel"></button>
+                                     <button type="button" id="retry-failed-subs-btn" class="hidden px-3 py-1 text-sm font-medium rounded-md" data-i18n-key="subtitleRetryFailedBtn"></button>
                                 </div>
                             </div>
+
+                            <div id="batch-warning" class="hidden text-sm p-2 rounded-md"></div>
 
                             <div class="flex flex-wrap gap-4 items-center justify-between">
                                 <div class="flex items-center gap-2">
@@ -2137,6 +2145,23 @@
                                 <div class="flex items-center gap-2">
                                     <button type="button" id="break-lines-toggle-btn" disabled class="px-3 py-1 text-sm font-medium rounded-md disabled:opacity-50" data-i18n-key="subtitleBreakLinesBtnLabel"></button>
                                     <button type="button" id="find-replace-toggle-btn" disabled class="px-3 py-1 text-sm font-medium rounded-md disabled:opacity-50" data-i18n-key="subtitleFindReplaceBtnLabel"></button>
+                                </div>
+                            </div>
+
+                            <div id="find-replace-panel" class="hidden p-3 rounded-lg space-y-2">
+                                <div class="flex flex-wrap gap-2 items-center">
+                                    <input type="text" id="find-input" placeholder="Find..." class="flex-grow min-w-[100px]">
+                                    <input type="text" id="replace-input" placeholder="Replace..." class="flex-grow min-w-[100px]">
+                                    <label class="flex items-center gap-1 text-sm"><input type="checkbox" id="find-case-sensitive"> Aa</label>
+                                    <button type="button" id="replace-all-btn" class="px-3 py-1 text-sm font-medium rounded-md">Replace All</button>
+                                </div>
+                            </div>
+
+                            <div id="break-lines-panel" class="hidden p-3 rounded-lg space-y-2">
+                                <div class="flex flex-wrap gap-2 items-center">
+                                    <label class="text-sm">Max chars:</label>
+                                    <input type="number" id="break-lines-max-chars" value="42" min="10" max="200" class="w-20">
+                                    <button type="button" id="break-lines-apply-btn" class="px-3 py-1 text-sm font-medium rounded-md">Apply</button>
                                 </div>
                             </div>
 
@@ -2155,8 +2180,15 @@
                             </div>
                         </div>
 
-                        <div id="progress-container" class="hidden">
-                            <div class="flex justify-between items-center mb-2">
+                         <div id="progress-container" class="hidden">
+                             <div id="saved-progress-notification" class="hidden text-sm p-2 rounded-md mb-2">
+                                 <div class="flex items-center gap-2">
+                                     <span></span>
+                                     <button type="button" id="load-progress-btn" class="px-3 py-1 text-sm font-medium rounded-md">Load</button>
+                                     <button type="button" id="clear-progress-btn" class="px-3 py-1 text-sm font-medium rounded-md">Clear</button>
+                                 </div>
+                             </div>
+                             <div class="flex justify-between items-center mb-2">
                                 <span id="progress-label" class="text-sm font-medium" data-i18n-key="progressLabelTranslating"></span>
                                 <span id="progress-percentage" class="text-sm font-bold">0%</span>
                             </div>
@@ -2178,9 +2210,10 @@
                            <div class="relative">
                                <textarea id="output" readonly placeholder="Translation will appear here..." class="w-full h-48 resize-none"></textarea>
                                <div class="absolute top-2 right-2 flex flex-col gap-2">
-                                  <button type="button" id="copy-btn" disabled class="action-btn p-2 rounded-md transition-colors disabled:opacity-50">
-                                      <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
-                                  </button>
+                                   <button type="button" id="copy-btn" disabled class="action-btn p-2 rounded-md transition-colors disabled:opacity-50">
+                                       <svg id="copy-icon-default" class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
+                                       <svg id="copy-icon-success" class="w-5 h-5 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                                   </button>
                                   <button type="button" id="export-text-btn" disabled class="action-btn p-2 rounded-md transition-colors disabled:opacity-50">
                                     <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" /> </svg>
                                   </button>
@@ -2199,10 +2232,87 @@
                                <button data-action="simplify" class="enhancement-btn text-sm px-3 py-1 rounded-md" data-i18n-key="styleSimplify"></button>
                            </div>
                         </div>
-                    </form>
-                </div>
+                     </form>
+                 </div>
 
-                <div id="settings-view" class="hidden">
+                 <div id="video-generator-section" class="hidden p-4 space-y-4">
+                     <div class="flex flex-wrap gap-2 mb-4">
+                         <button type="button" id="video-gen-tab-youtube" class="px-3 py-1 text-sm font-medium rounded-md">YouTube</button>
+                         <button type="button" id="video-gen-tab-upload" class="px-3 py-1 text-sm font-medium rounded-md">Upload</button>
+                         <button type="button" id="video-gen-tab-url" class="px-3 py-1 text-sm font-medium rounded-md">URL</button>
+                     </div>
+                     <div id="video-gen-content-youtube" class="space-y-2">
+                         <input type="text" id="video-gen-youtube-url" placeholder="YouTube URL..." class="w-full">
+                         <p id="video-gen-url-error" class="hidden text-sm text-red-500"></p>
+                     </div>
+                     <div id="video-gen-content-upload" class="hidden space-y-2">
+                         <input type="file" id="video-gen-video-upload" accept="video/*" class="w-full">
+                         <p id="video-gen-file-upload-text" class="text-sm"></p>
+                     </div>
+                     <div id="video-gen-content-url" class="hidden space-y-2">
+                         <input type="text" id="video-gen-direct-url" placeholder="Direct video URL..." class="w-full">
+                         <div id="video-gen-duration-container" class="hidden flex items-center gap-2">
+                             <label class="text-sm">Duration (sec):</label>
+                             <input type="number" id="video-gen-video-duration" min="1" class="w-24">
+                         </div>
+                     </div>
+                     <div class="flex flex-wrap gap-4 items-center">
+                         <select id="video-gen-output-language" class="w-full max-w-xs"></select>
+                         <select id="video-gen-output-format" class="w-full max-w-xs">
+                             <option value="srt">SRT</option>
+                             <option value="vtt">VTT</option>
+                         </select>
+                     </div>
+                     <div class="flex gap-2">
+                         <button type="button" id="video-gen-generate-btn" class="flex items-center justify-center gap-2 px-4 py-2 rounded-md">
+                             <span id="video-gen-btn-text">Generate</span>
+                             <svg id="video-gen-spinner" class="spinner w-5 h-5 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                         </button>
+                         <button type="button" id="video-gen-preview-btn" class="hidden px-4 py-2 rounded-md">Preview</button>
+                         <button type="button" id="video-gen-cancel-btn" class="hidden px-4 py-2 rounded-md">Cancel</button>
+                     </div>
+                     <div id="video-gen-progress-container" class="hidden">
+                         <div class="w-full progress-bar"><div id="video-gen-progress-bar" class="progress-bar-inner" style="width:0%"></div></div>
+                         <div class="flex justify-between text-sm mt-1"><span id="video-gen-progress-status"></span><span id="video-gen-progress-percentage">0%</span></div>
+                     </div>
+                     <div id="video-gen-status-container" class="hidden"><p id="video-gen-status-message" class="text-sm"></p></div>
+                     <div id="video-gen-output-container" class="hidden space-y-3">
+                         <div id="video-gen-results-wrapper" class="space-y-2">
+                             <textarea id="video-gen-subtitle-output" readonly class="w-full h-48 resize-none font-mono text-sm"></textarea>
+                         </div>
+                         <div class="flex flex-wrap gap-2">
+                             <button type="button" id="video-gen-copy-btn" class="px-3 py-1 text-sm rounded-md">Copy</button>
+                             <button type="button" id="video-gen-download-btn" class="px-3 py-1 text-sm rounded-md">Download</button>
+                             <button type="button" id="video-gen-export-video-btn" class="px-3 py-1 text-sm rounded-md">Export Video</button>
+                             <button type="button" id="video-gen-retry-btn" class="px-3 py-1 text-sm rounded-md">Retry</button>
+                             <button type="button" id="video-gen-edit-btn" class="px-3 py-1 text-sm rounded-md">Edit</button>
+                             <button type="button" id="video-gen-timestamp-btn" class="px-3 py-1 text-sm rounded-md">Timestamps</button>
+                         </div>
+                         <div id="video-gen-export-progress-container" class="hidden">
+                             <div class="w-full progress-bar"><div id="video-gen-export-progress-bar" class="progress-bar-inner" style="width:0%"></div></div>
+                             <div class="flex justify-between text-sm mt-1"><span>Exporting...</span><span id="video-gen-export-progress-percentage">0%</span></div>
+                             <button type="button" id="video-gen-export-cancel-btn" class="text-sm mt-1">Cancel</button>
+                         </div>
+                     </div>
+                     <div id="video-gen-container" class="hidden relative">
+                         <video id="video-gen-video-preview" class="w-full rounded-md"></video>
+                         <video id="video-gen-local-video-player" class="w-full rounded-md"></video>
+                         <div id="video-gen-yt-player-container" class="hidden w-full aspect-video"></div>
+                         <div id="video-gen-subtitle-overlay" class="absolute bottom-8 left-0 right-0 text-center pointer-events-none">
+                             <span id="video-gen-subtitle-text" class="bg-black/75 text-white px-3 py-1 rounded text-sm"></span>
+                         </div>
+                     </div>
+                     <div id="video-gen-timestamp-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+                         <div class="p-6 rounded-lg space-y-4 max-w-sm w-full">
+                             <h3 class="text-lg font-bold">Adjust Timestamps</h3>
+                             <div><label class="text-sm">Offset (seconds):</label><input type="number" id="video-gen-offset-seconds" value="0" step="0.1" class="w-full mt-1"></div>
+                             <div><label class="text-sm">Scale factor:</label><input type="number" id="video-gen-scale-factor" value="1" step="0.01" class="w-full mt-1"></div>
+                             <div class="flex gap-2"><button type="button" id="video-gen-cancel-timestamp" class="px-4 py-2 rounded-md">Cancel</button><button type="button" id="video-gen-apply-timestamp" class="px-4 py-2 rounded-md">Apply</button></div>
+                         </div>
+                     </div>
+                 </div>
+
+                 <div id="settings-view" class="hidden">
                     <h2>Settings</h2>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div>
@@ -2240,16 +2350,41 @@
                         <textarea id="api_key" name="api_key" rows="3" class="w-full font-mono"></textarea>
                         <p class="text-xs mt-1" data-i18n-key="settingsApiKeyHint"></p>
                     </div>
-                    <div class="mt-6 space-y-4 pt-4 border-t">
-                        <div class="flex items-center">
-                            <input id="use-proxy-checkbox" type="checkbox" class="h-4 w-4 rounded">
-                            <label for="use-proxy-checkbox" class="ms-3 text-sm font-medium" data-i18n-key="settingsUseProxy"></label>
-                        </div>
-                        <div class="flex items-center">
-                            <input id="save-settings-checkbox" type="checkbox" class="h-4 w-4 rounded">
-                            <label for="save-settings-checkbox" class="ms-3 text-sm font-medium" data-i18n-key="settingsSave"></label>
-                        </div>
-                    </div>
+                     <div class="mt-6 space-y-4 pt-4 border-t">
+                         <div class="flex items-center">
+                             <input id="use-proxy-checkbox" type="checkbox" class="h-4 w-4 rounded">
+                             <label for="use-proxy-checkbox" class="ms-3 text-sm font-medium" data-i18n-key="settingsUseProxy"></label>
+                         </div>
+                         <div id="custom-proxy-container" class="hidden ms-7">
+                             <label for="custom-proxy-input" class="block text-sm font-medium mb-1" data-i18n-key="settingsCustomProxyLabel"></label>
+                             <input id="custom-proxy-input" type="text" class="w-full" placeholder="https://...">
+                         </div>
+                         <div class="flex items-center">
+                             <input id="use-custom-prompt-checkbox" type="checkbox" class="h-4 w-4 rounded">
+                             <label for="use-custom-prompt-checkbox" class="ms-3 text-sm font-medium" data-i18n-key="settingsUseCustomPrompt"></label>
+                         </div>
+                         <div id="custom-prompt-container" class="hidden ms-7">
+                             <label for="custom-prompt-input" class="block text-sm font-medium mb-1" data-i18n-key="settingsCustomPromptLabel"></label>
+                             <textarea id="custom-prompt-input" rows="3" class="w-full"></textarea>
+                         </div>
+                         <div class="flex items-center">
+                             <input id="pdf-ocr-checkbox" type="checkbox" class="h-4 w-4 rounded">
+                             <label for="pdf-ocr-checkbox" class="ms-3 text-sm font-medium" data-i18n-key="settingsPdfOcr"></label>
+                         </div>
+                         <div class="flex items-center">
+                             <input id="save-settings-checkbox" type="checkbox" class="h-4 w-4 rounded">
+                             <label for="save-settings-checkbox" class="ms-3 text-sm font-medium" data-i18n-key="settingsSave"></label>
+                         </div>
+                     </div>
+
+                     <div class="mt-6">
+                         <div class="flex items-center gap-3">
+                             <button id="optimize-prompt-btn" type="button" class="px-4 py-2 text-sm font-medium rounded-md">
+                                 <span id="optimize-prompt-btn-text" data-i18n-key="settingsOptimizePrompt"></span>
+                                 <svg id="optimize-prompt-spinner" class="spinner w-4 h-4 ml-2 hidden inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                             </button>
+                         </div>
+                     </div>
 
                     <div class="quick-actions">
                         <button id="reset-settings-btn" class="quick-action-btn">
