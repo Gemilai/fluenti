@@ -1107,6 +1107,8 @@ function loadSettings() {
             currentLanguage = settings.language || 'en';
         }
         else {
+            dom.sourceLangSelect.value = 'auto';
+            dom.targetLangSelect.value = 'Persian';
             const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
             applyTheme(prefersDark ? 'dark' : 'light');
             dom.customProxyInput.value = DEFAULT_PROXY_URL;
