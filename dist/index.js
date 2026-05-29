@@ -1060,6 +1060,7 @@ async function handleEnhancement(action) {
 }
 // --- START: Local Storage and Settings ---
 const LS_SETTINGS_KEY = 'fluentify_settings_v9';
+let currentDesign = 'classic'; // 'classic' or 'glassy'
 function saveSettings() {
     if (!dom.saveSettingsCheckbox.checked) {
         localStorage.removeItem(LS_SETTINGS_KEY);
@@ -1073,6 +1074,7 @@ function saveSettings() {
         targetLang: dom.targetLangSelect.value,
         jobField: dom.jobFieldSelect.value,
         theme: dom.html.classList.contains('dark') ? 'dark' : 'light',
+        design: currentDesign,
         useProxy: dom.useProxyCheckbox.checked,
         customProxyUrl: dom.customProxyInput.value,
         useCustomPrompt: dom.useCustomPromptCheckbox.checked,
@@ -1082,7 +1084,8 @@ function saveSettings() {
         translationTone: dom.translationToneSelect.value,
         customTone: dom.customToneInput.value,
         pdfOcr: dom.pdfOcrCheckbox.checked,
-        language: currentLanguage
+        language: currentLanguage,
+        subtitleBatchSize: dom.subtitleBatchSizeInput ? dom.subtitleBatchSizeInput.value : 100
     };
     localStorage.setItem(LS_SETTINGS_KEY, JSON.stringify(settings));
 }
@@ -1100,6 +1103,8 @@ function loadSettings() {
             dom.customToneInput.value = settings.customTone || '';
             dom.customToneContainer.classList.toggle('hidden', dom.translationToneSelect.value !== 'Custom');
             applyTheme(settings.theme || 'dark');
+            currentDesign = settings.design || 'classic';
+            applyDesign(currentDesign);
             dom.useProxyCheckbox.checked = settings.useProxy || false;
             dom.customProxyInput.value = settings.customProxyUrl || DEFAULT_PROXY_URL;
             dom.useCustomPromptCheckbox.checked = settings.useCustomPrompt || false;
@@ -1110,12 +1115,23 @@ function loadSettings() {
             dom.pdfOcrCheckbox.checked = settings.pdfOcr || false;
             dom.saveSettingsCheckbox.checked = true;
             currentLanguage = settings.language || 'en';
+            if (dom.subtitleBatchSizeInput && settings.subtitleBatchSize) {
+                dom.subtitleBatchSizeInput.value = settings.subtitleBatchSize;
+            }
         }
         else {
+            // Default values for new users
             const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
             applyTheme(prefersDark ? 'dark' : 'light');
             dom.customProxyInput.value = DEFAULT_PROXY_URL;
             currentLanguage = navigator.language.startsWith('fa') ? 'fa' : (navigator.language.startsWith('ru') ? 'ru' : 'en');
+            // Set default language values
+            dom.sourceLangSelect.value = 'auto';
+            dom.targetLangSelect.value = 'Persian';
+            // Set default subtitle batch size
+            if (dom.subtitleBatchSizeInput) {
+                dom.subtitleBatchSizeInput.value = 100;
+            }
         }
     }
     catch (e) {
@@ -1126,6 +1142,80 @@ function loadSettings() {
 // --- START: Theme Management ---
 function applyTheme(theme) { dom.html.classList.toggle('dark', theme === 'dark'); dom.themeIconLight.classList.toggle('hidden', theme === 'dark'); dom.themeIconDark.classList.toggle('hidden', theme !== 'dark'); }
 function toggleTheme() { const newTheme = dom.html.classList.contains('dark') ? 'light' : 'dark'; applyTheme(newTheme); saveSettings(); }
+// --- START: Design Management ---
+function applyDesign(design) {
+    currentDesign = design;
+    const designToggleBtn = document.getElementById('design-toggle');
+    if (design === 'glassy') {
+        document.body.classList.add('glassy-theme');
+        if (designToggleBtn) {
+            designToggleBtn.title = 'Switch to Classic Theme';
+            designToggleBtn.innerHTML = '<i class="fas fa-desktop"></i>';
+        }
+    } else {
+        document.body.classList.remove('glassy-theme');
+        if (designToggleBtn) {
+            designToggleBtn.title = 'Switch to Glassy iPhone Theme';
+            designToggleBtn.innerHTML = '<i class="fas fa-mobile-alt"></i>';
+        }
+    }
+}
+function toggleDesign() {
+    const newDesign = currentDesign === 'classic' ? 'glassy' : 'classic';
+    applyDesign(newDesign);
+    saveSettings();
+}
+// --- START: Reset and Clear Memory Functions ---
+function handleResetTranslationSettings() {
+    // Reset specific translation settings to defaults
+    dom.modelSelect.selectedIndex = 0;
+    dom.jobFieldSelect.selectedIndex = 0;
+    dom.translationToneSelect.selectedIndex = 0;
+    dom.customToneInput.value = '';
+    dom.customToneContainer.classList.add('hidden');
+    // Clear saved translation settings from localStorage but keep other settings
+    const settings = JSON.parse(localStorage.getItem(LS_SETTINGS_KEY) || '{}');
+    settings.model = DEFAULT_WEB_MODEL;
+    settings.jobField = 'None';
+    settings.translationTone = 'Default';
+    settings.customTone = '';
+    localStorage.setItem(LS_SETTINGS_KEY, JSON.stringify(settings));
+    log('Translation settings reset to defaults.', 'info');
+    // Show visual feedback
+    const resetBtn = document.getElementById('reset-settings-btn');
+    if (resetBtn) {
+        const originalText = resetBtn.innerHTML;
+        resetBtn.innerHTML = '<i class="fas fa-check"></i> Reset Complete!';
+        setTimeout(() => {
+            resetBtn.innerHTML = originalText;
+        }, 2000);
+    }
+}
+function handleClearBrowserMemory() {
+    // Clear all subtitle progress from localStorage
+    const keysToRemove = [];
+    for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key && key.startsWith('fluentify_progress_')) {
+            keysToRemove.push(key);
+        }
+    }
+    keysToRemove.forEach(key => localStorage.removeItem(key));
+    log(`Cleared ${keysToRemove.length} saved subtitle(s) from browser memory.`, 'success');
+    // Hide any saved progress notification
+    if (dom.savedProgressNotification) {
+        dom.savedProgressNotification.classList.add('hidden');
+    }
+    // Show visual feedback
+    const clearBtn = document.getElementById('clear-memory-btn');
+    if (clearBtn) {
+        const originalText = clearBtn.innerHTML;
+        clearBtn.innerHTML = '<i class="fas fa-check"></i> Memory Cleared!';
+        setTimeout(() => {
+            clearBtn.innerHTML = originalText;
+        }, 2000);
+    }
+}
 // --- START: Helper Functions ---
 function fileToString(file) { return new Promise((resolve, reject) => { const reader = new FileReader(); reader.readAsText(file); reader.onload = () => resolve(reader.result); reader.onerror = (error) => reject(error); }); }
 function fileToBase64(file) { return new Promise((resolve, reject) => { const reader = new FileReader(); reader.readAsDataURL(file); reader.onload = () => resolve(reader.result.split(',')[1]); reader.onerror = (error) => reject(error); }); }
@@ -2275,6 +2365,18 @@ function init() {
     dom.cancelTranslationBtn.addEventListener('click', cancelTranslation);
     dom.enhancementsToolbar.querySelectorAll('.enhancement-btn').forEach(btn => btn.addEventListener('click', () => handleEnhancement(btn.dataset.action)));
     dom.themeToggleBtn.addEventListener('click', toggleTheme);
+    const designToggleBtn = document.getElementById('design-toggle');
+    if (designToggleBtn) {
+        designToggleBtn.addEventListener('click', toggleDesign);
+    }
+    const resetSettingsBtn = document.getElementById('reset-settings-btn');
+    if (resetSettingsBtn) {
+        resetSettingsBtn.addEventListener('click', handleResetTranslationSettings);
+    }
+    const clearMemoryBtn = document.getElementById('clear-memory-btn');
+    if (clearMemoryBtn) {
+        clearMemoryBtn.addEventListener('click', handleClearBrowserMemory);
+    }
     dom.apiKeyInput.addEventListener('input', validateForm);
     dom.languageSearch.addEventListener('input', filterAndRepopulateLanguages);
     // File input listeners
@@ -2382,87 +2484,14 @@ function init() {
 }
 document.addEventListener('DOMContentLoaded', init);
 
-
-window.resetTranslationDefaults = function() {
-    try {
-        [
-            "translationSpecialization",
-            "translationTone",
-            "customToneInstruction",
-            "temperature",
-            "requestDelay",
-            "aiModel"
-        ].forEach(k => localStorage.removeItem(k));
-
-        const model = document.querySelector('#ai_model');
-        const spec = document.querySelector('#translation_specialization');
-        const tone = document.querySelector('#translation_tone');
-        const custom = document.querySelector('#custom_tone_instruction');
-        const temp = document.querySelector('#temperature');
-        const delay = document.querySelector('#request_delay');
-
-        if(model) model.selectedIndex = 0;
-        if(spec) spec.selectedIndex = 0;
-        if(tone) tone.selectedIndex = 0;
-        if(custom) custom.value = "";
-        if(temp) temp.value = "0.7";
-        if(delay) delay.value = "0";
-
-        console.log("Translation defaults restored");
-    } catch(e) {
-        console.error(e);
-    }
-};
-
+// Set default language values on load
 setTimeout(() => {
-    const el = document.querySelector('#target_lang');
-    if(el && (!el.value || el.value === 'Afrikaans')) {
-        el.value = 'Persian';
-        el.dispatchEvent(new Event('change'));
+    const sourceEl = document.querySelector('#source_lang');
+    const targetEl = document.querySelector('#target_lang');
+    if (sourceEl && !sourceEl.value) {
+        sourceEl.value = 'auto';
+    }
+    if (targetEl && (!targetEl.value || targetEl.value === 'Afrikaans')) {
+        targetEl.value = 'Persian';
     }
 }, 100);
-
-setTimeout(() => {
-    const parent =
-        document.querySelector('#ai_model')?.parentElement ||
-        document.body;
-
-    if(parent && !document.querySelector('#reset_translation_settings_btn')) {
-        parent.insertAdjacentHTML('beforeend', `
-<button id="reset_translation_settings_btn"
-style="margin-top:10px;padding:10px 14px;border-radius:8px;background:#dc2626;color:white;font-weight:bold;">
-Reset Translation Settings
-</button>
-`);
-
-        document.querySelector('#reset_translation_settings_btn')
-        .addEventListener('click', () => {
-
-            const defaults = {
-                ai_model: '',
-                translation_specialization: '',
-                translation_tone: '',
-                temperature: '0.7',
-                request_delay: '0'
-            };
-
-            Object.keys(defaults).forEach(k => {
-                localStorage.removeItem(k);
-            });
-
-            const model=document.querySelector('#ai_model');
-            const spec=document.querySelector('#translation_specialization');
-            const tone=document.querySelector('#translation_tone');
-            const temp=document.querySelector('#temperature');
-            const delay=document.querySelector('#request_delay');
-
-            if(model) model.selectedIndex=0;
-            if(spec) spec.selectedIndex=0;
-            if(tone) tone.selectedIndex=0;
-            if(temp) temp.value='0.7';
-            if(delay) delay.value='0';
-
-            alert('Translation settings reset.');
-        });
-    }
-}, 500);
