@@ -451,807 +451,1001 @@
         }
 
         /* ========================================
-           FUTURISTIC THEME - CYBERPUNK & NEON
+           GLASSY IPHONE THEME - ELEGANT & MODERN
            ======================================== */
 
-        /* Futuristic Theme Styles */
-        .futuristic-theme {
-            --neon-cyan: #00f5ff;
-            --neon-pink: #ff00ff;
-            --neon-purple: #bf00ff;
-            --neon-green: #00ff88;
-            --neon-yellow: #ffff00;
-            --cyber-black: #050508;
-            --cyber-dark: #0a0a10;
-            --cyber-card: #0f0f18;
-            --cyber-border: rgba(0, 245, 255, 0.2);
+        /* Glassy Theme Variables */
+        .glassy-theme {
+            --glass-bg: rgba(255, 255, 255, 0.72);
+            --glass-bg-dark: rgba(28, 28, 30, 0.82);
+            --glass-bg-card: rgba(255, 255, 255, 0.55);
+            --glass-bg-card-dark: rgba(44, 44, 46, 0.65);
+            --glass-bg-input: rgba(242, 242, 247, 0.8);
+            --glass-bg-input-dark: rgba(58, 58, 60, 0.7);
+            --glass-accent: #007AFF;
+            --glass-accent-hover: #0056cc;
+            --glass-accent-subtle: rgba(0, 122, 255, 0.12);
+            --glass-border: rgba(255, 255, 255, 0.3);
+            --glass-border-dark: rgba(255, 255, 255, 0.1);
+            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+            --glass-shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.12);
+            --glass-radius: 20px;
+            --glass-radius-sm: 14px;
+            --glass-radius-xs: 10px;
+            --glass-text: #1c1c1e;
+            --glass-text-secondary: #636366;
+            --glass-text-dark: #f5f5f7;
+            --glass-text-secondary-dark: #aeaeb2;
         }
 
-        .futuristic-theme body {
-            font-family: 'Orbitron', sans-serif;
-            background-color: var(--cyber-black);
-            background-image:
-                radial-gradient(ellipse at 20% 20%, rgba(191, 0, 255, 0.15) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 80%, rgba(0, 245, 255, 0.15) 0%, transparent 50%),
-                radial-gradient(ellipse at 50% 50%, rgba(255, 0, 255, 0.05) 0%, transparent 50%),
-                linear-gradient(0deg, rgba(0, 245, 255, 0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 245, 255, 0.02) 1px, transparent 1px);
-            background-size: 100% 100%, 100% 100%, 100% 100%, 40px 40px, 40px 40px;
-            color: #e0e0ff;
+        .glassy-theme body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', sans-serif;
+            background: linear-gradient(145deg, #f0f2f5 0%, #e8ecf1 30%, #eef1f5 60%, #f5f5f7 100%);
+            background-attachment: fixed;
+            color: var(--glass-text);
             min-height: 100vh;
-            animation: bgPulse 10s ease-in-out infinite;
         }
 
-        @keyframes bgPulse {
-            0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 0 0, 0 0; }
-            50% { background-position: 100% 100%, 0% 0%, 50% 50%, 40px 0, 0 40px; }
+        .dark.glassy-theme body {
+            background: linear-gradient(145deg, #1a1a1e 0%, #1c1c20 30%, #161618 60%, #1a1a1e 100%);
+            background-attachment: fixed;
+            color: var(--glass-text-dark);
         }
 
-        .futuristic-theme #app-container {
-            background: linear-gradient(180deg, rgba(15, 15, 24, 0.95), rgba(10, 10, 16, 0.98));
-            border: 1px solid var(--cyber-border);
-            border-radius: 0;
-            padding: 0;
-            box-shadow:
-                0 0 60px rgba(0, 245, 255, 0.15),
-                0 0 120px rgba(191, 0, 255, 0.1),
-                inset 0 0 100px rgba(0, 0, 0, 0.5);
+        .glassy-theme #app-container {
+            background: var(--glass-bg);
+            backdrop-filter: blur(40px) saturate(180%);
+            -webkit-backdrop-filter: blur(40px) saturate(180%);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--glass-radius);
+            box-shadow: var(--glass-shadow-lg);
+            padding: 2rem;
             position: relative;
             overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
         }
 
-        .futuristic-theme #app-container::before {
+        .dark.glassy-theme #app-container {
+            background: var(--glass-bg-dark);
+            border: 1px solid var(--glass-border-dark);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .glassy-theme #app-container::before {
             content: '';
             position: absolute;
             top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg,
-                transparent,
-                var(--neon-cyan),
-                var(--neon-purple),
-                var(--neon-pink),
-                var(--neon-cyan),
-                transparent);
-            background-size: 200% 100%;
-            animation: topBorderGlow 4s linear infinite;
-        }
-
-        @keyframes topBorderGlow {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
-
-        .futuristic-theme #app-container::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
             left: 0;
             right: 0;
             height: 1px;
-            background: linear-gradient(90deg,
-                transparent,
-                var(--neon-purple),
-                var(--neon-cyan),
-                var(--neon-pink),
-                var(--neon-purple),
-                transparent);
-            background-size: 200% 100%;
-            animation: bottomBorderGlow 3s linear infinite reverse;
+            background: linear-gradient(90deg, transparent, rgba(0, 122, 255, 0.3), rgba(0, 122, 255, 0.15), transparent);
         }
 
-        @keyframes bottomBorderGlow {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
+        .glassy-theme header {
+            padding-bottom: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
         }
 
-        .futuristic-theme header {
-            padding: 1.5rem 2rem;
-            margin-bottom: 0;
-            border-bottom: 1px solid var(--cyber-border);
-            background: linear-gradient(180deg, rgba(0, 245, 255, 0.05), transparent);
+        .dark.glassy-theme header {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
         }
 
-        .futuristic-theme header h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2rem;
-            font-weight: 900;
-            letter-spacing: 2px;
-            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple), var(--neon-pink), var(--neon-cyan));
-            background-size: 300% 100%;
+        .glassy-theme header h1 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #007AFF, #5856D6);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            animation: titleShimmer 5s linear infinite;
-            text-shadow: 0 0 30px rgba(0, 245, 255, 0.5);
-            text-transform: uppercase;
         }
 
-        @keyframes titleShimmer {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 300% 50%; }
-        }
-
-        .futuristic-theme .header-controls {
+        /* Glassy Tabs */
+        .glassy-theme #desktop-tabs {
             display: flex;
-            gap: 0.75rem;
-        }
-
-        .futuristic-theme .control-btn {
-            width: 48px;
-            height: 48px;
-            border-radius: 0;
-            background: rgba(0, 245, 255, 0.1);
-            border: 1px solid var(--cyber-border);
-            color: var(--neon-cyan);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .futuristic-theme .control-btn::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: radial-gradient(circle, var(--neon-cyan), transparent);
-            transform: translate(-50%, -50%);
-            transition: all 0.3s ease;
-        }
-
-        .futuristic-theme .control-btn:hover::before {
-            width: 100px;
-            height: 100px;
-        }
-
-        .futuristic-theme .control-btn:hover {
-            border-color: var(--neon-cyan);
-            box-shadow: 0 0 30px rgba(0, 245, 255, 0.3), inset 0 0 20px rgba(0, 245, 255, 0.1);
-            text-shadow: 0 0 10px var(--neon-cyan);
-        }
-
-        /* Futuristic Tabs */
-        .futuristic-theme #desktop-tabs {
-            background: rgba(10, 10, 16, 0.9);
-            border: 1px solid var(--cyber-border);
-            border-radius: 0;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            border-bottom: 1px solid var(--cyber-border);
-            border-left: none;
-            border-right: none;
-        }
-
-        .futuristic-theme .desktop-tab-btn {
-            flex: 1;
-            padding: 1rem 1.5rem;
-            border: none;
-            background: transparent;
-            color: #666;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: center;
-            position: relative;
-        }
-
-        .futuristic-theme .desktop-tab-btn::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: var(--neon-cyan);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .futuristic-theme .desktop-tab-btn:hover {
-            color: var(--neon-cyan);
-            text-shadow: 0 0 10px var(--neon-cyan);
-        }
-
-        .futuristic-theme .desktop-tab-btn.active {
-            color: var(--neon-cyan);
-            background: linear-gradient(180deg, rgba(0, 245, 255, 0.15), transparent);
-        }
-
-        .futuristic-theme .desktop-tab-btn.active::before {
-            transform: scaleX(1);
-        }
-
-        /* Futuristic Form Content */
-        .futuristic-theme #view-container {
-            padding: 2rem;
-        }
-
-        .futuristic-theme input,
-        .futuristic-theme select,
-        .futuristic-theme textarea {
-            background: rgba(15, 15, 24, 0.8);
-            border: 1px solid var(--cyber-border);
-            color: #e0e0ff;
-            border-radius: 0;
-            padding: 1rem;
-            font-family: 'Orbitron', sans-serif;
-            letter-spacing: 0.5px;
-            transition: all 0.3s ease;
-        }
-
-        .futuristic-theme input:focus,
-        .futuristic-theme select:focus,
-        .futuristic-theme textarea:focus {
-            outline: none;
-            border-color: var(--neon-cyan);
-            box-shadow:
-                0 0 20px rgba(0, 245, 255, 0.2),
-                inset 0 0 20px rgba(0, 245, 255, 0.05);
-            background: rgba(15, 15, 24, 0.95);
-        }
-
-        .futuristic-theme select option {
-            background: var(--cyber-card);
-            color: #e0e0ff;
-        }
-
-        /* Futuristic Language Grid */
-        .futuristic-theme .grid {
-            gap: 1rem;
-        }
-
-        .futuristic-theme #swap-btn {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: rgba(0, 245, 255, 0.1);
-            border: 1px solid var(--cyber-border);
-            color: var(--neon-cyan);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .futuristic-theme #swap-btn::after {
-            content: '';
-            position: absolute;
-            inset: -3px;
-            border-radius: 50%;
-            border: 1px solid var(--neon-cyan);
-            opacity: 0;
-            transition: all 0.3s ease;
-        }
-
-        .futuristic-theme #swap-btn:hover {
-            background: rgba(0, 245, 255, 0.2);
-            transform: rotate(180deg);
-            box-shadow: 0 0 30px rgba(0, 245, 255, 0.3);
-        }
-
-        .futuristic-theme #swap-btn:hover::after {
-            opacity: 1;
-            animation: spinRing 2s linear infinite;
-        }
-
-        @keyframes spinRing {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Futuristic Translate Button */
-        .futuristic-theme #translate-btn {
-            background: linear-gradient(135deg, rgba(0, 245, 255, 0.2), rgba(191, 0, 255, 0.2));
-            border: 1px solid var(--neon-cyan);
-            color: var(--neon-cyan);
-            padding: 1rem 2.5rem;
-            border-radius: 0;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .futuristic-theme #translate-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.3), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .futuristic-theme #translate-btn:hover::before {
-            left: 100%;
-        }
-
-        .futuristic-theme #translate-btn:hover {
-            background: linear-gradient(135deg, rgba(0, 245, 255, 0.3), rgba(191, 0, 255, 0.3));
-            box-shadow: 0 0 40px rgba(0, 245, 255, 0.4);
-            text-shadow: 0 0 20px var(--neon-cyan);
-        }
-
-        /* Futuristic Output Section */
-        .futuristic-theme #output {
-            background: rgba(15, 15, 24, 0.8);
-            border: 1px solid var(--cyber-border);
-            color: #e0e0ff;
-            border-radius: 0;
-            padding: 1rem;
-            font-family: 'Orbitron', sans-serif;
-            letter-spacing: 0.5px;
-        }
-
-        .futuristic-theme #main-output-section {
-            margin-top: 2rem;
-        }
-
-        /* Futuristic Enhancement Toolbar */
-        .futuristic-theme #enhancements-toolbar {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            padding: 1rem;
-            background: rgba(10, 10, 16, 0.8);
-            border: 1px solid var(--cyber-border);
-            border-radius: 0;
-            margin-top: 1rem;
-        }
-
-        .futuristic-theme .enhancement-btn {
-            padding: 0.5rem 1rem;
-            border: 1px solid var(--cyber-border);
-            background: rgba(15, 15, 24, 0.8);
-            color: var(--neon-cyan);
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.7rem;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .futuristic-theme .enhancement-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.2), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .futuristic-theme .enhancement-btn:hover::before {
-            left: 100%;
-        }
-
-        .futuristic-theme .enhancement-btn:hover {
-            border-color: var(--neon-cyan);
-            box-shadow: 0 0 20px rgba(0, 245, 255, 0.2);
-            text-shadow: 0 0 10px var(--neon-cyan);
-        }
-
-        /* Futuristic Progress Bar */
-        .futuristic-theme .progress-bar {
-            height: 4px;
-            background: rgba(0, 245, 255, 0.1);
-            border-radius: 0;
-            overflow: hidden;
-        }
-
-        .futuristic-theme .progress-bar-inner,
-        .futuristic-theme #progress-bar-inner {
-            height: 100%;
-            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple), var(--neon-pink));
-            background-size: 200% 100%;
-            animation: progressGlow 2s linear infinite;
-            box-shadow: 0 0 10px var(--neon-cyan);
-        }
-
-        @keyframes progressGlow {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
-
-        /* Futuristic Settings Panel */
-        .futuristic-theme #settings-view {
-            padding: 2rem;
-        }
-
-        .futuristic-theme #settings-view h2 {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 800;
-            letter-spacing: 2px;
-            color: var(--neon-cyan);
-            text-transform: uppercase;
-            margin-bottom: 2rem;
-            text-shadow: 0 0 20px rgba(0, 245, 255, 0.3);
-        }
-
-        .futuristic-theme #settings-view label {
-            display: block;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 600;
-            letter-spacing: 1px;
-            color: var(--neon-cyan);
-            margin-bottom: 0.5rem;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-        }
-
-        .futuristic-theme #settings-view .grid {
-            gap: 1.5rem;
-        }
-
-        .futuristic-theme .quick-actions {
-            display: flex;
-            gap: 1rem;
-            padding: 1.5rem;
-            background: rgba(10, 10, 16, 0.8);
-            border: 1px solid var(--cyber-border);
-            margin-top: 2rem;
-        }
-
-        .futuristic-theme .quick-action-btn {
-            flex: 1;
-            padding: 1rem;
-            border: 1px solid;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .futuristic-theme #reset-settings-btn {
-            background: transparent;
-            border-color: var(--neon-pink);
-            color: var(--neon-pink);
-        }
-
-        .futuristic-theme #reset-settings-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 0, 255, 0.3), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .futuristic-theme #reset-settings-btn:hover::before {
-            left: 100%;
-        }
-
-        .futuristic-theme #reset-settings-btn:hover {
-            background: rgba(255, 0, 255, 0.1);
-            box-shadow: 0 0 30px rgba(255, 0, 255, 0.3);
-            text-shadow: 0 0 10px var(--neon-pink);
-        }
-
-        .futuristic-theme #clear-memory-btn {
-            background: transparent;
-            border-color: var(--neon-purple);
-            color: var(--neon-purple);
-        }
-
-        .futuristic-theme #clear-memory-btn:hover {
-            background: rgba(191, 0, 255, 0.1);
-            box-shadow: 0 0 30px rgba(191, 0, 255, 0.3);
-            text-shadow: 0 0 10px var(--neon-purple);
-        }
-
-        /* Futuristic Subtitle Table */
-        .futuristic-theme #subtitle-editor-section {
-            margin-top: 2rem;
-            padding: 0;
-        }
-
-        .futuristic-theme #subtitle-editor-section > div {
-            padding: 0 0 1rem 0;
-        }
-
-        .futuristic-theme #subtitle-editor-section table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            background: transparent;
-            border: 1px solid var(--cyber-border);
-        }
-
-        .futuristic-theme #subtitle-editor-section th {
-            background: rgba(0, 245, 255, 0.1);
-            border-bottom: 1px solid var(--cyber-border);
-            border-right: 1px solid var(--cyber-border);
-            padding: 1rem;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.75rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            color: var(--neon-cyan);
-            text-shadow: 0 0 10px rgba(0, 245, 255, 0.3);
-        }
-
-        .futuristic-theme #subtitle-editor-section th:last-child {
-            border-right: none;
-        }
-
-        .futuristic-theme #subtitle-editor-section td {
-            padding: 1rem;
-            border-bottom: 1px solid var(--cyber-border);
-            border-right: 1px solid var(--cyber-border);
-            color: #e0e0ff;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.8rem;
-            letter-spacing: 0.5px;
-        }
-
-        .futuristic-theme #subtitle-editor-section td:last-child {
-            border-right: none;
-        }
-
-        .futuristic-theme #subtitle-editor-section tr:hover td {
-            background: rgba(0, 245, 255, 0.05);
-        }
-
-        .futuristic-theme #subtitle-editor-section td[contenteditable="true"]:focus {
-            background: rgba(0, 245, 255, 0.1);
-            outline: none;
-            box-shadow: inset 0 0 20px rgba(0, 245, 255, 0.1);
-        }
-
-        /* Futuristic File Upload */
-        .futuristic-theme #dropzone-container {
-            border: 2px dashed var(--cyber-border);
-            padding: 2rem;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: rgba(10, 10, 16, 0.5);
-        }
-
-        .futuristic-theme #dropzone-container:hover {
-            border-color: var(--neon-cyan);
-            background: rgba(0, 245, 255, 0.05);
-            box-shadow: inset 0 0 30px rgba(0, 245, 255, 0.1);
-        }
-
-        /* Futuristic PDF Viewer */
-        .futuristic-theme .pdf-page-item {
-            border: 2px solid var(--cyber-border);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .futuristic-theme .pdf-page-item:hover {
-            border-color: var(--neon-cyan);
-            box-shadow: 0 0 20px rgba(0, 245, 255, 0.2);
-        }
-
-        .futuristic-theme .pdf-page-item.selected {
-            border-color: var(--neon-cyan);
-            box-shadow: 0 0 30px rgba(0, 245, 255, 0.3);
-        }
-
-        .futuristic-theme .pdf-page-item.selected::after {
-            background-color: var(--neon-cyan);
-            box-shadow: 0 0 10px var(--neon-cyan);
-        }
-
-        /* Futuristic Mobile Navigation */
-        .futuristic-theme #mobile-nav {
-            background: rgba(5, 5, 8, 0.95);
-            border-top: 1px solid var(--cyber-border);
-            box-shadow: 0 -5px 30px rgba(0, 0, 0, 0.5), 0 -5px 20px rgba(0, 245, 255, 0.1);
-        }
-
-        .futuristic-theme .mobile-nav-btn {
-            color: #666;
-            transition: all 0.3s ease;
-        }
-
-        .futuristic-theme .mobile-nav-btn.active {
-            color: var(--neon-cyan);
-            text-shadow: 0 0 10px var(--neon-cyan);
-        }
-
-        .futuristic-theme .mobile-nav-btn.active i {
-            filter: drop-shadow(0 0 5px var(--neon-cyan));
-        }
-
-        /* Futuristic Checkbox */
-        .futuristic-theme input[type="checkbox"] {
-            appearance: none;
-            width: 20px;
-            height: 20px;
-            background: rgba(15, 15, 24, 0.8);
-            border: 1px solid var(--cyber-border);
-            border-radius: 0;
-            cursor: pointer;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .futuristic-theme input[type="checkbox"]:checked {
-            background: var(--neon-cyan);
-            border-color: var(--neon-cyan);
-            box-shadow: 0 0 10px var(--neon-cyan);
-        }
-
-        .futuristic-theme input[type="checkbox"]:checked::after {
-            content: '✓';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: #000;
-            font-size: 12px;
-            font-weight: bold;
-        }
-
-        /* Futuristic Range Slider */
-        .futuristic-theme input[type="range"] {
-            -webkit-appearance: none;
-            appearance: none;
-            height: 6px;
-            background: rgba(0, 245, 255, 0.1);
-            border-radius: 0;
-            outline: none;
-        }
-
-        .futuristic-theme input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 16px;
-            height: 16px;
-            background: var(--neon-cyan);
-            cursor: pointer;
-            box-shadow: 0 0 10px var(--neon-cyan);
-            transition: all 0.3s ease;
-        }
-
-        .futuristic-theme input[type="range"]::-webkit-slider-thumb:hover {
-            transform: scale(1.2);
-            box-shadow: 0 0 20px var(--neon-cyan);
-        }
-
-        /* Futuristic Textarea */
-        .futuristic-theme textarea {
-            resize: vertical;
-            min-height: 150px;
-        }
-
-        /* Futuristic Youtube Section */
-        .futuristic-theme #youtube-input-section {
-            background: rgba(10, 10, 16, 0.8);
-            border: 1px solid var(--cyber-border);
-            padding: 1.5rem;
+            gap: 4px;
+            padding: 4px;
+            background: var(--glass-bg-input);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: var(--glass-radius-sm);
+            border: 1px solid rgba(0, 0, 0, 0.04);
             margin-bottom: 1.5rem;
         }
 
-        .futuristic-theme #youtube-input-section label {
-            font-family: 'Orbitron', sans-serif;
+        .dark.glassy-theme #desktop-tabs {
+            background: var(--glass-bg-input-dark);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .glassy-theme .desktop-tab-btn {
+            flex: 1;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 12px;
+            background: transparent;
+            color: var(--glass-text-secondary);
+            font-size: 0.8rem;
             font-weight: 600;
-            letter-spacing: 1px;
-            color: var(--neon-cyan);
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-        }
-
-        /* Futuristic Buttons */
-        .futuristic-theme #fetch-youtube-subs-btn {
-            background: linear-gradient(135deg, rgba(0, 245, 255, 0.2), rgba(191, 0, 255, 0.2));
-            border: 1px solid var(--neon-cyan);
-            color: var(--neon-cyan);
-            padding: 0.875rem 1.5rem;
-            border-radius: 0;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: uppercase;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.25s cubic-bezier(0.25, 0.1, 0.25, 1);
+            text-align: center;
+            letter-spacing: -0.2px;
         }
 
-        .futuristic-theme #fetch-youtube-subs-btn:hover {
-            box-shadow: 0 0 30px rgba(0, 245, 255, 0.3);
-            text-shadow: 0 0 10px var(--neon-cyan);
+        .dark.glassy-theme .desktop-tab-btn {
+            color: var(--glass-text-secondary-dark);
         }
 
-        /* Futuristic Tool Buttons */
-        .futuristic-theme .tool-btn {
-            padding: 0.5rem 1rem;
-            border: 1px solid var(--cyber-border);
-            background: rgba(15, 15, 24, 0.8);
-            color: var(--neon-cyan);
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.7rem;
+        .glassy-theme .desktop-tab-btn:hover {
+            color: var(--glass-text);
+        }
+
+        .dark.glassy-theme .desktop-tab-btn:hover {
+            color: var(--glass-text-dark);
+        }
+
+        .glassy-theme .desktop-tab-btn.active {
+            background: white;
+            color: var(--glass-text);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 0 0 0.5px rgba(0, 0, 0, 0.04);
+        }
+
+        .dark.glassy-theme .desktop-tab-btn.active {
+            background: #3a3a3c;
+            color: var(--glass-text-dark);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Glassy Form Inputs */
+        .glassy-theme input,
+        .glassy-theme select,
+        .glassy-theme textarea {
+            background: var(--glass-bg-input);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            color: var(--glass-text);
+            border-radius: var(--glass-radius-xs);
+            padding: 12px 16px;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            letter-spacing: -0.2px;
+        }
+
+        .dark.glassy-theme input,
+        .dark.glassy-theme select,
+        .dark.glassy-theme textarea {
+            background: var(--glass-bg-input-dark);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            color: var(--glass-text-dark);
+        }
+
+        .glassy-theme input:focus,
+        .glassy-theme select:focus,
+        .glassy-theme textarea:focus {
+            outline: none;
+            border-color: var(--glass-accent);
+            box-shadow: 0 0 0 4px var(--glass-accent-subtle);
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .dark.glassy-theme input:focus,
+        .dark.glassy-theme select:focus,
+        .dark.glassy-theme textarea:focus {
+            border-color: var(--glass-accent);
+            box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.2);
+            background: rgba(58, 58, 60, 0.9);
+        }
+
+        .glassy-theme select option {
+            background: white;
+            color: var(--glass-text);
+        }
+
+        .dark.glassy-theme select option {
+            background: #2c2c2e;
+            color: var(--glass-text-dark);
+        }
+
+        /* Glassy Swap Button */
+        .glassy-theme #swap-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--glass-bg-input);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            color: var(--glass-text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
+        .dark.glassy-theme #swap-btn {
+            background: var(--glass-bg-input-dark);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            color: var(--glass-text-secondary-dark);
+        }
+
+        .glassy-theme #swap-btn:hover {
+            background: var(--glass-accent);
+            border-color: var(--glass-accent);
+            color: white;
+            transform: rotate(180deg);
+            box-shadow: 0 4px 16px rgba(0, 122, 255, 0.3);
+        }
+
+        /* Glassy Translate Button */
+        .glassy-theme #translate-btn {
+            background: var(--glass-accent);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            border-radius: var(--glass-radius-xs);
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: -0.2px;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+            box-shadow: 0 2px 12px rgba(0, 122, 255, 0.25);
+        }
+
+        .glassy-theme #translate-btn:hover {
+            background: var(--glass-accent-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(0, 122, 255, 0.35);
+        }
+
+        .glassy-theme #translate-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 1px 4px rgba(0, 122, 255, 0.2);
+        }
+
+        /* Glassy Output Section */
+        .glassy-theme #output {
+            background: var(--glass-bg-input);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            color: var(--glass-text);
+            border-radius: var(--glass-radius-xs);
+            padding: 16px;
+            font-size: 0.9rem;
+        }
+
+        .dark.glassy-theme #output {
+            background: var(--glass-bg-input-dark);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            color: var(--glass-text-dark);
+        }
+
+        /* Glassy Enhancement Toolbar */
+        .glassy-theme #enhancements-toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            padding: 12px;
+            background: var(--glass-bg-input);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: var(--glass-radius-sm);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            margin-top: 1rem;
+        }
+
+        .dark.glassy-theme #enhancements-toolbar {
+            background: var(--glass-bg-input-dark);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .glassy-theme .enhancement-btn {
+            padding: 7px 14px;
+            border-radius: 8px;
+            border: none;
+            background: rgba(255, 255, 255, 0.7);
+            color: var(--glass-text);
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .dark.glassy-theme .enhancement-btn {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--glass-text-dark);
+        }
+
+        .glassy-theme .enhancement-btn:hover {
+            background: var(--glass-accent);
+            color: white;
+            box-shadow: 0 2px 8px rgba(0, 122, 255, 0.25);
+        }
+
+        /* Glassy Progress Bar */
+        .glassy-theme .progress-bar {
+            height: 6px;
+            background: rgba(0, 0, 0, 0.04);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .dark.glassy-theme .progress-bar {
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .glassy-theme .progress-bar-inner,
+        .glassy-theme #progress-bar-inner {
+            height: 100%;
+            background: linear-gradient(90deg, var(--glass-accent), #5856D6);
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        /* Glassy Settings Panel */
+        .glassy-theme #settings-view h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: var(--glass-text);
+            margin-bottom: 1.5rem;
+        }
+
+        .dark.glassy-theme #settings-view h2 {
+            color: var(--glass-text-dark);
+        }
+
+        .glassy-theme #settings-view label {
+            display: block;
+            font-weight: 600;
+            color: var(--glass-text-secondary);
+            margin-bottom: 6px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
             letter-spacing: 0.5px;
-            text-transform: uppercase;
+        }
+
+        .dark.glassy-theme #settings-view label {
+            color: var(--glass-text-secondary-dark);
+        }
+
+        /* Glassy Quick Actions */
+        .glassy-theme .quick-actions {
+            display: flex;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: var(--glass-bg-input);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: var(--glass-radius-sm);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            margin-top: 1.5rem;
+        }
+
+        .dark.glassy-theme .quick-actions {
+            background: var(--glass-bg-input-dark);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .glassy-theme .quick-action-btn {
+            flex: 1;
+            padding: 14px 20px;
+            border-radius: var(--glass-radius-xs);
+            border: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: -0.2px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
-        .futuristic-theme .tool-btn:hover {
-            border-color: var(--neon-cyan);
-            box-shadow: 0 0 20px rgba(0, 245, 255, 0.2);
-            text-shadow: 0 0 10px var(--neon-cyan);
+        .glassy-theme #reset-settings-btn {
+            background: rgba(255, 59, 48, 0.08);
+            color: #FF3B30;
+            border: 1.5px solid rgba(255, 59, 48, 0.2);
+            border-radius: var(--glass-radius-xs);
         }
 
-        /* Futuristic Activity Log */
-        .futuristic-theme #log-toggle-btn {
-            background: rgba(10, 10, 16, 0.8);
-            border: 1px solid var(--cyber-border);
-            color: var(--neon-cyan);
-            padding: 1rem;
-            font-family: 'Orbitron', sans-serif;
-            letter-spacing: 1px;
+        .glassy-theme #reset-settings-btn:hover {
+            background: #FF3B30;
+            color: white;
+            border-color: #FF3B30;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(255, 59, 48, 0.25);
+        }
+
+        .dark.glassy-theme #reset-settings-btn {
+            background: rgba(255, 69, 58, 0.1);
+            color: #FF453A;
+            border: 1.5px solid rgba(255, 69, 58, 0.25);
+        }
+
+        .dark.glassy-theme #reset-settings-btn:hover {
+            background: #FF453A;
+            color: white;
+            border-color: #FF453A;
+        }
+
+        .glassy-theme #clear-memory-btn {
+            background: rgba(0, 122, 255, 0.06);
+            color: var(--glass-accent);
+            border: 1.5px solid rgba(0, 122, 255, 0.15);
+            border-radius: var(--glass-radius-xs);
+        }
+
+        .glassy-theme #clear-memory-btn:hover {
+            background: var(--glass-accent);
+            color: white;
+            border-color: var(--glass-accent);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(0, 122, 255, 0.2);
+        }
+
+        .dark.glassy-theme #clear-memory-btn {
+            background: rgba(0, 122, 255, 0.1);
+            color: var(--glass-accent);
+            border: 1.5px solid rgba(0, 122, 255, 0.2);
+        }
+
+        .dark.glassy-theme #clear-memory-btn:hover {
+            background: var(--glass-accent);
+            color: white;
+            border-color: var(--glass-accent);
+        }
+
+        /* Glassy Subtitle Table */
+        .glassy-theme #subtitle-editor-section table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: var(--glass-bg-input);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: var(--glass-radius-xs);
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+        }
+
+        .dark.glassy-theme #subtitle-editor-section table {
+            background: var(--glass-bg-input-dark);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .glassy-theme #subtitle-editor-section th {
+            background: rgba(0, 0, 0, 0.02);
+            padding: 12px 16px;
+            font-size: 0.75rem;
+            font-weight: 700;
             text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--glass-text-secondary);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+        }
+
+        .dark.glassy-theme #subtitle-editor-section th {
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--glass-text-secondary-dark);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .glassy-theme #subtitle-editor-section td {
+            padding: 12px 16px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+            color: var(--glass-text);
+            font-size: 0.85rem;
+        }
+
+        .dark.glassy-theme #subtitle-editor-section td {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            color: var(--glass-text-dark);
+        }
+
+        .glassy-theme #subtitle-editor-section tr:hover td {
+            background: var(--glass-accent-subtle);
+        }
+
+        .glassy-theme #subtitle-editor-section td[contenteditable="true"]:focus {
+            background: rgba(0, 122, 255, 0.06);
+            outline: none;
+            box-shadow: inset 0 0 0 2px var(--glass-accent);
+        }
+
+        /* Glassy File Upload */
+        .glassy-theme #dropzone-container {
+            border: 2px dashed rgba(0, 0, 0, 0.08);
+            border-radius: var(--glass-radius-sm);
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: var(--glass-bg-input);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .dark.glassy-theme #dropzone-container {
+            border-color: rgba(255, 255, 255, 0.08);
+            background: var(--glass-bg-input-dark);
+        }
+
+        .glassy-theme #dropzone-container:hover {
+            border-color: var(--glass-accent);
+            background: var(--glass-accent-subtle);
+        }
+
+        /* Glassy PDF Viewer */
+        .glassy-theme .pdf-page-item {
+            border: 2px solid rgba(0, 0, 0, 0.06);
+            border-radius: var(--glass-radius-xs);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            overflow: hidden;
+        }
+
+        .dark.glassy-theme .pdf-page-item {
+            border-color: rgba(255, 255, 255, 0.06);
+        }
+
+        .glassy-theme .pdf-page-item:hover {
+            border-color: var(--glass-accent);
+        }
+
+        .glassy-theme .pdf-page-item.selected {
+            border-color: var(--glass-accent);
+            box-shadow: 0 0 0 3px var(--glass-accent-subtle);
+        }
+
+        /* Glassy Mobile Navigation */
+        .glassy-theme #mobile-nav {
+            background: var(--glass-bg);
+            backdrop-filter: blur(40px) saturate(180%);
+            -webkit-backdrop-filter: blur(40px) saturate(180%);
+            border-top: 1px solid rgba(0, 0, 0, 0.06);
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.04);
+        }
+
+        .dark.glassy-theme #mobile-nav {
+            background: var(--glass-bg-dark);
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .glassy-theme .mobile-nav-btn {
+            color: var(--glass-text-secondary);
+            transition: all 0.2s ease;
+        }
+
+        .dark.glassy-theme .mobile-nav-btn {
+            color: var(--glass-text-secondary-dark);
+        }
+
+        .glassy-theme .mobile-nav-btn.active {
+            color: var(--glass-accent);
+        }
+
+        .glassy-theme .mobile-nav-btn.active i {
+            opacity: 1;
+        }
+
+        /* Glassy Button styles */
+        .glassy-theme .control-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--glass-radius-xs);
+            background: var(--glass-bg-input);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            color: var(--glass-text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .dark.glassy-theme .control-btn {
+            background: var(--glass-bg-input-dark);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            color: var(--glass-text-secondary-dark);
+        }
+
+        .glassy-theme .control-btn:hover {
+            background: var(--glass-accent);
+            border-color: var(--glass-accent);
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 122, 255, 0.25);
+        }
+
+        .glassy-theme #theme-toggle,
+        .glassy-theme #settings-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--glass-radius-xs);
+            background: var(--glass-bg-input);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            color: var(--glass-text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .dark.glassy-theme #theme-toggle,
+        .dark.glassy-theme #settings-btn {
+            background: var(--glass-bg-input-dark);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            color: var(--glass-text-secondary-dark);
+        }
+
+        .glassy-theme #theme-toggle:hover,
+        .glassy-theme #settings-btn:hover {
+            background: var(--glass-accent);
+            border-color: var(--glass-accent);
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 122, 255, 0.25);
+        }
+
+        /* Glassy Scrollbar */
+        .glassy-theme ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .glassy-theme ::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+        }
+
+        .dark.glassy-theme ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .glassy-theme ::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 0, 0, 0.25);
+        }
+
+        .dark.glassy-theme ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        /* Glassy Copy/Export Buttons */
+        .glassy-theme .action-btn {
+            background: var(--glass-bg-input);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            color: var(--glass-text-secondary);
+            border-radius: var(--glass-radius-xs);
+            transition: all 0.2s ease;
+        }
+
+        .dark.glassy-theme .action-btn {
+            background: var(--glass-bg-input-dark);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            color: var(--glass-text-secondary-dark);
+        }
+
+        .glassy-theme .action-btn:hover {
+            border-color: var(--glass-accent);
+            color: var(--glass-accent);
+        }
+
+        /* Glassy Checkbox */
+        .glassy-theme input[type="checkbox"] {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: var(--glass-bg-input);
+            border: 2px solid rgba(0, 0, 0, 0.15);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .dark.glassy-theme input[type="checkbox"] {
+            background: var(--glass-bg-input-dark);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .glassy-theme input[type="checkbox"]:checked {
+            background: var(--glass-accent);
+            border-color: var(--glass-accent);
+        }
+
+        .glassy-theme input[type="checkbox"]:checked::after {
+            content: '✓';
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+            height: 100%;
+        }
+
+        /* Glassy Range Slider */
+        .glassy-theme input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            height: 6px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 3px;
+            outline: none;
+        }
+
+        .dark.glassy-theme input[type="range"] {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .glassy-theme input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 22px;
+            height: 22px;
+            background: var(--glass-accent);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 122, 255, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .glassy-theme input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
+        }
+
+        /* Glassy Textarea */
+        .glassy-theme textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* Glassy Youtube Section */
+        .glassy-theme #youtube-input-section {
+            background: var(--glass-bg-input);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            border-radius: var(--glass-radius-xs);
+            padding: 1.25rem;
             margin-bottom: 1rem;
         }
 
-        .futuristic-theme #log-content {
-            background: rgba(5, 5, 8, 0.9);
-            border: 1px solid var(--cyber-border);
+        .dark.glassy-theme #youtube-input-section {
+            background: var(--glass-bg-input-dark);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .glassy-theme #fetch-youtube-subs-btn {
+            background: var(--glass-accent);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: var(--glass-radius-xs);
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .glassy-theme #fetch-youtube-subs-btn:hover {
+            background: var(--glass-accent-hover);
+            box-shadow: 0 4px 12px rgba(0, 122, 255, 0.25);
+        }
+
+        /* Glassy Tool Buttons */
+        .glassy-theme .tool-btn {
+            padding: 8px 14px;
+            border: none;
+            background: var(--glass-bg-input);
+            color: var(--glass-text);
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .dark.glassy-theme .tool-btn {
+            background: var(--glass-bg-input-dark);
+            color: var(--glass-text-dark);
+        }
+
+        .glassy-theme .tool-btn:hover {
+            background: var(--glass-accent);
+            color: white;
+        }
+
+        /* Glassy Activity Log */
+        .glassy-theme #log-toggle-btn {
+            background: var(--glass-bg-input);
+            border: none;
+            color: var(--glass-text);
+            padding: 12px 16px;
+            border-radius: var(--glass-radius-xs);
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .dark.glassy-theme #log-toggle-btn {
+            background: var(--glass-bg-input-dark);
+            color: var(--glass-text-dark);
+        }
+
+        .glassy-theme #log-content {
+            background: var(--glass-bg-input);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            border-radius: var(--glass-radius-xs);
             max-height: 200px;
             overflow-y: auto;
-            font-family: 'Noto Sans Mono', monospace;
+            font-family: 'SF Mono', 'Noto Sans Mono', monospace;
         }
 
-        /* Futuristic Scrollbar */
-        .futuristic-theme ::-webkit-scrollbar-track {
-            background: rgba(10, 10, 16, 0.9);
+        .dark.glassy-theme #log-content {
+            background: var(--glass-bg-input-dark);
+            border: 1px solid rgba(255, 255, 255, 0.04);
         }
 
-        .futuristic-theme ::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, var(--neon-cyan), var(--neon-purple));
-            border-radius: 0;
+        /* Glassy Modal */
+        .glassy-theme #how-to-use-modal > div {
+            background: var(--glass-bg-card);
+            backdrop-filter: blur(50px) saturate(180%);
+            -webkit-backdrop-filter: blur(50px) saturate(180%);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--glass-radius);
+            box-shadow: var(--glass-shadow-lg);
         }
 
-        /* Futuristic Copy/Export Buttons */
-        .futuristic-theme #copy-btn,
-        .futuristic-theme #export-text-btn,
-        .futuristic-theme .action-btn {
-            background: rgba(15, 15, 24, 0.8);
-            border: 1px solid var(--cyber-border);
-            color: var(--neon-cyan);
-            transition: all 0.3s ease;
+        .dark.glassy-theme #how-to-use-modal > div {
+            background: var(--glass-bg-card-dark);
+            border: 1px solid var(--glass-border-dark);
         }
 
-        .futuristic-theme #copy-btn:hover,
-        .futuristic-theme #export-text-btn:hover,
-        .futuristic-theme .action-btn:hover {
-            border-color: var(--neon-cyan);
-            box-shadow: 0 0 20px rgba(0, 245, 255, 0.2);
+        /* Glassy Progress Container */
+        .glassy-theme #progress-container {
+            padding: 16px;
+            background: var(--glass-bg-input);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: var(--glass-radius-xs);
+            margin: 1.5rem 0;
+        }
+
+        .dark.glassy-theme #progress-container {
+            background: var(--glass-bg-input-dark);
+        }
+
+        /* Glassy Cancel Button */
+        .glassy-theme #cancel-translation-btn {
+            width: 100%;
+            padding: 10px;
+            background: rgba(255, 59, 48, 0.06);
+            border: 1.5px solid rgba(255, 59, 48, 0.2);
+            color: #FF3B30;
+            border-radius: var(--glass-radius-xs);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .dark.glassy-theme #cancel-translation-btn {
+            background: rgba(255, 69, 58, 0.1);
+            border-color: rgba(255, 69, 58, 0.25);
+            color: #FF453A;
+        }
+
+        .glassy-theme #cancel-translation-btn:hover {
+            background: #FF3B30;
+            color: white;
+            border-color: #FF3B30;
+        }
+
+        .dark.glassy-theme #cancel-translation-btn:hover {
+            background: #FF453A;
+            color: white;
+            border-color: #FF453A;
+        }
+
+        /* Glassy Error Display */
+        .glassy-theme #error-display {
+            color: #FF3B30;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .dark.glassy-theme #error-display {
+            color: #FF453A;
+        }
+
+        /* Glassy Footer */
+        .glassy-theme .footer {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.06);
+            text-align: center;
+            color: var(--glass-text-secondary);
+            font-size: 0.8rem;
+        }
+
+        .dark.glassy-theme .footer {
+            border-top-color: rgba(255, 255, 255, 0.06);
+            color: var(--glass-text-secondary-dark);
+        }
+
+        /* Glassy Character Counter */
+        .glassy-theme #char-counter {
+            background: var(--glass-bg-input);
+            color: var(--glass-text-secondary);
+            font-size: 0.75rem;
+            border-radius: 6px;
+        }
+
+        .dark.glassy-theme #char-counter {
+            background: var(--glass-bg-input-dark);
+            color: var(--glass-text-secondary-dark);
+        }
+
+        /* Glassy Language Switcher */
+        .glassy-theme #language-switcher {
+            background: var(--glass-bg-input);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            color: var(--glass-text);
+            padding: 8px 14px;
+            border-radius: var(--glass-radius-xs);
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .dark.glassy-theme #language-switcher {
+            background: var(--glass-bg-input-dark);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            color: var(--glass-text-dark);
+        }
+
+        /* Glassy How to Use Button */
+        .glassy-theme #how-to-use-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--glass-radius-xs);
+            background: var(--glass-bg-input);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            color: var(--glass-text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .dark.glassy-theme #how-to-use-btn {
+            background: var(--glass-bg-input-dark);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            color: var(--glass-text-secondary-dark);
+        }
+
+        .glassy-theme #how-to-use-btn:hover {
+            background: var(--glass-accent);
+            border-color: var(--glass-accent);
+            color: white;
         }
 
         /* Design Switcher Button - Shared */
@@ -1292,15 +1486,18 @@
             box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
         }
 
-        /* Futuristic Design Switcher */
-        .futuristic-theme #design-toggle {
-            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
-            box-shadow: 0 0 30px rgba(0, 245, 255, 0.3);
-            border-radius: 0;
+        /* Glassy Design Switcher */
+        .glassy-theme #design-toggle {
+            background: linear-gradient(135deg, #007AFF, #5856D6);
+            box-shadow: 0 4px 20px rgba(0, 122, 255, 0.3);
+            border-radius: 14px;
+            width: 44px;
+            height: 44px;
         }
 
-        .futuristic-theme #design-toggle:hover {
-            box-shadow: 0 0 40px rgba(0, 245, 255, 0.5);
+        .glassy-theme #design-toggle:hover {
+            box-shadow: 0 6px 25px rgba(0, 122, 255, 0.45);
+            transform: translateY(-2px);
         }
 
         /* Common Animations */
@@ -1324,12 +1521,19 @@
             cursor: pointer;
         }
 
-        .futuristic-theme #language-switcher {
-            background: rgba(15, 15, 24, 0.8);
-            border: 1px solid var(--cyber-border);
-            color: var(--neon-cyan);
-            font-family: 'Orbitron', sans-serif;
-            letter-spacing: 0.5px;
+        .glassy-theme #language-switcher {
+            background: var(--glass-bg-input);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            color: var(--glass-text);
+            border-radius: var(--glass-radius-xs);
+            font-size: 0.85rem;
+            padding: 8px 14px;
+        }
+
+        .dark.glassy-theme #language-switcher {
+            background: var(--glass-bg-input-dark);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            color: var(--glass-text-dark);
         }
 
         /* How to Use Button - Shared */
@@ -1352,15 +1556,23 @@
             color: var(--classic-primary);
         }
 
-        .futuristic-theme #how-to-use-btn {
-            background: rgba(0, 245, 255, 0.1);
-            border: 1px solid var(--cyber-border);
-            color: var(--neon-cyan);
+        .glassy-theme #how-to-use-btn {
+            background: var(--glass-bg-input);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            color: var(--glass-text-secondary);
+            border-radius: var(--glass-radius-xs);
         }
 
-        .futuristic-theme #how-to-use-btn:hover {
-            border-color: var(--neon-cyan);
-            box-shadow: 0 0 20px rgba(0, 245, 255, 0.2);
+        .dark.glassy-theme #how-to-use-btn {
+            background: var(--glass-bg-input-dark);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            color: var(--glass-text-secondary-dark);
+        }
+
+        .glassy-theme #how-to-use-btn:hover {
+            background: var(--glass-accent);
+            border-color: var(--glass-accent);
+            color: white;
         }
 
         /* Character Counter */
@@ -1375,11 +1587,16 @@
             border-radius: 0.25rem;
         }
 
-        .futuristic-theme #char-counter {
-            background: rgba(15, 15, 24, 0.8);
-            color: var(--neon-cyan);
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.7rem;
+        .glassy-theme #char-counter {
+            background: var(--glass-bg-input);
+            color: var(--glass-text-secondary);
+            font-size: 0.75rem;
+            border-radius: 6px;
+        }
+
+        .dark.glassy-theme #char-counter {
+            background: var(--glass-bg-input-dark);
+            color: var(--glass-text-secondary-dark);
         }
 
         /* Error Display */
@@ -1388,10 +1605,14 @@
             font-size: 0.875rem;
         }
 
-        .futuristic-theme #error-display {
-            color: var(--neon-pink);
-            font-family: 'Orbitron', sans-serif;
-            text-shadow: 0 0 10px var(--neon-pink);
+        .glassy-theme #error-display {
+            color: #FF3B30;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .dark.glassy-theme #error-display {
+            color: #FF453A;
         }
 
         /* Responsive adjustments */
@@ -1463,10 +1684,18 @@
             border: 1px solid var(--classic-border);
         }
 
-        .futuristic-theme #how-to-use-modal > div {
-            background: var(--cyber-card);
-            border: 1px solid var(--cyber-border);
-            box-shadow: 0 25px 50px rgba(0, 245, 255, 0.2);
+        .glassy-theme #how-to-use-modal > div {
+            background: var(--glass-bg-card);
+            backdrop-filter: blur(50px) saturate(180%);
+            -webkit-backdrop-filter: blur(50px) saturate(180%);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--glass-radius);
+            box-shadow: var(--glass-shadow-lg);
+        }
+
+        .dark.glassy-theme #how-to-use-modal > div {
+            background: var(--glass-bg-card-dark);
+            border: 1px solid var(--glass-border-dark);
         }
 
         #how-to-use-content {
@@ -1475,9 +1704,13 @@
             max-height: calc(90vh - 120px);
         }
 
-        .futuristic-theme #how-to-use-content {
-            font-family: 'Orbitron', sans-serif;
-            color: #e0e0ff;
+        .glassy-theme #how-to-use-content {
+            font-family: 'Inter', -apple-system, sans-serif;
+            color: var(--glass-text);
+        }
+
+        .dark.glassy-theme #how-to-use-content {
+            color: var(--glass-text-dark);
         }
 
         /* Progress Container */
@@ -1488,10 +1721,17 @@
             margin: 1.5rem 0;
         }
 
-        .futuristic-theme #progress-container {
-            background: rgba(10, 10, 16, 0.8);
-            border: 1px solid var(--cyber-border);
-            border-radius: 0;
+        .glassy-theme #progress-container {
+            background: var(--glass-bg-input);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            border-radius: var(--glass-radius-xs);
+        }
+
+        .dark.glassy-theme #progress-container {
+            background: var(--glass-bg-input-dark);
+            border: 1px solid rgba(255, 255, 255, 0.04);
         }
 
         /* Cancel Button */
@@ -1511,18 +1751,31 @@
             border-color: var(--classic-border-hover);
         }
 
-        .futuristic-theme #cancel-translation-btn {
-            background: rgba(255, 0, 255, 0.1);
-            border: 1px solid var(--neon-pink);
-            color: var(--neon-pink);
-            font-family: 'Orbitron', sans-serif;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+        .glassy-theme #cancel-translation-btn {
+            background: rgba(255, 59, 48, 0.06);
+            border: 1.5px solid rgba(255, 59, 48, 0.2);
+            color: #FF3B30;
+            border-radius: var(--glass-radius-xs);
+            font-weight: 600;
+            padding: 10px;
         }
 
-        .futuristic-theme #cancel-translation-btn:hover {
-            background: rgba(255, 0, 255, 0.2);
-            box-shadow: 0 0 20px rgba(255, 0, 255, 0.2);
+        .dark.glassy-theme #cancel-translation-btn {
+            background: rgba(255, 69, 58, 0.1);
+            border-color: rgba(255, 69, 58, 0.25);
+            color: #FF453A;
+        }
+
+        .glassy-theme #cancel-translation-btn:hover {
+            background: #FF3B30;
+            color: white;
+            border-color: #FF3B30;
+        }
+
+        .dark.glassy-theme #cancel-translation-btn:hover {
+            background: #FF453A;
+            color: white;
+            border-color: #FF453A;
         }
 
         /* Progress Labels */
@@ -1531,10 +1784,15 @@
             font-weight: 500;
         }
 
-        .futuristic-theme #progress-label,
-        .futuristic-theme #progress-percentage {
-            font-family: 'Orbitron', sans-serif;
-            color: var(--neon-cyan);
+        .glassy-theme #progress-label,
+        .glassy-theme #progress-percentage {
+            font-family: 'Inter', -apple-system, sans-serif;
+            color: var(--glass-text);
+        }
+
+        .dark.glassy-theme #progress-label,
+        .dark.glassy-theme #progress-percentage {
+            color: var(--glass-text-dark);
         }
 
         /* Hide/Show Utilities */
@@ -1550,9 +1808,14 @@
             font-size: 0.875rem;
         }
 
-        .futuristic-theme .footer {
-            border-top-color: var(--cyber-border);
-            color: #666;
+        .glassy-theme .footer {
+            border-top-color: rgba(0, 0, 0, 0.06);
+            color: var(--glass-text-secondary);
+        }
+
+        .dark.glassy-theme .footer {
+            border-top-color: rgba(255, 255, 255, 0.06);
+            color: var(--glass-text-secondary-dark);
         }
     </style>
 </head>
@@ -1574,7 +1837,7 @@
                         <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" /></svg>
                     </button>
                     <button id="design-toggle" title="Switch Theme">
-                        <i class="fas fa-bolt"></i>
+                        <i class="fas fa-gem"></i>
                     </button>
                     <button id="theme-toggle" title="Toggle Dark/Light">
                         <i class="fas fa-sun"></i>
