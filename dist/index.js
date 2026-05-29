@@ -1092,13 +1092,8 @@ function loadSettings() {
         if (savedSettings) {
             const settings = JSON.parse(savedSettings);
             dom.apiKeyInput.value = settings.apiKey || '';
-            dom.modelSelect.value = settings.model || DEFAULT_WEB_MODEL;
             dom.sourceLangSelect.value = settings.sourceLang || 'auto';
             dom.targetLangSelect.value = settings.targetLang || 'Persian';
-            dom.jobFieldSelect.value = settings.jobField || 'None';
-            dom.translationToneSelect.value = settings.translationTone || 'Default';
-            dom.customToneInput.value = settings.customTone || '';
-            dom.customToneContainer.classList.toggle('hidden', dom.translationToneSelect.value !== 'Custom');
             applyTheme(settings.theme || 'dark');
             dom.useProxyCheckbox.checked = settings.useProxy || false;
             dom.customProxyInput.value = settings.customProxyUrl || DEFAULT_PROXY_URL;
@@ -1121,6 +1116,31 @@ function loadSettings() {
     catch (e) {
         console.error("Failed to load settings", e);
         localStorage.removeItem(LS_SETTINGS_KEY);
+    }
+}
+const LS_TRANSLATION_KEY = 'fluentify_translation_settings_v1';
+function saveTranslationSettings() {
+    const data = {
+        model: dom.modelSelect.value,
+        jobField: dom.jobFieldSelect.value,
+        translationTone: dom.translationToneSelect.value,
+        customTone: dom.customToneInput.value
+    };
+    localStorage.setItem(LS_TRANSLATION_KEY, JSON.stringify(data));
+}
+function loadTranslationSettings() {
+    try {
+        const raw = localStorage.getItem(LS_TRANSLATION_KEY);
+        if (!raw) return;
+        const data = JSON.parse(raw);
+        if (data.model) dom.modelSelect.value = data.model;
+        if (data.jobField) dom.jobFieldSelect.value = data.jobField;
+        if (data.translationTone) dom.translationToneSelect.value = data.translationTone;
+        if (data.customTone) dom.customToneInput.value = data.customTone;
+        dom.customToneContainer.classList.toggle('hidden', dom.translationToneSelect.value !== 'Custom');
+    } catch (e) {
+        console.error("Failed to load translation settings", e);
+        localStorage.removeItem(LS_TRANSLATION_KEY);
     }
 }
 // --- START: Theme Management ---
@@ -2240,6 +2260,7 @@ function init() {
     // Populate static dropdowns first
     dom.modelSelect.innerHTML = MODELS.map(model => `<option value="${model}">${model}</option>`).join('');
     loadSettings();
+    loadTranslationSettings();
     setLanguage(currentLanguage);
     // Main event listeners
     document.querySelectorAll('[data-mode]').forEach(btn => btn.addEventListener('click', () => {
@@ -2323,13 +2344,27 @@ function init() {
         log('Cleared saved progress.', 'info');
     });
     // Settings listeners
-    dom.translationToneSelect.addEventListener('change', () => dom.customToneContainer.classList.toggle('hidden', dom.translationToneSelect.value !== 'Custom'));
-    dom.temperatureSlider.addEventListener('input', () => dom.temperatureValue.textContent = dom.temperatureSlider.value);
+    dom.modelSelect.addEventListener('change', saveTranslationSettings);
+    dom.jobFieldSelect.addEventListener('change', saveTranslationSettings);
+    dom.translationToneSelect.addEventListener('change', () => {
+        dom.customToneContainer.classList.toggle('hidden', dom.translationToneSelect.value !== 'Custom');
+        saveTranslationSettings();
+    });
+    dom.customToneInput.addEventListener('input', saveTranslationSettings);
+    dom.temperatureSlider.addEventListener('input', () => {
+        dom.temperatureValue.textContent = dom.temperatureSlider.value;
+        saveTranslationSettings();
+    });
     dom.useProxyCheckbox.addEventListener('change', () => dom.customProxyContainer.classList.toggle('hidden', !dom.useProxyCheckbox.checked));
     dom.useCustomPromptCheckbox.addEventListener('change', () => dom.customPromptContainer.classList.toggle('hidden', !dom.useCustomPromptCheckbox.checked));
     document.querySelectorAll('#settings-view input, #settings-view select, #settings-view textarea').forEach(el => {
-        el.addEventListener('change', saveSettings);
-        el.addEventListener('input', saveSettings);
+        if (el.id === 'model' || el.id === 'job_field' || el.id === 'translation_tone' || el.id === 'custom-tone-input') {
+            el.addEventListener('change', saveTranslationSettings);
+            el.addEventListener('input', saveTranslationSettings);
+        } else {
+            el.addEventListener('change', saveSettings);
+            el.addEventListener('input', saveSettings);
+        }
     });
     dom.optimizePromptBtn.addEventListener('click', async () => {
         const currentPrompt = dom.customPromptInput.value;
@@ -2377,155 +2412,27 @@ function init() {
     dom.howToUseCloseBtn.addEventListener('click', () => dom.howToUseModal.classList.add('hidden'));
     // Initialize Video Generator
     videoGen_setupEventListeners();
+    document.getElementById('reset_translation_settings_btn').addEventListener('click', () => {
+        if (!confirm('Reset translation-only settings?')) return;
+        localStorage.removeItem(LS_TRANSLATION_KEY);
+        dom.modelSelect.selectedIndex = 0;
+        dom.jobFieldSelect.selectedIndex = 0;
+        dom.translationToneSelect.selectedIndex = 0;
+        dom.customToneInput.value = '';
+        dom.customToneContainer.classList.add('hidden');
+        log('Translation settings reset.', 'info');
+    });
+    document.getElementById('clear_browser_storage_btn').addEventListener('click', () => {
+        if (!confirm('Clear ALL saved browser settings for this website?')) return;
+        localStorage.clear();
+        sessionStorage.clear();
+        alert('Browser storage cleared.');
+        location.reload();
+    });
     updateUI();
     validateForm();
 }
 document.addEventListener('DOMContentLoaded', init);
 
 
-window.resetTranslationDefaults = function() {
-    try {
-        [
-            "translationSpecialization",
-            "translationTone",
-            "customToneInstruction",
-            "temperature",
-            "requestDelay",
-            "aiModel"
-        ].forEach(k => localStorage.removeItem(k));
-
-        const model = document.querySelector('#ai_model');
-        const spec = document.querySelector('#translation_specialization');
-        const tone = document.querySelector('#translation_tone');
-        const custom = document.querySelector('#custom_tone_instruction');
-        const temp = document.querySelector('#temperature');
-        const delay = document.querySelector('#request_delay');
-
-        if(model) model.selectedIndex = 0;
-        if(spec) spec.selectedIndex = 0;
-        if(tone) tone.selectedIndex = 0;
-        if(custom) custom.value = "";
-        if(temp) temp.value = "0.7";
-        if(delay) delay.value = "0";
-
-        console.log("Translation defaults restored");
-    } catch(e) {
-        console.error(e);
-    }
-};
-
-setTimeout(() => {
-    const el = document.querySelector('#target_lang');
-    if(el && (!el.value || el.value === 'Afrikaans')) {
-        el.value = 'Persian';
-        el.dispatchEvent(new Event('change'));
-    }
-}, 100);
-
-setTimeout(() => {
-    const parent =
-        document.querySelector('#ai_model')?.parentElement ||
-        document.body;
-
-    if(parent && !document.querySelector('#reset_translation_settings_btn')) {
-        parent.insertAdjacentHTML('beforeend', `
-<button id="reset_translation_settings_btn"
-style="margin-top:10px;padding:10px 14px;border-radius:8px;background:#dc2626;color:white;font-weight:bold;">
-Reset Translation Settings
-</button>
-`);
-
-        document.querySelector('#reset_translation_settings_btn')
-        .addEventListener('click', () => {
-
-            const defaults = {
-                ai_model: '',
-                translation_specialization: '',
-                translation_tone: '',
-                temperature: '0.7',
-                request_delay: '0'
-            };
-
-            Object.keys(defaults).forEach(k => {
-                localStorage.removeItem(k);
-            });
-
-            const model=document.querySelector('#ai_model');
-            const spec=document.querySelector('#translation_specialization');
-            const tone=document.querySelector('#translation_tone');
-            const temp=document.querySelector('#temperature');
-            const delay=document.querySelector('#request_delay');
-
-            if(model) model.selectedIndex=0;
-            if(spec) spec.selectedIndex=0;
-            if(tone) tone.selectedIndex=0;
-            if(temp) temp.value='0.7';
-            if(delay) delay.value='0';
-
-            alert('Translation settings reset.');
-        });
-    }
-}, 500);
-
-setTimeout(()=>{const t=document.querySelector('#target_lang');if(t){t.value='Persian';t.dispatchEvent(new Event('change'));}},100);
-
-setTimeout(()=>{const b=document.querySelector('#subtitle-batch-size')||document.querySelector('[name="subtitle-batch-size"]');if(b){b.value='100';b.setAttribute('value','100');}},150);
-
-setTimeout(()=>{
-const map={
-'#translation_specialization':'translation_specialization',
-'#translation_tone':'translation_tone',
-'#custom_tone_instruction':'custom_tone_instruction'
-};
-
-Object.entries(map).forEach(([s,k])=>{
-const el=document.querySelector(s);
-if(!el)return;
-const saved=localStorage.getItem(k);
-if(saved!==null)el.value=saved;
-el.addEventListener('change',()=>localStorage.setItem(k,el.value));
-el.addEventListener('input',()=>localStorage.setItem(k,el.value));
-});
-},300);
-
-setTimeout(()=>{
-if(document.querySelector('#reset_translation_settings_btn'))return;
-
-const parent=document.querySelector('#ai_model')?.parentElement||document.body;
-
-const btn=document.createElement('button');
-btn.id='reset_translation_settings_btn';
-btn.innerText='Reset Translation Settings';
-
-btn.style.cssText='margin-top:12px;padding:9px 14px;border:none;border-radius:12px;background:linear-gradient(135deg,#ef4444,#b91c1c);color:white;font-size:13px;font-weight:600;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.18);';
-
-btn.onclick=()=>{
-['translation_specialization','translation_tone','custom_tone_instruction','temperature','request_delay','ai_model'].forEach(k=>localStorage.removeItem(k));
-alert('Translation settings reset.');
-location.reload();
-};
-
-parent.appendChild(btn);
-},600);
-
-setTimeout(()=>{
-if(document.querySelector('#clear_browser_storage_btn'))return;
-
-const parent=document.querySelector('#reset_translation_settings_btn')?.parentElement||document.body;
-
-const btn=document.createElement('button');
-btn.id='clear_browser_storage_btn';
-btn.innerText='Clear Browser Storage';
-
-btn.style.cssText='margin-top:12px;margin-left:10px;padding:9px 14px;border:none;border-radius:12px;background:linear-gradient(135deg,#475569,#1e293b);color:white;font-size:13px;font-weight:600;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.18);';
-
-btn.onclick=()=>{
-if(!confirm("Clear ALL saved browser settings for this website?"))return;
-localStorage.clear();
-sessionStorage.clear();
-alert('Browser storage cleared.');
-location.reload();
-};
-
-parent.appendChild(btn);
-},700);
+document.addEventListener('DOMContentLoaded', init);
