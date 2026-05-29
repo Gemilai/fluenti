@@ -15,10 +15,15 @@ const TRANSLATIONS = {
         lang_auto: "تشخیص خودکار زبان", lang_af: "آفریکانس", lang_sq: "آلبانیایی", lang_am: "امهری", lang_ar: "عربی", lang_hy: "ارمنی", lang_as: "آسامی", lang_ay: "آیمارا", lang_az: "آذربایجانی", lang_bm: "بامبارا", lang_eu: "باسکی", lang_be: "بلاروسی", lang_bn: "بنگالی", lang_bho: "بوجپوری", lang_bs: "بوسنیایی", lang_bg: "بلغاری", lang_ca: "کاتالان", lang_ceb: "سبوانو", lang_ny: "چیچوا", "lang_zh-CN": "چینی (ساده شده)", "lang_zh-TW": "چینی (سنتی)", lang_co: "کرسی", lang_hr: "کرواتی", lang_cs: "چکی", lang_da: "دانمارکی", lang_dv: "دیوهی", lang_doi: "دوگری", lang_nl: "هلندی", lang_en: "انگلیسی", lang_eo: "اسپرانتو", lang_et: "استونیایی", lang_ee: "اوه", lang_tl: "فیلیپینی (تاگالوگ)", lang_fi: "فنلاندی", lang_fr: "فرانسوی", lang_fy: "فریزی", lang_gl: "گالیسی", lang_ka: "گرجی", lang_de: "آلمانی", lang_el: "یونانی", lang_gn: "گوارانی", lang_gu: "گجراتی", lang_ht: "کریول هائیتی", lang_ha: "هوسا", lang_haw: "هاوایی", lang_iw: "عبری", lang_hi: "هندی", lang_hmn: "همونگ", lang_hu: "مجاری", lang_is: "ایسلندی", lang_ig: "ایگبو", lang_ilo: "ایلوکانو", lang_id: "اندونزیایی", lang_ga: "ایرلندی", lang_it: "ایتالیایی", lang_ja: "ژاپنی", lang_jw: "جاوه‌ای", lang_kn: "کانارا", lang_kk: "قزاقی", lang_km: "خمر", lang_rw: "کینیارواندا", lang_gom: "کونکانی", lang_ko: "کره‌ای", lang_kri: "کریو", lang_ku: "کردی (کرمانجی)", lang_ckb: "کردی (سورانی)", lang_ky: "قرقیزی", lang_lo: "لائوسی", lang_la: "لاتین", lang_lv: "لتونیایی", lang_ln: "لینگالا", lang_lt: "لیتوانیایی", lang_lg: "لوگاندا", lang_lb: "لوکزامبورگی", lang_mk: "مقدونی", lang_mai: "مایتهیلی", lang_mg: "مالاگاسی", lang_ms: "مالایی", lang_ml: "مالایالام", lang_mt: "مالتی", lang_mi: "مائوری", lang_mr: "مراتی", "lang_mni-Mtei": "می‌تیلون (مانیپوری)", lang_lus: "میزو", lang_mn: "مغولی", lang_my: "میانماری (برمه‌ای)", lang_ne: "نپالی", lang_no: "نروژی", lang_or: "اوریا", lang_om: "اورومو", lang_ps: "پشتو", lang_fa: "فارسی", lang_pl: "لهستانی", lang_pt: "پرتغالی", lang_pa: "پنجابی", lang_qu: "کچوآ", lang_ro: "رومانیایی", lang_ru: "روسی", lang_sm: "ساموآیی", lang_sa: "سانسکریت", lang_gd: "گیلی اسکاتلندی", lang_nso: "سپدی", lang_sr: "صربی", lang_st: "سسوتو", lang_sn: "شونا", lang_sd: "سندی", lang_si: "سینهالی", lang_sk: "اسلواکی", lang_sl: "اسلوونیایی", lang_so: "سومالیایی", lang_es: "اسپانیایی", lang_su: "سوندانی", lang_sw: "سواحیلی", lang_sv: "سوئدی", lang_tg: "تاجیکی", lang_ta: "تامیلی", lang_tt: "تاتاری", lang_te: "تلوگو", lang_th: "تایلندی", lang_ti: "تیگرینیا", lang_ts: "تسونگا", lang_tr: "ترکی", lang_tk: "ترکمنی", lang_ak: "توی (آکان)", lang_uk: "اوکراینی", lang_ur: "اردو", lang_ug: "اویغوری", lang_uz: "ازبکی", lang_vi: "ویتنامی", lang_cy: "ولزی", lang_xh: "خوسا", lang_yi: "ییدیش", lang_yo: "یوروبا", lang_zu: "زولو",
         job_None: "هیچکدام (عمومی)", job_Medical: "پزشکی / بهداشت", job_Legal: "حقوقی / قانون", job_Engineering: "مهندسی (عمومی)", job_IT: "فناوری اطلاعات / نرم‌افزار", job_Finance: "مالی / بانکداری", job_Academic: "دانشگاهی / تحقیقاتی", job_Marketing: "بازاریابی / کسب و کار", job_Cinema: "سینما / سریال تلویزیونی",
         tone_Default: "پیش‌فرض", tone_Formal: "رسمی", tone_Informal: "غیررسمی", tone_Poetic: "شاعرانه", tone_Technical: "فنی", tone_Simplify: "ساده / روان", tone_Custom: "سفارشی..." },
+    ru: { appTitle: "Fluentify", tabText: "Текст", tabImage: "Изображение", tabPDF: "PDF", tabSubtitle: "Субтитры", tabVideo: "Видео", swapBtnLabel: "Поменять языки", textInputPlaceholder: "Введите текст для перевода...", youtubeSectionTitle: "Загрузить с YouTube URL", youtubeUrlPlaceholder: "Введите URL видео YouTube...", youtubeLangPlaceholder: "язык", youtubeFetchBtn: "Получить", youtubeNotice: ``, fileDragDrop: "Перетащите файл", fileOr: "или", fileChooseBtn: "Выберите файл", fileHintImage: "PNG, JPG, WEBP, GIF (МАКС. 20МБ)", fileHintPDF: "PDF (МАКС. 20МБ)", fileHintSubtitle: "SRT, VTT, SSA, ASS (МАКС. 20МБ)", removeFileBtnLabel: "Удалить файл", pdfSelectPagesTitle: "Выберите страницы для перевода", pdfSelectAll: "Выбрать все", pdfDeselectAll: "Снять выбор", pdfPageCounter: "Выбрано страниц: {count}", pdfCombinePages: "Объединить выбранные страницы перед переводом", pdfBatchWarning: "Перевод может занять до {seconds} секунд.", subtitleEditorTitle: "Редактор субтитров", subtitleLinesPerRequest: "Строк / запрос", subtitleBreakLinesBtnLabel: "Разбить длинные строки", subtitleFindReplaceBtnLabel: "Найти и заменить", subtitleExportBtnLabel: "Экспортировать как файл субтитров", subtitleSavedProgress: "Найден сохраненный прогресс для этого файла.", subtitleLoadProgress: "Загрузить прогресс", subtitleClearHistory: "Очистить историю", breakLinesPanelTitle: "Макс. символов / строка:", breakLinesApply: "Применить изменения", findInputPlaceholder: "Найти текст...", replaceInputPlaceholder: "Заменить на...", findCaseSensitive: "Учитывать регистр", replaceAllBtn: "Заменить все", subtitleTableHeaderNum: "#", subtitleTableHeaderTime: "Временная метка", subtitleTableHeaderOrig: "Оригинальный текст", subtitleTableHeaderTrans: "Переведенный текст", progressLabelTranslating: "Перевод...", progressCancel: "Отмена", advSettingsBtn: "Настройки", translateBtn: "Перевести", settingsModel: "Модель ИИ", settingsSpecialization: "Специализация перевода", settingsTone: "Тон перевода", settingsCustomToneLabel: "Инструкция для пользовательского тона", settingsCustomTonePlaceholder: "напр., 'Переведи это в стиле пирата.'", settingsCreativity: "Креативность (Temperature)", settingsRequestDelay: "Задержка запроса (секунды)", settingsApiKey: "Ключ(и) API Google AI", settingsApiKeyPlaceholder: "Введите ваши ключи API, по одному на строку.", settingsApiKeyHint: "Введите несколько ключей для распределения нагрузки или как резервные.", settingsUseProxy: "Использовать прокси", settingsCustomProxyLabel: "Пользовательский URL прокси (необязательно)", settingsCustomProxyHint: `Разверните свой собственный прокси с помощью <a href="https://github.com/yebekhe/middleman" target="_blank" rel="noopener noreferrer" class="underline hover:text-sky-500">Middleman</a>.`, settingsUseCustomPrompt: "Использовать свой промпт", settingsCustomPromptPlaceholder: "Введите свой промпт. Используйте {text}, {source_lang} и {target_lang} как переменные.", settingsOptimizePrompt: "Оптимизировать", settingsOcr: "Использовать OCR для сканированных PDF", settingsSave: "Сохранить все настройки в этом браузере", outputPlaceholder: "Перевод появится здесь...", copyBtnLabel: "Копировать результат", exportTextBtnLabel: "Экспортировать в TXT", refineToolbarTitle: "Улучшить:", refineShorten: "Сделать короче", refineExpand: "Расширить", refineSummarize: "Суммировать", styleToolbarTitle: "Изменить стиль:", styleFormal: "Формальный", styleInformal: "Неформальный", stylePoetic: "Поэтический", styleSimplify: "Упростить", logTitle: "Журнал активности", footerText: `Создано с <i class="fas fa-heart text-red-500 mx-1"></i> YEBEKHE`, pageTitle: "Fluentify - Современный ИИ-переводчик", howToUseBtnLabel: "Как использовать", howToUseModalTitle: "Как использовать Fluentify", searchLanguagesPlaceholder: "Поиск языков...",
+        lang_auto: "Автоопределение языка", lang_af: "Африкаанс", lang_sq: "Албанский", lang_am: "Амхарский", lang_ar: "Арабский", lang_hy: "Армянский", lang_as: "Ассамский", lang_ay: "Аймара", lang_az: "Азербайджанский", lang_bm: "Бамбара", lang_eu: "Баскский", lang_be: "Белорусский", lang_bn: "Бенгальский", lang_bho: "Бходжпури", lang_bs: "Боснийский", lang_bg: "Болгарский", lang_ca: "Каталанский", lang_ceb: "Себуанский", lang_ny: "Чичева", "lang_zh-CN": "Китайский (упрощенный)", "lang_zh-TW": "Китайский (традиционный)", lang_co: "Корсиканский", lang_hr: "Хорватский", lang_cs: "Чешский", lang_da: "Датский", lang_dv: "Дивехи", lang_doi: "Догри", lang_nl: "Голландский", lang_en: "Английский", lang_eo: "Эсперанто", lang_et: "Эстонский", lang_ee: "Эве", lang_tl: "Филиппинский (тагальский)", lang_fi: "Финский", lang_fr: "Французский", lang_fy: "Фризский", lang_gl: "Галисийский", lang_ka: "Грузинский", lang_de: "Немецкий", lang_el: "Греческий", lang_gn: "Гуарани", lang_gu: "Гуджарати", lang_ht: "Гаитянский креольский", lang_ha: "Хауса", lang_haw: "Гавайский", lang_iw: "Иврит", lang_hi: "Хинди", lang_hmn: "Хмонг", lang_hu: "Венгерский", lang_is: "Исландский", lang_ig: "Игбо", lang_ilo: "Илоканский", lang_id: "Индонезийский", lang_ga: "Ирландский", lang_it: "Итальянский", lang_ja: "Японский", lang_jw: "Яванский", lang_kn: "Каннада", lang_kk: "Казахский", lang_km: "Кхмерский", lang_rw: "Киньяруанда", lang_gom: "Конкани", lang_ko: "Корейский", lang_kri: "Крио", lang_ku: "Курдский (курманджи)", lang_ckb: "Курдский (сорани)", lang_ky: "Киргизский", lang_lo: "Лаосский", lang_la: "Латинский", lang_lv: "Латышский", lang_ln: "Лингала", lang_lt: "Литовский", lang_lg: "Луганда", lang_lb: "Люксембургский", lang_mk: "Македонский", lang_mai: "Майтхили", lang_mg: "Малагасийский", lang_ms: "Малайский", lang_ml: "Малаялам", lang_mt: "Мальтийский", lang_mi: "Маори", lang_mr: "Маратхи", "lang_mni-Mtei": "Меитеилон (манипури)", lang_lus: "Мизо", lang_mn: "Монгольский", lang_my: "Бирманский", lang_ne: "Непальский", lang_no: "Норвежский", lang_or: "Ория", lang_om: "Оромо", lang_ps: "Пушту", lang_fa: "Персидский (фарси)", lang_pl: "Польский", lang_pt: "Португальский", lang_pa: "Панджаби", lang_qu: "Кечуа", lang_ro: "Румынский", lang_ru: "Русский", lang_sm: "Самоанский", lang_sa: "Санскрит", lang_gd: "Шотландский гэльский", lang_nso: "Сепеди", lang_sr: "Сербский", lang_st: "Сесото", lang_sn: "Шона", lang_sd: "Синдхи", lang_si: "Сингальский", lang_sk: "Словацкий", lang_sl: "Словенский", lang_so: "Сомалийский", lang_es: "Испанский", lang_su: "Сунданский", lang_sw: "Суахили", lang_sv: "Шведский", lang_tg: "Таджикский", lang_ta: "Тамильский", lang_tt: "Татарский", lang_te: "Телугу", lang_th: "Тайский", lang_ti: "Тигринья", lang_ts: "Тсонга", lang_tr: "Турецкий", lang_tk: "Туркменский", lang_ak: "Тви (акан)", lang_uk: "Украинский", lang_ur: "Урду", lang_ug: "Уйгурский", lang_uz: "Узбекский", lang_vi: "Вьетнамский", lang_cy: "Валлийский", lang_xh: "Коса", lang_yi: "Идиш", lang_yo: "Йоруба", lang_zu: "Зулу",
+        job_None: "Нет (общий)", job_Medical: "Медицина / Здравоохранение", job_Legal: "Юриспруденция / Право", job_Engineering: "Инженерия (общая)", job_IT: "ИТ / Программное обеспечение", job_Finance: "Финансы / Банковское дело", job_Academic: "Наука / Исследования", job_Marketing: "Маркетинг / Бизнес", job_Cinema: "Кино / Сериалы",
+        tone_Default: "По умолчанию", tone_Formal: "Формальный", tone_Informal: "Неформальный", tone_Poetic: "Поэтический", tone_Technical: "Технический", tone_Simplify: "Простой / Легко читаемый", tone_Custom: "Пользовательский..." }
 };
 const HOW_TO_USE_CONTENT = {
     en: `<div class="space-y-6 text-slate-700 dark:text-slate-300"><div><h3 class="text-lg font-bold mb-2 text-slate-800 dark:text-slate-100">1. Initial Setup (API Key)</h3><p class="mb-2">Before you can translate, you need a Google AI API Key.</p><ol class="list-decimal list-inside space-y-2 pl-4"><li>Go to <a href="https://aistudio.google.com/" target="_blank" rel="noopener noreferrer" class="text-sky-500 underline">Google AI Studio</a> and sign in.</li><li>Click <strong>"Get API key"</strong>, then <strong>"Create API key in new project"</strong>.</li><li>Copy the generated key.</li><li>In Fluentify, navigate to the <strong>Settings</strong> page using the gear icon (<i class="fas fa-cog inline-block"></i>) in the top right (desktop) or bottom tab bar (mobile).</li><li>Paste your key into the <strong>"Google AI API Key(s)"</strong> field.</li><li>(Recommended) Check the <strong>"Save all settings in this browser"</strong> box to store your key securely for future use.</li></ol></div><div><h3 class="text-lg font-bold mb-2 text-slate-800 dark:text-slate-100">2. Translating Content</h3><p class="mb-3">Select your desired input type from the navigation tabs.</p><div class="space-y-4 pl-4 border-l-2 dark:border-slate-600"><div><h4 class="font-semibold">📝 Text Translation</h4><p>Select the <strong>Text</strong> tab, choose languages, enter your text, and click <strong>Translate</strong>. Use the <strong>Refine</strong> and <strong>Change Style</strong> buttons to enhance the output.</p></div><div><h4 class="font-semibold">🖼️ Image Translation</h4><p>Select the <strong>Image</strong> tab, choose your target language, and drop an image file. The app will perform OCR to extract the text and then translate it.</p></div><div><h4 class="font-semibold">📄 PDF Translation</h4><p>Upload a PDF. Click on the pages you want to translate. For scanned PDFs, enable <strong>"Use OCR for scanned PDF pages"</strong> in Settings. Click <strong>Translate</strong>.</p></div><div><h4 class="font-semibold">🎬 Subtitle Translation</h4><p class="mb-2">Either upload a subtitle file (SRT, VTT, etc.) or paste a YouTube URL and click <strong>Fetch</strong> to load subtitles into the editor.</p><ul class="list-disc list-inside space-y-1"><li><strong>Translate:</strong> Click the main "Translate" button to translate all untranslated lines in batches.</li><li><strong>Edit:</strong> Click directly on any translated text to edit it manually.</li><li><strong>Tools:</strong> Use the Find & Replace and Break Long Lines tools for advanced editing.</li><li><strong>Export:</strong> Click the export button in the editor's header to download your translated file.</li></ul></div></div></div></div>`,
     fa: `<div class="space-y-6 text-slate-700 dark:text-slate-300 text-right"><div><h3 class="text-lg font-bold mb-2 text-slate-800 dark:text-slate-100">۱. راه‌اندازی اولیه (کلید API)</h3><p class="mb-2">قبل از شروع ترجمه، به یک کلید API از Google AI نیاز دارید.</p><ol class="list-decimal list-inside space-y-2 pr-4"><li>به <a href="https://aistudio.google.com/" target="_blank" rel="noopener noreferrer" class="text-sky-500 underline">Google AI Studio</a> بروید و وارد شوید.</li><li>روی <strong>"Get API key"</strong> و سپس <strong>"Create API key in new project"</strong> کلیک کنید.</li><li>کلید تولید شده را کپی کنید.</li><li>در Fluentify، با استفاده از آیکون چرخ‌دنده (<i class="fas fa-cog inline-block"></i>) در بالا سمت راست (دسکتاپ) یا نوار پایین (موبایل) به صفحه <strong>تنظیمات</strong> بروید.</li><li>کلید خود را در فیلد <strong>"کلید(های) API گوگل"</strong> الصاق کنید.</li><li>(توصیه‌شده) تیک گزینه <strong>"ذخیره تمام تنظیمات در این مرورگر"</strong> را بزنید تا کلید شما برای استفاده‌های بعدی ذخیره شود.</li></ol></div><div><h3 class="text-lg font-bold mb-2 text-slate-800 dark:text-slate-100">۲. ترجمه محتوا</h3><p class="mb-3">نوع ورودی مورد نظر خود را از تب‌های ناوبری انتخاب کنید.</p><div class="space-y-4 pr-4 border-r-2 dark:border-slate-600"><div><h4 class="font-semibold">📝 ترجمه متن</h4><p>تب <strong>متن</strong> را انتخاب کنید، زبان مبدأ و مقصد را انتخاب کنید، متن خود را وارد کرده و روی <strong>ترجمه</strong> کلیک کنید. از دکمه‌های <strong>اصلاح</strong> و <strong>تغییر سبک</strong> برای بهبود خروجی استفاده کنید.</p></div><div><h4 class="font-semibold">🖼️ ترجمه تصویر</h4><p>تب <strong>تصویر</strong> را انتخاب کنید، زبان مقصد خود را برگزینید و یک فایل تصویر را رها کنید. برنامه متن را با OCR استخراج کرده و سپس آن را ترجمه می‌کند.</p></div><div><h4 class="font-semibold">📄 ترجمه PDF</h4><p>یک فایل PDF آپلود کنید. روی صفحاتی که می‌خواهید ترجمه شوند کلیک کنید. برای PDFهای اسکن شده، گزینه <strong>"استفاده از OCR"</strong> را در تنظیمات فعال کنید. روی <strong>ترجمه</strong> کلیک کنید.</p></div><div><h4 class="font-semibold">🎬 ترجمه زیرنویس</h4><p class="mb-2">می‌توانید یک فایل زیرنویس (SRT, VTT, و غیره) آپلود کنید یا یک آدرس یوتیوب را وارد کرده و روی <strong>دریافت</strong> کلیک کنید تا زیرنویس‌ها در ویرایشگر بارگذاری شوند.</p><ul class="list-disc list-inside space-y-1"><li><strong>ترجمه:</strong> روی دکمه اصلی «ترجمه» کلیک کنید تا تمام خطوط ترجمه نشده به صورت دسته‌ای ترجمه شوند.</li><li><strong>ویرایش:</strong> برای ویرایش دستی، مستقیماً روی متن ترجمه شده کلیک کنید.</li><li><strong>ابزارها:</strong> از ابزارهای جستجو و جایگزینی و شکستن خطوط طولانی برای ویرایش پیشرفته استفاده کنید.</li><li><strong>خروجی:</strong> برای دانلود فایل ترجمه شده، روی دکمه خروجی در هدر ویرایشگر کلیک کنید.</li></ul></div></div></div></div>`,
+    ru: `<div class="space-y-6 text-slate-700 dark:text-slate-300"><div><h3 class="text-lg font-bold mb-2 text-slate-800 dark:text-slate-100">1. Начальная настройка (API-ключ)</h3><p class="mb-2">Перед началом работы вам понадобится API-ключ от Google AI.</p><ol class="list-decimal list-inside space-y-2 pl-4"><li>Перейдите в <a href="https://aistudio.google.com/" target="_blank" rel="noopener noreferrer" class="text-sky-500 underline">Google AI Studio</a> и войдите в систему.</li><li>Нажмите <strong>"Get API key"</strong>, затем <strong>"Create API key in new project"</strong>.</li><li>Скопируйте сгенерированный ключ.</li><li>В Fluentify перейдите на страницу <strong>Настройки</strong>, используя иконку шестеренки (<i class="fas fa-cog inline-block"></i>) в правом верхнем углу (настольная версия) или на нижней панели (мобильная версия).</li><li>Вставьте ваш ключ в поле <strong>"Ключ(и) API Google AI"</strong>.</li><li>(Рекомендуется) Установите флажок <strong>"Сохранить все настройки в этом браузере"</strong>, чтобы безопасно сохранить ваш ключ для будущего использования.</li></ol></div><div><h3 class="text-lg font-bold mb-2 text-slate-800 dark:text-slate-100">2. Перевод контента</h3><p class="mb-3">Выберите желаемый тип ввода на вкладках навигации.</p><div class="space-y-4 pl-4 border-l-2 dark:border-slate-600"><div><h4 class="font-semibold">📝 Перевод текста</h4><p>Выберите вкладку <strong>Текст</strong>, выберите языки, введите текст и нажмите <strong>Перевести</strong>. Используйте кнопки <strong>Улучшить</strong> и <strong>Изменить стиль</strong> для доработки результата.</p></div><div><h4 class="font-semibold">🖼️ Перевод изображений</h4><p>Выберите вкладку <strong>Изображение</strong>, укажите целевой язык и перетащите файл изображения. Приложение выполнит OCR для извлечения текста, а затем переведет его.</p></div><div><h4 class="font-semibold">📄 Перевод PDF</h4><p>Загрузите PDF. Нажмите на страницы, которые вы хотите перевести. Для сканированных PDF включите опцию <strong>"Использовать OCR"</strong> в Настройках. Нажмите <strong>Перевести</strong>.</p></div><div><h4 class="font-semibold">🎬 Перевод субтитров</h4><p class="mb-2">Вы можете загрузить файл субтитров (SRT, VTT и т.д.) или вставить URL-адрес YouTube и нажать <strong>Получить</strong>, чтобы загрузить субтитры в редактор.</p><ul class="list-disc list-inside space-y-1"><li><strong>Перевести:</strong> Нажмите главную кнопку «Перевести», чтобы перевести все непереведенные строки пакетами.</li><li><strong>Редактировать:</strong> Нажмите прямо на переведенный текст, чтобы отредактировать его вручную.</li><li><strong>Инструменты:</strong> Используйте инструменты "Найти и заменить" и "Разбить длинные строки" для расширенного редактирования.</li><li><strong>Экспорт:</strong> Нажмите кнопку экспорта в заголовке редактора, чтобы скачать переведенный файл.</li></ul></div></div></div></div>`
 };
 // --- START: DOM Element Selection ---
 const dom = {
@@ -129,19 +134,6 @@ const dom = {
     howToUseCloseBtn: document.getElementById('how-to-use-close-btn'),
     languageSearch: document.getElementById('language-search'),
 };
-function __nullSafeDom(obj) {
-    const dummy = document.createElement('div');
-    dummy.style.display = 'none';
-    Object.keys(obj).forEach(key => {
-        const val = obj[key];
-        if (val === null) {
-            obj[key] = dummy;
-        } else if (typeof val === 'object' && !Array.isArray(val) && !(val instanceof HTMLElement)) {
-            Object.keys(val).forEach(k => { if (val[k] === null) val[k] = dummy; });
-        }
-    });
-}
-__nullSafeDom(dom);
 // --- START: State Management ---
 let pdfDoc = null;
 let selectedPages = new Set();
@@ -244,8 +236,8 @@ function updateUI() {
     dom.translateBtn.parentElement.classList.toggle('hidden', isVideoMode); // Hides the main translate button and error display row
     dom.form.querySelector('.grid').classList.toggle('hidden', isVideoMode); // Hides language selectors and swap button
     // Configure UI elements based on mode
-    dom.sourceLangSelect.disabled = false;
-    if (currentMode !== 'text' && currentMode !== 'subtitle')
+    dom.sourceLangSelect.disabled = !isTextMode;
+    if (!isTextMode)
         dom.sourceLangSelect.value = 'auto';
     if (isImageMode) {
         dom.fileUpload.accept = "image/png, image/jpeg, image/webp, image/gif";
@@ -836,7 +828,7 @@ function validateForm() {
         hasInput = false; // Prevents main translate button from enabling
     }
     dom.translateBtn.disabled = !hasInput || !isApiKeyValid;
-    dom.swapBtn.disabled = currentMode !== 'text' && currentMode !== 'subtitle';
+    dom.swapBtn.disabled = dom.sourceLangSelect.value === 'auto' || currentMode !== 'text';
 }
 function updateCharCounter() { const len = dom.textInput.value.length; dom.charCounter.textContent = `${len} / 5000`; dom.charCounter.classList.toggle('text-red-500', len > 5000); dom.charCounter.classList.toggle('dark:text-red-400', len > 5000); }
 function showError(message) { dom.errorDisplay.textContent = message; }
@@ -1068,30 +1060,6 @@ async function handleEnhancement(action) {
 }
 // --- START: Local Storage and Settings ---
 const LS_SETTINGS_KEY = 'fluentify_settings_v9';
-const LS_TRANSLATION_KEY = 'fluentify_translation_prefs_v1';
-let currentDesign = 'classic'; // 'classic' or 'glass'
-function saveTranslationPrefs() {
-    const prefs = {
-        model: dom.modelSelect.value,
-        jobField: dom.jobFieldSelect.value,
-        translationTone: dom.translationToneSelect.value,
-        customTone: dom.customToneInput.value
-    };
-    localStorage.setItem(LS_TRANSLATION_KEY, JSON.stringify(prefs));
-}
-function loadTranslationPrefs() {
-    try {
-        const saved = localStorage.getItem(LS_TRANSLATION_KEY);
-        if (saved) {
-            const prefs = JSON.parse(saved);
-            if (prefs.model) dom.modelSelect.value = prefs.model;
-            if (prefs.jobField) dom.jobFieldSelect.value = prefs.jobField;
-            if (prefs.translationTone) dom.translationToneSelect.value = prefs.translationTone;
-            if (prefs.customTone !== undefined) dom.customToneInput.value = prefs.customTone;
-            dom.customToneContainer.classList.toggle('hidden', dom.translationToneSelect.value !== 'Custom');
-        }
-    } catch (e) { /* ignore */ }
-}
 function saveSettings() {
     if (!dom.saveSettingsCheckbox.checked) {
         localStorage.removeItem(LS_SETTINGS_KEY);
@@ -1105,7 +1073,6 @@ function saveSettings() {
         targetLang: dom.targetLangSelect.value,
         jobField: dom.jobFieldSelect.value,
         theme: dom.html.classList.contains('dark') ? 'dark' : 'light',
-        design: currentDesign,
         useProxy: dom.useProxyCheckbox.checked,
         customProxyUrl: dom.customProxyInput.value,
         useCustomPrompt: dom.useCustomPromptCheckbox.checked,
@@ -1115,18 +1082,13 @@ function saveSettings() {
         translationTone: dom.translationToneSelect.value,
         customTone: dom.customToneInput.value,
         pdfOcr: dom.pdfOcrCheckbox.checked,
-        language: currentLanguage,
-        subtitleBatchSize: dom.subtitleBatchSizeInput ? dom.subtitleBatchSizeInput.value : 100
+        language: currentLanguage
     };
     localStorage.setItem(LS_SETTINGS_KEY, JSON.stringify(settings));
 }
 function loadSettings() {
     try {
         const savedSettings = localStorage.getItem(LS_SETTINGS_KEY);
-        // First populate the dropdowns with options
-        if (dom.modelSelect && dom.modelSelect.options.length === 0) {
-            dom.modelSelect.innerHTML = MODELS.map(model => `<option value="${model}">${model}</option>`).join('');
-        }
         if (savedSettings) {
             const settings = JSON.parse(savedSettings);
             dom.apiKeyInput.value = settings.apiKey || '';
@@ -1138,9 +1100,6 @@ function loadSettings() {
             dom.customToneInput.value = settings.customTone || '';
             dom.customToneContainer.classList.toggle('hidden', dom.translationToneSelect.value !== 'Custom');
             applyTheme(settings.theme || 'dark');
-            currentDesign = settings.design || 'classic';
-            if (currentDesign === 'futuristic') currentDesign = 'glass';
-            applyDesign(currentDesign);
             dom.useProxyCheckbox.checked = settings.useProxy || false;
             dom.customProxyInput.value = settings.customProxyUrl || DEFAULT_PROXY_URL;
             dom.useCustomPromptCheckbox.checked = settings.useCustomPrompt || false;
@@ -1151,24 +1110,12 @@ function loadSettings() {
             dom.pdfOcrCheckbox.checked = settings.pdfOcr || false;
             dom.saveSettingsCheckbox.checked = true;
             currentLanguage = settings.language || 'en';
-            if (dom.subtitleBatchSizeInput && settings.subtitleBatchSize) {
-                dom.subtitleBatchSizeInput.value = settings.subtitleBatchSize;
-            }
-            log('Settings loaded successfully.', 'success');
         }
         else {
-            // Default values for new users
             const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
             applyTheme(prefersDark ? 'dark' : 'light');
             dom.customProxyInput.value = DEFAULT_PROXY_URL;
-            currentLanguage = navigator.language.startsWith('fa') ? 'fa' : 'en';
-            // Set default language values
-            dom.sourceLangSelect.value = 'auto';
-            dom.targetLangSelect.value = 'Persian';
-            // Set default subtitle batch size
-            if (dom.subtitleBatchSizeInput) {
-                dom.subtitleBatchSizeInput.value = 100;
-            }
+            currentLanguage = navigator.language.startsWith('fa') ? 'fa' : (navigator.language.startsWith('ru') ? 'ru' : 'en');
         }
     }
     catch (e) {
@@ -1179,87 +1126,6 @@ function loadSettings() {
 // --- START: Theme Management ---
 function applyTheme(theme) { dom.html.classList.toggle('dark', theme === 'dark'); dom.themeIconLight.classList.toggle('hidden', theme === 'dark'); dom.themeIconDark.classList.toggle('hidden', theme !== 'dark'); }
 function toggleTheme() { const newTheme = dom.html.classList.contains('dark') ? 'light' : 'dark'; applyTheme(newTheme); saveSettings(); }
-// --- START: Design Management ---
-function applyDesign(design) {
-    currentDesign = design;
-    const designToggleBtn = document.getElementById('design-toggle');
-    if (design === 'glass') {
-        document.body.classList.add('glass-theme');
-        if (designToggleBtn) {
-            designToggleBtn.title = 'Switch to Classic Theme';
-            designToggleBtn.querySelectorAll('.toggle-option').forEach(el => el.classList.remove('active'));
-            designToggleBtn.querySelector('[data-design="glass"]').classList.add('active');
-        }
-    } else {
-        document.body.classList.remove('glass-theme');
-        if (designToggleBtn) {
-            designToggleBtn.title = 'Switch to Glass Theme';
-            designToggleBtn.querySelectorAll('.toggle-option').forEach(el => el.classList.remove('active'));
-            designToggleBtn.querySelector('[data-design="classic"]').classList.add('active');
-        }
-    }
-}
-function toggleDesign() {
-    const newDesign = currentDesign === 'classic' ? 'glass' : 'classic';
-    applyDesign(newDesign);
-    saveSettings();
-}
-// --- START: Reset and Clear Memory Functions ---
-function handleResetTranslationSettings() {
-    if (!confirm('Reset AI Model, Translation Specialization, Translation Tone, and Custom Tone to defaults?')) return;
-    dom.modelSelect.value = DEFAULT_WEB_MODEL;
-    dom.jobFieldSelect.value = 'None';
-    dom.translationToneSelect.value = 'Default';
-    dom.customToneInput.value = '';
-    dom.customToneContainer.classList.add('hidden');
-    const LS_TRANSLATION_KEY = 'fluentify_translation_prefs_v1';
-    const prefs = { model: DEFAULT_WEB_MODEL, jobField: 'None', translationTone: 'Default', customTone: '' };
-    localStorage.setItem(LS_TRANSLATION_KEY, JSON.stringify(prefs));
-    if (dom.saveSettingsCheckbox.checked) {
-        const settings = JSON.parse(localStorage.getItem(LS_SETTINGS_KEY) || '{}');
-        settings.model = DEFAULT_WEB_MODEL;
-        settings.jobField = 'None';
-        settings.translationTone = 'Default';
-        settings.customTone = '';
-        localStorage.setItem(LS_SETTINGS_KEY, JSON.stringify(settings));
-    }
-    log('Translation settings reset to defaults.', 'info');
-    const resetBtn = document.getElementById('reset-settings-btn');
-    if (resetBtn) {
-        const originalText = resetBtn.innerHTML;
-        resetBtn.innerHTML = '<i class="fas fa-check-circle"></i> Done!';
-        resetBtn.style.background = 'linear-gradient(135deg, #34c759, #30d158)';
-        setTimeout(() => {
-            resetBtn.innerHTML = originalText;
-            resetBtn.style.background = '';
-        }, 1500);
-    }
-}
-function handleClearBrowserMemory() {
-    if (!confirm('Clear all stored subtitles from browser memory?')) return;
-    const keysToRemove = [];
-    for (let i = 0; i < localStorage.length; i++) {
-        const key = localStorage.key(i);
-        if (key && key.startsWith('fluentify_progress_')) {
-            keysToRemove.push(key);
-        }
-    }
-    keysToRemove.forEach(key => localStorage.removeItem(key));
-    log(`Cleared ${keysToRemove.length} saved subtitle(s) from browser memory.`, 'success');
-    if (dom.savedProgressNotification) {
-        dom.savedProgressNotification.classList.add('hidden');
-    }
-    const clearBtn = document.getElementById('clear-memory-btn');
-    if (clearBtn) {
-        const originalText = clearBtn.innerHTML;
-        clearBtn.innerHTML = `<i class="fas fa-check-circle"></i> Cleared ${keysToRemove.length} item(s)!`;
-        clearBtn.style.background = 'linear-gradient(135deg, #34c759, #30d158)';
-        setTimeout(() => {
-            clearBtn.innerHTML = originalText;
-            clearBtn.style.background = '';
-        }, 1500);
-    }
-}
 // --- START: Helper Functions ---
 function fileToString(file) { return new Promise((resolve, reject) => { const reader = new FileReader(); reader.readAsText(file); reader.onload = () => resolve(reader.result); reader.onerror = (error) => reject(error); }); }
 function fileToBase64(file) { return new Promise((resolve, reject) => { const reader = new FileReader(); reader.readAsDataURL(file); reader.onload = () => resolve(reader.result.split(',')[1]); reader.onerror = (error) => reject(error); }); }
@@ -1526,7 +1392,6 @@ const dom_video = {
     localPlayer: document.getElementById('video-gen-local-video-player'),
     ytPlayerContainer: document.getElementById('video-gen-yt-player-container'),
 };
-__nullSafeDom(dom_video);
 let videoGen_finalSubtitleContent = '';
 let videoGen_abortController = null;
 let videoGen_exportAbortController = null;
@@ -2374,14 +2239,7 @@ async function videoGen_startVideoExport() {
 function init() {
     // Populate static dropdowns first
     dom.modelSelect.innerHTML = MODELS.map(model => `<option value="${model}">${model}</option>`).join('');
-    // Populate language selects BEFORE loadSettings so defaults can be applied
-    filterAndRepopulateLanguages();
-    // Populate job field and translation tone dropdowns
-    const translations = TRANSLATIONS[currentLanguage];
-    dom.jobFieldSelect.innerHTML = JOB_FIELDS.map(opt => `<option value="${opt.value}">${translations[opt.i18nKey] || opt.text}</option>`).join('');
-    dom.translationToneSelect.innerHTML = TONES.map(opt => `<option value="${opt.value}">${translations[opt.i18nKey] || opt.text}</option>`).join('');
     loadSettings();
-    loadTranslationPrefs();
     setLanguage(currentLanguage);
     // Main event listeners
     document.querySelectorAll('[data-mode]').forEach(btn => btn.addEventListener('click', () => {
@@ -2417,26 +2275,6 @@ function init() {
     dom.cancelTranslationBtn.addEventListener('click', cancelTranslation);
     dom.enhancementsToolbar.querySelectorAll('.enhancement-btn').forEach(btn => btn.addEventListener('click', () => handleEnhancement(btn.dataset.action)));
     dom.themeToggleBtn.addEventListener('click', toggleTheme);
-    const designToggleBtn = document.getElementById('design-toggle');
-    if (designToggleBtn) {
-        designToggleBtn.addEventListener('click', (e) => {
-            const option = e.target.closest('.toggle-option');
-            if (!option) return;
-            const design = option.dataset.design;
-            if (design && design !== currentDesign) {
-                applyDesign(design);
-                saveSettings();
-            }
-        });
-    }
-    const resetSettingsBtn = document.getElementById('reset-settings-btn');
-    if (resetSettingsBtn) {
-        resetSettingsBtn.addEventListener('click', handleResetTranslationSettings);
-    }
-    const clearMemoryBtn = document.getElementById('clear-memory-btn');
-    if (clearMemoryBtn) {
-        clearMemoryBtn.addEventListener('click', handleClearBrowserMemory);
-    }
     dom.apiKeyInput.addEventListener('input', validateForm);
     dom.languageSearch.addEventListener('input', filterAndRepopulateLanguages);
     // File input listeners
@@ -2485,10 +2323,7 @@ function init() {
         log('Cleared saved progress.', 'info');
     });
     // Settings listeners
-    dom.translationToneSelect.addEventListener('change', () => { dom.customToneContainer.classList.toggle('hidden', dom.translationToneSelect.value !== 'Custom'); saveTranslationPrefs(); });
-    dom.modelSelect.addEventListener('change', saveTranslationPrefs);
-    dom.jobFieldSelect.addEventListener('change', saveTranslationPrefs);
-    dom.customToneInput.addEventListener('input', saveTranslationPrefs);
+    dom.translationToneSelect.addEventListener('change', () => dom.customToneContainer.classList.toggle('hidden', dom.translationToneSelect.value !== 'Custom'));
     dom.temperatureSlider.addEventListener('input', () => dom.temperatureValue.textContent = dom.temperatureSlider.value);
     dom.useProxyCheckbox.addEventListener('change', () => dom.customProxyContainer.classList.toggle('hidden', !dom.useProxyCheckbox.checked));
     dom.useCustomPromptCheckbox.addEventListener('change', () => dom.customPromptContainer.classList.toggle('hidden', !dom.useCustomPromptCheckbox.checked));
@@ -2546,3 +2381,151 @@ function init() {
     validateForm();
 }
 document.addEventListener('DOMContentLoaded', init);
+
+
+window.resetTranslationDefaults = function() {
+    try {
+        [
+            "translationSpecialization",
+            "translationTone",
+            "customToneInstruction",
+            "temperature",
+            "requestDelay",
+            "aiModel"
+        ].forEach(k => localStorage.removeItem(k));
+
+        const model = document.querySelector('#ai_model');
+        const spec = document.querySelector('#translation_specialization');
+        const tone = document.querySelector('#translation_tone');
+        const custom = document.querySelector('#custom_tone_instruction');
+        const temp = document.querySelector('#temperature');
+        const delay = document.querySelector('#request_delay');
+
+        if(model) model.selectedIndex = 0;
+        if(spec) spec.selectedIndex = 0;
+        if(tone) tone.selectedIndex = 0;
+        if(custom) custom.value = "";
+        if(temp) temp.value = "0.7";
+        if(delay) delay.value = "0";
+
+        console.log("Translation defaults restored");
+    } catch(e) {
+        console.error(e);
+    }
+};
+
+setTimeout(() => {
+    const el = document.querySelector('#target_lang');
+    if(el && (!el.value || el.value === 'Afrikaans')) {
+        el.value = 'Persian';
+        el.dispatchEvent(new Event('change'));
+    }
+}, 100);
+
+setTimeout(() => {
+    const parent =
+        document.querySelector('#ai_model')?.parentElement ||
+        document.body;
+
+    if(parent && !document.querySelector('#reset_translation_settings_btn')) {
+        parent.insertAdjacentHTML('beforeend', `
+<button id="reset_translation_settings_btn"
+style="margin-top:10px;padding:10px 14px;border-radius:8px;background:#dc2626;color:white;font-weight:bold;">
+Reset Translation Settings
+</button>
+`);
+
+        document.querySelector('#reset_translation_settings_btn')
+        .addEventListener('click', () => {
+
+            const defaults = {
+                ai_model: '',
+                translation_specialization: '',
+                translation_tone: '',
+                temperature: '0.7',
+                request_delay: '0'
+            };
+
+            Object.keys(defaults).forEach(k => {
+                localStorage.removeItem(k);
+            });
+
+            const model=document.querySelector('#ai_model');
+            const spec=document.querySelector('#translation_specialization');
+            const tone=document.querySelector('#translation_tone');
+            const temp=document.querySelector('#temperature');
+            const delay=document.querySelector('#request_delay');
+
+            if(model) model.selectedIndex=0;
+            if(spec) spec.selectedIndex=0;
+            if(tone) tone.selectedIndex=0;
+            if(temp) temp.value='0.7';
+            if(delay) delay.value='0';
+
+            alert('Translation settings reset.');
+        });
+    }
+}, 500);
+
+setTimeout(()=>{const t=document.querySelector('#target_lang');if(t){t.value='Persian';t.dispatchEvent(new Event('change'));}},100);
+
+setTimeout(()=>{const b=document.querySelector('#subtitle-batch-size')||document.querySelector('[name="subtitle-batch-size"]');if(b){b.value='100';b.setAttribute('value','100');}},150);
+
+setTimeout(()=>{
+const map={
+'#translation_specialization':'translation_specialization',
+'#translation_tone':'translation_tone',
+'#custom_tone_instruction':'custom_tone_instruction'
+};
+
+Object.entries(map).forEach(([s,k])=>{
+const el=document.querySelector(s);
+if(!el)return;
+const saved=localStorage.getItem(k);
+if(saved!==null)el.value=saved;
+el.addEventListener('change',()=>localStorage.setItem(k,el.value));
+el.addEventListener('input',()=>localStorage.setItem(k,el.value));
+});
+},300);
+
+setTimeout(()=>{
+if(document.querySelector('#reset_translation_settings_btn'))return;
+
+const parent=document.querySelector('#ai_model')?.parentElement||document.body;
+
+const btn=document.createElement('button');
+btn.id='reset_translation_settings_btn';
+btn.innerText='Reset Translation Settings';
+
+btn.style.cssText='margin-top:12px;padding:9px 14px;border:none;border-radius:12px;background:linear-gradient(135deg,#ef4444,#b91c1c);color:white;font-size:13px;font-weight:600;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.18);';
+
+btn.onclick=()=>{
+['translation_specialization','translation_tone','custom_tone_instruction','temperature','request_delay','ai_model'].forEach(k=>localStorage.removeItem(k));
+alert('Translation settings reset.');
+location.reload();
+};
+
+parent.appendChild(btn);
+},600);
+
+setTimeout(()=>{
+if(document.querySelector('#clear_browser_storage_btn'))return;
+
+const parent=document.querySelector('#reset_translation_settings_btn')?.parentElement||document.body;
+
+const btn=document.createElement('button');
+btn.id='clear_browser_storage_btn';
+btn.innerText='Clear Browser Storage';
+
+btn.style.cssText='margin-top:12px;margin-left:10px;padding:9px 14px;border:none;border-radius:12px;background:linear-gradient(135deg,#475569,#1e293b);color:white;font-size:13px;font-weight:600;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.18);';
+
+btn.onclick=()=>{
+if(!confirm("Clear ALL saved browser settings for this website?"))return;
+localStorage.clear();
+sessionStorage.clear();
+alert('Browser storage cleared.');
+location.reload();
+};
+
+parent.appendChild(btn);
+},700);
