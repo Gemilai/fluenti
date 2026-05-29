@@ -19,12 +19,140 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono&display=swap" rel="stylesheet">
 
     <style type="text/css">
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.15);
+            --glass-border: rgba(255, 255, 255, 0.3);
+            --glass-shadow: rgba(0, 0, 0, 0.1);
+            --glass-text: #ffffff;
+            --glass-bg-dark: rgba(30, 30, 30, 0.6);
+        }
         body, .bg-card, .bg-input { transition: background-color 0.3s ease, color 0.3s ease; }
         textarea::-webkit-scrollbar, .scroll-container::-webkit-scrollbar { width: 8px; }
         textarea::-webkit-scrollbar-track, .scroll-container::-webkit-scrollbar-track { background: transparent; }
         textarea::-webkit-scrollbar-thumb, .scroll-container::-webkit-scrollbar-thumb { background-color: rgba(100, 116, 139, 0.5); border-radius: 20px; }
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         .spinner { animation: spin 1s linear infinite; }
+
+        /* Glassy iPhone Theme Styles */
+        .glassy-theme body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+        }
+        .glassy-theme #app-container {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px var(--glass-shadow), inset 0 0 20px rgba(255, 255, 255, 0.1);
+        }
+        .glassy-theme .bg-card, .glassy-theme .bg-input {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .glassy-theme #desktop-tabs {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .glassy-theme .desktop-tab-btn {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        .glassy-theme .desktop-tab-btn.active {
+            background: rgba(255, 255, 255, 0.25);
+            color: #ffffff;
+        }
+        .glassy-theme #mobile-nav {
+            background: rgba(20, 20, 20, 0.8);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glassy-theme .mobile-nav-btn {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .glassy-theme .mobile-nav-btn.active {
+            color: #ffffff;
+        }
+        .glassy-theme .progress-bar {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        .glassy-theme .progress-bar-inner {
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+        .glassy-theme button, .glassy-theme select, .glassy-theme input, .glassy-theme textarea {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .glassy-theme button:hover, .glassy-theme select:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .glassy-theme .log-timestamp {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        .glassy-theme #log-content {
+            background: rgba(0, 0, 0, 0.3);
+        }
+        .glassy-theme h1, .glassy-theme h2, .glassy-theme h3, .glassy-theme label {
+            color: #ffffff !important;
+        }
+        .glassy-theme select option {
+            background: #1a1a2e;
+            color: #ffffff;
+        }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .design-switcher-btn {
+            position: relative;
+            overflow: hidden;
+        }
+        .design-switcher-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+        .design-switcher-btn:hover::before {
+            left: 100%;
+        }
+        .reset-btn {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .reset-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+        }
+        .reset-btn::after {
+            content: '↻';
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .reset-btn:hover::after {
+            opacity: 1;
+        }
+        .clear-memory-btn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        .clear-memory-btn:hover {
+            background: linear-gradient(135deg, #f5576c 0%, #f093fb 100%);
+        }
         
         .pdf-page-item { transition: border-color 0.2s ease, box-shadow 0.2s ease; }
         .pdf-page-item.selected {
@@ -166,6 +294,9 @@
                     <button id="how-to-use-btn" class="p-2 rounded-full bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors" data-i18n-title-key="howToUseBtnLabel" aria-label="How to use">
                         <svg class="w-5 h-5 text-slate-600 dark:text-slate-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" /></svg>
                     </button>
+                    <button id="design-toggle" class="design-switcher-btn p-2 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white transition-all duration-300 shadow-lg" aria-label="Toggle design" title="Switch to Glassy iPhone Theme">
+                        <i class="fas fa-mobile-alt"></i>
+                    </button>
                     <button id="theme-toggle" class="p-2 rounded-full bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors" aria-label="Toggle theme">
                         <svg id="theme-icon-light" class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
                         <svg id="theme-icon-dark" class="w-5 h-5 text-slate-400 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
@@ -280,7 +411,7 @@
                             <div class="flex flex-wrap gap-4 items-center justify-between">
                                 <div class="flex items-center gap-2">
                                     <label for="subtitle-batch-size" class="text-sm font-medium" data-i18n-key="subtitleLinesPerRequest"></label>
-                                    <input type="number" id="subtitle-batch-size" value="50" min="1" max="500" class="w-20 bg-slate-100 dark:bg-slate-700 bg-input rounded-lg p-2 border-slate-300 dark:border-transparent focus:ring-2 focus:ring-sky-500 transition duration-200">
+                                    <input type="number" id="subtitle-batch-size" value="100" min="1" max="500" class="w-20 bg-slate-100 dark:bg-slate-700 bg-input rounded-lg p-2 border-slate-300 dark:border-transparent focus:ring-2 focus:ring-sky-500 transition duration-200">
                                 </div>
                                 <div class="flex items-center gap-2">
                                     <button type="button" id="break-lines-toggle-btn" disabled class="px-3 py-1 text-sm font-medium rounded-md bg-white dark:bg-slate-600 border border-gray-300 dark:border-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 disabled:opacity-50" data-i18n-key="subtitleBreakLinesBtnLabel"></button>
@@ -603,6 +734,20 @@
                             <div class="flex items-center">
                                 <input id="save-settings-checkbox" type="checkbox" class="h-4 w-4 rounded text-sky-600 focus:ring-sky-500">
                                 <label for="save-settings-checkbox" class="ms-3 rtl:ms-0 rtl:me-3 text-sm font-medium" data-i18n-key="settingsSave"></label>
+                            </div>
+                        </div>
+
+                        <div class="pt-6 border-t border-slate-200 dark:border-slate-700">
+                            <h3 class="text-sm font-semibold text-slate-800 dark:text-slate-200 mb-3">Quick Actions</h3>
+                            <div class="flex flex-wrap gap-3">
+                                <button id="reset-settings-btn" class="reset-btn px-4 py-2 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white rounded-lg font-semibold shadow-md transition-all duration-300 flex items-center gap-2">
+                                    <i class="fas fa-undo"></i>
+                                    Reset Translation Settings
+                                </button>
+                                <button id="clear-memory-btn" class="clear-memory-btn px-4 py-2 text-white rounded-lg font-semibold shadow-md transition-all duration-300 flex items-center gap-2">
+                                    <i class="fas fa-trash-alt"></i>
+                                    Clear Browser Memory
+                                </button>
                             </div>
                         </div>
 
